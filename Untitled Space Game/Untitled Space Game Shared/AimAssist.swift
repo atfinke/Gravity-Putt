@@ -19,16 +19,16 @@ class AimAssist: SKSpriteNode {
     // MARK: - Initalization -
     
     init() {
-        centerRadius = 23
+        centerRadius = 8
         
         let center = SKShapeNode(circleOfRadius: centerRadius)
         center.fillColor = .clear
-        center.strokeColor = .gray
-        center.lineWidth = 6
+        center.strokeColor = .lightGray
+        center.lineWidth = 3
         
-        let border = SKShapeNode(circleOfRadius: 4)
-        border.fillColor = .blue
-        border.strokeColor = .blue
+        let border = SKShapeNode(circleOfRadius: 3)
+        border.fillColor = .white
+        border.strokeColor = .white
         border.lineWidth = 3
         border.position = CGPoint(x: 0, y: 20)
         
@@ -38,13 +38,14 @@ class AimAssist: SKSpriteNode {
         let dashed = path.copy(dashingWithPhase: 0, lengths: [12, 12])
         
         tail = SKShapeNode(path: dashed)
-        tail.fillColor = .gray
-        tail.strokeColor = .gray
-        tail.lineWidth = 6
+        tail.fillColor = .lightGray
+        tail.strokeColor = .lightGray
+        tail.lineWidth = 4
         tail.position = CGPoint(x: 0, y: -centerRadius * 2)
         tail.zRotation = CGFloat.pi
         
         super.init(texture: nil, color: .clear, size: CGSize(width: 20, height: 20))
+        zPosition = 10
         
         addChild(center)
         addChild(border)

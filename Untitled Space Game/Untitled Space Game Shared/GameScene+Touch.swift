@@ -9,7 +9,7 @@
 import UIKit
 
 extension GameScene {
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.count == 2 {
             resetPlayerPosition()
@@ -23,14 +23,14 @@ extension GameScene {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let location = touches.first?.location(in: self) else {
+        guard touches.count == 1, let location = touches.first?.location(in: self) else {
             return
         }
         setTargeting(pullBackLocation: location)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let location = touches.first?.location(in: self) else {
+        guard touches.count == 1, let location = touches.first?.location(in: self) else {
             return
         }
         finishedTargeting(pullBackLocation: location)

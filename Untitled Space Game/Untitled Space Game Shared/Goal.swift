@@ -15,7 +15,7 @@ class Goal: SKSpriteNode {
     let border: SKShapeNode
     let gravityField: SKFieldNode = {
         let field = SKFieldNode.radialGravityField()
-        field.strength = 1
+        field.strength = 2
         field.categoryBitMask = SpriteCategory.player
         return field
     }()
@@ -29,8 +29,8 @@ class Goal: SKSpriteNode {
         }
         
         border = SKShapeNode(path: dashed)
-        border.fillColor = .yellow
-        border.strokeColor = .yellow
+        border.fillColor = .green
+        border.strokeColor = .green
         border.lineWidth = 6
         
         super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
@@ -46,9 +46,26 @@ class Goal: SKSpriteNode {
         body.categoryBitMask = SpriteCategory.none
         body.isDynamic = false
         physicsBody = body
+        
+        let action: SKAction = .repeatForever(.sequence([
+            .scale(to: CGFloat.random(in: 0.8..<0.9), duration: 5),
+            .wait(forDuration: 0.1),
+            .scale(to: 1, duration: 5),
+            .wait(forDuration: 0.1)
+        ]))
+        action.timingMode = .easeInEaseOut
+        
+        run(action)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Helpers -
+    
+    func update(color: SKColor) {
+        border.fillColor = color
+        border.strokeColor = color
     }
 }

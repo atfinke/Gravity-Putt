@@ -16,7 +16,6 @@ class Planet: SKSpriteNode {
         let field = SKFieldNode.radialGravityField()
         field.strength = Float.random(in: 0.5...1.5)
         field.categoryBitMask = SpriteCategory.player
-        field.falloff = 0
         return field
     }()
     
@@ -24,10 +23,10 @@ class Planet: SKSpriteNode {
     
     init(radius: CGFloat, color: SKColor) {
         super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
-        gravityField.region = SKRegion(radius: Float(radius * 4))
+        gravityField.region = SKRegion(radius: Float(radius * 3))
         
         let path = CGMutablePath()
-        let numberOfPoints = Int.random(in: 5..<12)
+        let numberOfPoints = Int.random(in: 10..<20)
         
         var points = [CGPoint]()
         let angle = 2 * CGFloat.pi / CGFloat(numberOfPoints)
@@ -51,6 +50,7 @@ class Planet: SKSpriteNode {
         body.allowsRotation = false
         body.friction = 0.95
         body.collisionBitMask = SpriteCategory.player
+        body.contactTestBitMask = SpriteCategory.player
         physicsBody = body
 
         let border = SKShapeNode(points: &points, count: points.count)
@@ -62,7 +62,7 @@ class Planet: SKSpriteNode {
         let direction = Int.random(in: 0...1) == 1 ? 1 : -1
         
         let action: SKAction = .repeatForever(.sequence([
-            .rotate(byAngle: CGFloat.pi * CGFloat(direction), duration: TimeInterval.random(in: 5..<15))
+            .rotate(byAngle: CGFloat.pi * CGFloat(direction), duration: TimeInterval.random(in: 15..<45))
         ]))
         
         run(action)
