@@ -24,6 +24,9 @@
 		1400F9B1241BF47D003BFED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1400F976241BF47D003BFED8 /* Assets.xcassets */; };
 		1400F9B2241BF47D003BFED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1400F976241BF47D003BFED8 /* Assets.xcassets */; };
 		1400F9B3241BF47D003BFED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1400F976241BF47D003BFED8 /* Assets.xcassets */; };
+		140266ED2431DC8000EF4AA8 /* goal.sks in Resources */ = {isa = PBXBuildFile; fileRef = 140266EC2431DC8000EF4AA8 /* goal.sks */; };
+		140266EE2431DC8000EF4AA8 /* goal.sks in Resources */ = {isa = PBXBuildFile; fileRef = 140266EC2431DC8000EF4AA8 /* goal.sks */; };
+		140266EF2431DC8000EF4AA8 /* goal.sks in Resources */ = {isa = PBXBuildFile; fileRef = 140266EC2431DC8000EF4AA8 /* goal.sks */; };
 		145845EC241F46E100B0B922 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145845EB241F46E100B0B922 /* Level.swift */; };
 		145845ED241F46E100B0B922 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145845EB241F46E100B0B922 /* Level.swift */; };
 		145845EE241F46E100B0B922 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145845EB241F46E100B0B922 /* Level.swift */; };
@@ -48,6 +51,12 @@
 		1471669D241C4A3700E75D98 /* SpriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471669C241C4A3700E75D98 /* SpriteCategory.swift */; };
 		1471669E241C4A3700E75D98 /* SpriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471669C241C4A3700E75D98 /* SpriteCategory.swift */; };
 		1471669F241C4A3700E75D98 /* SpriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471669C241C4A3700E75D98 /* SpriteCategory.swift */; };
+		14B5727624270419006F85FE /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B5727524270419006F85FE /* StarTextureCreator.swift */; };
+		14B5727724270419006F85FE /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B5727524270419006F85FE /* StarTextureCreator.swift */; };
+		14B5727824270419006F85FE /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B5727524270419006F85FE /* StarTextureCreator.swift */; };
+		14B5727A2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
+		14B5727B2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
+		14B5727C2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +79,7 @@
 		1400F9A2241BF47D003BFED8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1400F9A5241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1400F9A7241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		140266EC2431DC8000EF4AA8 /* goal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = goal.sks; sourceTree = "<group>"; };
 		145845EB241F46E100B0B922 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		145845EF24207E7700B0B922 /* GameScene+Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Touch.swift"; sourceTree = "<group>"; };
 		145845F224207E8F00B0B922 /* GameScene+Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Mouse.swift"; sourceTree = "<group>"; };
@@ -79,6 +89,8 @@
 		14716694241C4A0500E75D98 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		14716698241C4A1600E75D98 /* AimAssist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimAssist.swift; sourceTree = "<group>"; };
 		1471669C241C4A3700E75D98 /* SpriteCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteCategory.swift; sourceTree = "<group>"; };
+		14B5727524270419006F85FE /* StarTextureCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StarTextureCreator.swift; path = "Untitled Space Game Shared/StarTextureCreator.swift"; sourceTree = SOURCE_ROOT; };
+		14B572792428B5A8006F85FE /* StarDepthNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarDepthNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,9 +132,12 @@
 		1400F972241BF47C003BFED8 /* Untitled Space Game Shared */ = {
 			isa = PBXGroup;
 			children = (
+				140266EC2431DC8000EF4AA8 /* goal.sks */,
 				1400F975241BF47C003BFED8 /* GameScene.swift */,
+				14B572792428B5A8006F85FE /* StarDepthNode.swift */,
 				145845F224207E8F00B0B922 /* GameScene+Mouse.swift */,
 				145845EF24207E7700B0B922 /* GameScene+Touch.swift */,
+				14B5727524270419006F85FE /* StarTextureCreator.swift */,
 				145845EB241F46E100B0B922 /* Level.swift */,
 				1471669C241C4A3700E75D98 /* SpriteCategory.swift */,
 				14716698241C4A1600E75D98 /* AimAssist.swift */,
@@ -282,6 +297,7 @@
 			files = (
 				1400F984241BF47D003BFED8 /* Main.storyboard in Resources */,
 				1400F987241BF47D003BFED8 /* LaunchScreen.storyboard in Resources */,
+				140266ED2431DC8000EF4AA8 /* goal.sks in Resources */,
 				1400F9B1241BF47D003BFED8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +308,7 @@
 			files = (
 				1400F995241BF47D003BFED8 /* Main.storyboard in Resources */,
 				1400F998241BF47D003BFED8 /* LaunchScreen.storyboard in Resources */,
+				140266EE2431DC8000EF4AA8 /* goal.sks in Resources */,
 				1400F9B2241BF47D003BFED8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,6 +319,7 @@
 			files = (
 				1400F9A6241BF47D003BFED8 /* Main.storyboard in Resources */,
 				1400F9B3241BF47D003BFED8 /* Assets.xcassets in Resources */,
+				140266EF2431DC8000EF4AA8 /* goal.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +336,8 @@
 				1400F981241BF47D003BFED8 /* GameViewController.swift in Sources */,
 				1400F97F241BF47D003BFED8 /* AppDelegate.swift in Sources */,
 				145845F524208BEA00B0B922 /* CGExtensions.swift in Sources */,
+				14B5727A2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
+				14B5727624270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1471669D241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
 				14716695241C4A0500E75D98 /* Goal.swift in Sources */,
 				14716691241C49EA00E75D98 /* Planet.swift in Sources */,
@@ -336,6 +356,8 @@
 				1400F992241BF47D003BFED8 /* GameViewController.swift in Sources */,
 				1400F990241BF47D003BFED8 /* AppDelegate.swift in Sources */,
 				145845F624208BEA00B0B922 /* CGExtensions.swift in Sources */,
+				14B5727B2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
+				14B5727724270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1471669E241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
 				14716696241C4A0500E75D98 /* Goal.swift in Sources */,
 				14716693241C49EC00E75D98 /* Planet.swift in Sources */,
@@ -354,6 +376,8 @@
 				1400F9B0241BF47D003BFED8 /* GameScene.swift in Sources */,
 				1400F9A3241BF47D003BFED8 /* GameViewController.swift in Sources */,
 				145845F724208BEA00B0B922 /* CGExtensions.swift in Sources */,
+				14B5727C2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
+				14B5727824270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1400F9A1241BF47D003BFED8 /* AppDelegate.swift in Sources */,
 				1471669F241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
 				14716697241C4A0500E75D98 /* Goal.swift in Sources */,
@@ -612,7 +636,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
 				PRODUCT_NAME = "Untitled Space Game";
 				SDKROOT = macosx;
@@ -633,7 +657,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
 				PRODUCT_NAME = "Untitled Space Game";
 				SDKROOT = macosx;

@@ -45,7 +45,7 @@ class AimAssist: SKSpriteNode {
         tail.zRotation = CGFloat.pi
         
         super.init(texture: nil, color: .clear, size: CGSize(width: 20, height: 20))
-        zPosition = 10
+        zPosition = 100000
         
         addChild(center)
         addChild(border)
@@ -61,7 +61,7 @@ class AimAssist: SKSpriteNode {
     func updateTail(length: CGFloat) {
         let path = CGMutablePath()
         path.move(to: .zero)
-        path.addLine(to: CGPoint(x: 0, y: length - centerRadius * 2))
+        path.addLine(to: CGPoint(x: 0, y: max(0, length - centerRadius * 2)))
         tail.path = path.copy(dashingWithPhase: 0, lengths: [12, 12])
     }
 }

@@ -14,7 +14,7 @@ class Planet: SKSpriteNode {
     
     let gravityField: SKFieldNode = {
         let field = SKFieldNode.radialGravityField()
-        field.strength = Float.random(in: 0.5...1.5)
+        field.strength = Float.random(in: 0.95...1.9)
         field.categoryBitMask = SpriteCategory.player
         return field
     }()
@@ -26,7 +26,13 @@ class Planet: SKSpriteNode {
         gravityField.region = SKRegion(radius: Float(radius * 3))
         
         let path = CGMutablePath()
-        let numberOfPoints = Int.random(in: 10..<20)
+        let numberOfPoints = 100//Int.random(in: 8..<16)
+        
+        
+        let _viz = SKShapeNode(circleOfRadius: radius * 3)
+        _viz.fillColor = SKColor.darkGray.withAlphaComponent(0.2)
+        _viz.strokeColor = .clear
+//        addChild(_viz)
         
         var points = [CGPoint]()
         let angle = 2 * CGFloat.pi / CGFloat(numberOfPoints)
@@ -65,7 +71,7 @@ class Planet: SKSpriteNode {
             .rotate(byAngle: CGFloat.pi * CGFloat(direction), duration: TimeInterval.random(in: 15..<45))
         ]))
         
-        run(action)
+//        run(action)
         addChild(gravityField)
     }
     

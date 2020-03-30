@@ -22,7 +22,7 @@ class Level: SKNode {
     
     // MARK: - Initalization -
     
-    init(size: CGSize, startSize: CGSize) {
+    init(size: CGSize, startSize: CGSize, num: Int) {
         self.size = size
         
         var children = [SKNode]()
@@ -33,7 +33,7 @@ class Level: SKNode {
                                      width: startSize.width,
                                      height: startSize.height)
         
-        let goalRadius = 0.1 * size.height
+        let goalRadius: CGFloat = 40
         let goalWidthPercent = goalRadius / size.width
         let goalWidthMaxBounds = 0.5 - goalWidthPercent
         let goalHeightBounds = 0.5 - (goalRadius * 2) / size.height
@@ -45,19 +45,15 @@ class Level: SKNode {
                                         size: CGSize(width: goalRadius * 2,
                                                      height: goalRadius * 2))
         
-        goalNode = Goal(radius: goalRadius, color: .yellow)
+        goalNode = Goal(radius: goalRadius, color: .yellow, levelNumber: num)
         goalNode.position = goalPosition
         children.append(goalNode)
         super.init()
 
-//        for _ in 0..<250 {
-//            let star = SKShapeNode(circleOfRadius: CGFloat.random(in: 0.15..<0.75))
-//            star.zPosition = 1
-//            star.fillColor = SKColor(white: CGFloat.random(in: 0.5...1), alpha: 0.8)
-//            star.position = CGPoint(x: CGFloat.random(in: -size.width...size.width),
-//                                    y: CGFloat.random(in: -size.height...size.height))
-//            addChild(star)
-//        }
+//        let _viz = SKShapeNode(rectOf: size)
+//        _viz.fillColor = SKColor.blue.withAlphaComponent(0.1)
+//        addChild(_viz)
+
         
         children.forEach { addChild($0) }
     }
@@ -74,7 +70,7 @@ class Level: SKNode {
 //            start.fillColor = SKColor.yellow.withAlphaComponent(0.6)
 //            addChild(start)
 //        }
-        
+    
         let planetInsertionAttemptCount = Int.random(in: 5...10)
         for _ in 2..<planetInsertionAttemptCount {
             let planetRadius = CGFloat.random(in: 0.075...0.2) * size.height
@@ -86,8 +82,7 @@ class Level: SKNode {
                 .insetBy(dx: -planetRadius/3, dy: -planetRadius/3)
 
 
-            if planetRect.intersects(startRectLocalSpace.offsetBy(dx: startRectLocalSpace.width / 2,
-                                                                  dy: startRectLocalSpace.height / 2)) || planetRect.intersects(goalRectLocalSpace.insetBy(dx: -goalRectLocalSpace.width, dy: -goalRectLocalSpace.height)) {
+            if planetRect.intersects(startRectLocalSpace.offsetBy(dx: startRectLocalSpace.width / 2, dy: startRectLocalSpace.height / 2)) || planetRect.intersects(goalRectLocalSpace.insetBy(dx: -goalRectLocalSpace.width * 2, dy: -goalRectLocalSpace.height * 2)) {
                 continue
             } else if !planetRectsLocalSpace.filter({ $0.intersects(planetRect) }).isEmpty {
                 continue

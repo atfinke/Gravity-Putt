@@ -25,6 +25,8 @@ class GameViewController: UIViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         
+        skView.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(doubleTapRecognizer))
         tapGestureRecognizer.numberOfTapsRequired = 1
         tapGestureRecognizer.numberOfTouchesRequired = 2
@@ -48,6 +50,10 @@ class GameViewController: UIViewController {
     }
     
     override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
 }

@@ -12,7 +12,7 @@ class GameScene: SKScene {
     
     // MARK: - Properties -
     
-    let label = SKLabelNode(text: "Hole 1, +0")
+    let label = SKLabelNode(text: "")
     
     let aimAssist = AimAssist()
     let cameraNode = SKCameraNode()
@@ -20,6 +20,7 @@ class GameScene: SKScene {
     let player: Player = {
         let player = Player(radius: 5, color: .white)
         player.zRotation = -CGFloat.pi / 2
+        player.zPosition = 100
         return player
     }()
     
@@ -29,9 +30,26 @@ class GameScene: SKScene {
     
     var playerNeedsPhysicsBodyDynamics = false
     
-    var _hole: Int = 1
-    var _score: Int = 1
-    var isDecellerating = false
+    var holeNumber = 0
+    var holeScore = 0 {
+        didSet {
+            updateScoreLabel()
+        }
+    }
+    var totalScore = 0 {
+        didSet {
+            updateScoreLabel()
+        }
+    }
+    
+    
+    var _path = CGMutablePath()
+    var fgsdffd: SKShapeNode?
+    
+    var playerVelocityModifier: CGFloat = 1.0
+    
+    
+    var starDepthLevelNodes = [[StarDepthNode]]()
     
     // MARK: - Initalization -
     
@@ -48,12 +66,14 @@ class GameScene: SKScene {
     func setUpScene() {
         backgroundColor = SKColor(white: 0, alpha: 1)
         
+        
         addChild(cameraNode)
         camera = cameraNode
         
-        label.alpha = 0
+        label.alpha = 1
         label.fontName = "Menlo-Regular"
         label.fontSize = 22
+        updateScoreLabel()
         cameraNode.addChild(label)
         
         label.position = CGPoint(x: 0, y: size.height / 2 - 30)
@@ -62,7 +82,7 @@ class GameScene: SKScene {
         addChild(player)
         
         let startSize = CGSize(width: 200, height: 200)
-        let initalLevel = Level(size: size, startSize: startSize)
+        let initalLevel = Level(size: size, startSize: startSize, num: 1)
         initalLevel.createPlanets(avoiding: [])
         initalLevel.goalNode.update(color: .green)
         initalLevel.position = CGPoint(x: -startSize.height / 2,
@@ -71,12 +91,32 @@ class GameScene: SKScene {
         let goalRectWorldSpaceX = initalLevel.position.x - initalLevel.goalRectLocalSpace.width / 2
         let goalRectWorldSpaceY = initalLevel.position.y - initalLevel.goalRectLocalSpace.height / 2
         let goalRectWorldSpace = initalLevel.goalRectLocalSpace.offsetBy(dx: goalRectWorldSpaceX,
-                                                                             dy: goalRectWorldSpaceY)
+                                                                         dy: goalRectWorldSpaceY)
         goalRectsWorldSpace.append(goalRectWorldSpace)
         
         levels.append(initalLevel)
         addChild(initalLevel)
-
+        
+        let depthLevels = 15
+        let radiusCountInterval = CGFloat(150 - 40) / CGFloat(depthLevels)
+        let radiusDepthInterval = CGFloat(0.8 - 0.5) / CGFloat(depthLevels)
+        
+        for starDepthLevel in (0..<depthLevels).reversed() {
+            let maxCount = 150 - Int(radiusCountInterval) * (depthLevels - starDepthLevel)
+            let minRadius = 0.35 + radiusDepthInterval * CGFloat(starDepthLevel)
+            let maxRadius = 0.5 + radiusDepthInterval * CGFloat(starDepthLevel)
+            
+            let starDepthNode = StarDepthNode(size: size * Int(2),
+                                              countRange: 0..<maxCount,
+                                              radiusRange: minRadius..<maxRadius)
+            starDepthLevelNodes.append([starDepthNode])
+            
+            addChild(starDepthNode)
+            //            depth.alpha = 1.0 - CGFloat(starDepth / depths)
+            
+            starDepthNode.position = initalLevel.position
+        }
+        
         for _ in 0..<2 {
             addLevel()
         }
@@ -86,16 +126,30 @@ class GameScene: SKScene {
         addChild(aimAssist)
         
         physicsWorld.contactDelegate = self
+        
+        _path.move(to: player.position)
+        fgsdffd = SKShapeNode(path: _path)
+        fgsdffd?.strokeColor = .white
+        fgsdffd?.lineWidth = 4
+//        fgsdffd?.fillColor = .white
+        addChild(fgsdffd!)
     }
     
     // MARK: - Level Management -
+    
+    func updateScoreLabel() {
+        label.text = "\(totalScore), +\(holeScore)"
+    }
     
     func addLevel() {
         guard let finalLevel = levels.last else {
             fatalError()
         }
         
-        let level = Level(size: size, startSize: finalLevel.goalRectLocalSpace.size)
+        let level = Level(size: size,
+                          startSize: finalLevel.goalRectLocalSpace.size,
+                          num: holeNumber + levels.count)
+        
         let positionX = finalLevel.position.x
             + finalLevel.goalRectLocalSpace.origin.x
             - level.startRectLocalSpace.width / 2
@@ -115,7 +169,7 @@ class GameScene: SKScene {
         let goalSafeOffsetX = level.position.x - level.goalRectLocalSpace.width / 2
         let goalSafeOffsetY = level.position.y - level.goalRectLocalSpace.height / 2
         let goalSafeWorldRect = level.goalRectLocalSpace.offsetBy(dx: goalSafeOffsetX,
-                                                                      dy: goalSafeOffsetY)
+                                                                  dy: goalSafeOffsetY)
         
         levels.append(level)
         goalRectsWorldSpace.append(goalSafeWorldRect)
@@ -123,9 +177,11 @@ class GameScene: SKScene {
     }
     
     func moveToLevel(at index: Int) {
-        _hole += index
+        print("moveToLevel")
+        holeNumber += index
+        totalScore += holeScore
+        holeScore = 0
         
-        lastLevel?.removeFromParent()
         if index > 0 {
             lastLevel = levels[index - 1]
         }
@@ -137,42 +193,119 @@ class GameScene: SKScene {
         goalRectsWorldSpace.removeFirst(index)
         let levelsToRemove = levels.prefix(index)
         levels.removeFirst(index)
+        
+        let levelMoveDuration: TimeInterval = 1.0
+        
         for (levelToRemoveIndex, levelToRemove) in levelsToRemove.enumerated() {
             if levelToRemoveIndex == levelsToRemove.count - 1 {
-                levelToRemove.goalNode.gravityField.removeFromParent()
-                levelToRemove.goalNode.update(color: .blue)
+                let goalNode = levelToRemove.goalNode
+                goalNode.physicsBody = nil
+                goalNode.gravityField.removeFromParent()
+                goalNode.border.removeAllActions()
+                
+                let currentColor = goalNode.border.strokeColor
+     
+                let currentRotation = levelToRemove.goalNode.border.zRotation
+                let minAmountToRotate = -CGFloat.pi * 3
+                let estimatedNewRotation = currentRotation + minAmountToRotate
+                
+                let rotationRounding = -CGFloat.pi * (1 / 4)
+                let rotationPadding = rotationRounding - estimatedNewRotation.truncatingRemainder(dividingBy: rotationRounding)
+                let finalRotation = estimatedNewRotation + rotationPadding
+                
+                let finalColor = SKColor(red: 1, green: 1, blue: 1, alpha: 0.5)
+            
+                let action: SKAction = .group([
+                    .scale(to: 0.5, duration: levelMoveDuration),
+                    .customAction(withDuration: levelMoveDuration, actionBlock: { _, time in
+                        let percent = time / CGFloat(levelMoveDuration)
+                        let color = currentColor.lerp(color: finalColor, percent: percent)
+                        goalNode.border.strokeColor = color
+                    }),
+                    .rotate(toAngle: finalRotation, duration: levelMoveDuration),
+                    .fadeAlpha(to: 0.25, duration: levelMoveDuration)
+                ])
+                action.timingMode = .easeInEaseOut
+                levelToRemove.goalNode.border.run(action)
+                levelToRemove.goalNode.innerBorder.run(.group([
+                    .fadeOut(withDuration: levelMoveDuration),
+                    .scale(to: 0, duration: levelMoveDuration)
+                ]))
+                
+                let ggg = SKEmitterNode(fileNamed: "goal.sks")!
+                ggg.zPosition = -10
+                levelToRemove.goalNode.addChild(ggg)
+                
             } else {
-                levelToRemove.removeFromParent()
+                levelToRemove.goalNode.gravityField.removeFromParent()
+                levelToRemove.run(.sequence([
+                    .wait(forDuration: levelMoveDuration),
+                    .removeFromParent()
+                ]))
             }
         }
         
-        cameraNode.run(.move(to: position, duration: 1))
+        let action = SKAction.move(to: position, duration: levelMoveDuration)
+        action.timingMode = .easeInEaseOut
+        cameraNode.run(action)
+        
+        let cameraOffset = position - cameraNode.position
+        
+        var starDepthsToAdd = [Int: StarDepthNode]()
+        var starDepthsToRemove = [Int: StarDepthNode]()
+        
+        for (depthLevel, depthNodesAtLevel) in starDepthLevelNodes.enumerated() {
+            let offset = cameraOffset.scaleComponents(by: 0.1 * 0.5 * CGFloat(depthLevel + 1))
+            
+            for (depthLevelNodeIndex, depthLevelNode) in depthNodesAtLevel.enumerated() {
+                let newPosition = depthLevelNode.position + offset
+                
+                let action = SKAction.move(to: newPosition, duration: levelMoveDuration)
+                action.timingMode = .easeInEaseOut
+                depthLevelNode.run(action)
+                
+                let cameraPaddedDistanceFromDepthNode = (position.x + size.width * 2) - (newPosition.x + depthLevelNode.frame.width)
+                
+                if cameraPaddedDistanceFromDepthNode > 0 && depthLevelNodeIndex == depthNodesAtLevel.count - 1 {
+                    let starDepthNode = StarDepthNode(previousNode: depthLevelNode)
+                    starDepthNode.position = CGPoint(x: newPosition.x + depthLevelNode.frame.width,
+                                                     y: level.position.y)
+                    addChild(starDepthNode)
+                    starDepthsToAdd[depthLevel] = starDepthNode
+                } else if cameraPaddedDistanceFromDepthNode > size.width * 2 && depthLevelNodeIndex == 0 {
+                    starDepthsToRemove[depthLevel] = depthLevelNode
+                }
+                
+            }
+            
+            for (key, value) in starDepthsToAdd {
+                starDepthLevelNodes[key].append(value)
+            }
+            for (key, value) in starDepthsToRemove {
+                starDepthLevelNodes[key].removeFirst()
+                value.run(.sequence([
+                    .wait(forDuration: levelMoveDuration),
+                    .removeFromParent()
+                ]))
+            }
+        }
+        
         for _ in 0..<index {
             addLevel()
         }
         resetPlayerPosition()
         
-        label.alpha = 10
-        let scale: CGFloat = 0.75
-        label.text = "Hole \(_hole), +\(_score - _hole)"
-//        label.run(.sequence([
-////            .group([
-////            .moveTo(y: 0, duration: 1),
-////            .scale(to: 1, duration: 1)
-////            ]),
-////            .wait(forDuration: 1.0),
-//            .group([
-//            .moveTo(y: size.height / 2 - label.frame.height * scale, duration: 1),
-//            .scale(to: scale, duration: 1)
-//            ])
-//        ]))
+        label.text = "\(totalScore), +\(holeScore)"
+        playerVelocityModifier = 1.0
     }
     
     // MARK: - Aiming -
     
     func setTargeting(startLocation: CGPoint) {
+        aimAssist.updateTail(length: 0)
         aimAssist.position = startLocation
         aimAssist.run(.fadeIn(withDuration: 0.15))
+        
     }
     
     func setTargeting(pullBackLocation: CGPoint) {
@@ -184,6 +317,9 @@ class GameScene: SKScene {
     }
     
     func finishedTargeting(pullBackLocation: CGPoint) {
+        _path = CGMutablePath()
+        _path.move(to: player.position)
+        
         let magnitude = pullBackLocation.distance(to: aimAssist.position)
         let mag: CGFloat = magnitude / 5
         let x = mag * -sin(aimAssist.zRotation)
@@ -192,16 +328,18 @@ class GameScene: SKScene {
         player.run(.applyImpulse(CGVector(dx: x, dy: y), duration: 0.5))
         aimAssist.run(.fadeOut(withDuration: 0.15))
         
-        _score += 1
-        label.text = "Hole \(_hole), +\(_score - _hole)"
+        holeScore += 1
+        
     }
     
     // MARK: - Player -
     
     func resetPlayerPosition() {
+        
         guard let physicsBody = player.physicsBody, let level = levels.first else {
             fatalError()
         }
+        
         
         physicsBody.fieldBitMask = SpriteCategory.none
         physicsBody.velocity = CGVector(dx: 0, dy: 0)
@@ -213,16 +351,25 @@ class GameScene: SKScene {
                                   y: startRectWorldSpace.minY + startRectWorldSpace.height / 2)
         
         playerNeedsPhysicsBodyDynamics = true
+        playerVelocityModifier = 1.0
+        
+        _path = CGMutablePath()
+        _path.move(to: player.position)
     }
     
     // MARK: - SKScene Overrides -
     
     override func update(_ currentTime: TimeInterval) {
-        
-        if isDecellerating {
-            let velocity = player.physicsBody!.velocity
-            player.physicsBody?.velocity = CGVector(dx: velocity.dx * 0.7, dy: velocity.dy * 0.7)
+        if playerVelocityModifier != 1.0, let physicsBody = player.physicsBody {
+            let velocity = physicsBody.velocity
+            physicsBody.velocity = CGVector(dx: velocity.dx * playerVelocityModifier,
+                                            dy: velocity.dy * playerVelocityModifier)
         }
+        
+        _path.addLine(to: player.position)
+        fgsdffd?.path = _path.copy(dashingWithPhase: 0, lengths: [12])
+        
+        
         if let level = levels.first {
             let safeWidthPadding: CGFloat = size.width / 10
             let levelMinXWorldSpace = level.position.x - size.width / 2 + safeWidthPadding
@@ -246,12 +393,9 @@ class GameScene: SKScene {
             }
             
             cameraNode.run(.scale(to: min(scale, 2), duration: 0.25))
-//            cameraNode.run(.scale(to: 2, duration: 0.25))
             
             if scale > 2.5 {
                 resetPlayerPosition()
-            } else {
-                
             }
         }
         
@@ -264,17 +408,17 @@ class GameScene: SKScene {
                 if dist < 40 {
                     physicsBody.velocity = CGVector(dx: velocity.dx * 0.7,
                                                     dy: velocity.dy * 0.7)
-//                    print(dist)
                     if magnitude < 2 && dist < 4 {
                         moveToLevel(at: index + 1)
                     } else if magnitude < 20 {
                         physicsBody.velocity = CGVector(dx: velocity.dx * 0.7,
-                        dy: velocity.dy * 0.7)
+                                                        dy: velocity.dy * 0.7)
                         if dist < 5 {
                             levels[index].goalNode.gravityField.strength = 0.5
                         }
-                        //                        levels[index].goalNode.gravityField.strength = 1
                     }
+                    
+//                    levels[index].goalNode.innerBorder.alpha = (dist - 10) / 30
                     break
                 }
             }
@@ -288,7 +432,6 @@ class GameScene: SKScene {
             player.physicsBody?.linearDamping = 0.0
         }
     }
-    
 }
 
 extension GameScene: SKPhysicsContactDelegate {
@@ -299,26 +442,15 @@ extension GameScene: SKPhysicsContactDelegate {
         if let player = contact.bodyA.node as? Player, let _ = player.physicsBody, let goal = contact.bodyB.node as? Goal,
             goal != lastLevel?.goalNode {
             goal.gravityField.strength = 4.5
-            print("contact")
-            //            let velocity = playerBody.velocity
-            //            player.run(.applyImpulse(CGVector(dx: -velocity.dx / 4,
-            //                                              dy: -velocity.dy / 4),
-            //                                     duration: 2))
-            //            playerBody.linearDamping = 1
-        } else if let goal = contact.bodyB.node as? Planet {
-            print("pc   ")
+            playerVelocityModifier = 0.75
+        } else if let _ = contact.bodyA.node as? Planet {
+            playerVelocityModifier = 0.95
         }
-        
-        isDecellerating = true
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
-        if let player = contact.bodyA.node as? Player, let _ = player.physicsBody, let goal = contact.bodyB.node as? Goal,
-        goal != lastLevel?.goalNode {
-        
-            print("contacted")
-        }
-        isDecellerating = false
+        playerVelocityModifier = 1.0
     }
     
 }
+
