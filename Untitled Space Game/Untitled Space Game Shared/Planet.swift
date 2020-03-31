@@ -9,31 +9,26 @@
 import SpriteKit
 
 class Planet: SKSpriteNode {
-    
+
     // MARK: - Properties -
-    
+
     let gravityField: SKFieldNode = {
         let field = SKFieldNode.radialGravityField()
-        field.strength = Float.random(in: 0.95...1.9)
+        field.strength = 1.5
         field.categoryBitMask = SpriteCategory.player
         return field
     }()
-    
+
     // MARK: - Initalization -
-    
+
     init(radius: CGFloat, color: SKColor) {
         super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
         gravityField.region = SKRegion(radius: Float(radius * 3))
-        
+        addChild(gravityField)
+
         let path = CGMutablePath()
         let numberOfPoints = 100//Int.random(in: 8..<16)
-        
-        
-        let _viz = SKShapeNode(circleOfRadius: radius * 3)
-        _viz.fillColor = SKColor.darkGray.withAlphaComponent(0.2)
-        _viz.strokeColor = .clear
-//        addChild(_viz)
-        
+
         var points = [CGPoint]()
         let angle = 2 * CGFloat.pi / CGFloat(numberOfPoints)
         for index in 0..<numberOfPoints {
@@ -45,11 +40,10 @@ class Planet: SKSpriteNode {
                 path.move(to: point)
             } else {
                 path.addLine(to: point)
-                
             }
         }
         points.append(points[0])
-        
+
         let body = SKPhysicsBody(polygonFrom: path)
         body.isDynamic = false
         body.affectedByGravity = false
@@ -59,22 +53,42 @@ class Planet: SKSpriteNode {
         body.contactTestBitMask = SpriteCategory.player
         physicsBody = body
 
+        let color = SKColor(deviceHue: CGFloat.random(in: 0..<1),
+                            saturation: 1,
+                            brightness: 0.7,
+                            alpha: 1.0)
+
+        let _viz = SKShapeNode(circleOfRadius: radius * 3)
+        _viz.fillColor = color.withAlphaComponent(0.2)
+        _viz.strokeColor = .clear
+        //        addChild(_viz)
+
         let border = SKShapeNode(points: &points, count: points.count)
-        border.fillColor = SKColor(white: 0.2, alpha: 1)
-        border.strokeColor = SKColor(white: 1, alpha: 1)
-        border.lineWidth = CGFloat.random(in: 0.5..<2)
+        if PRETTY_COLORS {
+            border.fillColor = color//SKColor(white: 0.2, alpha: 1)
+            border.strokeColor = SKColor.white.withAlphaComponent(0.8) //SKColor(white: 1, alpha: 1)
+        } else {
+            border.fillColor = SKColor(white: 0.2, alpha: 1)
+            border.strokeColor = SKColor(white: 1, alpha: 1)
+        }
+        border.lineWidth = 0.075 * radius
         addChild(border)
-        
-        let direction = Int.random(in: 0...1) == 1 ? 1 : -1
-        
-        let action: SKAction = .repeatForever(.sequence([
-            .rotate(byAngle: CGFloat.pi * CGFloat(direction), duration: TimeInterval.random(in: 15..<45))
-        ]))
-        
-//        run(action)
-        addChild(gravityField)
+
+        //        let direction = Int.random(in: 0...1) == 1 ? 1 : -1
+
+        //        let action: SKAction = .repeatForever(.sequence([
+        //            .rotate(byAngle: CGFloat.pi * CGFloat(direction), duration: TimeInterval.random(in: 15..<45))
+        //        ]))
+
+        //        run(action)
+        //        addChild(gravityField)
+
+        //        let _viz_planet = SKShapeNode(circleOfRadius: CGFloat(Float(radius * 3)))
+        //        _viz_planet.fillColor = color
+        //        _viz_planet.zPosition = -10
+        //        addChild(_viz_planet)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

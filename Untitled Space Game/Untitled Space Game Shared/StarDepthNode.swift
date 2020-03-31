@@ -9,31 +9,31 @@
 import SpriteKit
 
 class StarDepthNode: SKSpriteNode {
-    
+
     // MARK: - Properties -
-    
+
     private static let starTextureCreator = StarTextureCreator()
-    
+
     // MARK: - Initalization -
-    
+
     init(size: CGSize, countRange: Range<Int>, radiusRange: Range<CGFloat>) {
         let texture = StarDepthNode.starTextureCreator.create(size: size,
                                                               countRange: countRange,
                                                               radiusRange: radiusRange)
         super.init(texture: texture, color: .clear, size: texture.size())
-        zPosition = -1
+        zPosition = ZPosition.stars.rawValue
     }
-    
+
     init(previousNode: StarDepthNode) {
         guard let texture = previousNode.texture else { fatalError() }
         super.init(texture: texture, color: .clear, size: texture.size())
-        zPosition = -1
+        zPosition = ZPosition.stars.rawValue
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func showShape() {
         let _viz = SKShapeNode(rectOf: size)
         _viz.fillColor = SKColor.white.withAlphaComponent(0.1)

@@ -9,24 +9,23 @@
 import SpriteKit
 
 struct StarTextureCreator {
-    
+
     #if os(macOS)
     private typealias StarRenderer = StarAppKitRenderer
     #else
     private typealias StarRenderer = UIGraphicsImageRenderer
     #endif
 
-    func create(size: CGSize, countRange: Range<Int>, radiusRange: Range<CGFloat>) -> SKTexture{
-        
+    func create(size: CGSize, countRange: Range<Int>, radiusRange: Range<CGFloat>) -> SKTexture {
+
         #if os(macOS)
         guard let scale = NSScreen.main?.backingScaleFactor else { fatalError() }
         #else
         let scale = UIScreen.main.scale
         #endif
-        
-        
+
         let scaledSize = size / scale
-        
+
         let renderer = StarRenderer(size: scaledSize)
         let image = renderer.image { ctx in
             let context = ctx.cgContext
@@ -40,7 +39,7 @@ struct StarTextureCreator {
                            endAngle: CGFloat.pi * 2,
                            clockwise: false)
             }
-            
+
             SKColor.white.setFill()
             context.fillPath()
         }
@@ -55,7 +54,7 @@ struct StarTextureCreator {
             fatalError()
         }
         #endif
-        
+
         return SKTexture(cgImage: cgImage)
     }
 }
@@ -71,11 +70,11 @@ private class StarAppKitRenderer {
     func image(actions: (NSGraphicsContext) -> Void) -> NSImage {
         let image = NSImage(size: size)
         image.lockFocusFlipped(true)
-        
+
         guard let ctx = NSGraphicsContext.current else {
             fatalError()
         }
-        
+
         actions(ctx)
         image.unlockFocus()
         return image

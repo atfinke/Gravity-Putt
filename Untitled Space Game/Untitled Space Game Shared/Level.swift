@@ -8,94 +8,149 @@
 
 import SpriteKit
 
+private let isVizOn = false
+
 class Level: SKNode {
-    
+
     // MARK: - Properties -
-    
+
     private let size: CGSize
-    
+
     let goalNode: Goal
     let goalRectLocalSpace: CGRect
-    
+
     let startRectLocalSpace: CGRect
     var planetRectsLocalSpace = [CGRect]()
-    
+
     // MARK: - Initalization -
-    
+
+    let aaa: Int
     init(size: CGSize, startSize: CGSize, num: Int) {
+        self.aaa = num
+
         self.size = size
-        
+
         var children = [SKNode]()
-        
+
+        let startPositionX = -size.width * CGFloat(3.0 / 8.0)
         let startPositionYBounds = size.height * 0.25
-        startRectLocalSpace = CGRect(x: -size.width / 2 + 30,
-                                     y: CGFloat.random(in: -(startPositionYBounds + startSize.height)...startPositionYBounds),
+        let startPositionY = CGFloat.random(in: -(startPositionYBounds + startSize.height)...startPositionYBounds)
+
+        startRectLocalSpace = CGRect(x: startPositionX,
+                                     y: startPositionY,
                                      width: startSize.width,
                                      height: startSize.height)
-        
-        let goalRadius: CGFloat = 40
-        let goalWidthPercent = goalRadius / size.width
-        let goalWidthMaxBounds = 0.5 - goalWidthPercent
+
+        let goalRadius: CGFloat = 50
+        let goalPositionXVariable = CGFloat.random(in: -2...0.5) * CGFloat(1.0 / 16.0)
+        let goalPositionX = size.width * CGFloat(3.0 / 8.0) + size.width * goalPositionXVariable
+
         let goalHeightBounds = 0.5 - (goalRadius * 2) / size.height
-        let goalPositionX = CGFloat.random(in: goalWidthPercent...goalWidthMaxBounds) * size.width
         let goalPositionY = CGFloat.random(in: -(goalHeightBounds)...goalHeightBounds) * size.height
-        let goalPosition = CGPoint(x: goalPositionX,
-                                   y: goalPositionY)
-        goalRectLocalSpace = CGRect(origin: goalPosition,
-                                        size: CGSize(width: goalRadius * 2,
-                                                     height: goalRadius * 2))
-        
+        let goalPosition = CGPoint(x: goalPositionX, y: goalPositionY)
+
+        let goalSize = CGSize(width: goalRadius * 2, height: goalRadius * 2)
+        goalRectLocalSpace = CGRect(origin: goalPosition, size: goalSize)
+
         goalNode = Goal(radius: goalRadius, color: .yellow, levelNumber: num)
-        goalNode.position = goalPosition
+        goalNode.position = goalRectLocalSpace.center
         children.append(goalNode)
         super.init()
 
-//        let _viz = SKShapeNode(rectOf: size)
-//        _viz.fillColor = SKColor.blue.withAlphaComponent(0.1)
-//        addChild(_viz)
+        if isVizOn {
+            let _viz_level = SKShapeNode(rectOf: size)
+            _viz_level.fillColor = SKColor.blue.withAlphaComponent(0.15)
+            addChild(_viz_level)
 
-        
+            let _viz_start = SKShapeNode(rect: startRectLocalSpace,
+                                         cornerRadius: startRectLocalSpace.width / 2)
+            _viz_start.fillColor = SKColor.yellow.withAlphaComponent(0.4)
+            addChild(_viz_start)
+        }
+
         children.forEach { addChild($0) }
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Helpers -
 
     func createPlanets(avoiding localSpacePlanets: [CGRect]) {
-//        for rect in localSpacePlanets {
-//            let start = SKShapeNode(rect: rect)
-//            start.fillColor = SKColor.yellow.withAlphaComponent(0.6)
-//            addChild(start)
-//        }
-    
-        let planetInsertionAttemptCount = Int.random(in: 5...10)
-        for _ in 2..<planetInsertionAttemptCount {
+        let startSafeAreaWidthInset = -startRectLocalSpace.width * 3 / 4
+        let startSafeAreaHeightInset = -startRectLocalSpace.height * 3 / 4
+        let startSafeArea = startRectLocalSpace.insetBy(dx: startSafeAreaWidthInset,
+                                                        dy: startSafeAreaHeightInset)
+
+        let goalSafeAreaWidthInset = -goalRectLocalSpace.width * 3 / 4
+        let goalSafeAreaHeightInset = -goalRectLocalSpace.height * 3 / 4
+        let goalSafeArea = goalRectLocalSpace.insetBy(dx: goalSafeAreaWidthInset,
+                                                      dy: goalSafeAreaHeightInset)
+
+        if isVizOn {
+            let _viz_start_safe = SKShapeNode(rect: startSafeArea,
+                                              cornerRadius: startSafeArea.width / 2)
+            _viz_start_safe.fillColor = SKColor.white.withAlphaComponent(1)
+            addChild(_viz_start_safe)
+
+            //            let _viz_goal_safe = SKShapeNode(rect: goalSafeArea,
+            //                                             cornerRadius: goalSafeArea.width / 2)
+            //            _viz_goal_safe.fillColor = SKColor.yellow.withAlphaComponent(0.5)
+            //            addChild(_viz_goal_safe)
+
+            for rect in localSpacePlanets {
+                let _viz_planet = SKShapeNode(rect: rect, cornerRadius: rect.width / 2)
+                _viz_planet.fillColor = SKColor.darkGray
+                if aaa == 2 {
+                    _viz_planet.fillColor = SKColor.red.withAlphaComponent(0.5)
+                } else if aaa == 3 {
+                    _viz_planet.fillColor = SKColor.yellow.withAlphaComponent(0.5)
+                } else if aaa == 3 {
+                    _viz_planet.fillColor = SKColor.white.withAlphaComponent(0.5)
+                } else if aaa == 3 {
+                    _viz_planet.fillColor = SKColor.orange.withAlphaComponent(0.5)
+                }
+                addChild(_viz_planet)
+            }
+        }
+
+        let planetInsertionAttemptCount = 20//Int.random(in: 10...20)
+        for _ in 0..<planetInsertionAttemptCount {
             let planetRadius = CGFloat.random(in: 0.075...0.2) * size.height
-            let planetPosition = CGPoint(x: 0 + CGFloat.random(in: -0.5..<0.5) * size.width,
-                                         y: 0 + CGFloat.random(in: -0.5..<0.5) * size.height)
-            let planetRect = CGRect(origin: planetPosition,
-                                        size: CGSize(width: planetRadius * 2,
-                                                     height: planetRadius * 2))
-                .insetBy(dx: -planetRadius/3, dy: -planetRadius/3)
+            let planetRadiusWidthPercent = planetRadius / size.width
+            let planetRadiusHeightPercent = planetRadius / size.height
 
+            let planetPosition = CGPoint(x: CGFloat.random(in: -0.5..<(0.5 - planetRadiusWidthPercent)) * size.width,
+                                         y: CGFloat.random(in: -0.5..<(0.5 - planetRadiusHeightPercent)) * size.height)
 
-            if planetRect.intersects(startRectLocalSpace.offsetBy(dx: startRectLocalSpace.width / 2, dy: startRectLocalSpace.height / 2)) || planetRect.intersects(goalRectLocalSpace.insetBy(dx: -goalRectLocalSpace.width * 2, dy: -goalRectLocalSpace.height * 2)) {
+            let planetSafeAreaPadding = planetRadius * CGFloat(3.0 / 4.0)
+            let planetSize = CGSize(width: planetRadius * 2, height: planetRadius * 2)
+
+            let planetSafeRect = CGRect(origin: planetPosition, size: planetSize)
+                .insetBy(dx: -planetSafeAreaPadding, dy: -planetSafeAreaPadding)
+
+            if planetSafeRect.innerCircleIntersects(circleRect: startSafeArea) || planetSafeRect.innerCircleIntersects(circleRect: goalSafeArea) {
                 continue
-            } else if !planetRectsLocalSpace.filter({ $0.intersects(planetRect) }).isEmpty {
+            } else if !planetRectsLocalSpace.filter({ $0.innerCircleIntersects(circleRect: planetSafeRect) }).isEmpty {
                 continue
-            } else if !localSpacePlanets.filter({ $0.intersects(planetRect) }).isEmpty {
+            } else if !localSpacePlanets.filter({ $0.innerCircleIntersects(circleRect: planetSafeRect) }).isEmpty {
                 continue
             }
-            planetRectsLocalSpace.append(planetRect)
-            
+            planetRectsLocalSpace.append(planetSafeRect)
+
+            if isVizOn {
+                let _viz_planet = SKShapeNode(rect: planetSafeRect,
+                                              cornerRadius: planetSafeRect.width / 2)
+                _viz_planet.fillColor = SKColor.white.withAlphaComponent(0.1)
+                addChild(_viz_planet)
+            }
+
             let planet = Planet(radius: planetRadius, color: .blue)
-            planet.zPosition = 0
-            planet.position = planetPosition
+            planet.zPosition = ZPosition.planet.rawValue
+            planet.position = planetSafeRect.center
             addChild(planet)
         }
     }
-    
+
 }

@@ -27,6 +27,9 @@
 		140266ED2431DC8000EF4AA8 /* goal.sks in Resources */ = {isa = PBXBuildFile; fileRef = 140266EC2431DC8000EF4AA8 /* goal.sks */; };
 		140266EE2431DC8000EF4AA8 /* goal.sks in Resources */ = {isa = PBXBuildFile; fileRef = 140266EC2431DC8000EF4AA8 /* goal.sks */; };
 		140266EF2431DC8000EF4AA8 /* goal.sks in Resources */ = {isa = PBXBuildFile; fileRef = 140266EC2431DC8000EF4AA8 /* goal.sks */; };
+		140266F12431F29800EF4AA8 /* ZPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140266F02431F29800EF4AA8 /* ZPosition.swift */; };
+		140266F22431F29800EF4AA8 /* ZPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140266F02431F29800EF4AA8 /* ZPosition.swift */; };
+		140266F32431F29800EF4AA8 /* ZPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140266F02431F29800EF4AA8 /* ZPosition.swift */; };
 		145845EC241F46E100B0B922 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145845EB241F46E100B0B922 /* Level.swift */; };
 		145845ED241F46E100B0B922 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145845EB241F46E100B0B922 /* Level.swift */; };
 		145845EE241F46E100B0B922 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145845EB241F46E100B0B922 /* Level.swift */; };
@@ -80,6 +83,7 @@
 		1400F9A5241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1400F9A7241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		140266EC2431DC8000EF4AA8 /* goal.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = goal.sks; sourceTree = "<group>"; };
+		140266F02431F29800EF4AA8 /* ZPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPosition.swift; sourceTree = "<group>"; };
 		145845EB241F46E100B0B922 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		145845EF24207E7700B0B922 /* GameScene+Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Touch.swift"; sourceTree = "<group>"; };
 		145845F224207E8F00B0B922 /* GameScene+Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Mouse.swift"; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 			children = (
 				140266EC2431DC8000EF4AA8 /* goal.sks */,
 				1400F975241BF47C003BFED8 /* GameScene.swift */,
+				140266F02431F29800EF4AA8 /* ZPosition.swift */,
 				14B572792428B5A8006F85FE /* StarDepthNode.swift */,
 				145845F224207E8F00B0B922 /* GameScene+Mouse.swift */,
 				145845EF24207E7700B0B922 /* GameScene+Touch.swift */,
@@ -256,7 +261,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Andrew Finke";
 				TargetAttributes = {
 					1400F97A241BF47D003BFED8 = {
@@ -339,6 +344,7 @@
 				14B5727A2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14B5727624270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1471669D241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
+				140266F12431F29800EF4AA8 /* ZPosition.swift in Sources */,
 				14716695241C4A0500E75D98 /* Goal.swift in Sources */,
 				14716691241C49EA00E75D98 /* Planet.swift in Sources */,
 				145845F024207E7700B0B922 /* GameScene+Touch.swift in Sources */,
@@ -359,6 +365,7 @@
 				14B5727B2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14B5727724270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1471669E241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
+				140266F22431F29800EF4AA8 /* ZPosition.swift in Sources */,
 				14716696241C4A0500E75D98 /* Goal.swift in Sources */,
 				14716693241C49EC00E75D98 /* Planet.swift in Sources */,
 				145845F124207E7700B0B922 /* GameScene+Touch.swift in Sources */,
@@ -379,6 +386,7 @@
 				14B5727C2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14B5727824270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1400F9A1241BF47D003BFED8 /* AppDelegate.swift in Sources */,
+				140266F32431F29800EF4AA8 /* ZPosition.swift in Sources */,
 				1471669F241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
 				14716697241C4A0500E75D98 /* Goal.swift in Sources */,
 				14716692241C49EC00E75D98 /* Planet.swift in Sources */,
@@ -627,6 +635,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
@@ -637,6 +646,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
 				PRODUCT_NAME = "Untitled Space Game";
 				SDKROOT = macosx;
@@ -648,6 +658,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
@@ -658,6 +669,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
 				PRODUCT_NAME = "Untitled Space Game";
 				SDKROOT = macosx;
