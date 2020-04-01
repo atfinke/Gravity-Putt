@@ -24,10 +24,7 @@ class Level: SKNode {
 
     // MARK: - Initalization -
 
-    let aaa: Int
     init(size: CGSize, startSize: CGSize, num: Int) {
-        self.aaa = num
-
         self.size = size
 
         var children = [SKNode]()
@@ -52,7 +49,7 @@ class Level: SKNode {
         let goalSize = CGSize(width: goalRadius * 2, height: goalRadius * 2)
         goalRectLocalSpace = CGRect(origin: goalPosition, size: goalSize)
 
-        goalNode = Goal(radius: goalRadius, color: .yellow, levelNumber: num)
+        goalNode = Goal(radius: goalRadius, levelNumber: num)
         goalNode.position = goalRectLocalSpace.center
         children.append(goalNode)
         super.init()
@@ -101,23 +98,14 @@ class Level: SKNode {
 
             for rect in localSpacePlanets {
                 let _viz_planet = SKShapeNode(rect: rect, cornerRadius: rect.width / 2)
-                _viz_planet.fillColor = SKColor.darkGray
-                if aaa == 2 {
-                    _viz_planet.fillColor = SKColor.red.withAlphaComponent(0.5)
-                } else if aaa == 3 {
-                    _viz_planet.fillColor = SKColor.yellow.withAlphaComponent(0.5)
-                } else if aaa == 3 {
-                    _viz_planet.fillColor = SKColor.white.withAlphaComponent(0.5)
-                } else if aaa == 3 {
-                    _viz_planet.fillColor = SKColor.orange.withAlphaComponent(0.5)
-                }
+                _viz_planet.fillColor = SKColor.red.withAlphaComponent(0.5)
                 addChild(_viz_planet)
             }
         }
 
-        let planetInsertionAttemptCount = 20//Int.random(in: 10...20)
-        for _ in 0..<planetInsertionAttemptCount {
-            let planetRadius = CGFloat.random(in: 0.075...0.2) * size.height
+        let planetInsertionAttemptCount = Int.random(in: 4...10)
+        for _ in 2..<planetInsertionAttemptCount {
+            let planetRadius = CGFloat.random(in: 0.15...0.3) * size.height
             let planetRadiusWidthPercent = planetRadius / size.width
             let planetRadiusHeightPercent = planetRadius / size.height
 

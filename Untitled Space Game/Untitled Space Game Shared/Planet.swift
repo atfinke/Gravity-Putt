@@ -9,42 +9,26 @@
 import SpriteKit
 
 class Planet: SKSpriteNode {
-
+    
     // MARK: - Properties -
-
+    
     let gravityField: SKFieldNode = {
         let field = SKFieldNode.radialGravityField()
         field.strength = 1.5
         field.categoryBitMask = SpriteCategory.player
         return field
     }()
-
+    
     // MARK: - Initalization -
-
+    
     init(radius: CGFloat, color: SKColor) {
         super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
-        gravityField.region = SKRegion(radius: Float(radius * 3))
+        
+        let gravityFieldRegionRadius = radius * 3
+        gravityField.region = SKRegion(radius: Float(gravityFieldRegionRadius))
         addChild(gravityField)
-
-        let path = CGMutablePath()
-        let numberOfPoints = 100//Int.random(in: 8..<16)
-
-        var points = [CGPoint]()
-        let angle = 2 * CGFloat.pi / CGFloat(numberOfPoints)
-        for index in 0..<numberOfPoints {
-            let x = radius * sin(CGFloat(index) * angle)
-            let y = radius * cos(CGFloat(index) * angle)
-            let point = CGPoint(x: x, y: y)
-            points.append(point)
-            if index == 0 {
-                path.move(to: point)
-            } else {
-                path.addLine(to: point)
-            }
-        }
-        points.append(points[0])
-
-        let body = SKPhysicsBody(polygonFrom: path)
+        
+        let body = SKPhysicsBody(circleOfRadius: radius)
         body.isDynamic = false
         body.affectedByGravity = false
         body.allowsRotation = false
@@ -52,18 +36,27 @@ class Planet: SKSpriteNode {
         body.collisionBitMask = SpriteCategory.player
         body.contactTestBitMask = SpriteCategory.player
         physicsBody = body
-
-        let color = SKColor(deviceHue: CGFloat.random(in: 0..<1),
+        
+        let color = SKColor(hue: CGFloat.random(in: 0..<1),
                             saturation: 1,
                             brightness: 0.7,
                             alpha: 1.0)
-
-        let _viz = SKShapeNode(circleOfRadius: radius * 3)
-        _viz.fillColor = color.withAlphaComponent(0.2)
-        _viz.strokeColor = .clear
-        //        addChild(_viz)
-
-        let border = SKShapeNode(points: &points, count: points.count)
+        
+        let gravityFieldTexture = Planet.gravityFieldImage(radius: gravityFieldRegionRadius, color: color)
+        let gravityFieldTextureNode = SKSpriteNode(texture: gravityFieldTexture)
+        gravityFieldTextureNode.zPosition = ZPosition.stars.rawValue + 1
+        addChild(gravityFieldTextureNode)
+        
+        let fadeAction = SKAction.repeatForever(SKAction.sequence([
+            .fadeAlpha(to: CGFloat.random(in: 0.6...1), duration: TimeInterval.random(in: 8...20)),
+            .fadeAlpha(to: 1, duration: TimeInterval.random(in: 8...20))
+        ]))
+        fadeAction.timingMode = .easeInEaseOut
+        gravityFieldTextureNode.run(fadeAction)
+        
+        
+        let border = SKShapeNode(circleOfRadius: radius)
+        border.zPosition = ZPosition.stars.rawValue + 2
         if PRETTY_COLORS {
             border.fillColor = color//SKColor(white: 0.2, alpha: 1)
             border.strokeColor = SKColor.white.withAlphaComponent(0.8) //SKColor(white: 1, alpha: 1)
@@ -73,23 +66,32 @@ class Planet: SKSpriteNode {
         }
         border.lineWidth = 0.075 * radius
         addChild(border)
-
-        //        let direction = Int.random(in: 0...1) == 1 ? 1 : -1
-
-        //        let action: SKAction = .repeatForever(.sequence([
-        //            .rotate(byAngle: CGFloat.pi * CGFloat(direction), duration: TimeInterval.random(in: 15..<45))
-        //        ]))
-
-        //        run(action)
-        //        addChild(gravityField)
-
-        //        let _viz_planet = SKShapeNode(circleOfRadius: CGFloat(Float(radius * 3)))
-        //        _viz_planet.fillColor = color
-        //        _viz_planet.zPosition = -10
-        //        addChild(_viz_planet)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    static func gravityFieldImage(radius: CGFloat, color: SKColor) -> SKTexture {
+        let size = CGSize(width: radius * 2, height: radius * 2)
+        
+        let layer = CAGradientLayer()
+        layer.type = .radial
+        layer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        layer.endPoint = CGPoint(x: 1, y: 1)
+        layer.frame = CGRect(origin: .zero, size: size)
+        layer.colors = [
+            color.withAlphaComponent(0.75).cgColor,
+            color.withAlphaComponent(0.0).cgColor
+        ]
+        layer.cornerRadius = radius
+        
+        let renderer = ContextRenderer(size: size)
+        let image = renderer.image { context in
+            layer.render(in: context.cgContext)
+        }
+        
+        return SKTexture(image: image)
     }
 }

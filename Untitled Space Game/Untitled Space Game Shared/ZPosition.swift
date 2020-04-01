@@ -6,7 +6,7 @@
 //  Copyright © 2020 Andrew Finke. All rights reserved.
 //
 
-import Foundation
+import CoreGraphics
 
 enum ZPosition: CGFloat {
     case aimAssist = 1_000_000

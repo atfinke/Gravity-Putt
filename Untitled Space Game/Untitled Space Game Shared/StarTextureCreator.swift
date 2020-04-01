@@ -8,13 +8,13 @@
 
 import SpriteKit
 
-struct StarTextureCreator {
+#if os(macOS)
+typealias ContextRenderer = StarAppKitRenderer
+#else
+typealias ContextRenderer = UIGraphicsImageRenderer
+#endif
 
-    #if os(macOS)
-    private typealias StarRenderer = StarAppKitRenderer
-    #else
-    private typealias StarRenderer = UIGraphicsImageRenderer
-    #endif
+struct StarTextureCreator {
 
     func create(size: CGSize, countRange: Range<Int>, radiusRange: Range<CGFloat>) -> SKTexture {
 
@@ -26,7 +26,7 @@ struct StarTextureCreator {
 
         let scaledSize = size / scale
 
-        let renderer = StarRenderer(size: scaledSize)
+        let renderer = ContextRenderer(size: scaledSize)
         let image = renderer.image { ctx in
             let context = ctx.cgContext
             for _ in countRange {
@@ -60,7 +60,7 @@ struct StarTextureCreator {
 }
 
 #if os(macOS)
-private class StarAppKitRenderer {
+class StarAppKitRenderer {
     let size: CGSize
 
     init(size: CGSize) {

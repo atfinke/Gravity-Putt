@@ -24,55 +24,67 @@ class Goal: SKSpriteNode {
 
     // MARK: - Initalization -
 
-    init(radius: CGFloat, color: SKColor, levelNumber: Int) {
-        let outerRadius: CGFloat = radius
-        let innerRadius = outerRadius - 10
+    init(radius: CGFloat, levelNumber: Int) {
+        let outerBorderPath = CGMutablePath()
+        outerBorderPath.move(to: .zero)
+        let outerBorderOuterRadius: CGFloat = radius
+        let outerBorderInnerRadius = outerBorderOuterRadius - 10
+        
+        let innerBorderPath = CGMutablePath()
+        innerBorderPath.move(to: .zero)
+        let innerBorderRadius = radius / 2
 
-        let borderPath = CGMutablePath()
-        borderPath.move(to: .zero)
+        let segments: CGFloat = 4
+        let offset = CGFloat.pi / segments / 2
+        for i in 0..<Int(segments * 3) {
+            let angle = CGFloat.pi / segments * CGFloat(2 * i) - offset
+            let nextAngle = CGFloat.pi / segments * CGFloat(2 * i + 1) - offset
 
-        let dashes: CGFloat = 4
-        let offset = CGFloat.pi / dashes / 2
-        for i in 0..<Int(dashes * 3) {
-            let angle = CGFloat.pi / dashes * CGFloat(2 * i) - offset
-            let nextAngle = CGFloat.pi / dashes * CGFloat(2 * i + 1) - offset
+            let start = CGPoint(x: outerBorderInnerRadius * cos(angle),
+                                y: outerBorderInnerRadius * sin(angle))
 
-            let start = CGPoint(x: innerRadius * cos(angle), y: innerRadius * sin(angle))
-
-            borderPath.move(to: start)
-            borderPath.addArc(center: .zero,
-                              radius: innerRadius,
+            outerBorderPath.move(to: start)
+            outerBorderPath.addArc(center: .zero,
+                              radius: outerBorderInnerRadius,
                               startAngle: angle,
                               endAngle: nextAngle,
                               clockwise: false)
 
-            borderPath.addLine(to: CGPoint(x: outerRadius * cos(nextAngle), y: outerRadius * sin(nextAngle)))
-            borderPath.addArc(center: .zero,
-                              radius: outerRadius,
+            outerBorderPath.addLine(to: CGPoint(x: outerBorderOuterRadius * cos(nextAngle), y: outerBorderOuterRadius * sin(nextAngle)))
+            outerBorderPath.addArc(center: .zero,
+                              radius: outerBorderOuterRadius,
                               startAngle: nextAngle,
                               endAngle: angle,
                               clockwise: true)
-            borderPath.addLine(to: start)
+            outerBorderPath.addLine(to: start)
+            
+            let innerStart = CGPoint(x: innerBorderRadius * cos(angle), y: innerBorderRadius * sin(angle))
+            innerBorderPath.move(to: innerStart)
+
+            innerBorderPath.addArc(center: .zero,
+                              radius: innerBorderRadius,
+                              startAngle: angle,
+                              endAngle: nextAngle,
+                              clockwise: false)
         }
 
-        borderNode = SKShapeNode(path: borderPath)
-//        borderNode.fillColor = .black
+        borderNode = SKShapeNode(path: outerBorderPath)
         borderNode.strokeColor = SKColor.green.withAlphaComponent(0.5)
+        borderNode.fillColor = SKColor.black
         borderNode.lineWidth = 3
-
-        innerNode = SKShapeNode(circleOfRadius: radius / 2)
-        innerNode.strokeColor = .white
+        
+        innerNode = SKShapeNode(path: innerBorderPath)
+        innerNode.strokeColor = SKColor.white.withAlphaComponent(0.25)
         innerNode.lineWidth = 3
-//        innerNode.fillColor = SKColor(white: 0.1, alpha: 1.0)
-
+        
         let label = SKLabelNode(text: levelNumber.description)
-        label.fontName = "SF Mono Bold"
+        label.fontName = "Menlo Bold"
         label.horizontalAlignmentMode = .center
         label.verticalAlignmentMode = .center
         label.fontSize = 15
         label.fontColor = SKColor.white
         innerNode.addChild(label)
-
+        
         super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
 
         gravityField.minimumRadius = Float(radius)
@@ -94,7 +106,7 @@ class Goal: SKSpriteNode {
             .rotate(byAngle: -CGFloat.pi, duration: 30)
         ]))
         action.timingMode = .easeInEaseOut
-
+      
         borderNode.run(action)
     }
 
@@ -109,23 +121,27 @@ extension SKColor {
         let ir = redComponent
         let ig = greenComponent
         let ib = blueComponent
+        let ia = alphaComponent
         let fr = color.redComponent
         let fg = color.greenComponent
         let fb = color.blueComponent
+        let fa = color.alphaComponent
         #else
         var ir: CGFloat = 0
         var ig: CGFloat = 0
         var ib: CGFloat = 0
-        getRed(&ir, green: &ig, blue: &ib, alpha: nil)
+        var ia: CGFloat = 0
+        getRed(&ir, green: &ig, blue: &ib, alpha: &ia)
         var fr: CGFloat = 0
         var fg: CGFloat = 0
         var fb: CGFloat = 0
-        getRed(&fr, green: &fg, blue: &fb, alpha: nil)
+        var fa: CGFloat = 0
+        getRed(&fr, green: &fg, blue: &fb, alpha: &fa)
         #endif
 
         return SKColor(red: ir + (fr - ir) * percent,
                        green: ig + (fg - ig) * percent,
                        blue: ib + (fb - ib) * percent,
-                       alpha: 1)
+                       alpha: ia + (fa - ia) * percent)
     }
 }
