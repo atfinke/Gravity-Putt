@@ -24,9 +24,9 @@ class Planet: SKSpriteNode {
     init(radius: CGFloat, color: SKColor) {
         super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
         
-        let gravityFieldRegionRadius = radius * 3
+        let gravityFieldRegionRadius = radius * 4
         gravityField.region = SKRegion(radius: Float(gravityFieldRegionRadius))
-        addChild(gravityField)
+//        addChild(gravityField)
         
         let body = SKPhysicsBody(circleOfRadius: radius)
         body.isDynamic = false
@@ -35,7 +35,7 @@ class Planet: SKSpriteNode {
         body.friction = 0.95
         body.collisionBitMask = SpriteCategory.player
         body.contactTestBitMask = SpriteCategory.player
-        physicsBody = body
+//        physicsBody = body
         
         let color = SKColor(hue: CGFloat.random(in: 0..<1),
                             saturation: 1,

@@ -26,9 +26,9 @@ class GameScene: SKScene {
         return player
     }()
     
-    var lastLevel: Level?
-    var levels = [Level]()
-    var goalRectsWorldSpace = [CGRect]()
+    var lastLevel: Level2?
+    var levels = [Level2]()
+    var goalRectsWorldSpace = [SKCircleRect]()
     
     var playerNeedsPhysicsBodyDynamics = false
     
@@ -48,6 +48,8 @@ class GameScene: SKScene {
     var playerVelocityModifier: CGFloat = 1.0
     
     var starDepthLevelNodes = [[StarDepthNode]]()
+    
+    var planetContact: Planet?
     
     // MARK: - Initalization -
     
@@ -80,10 +82,10 @@ class GameScene: SKScene {
         addChild(player)
         
         let startSize = CGSize(width: 120, height: 120)
-        let initalLevel = Level(size: size, startSize: startSize, num: holeNumber)
+        let initalLevel = Level2(size: size, startRadius: 60, number: holeNumber)
         initalLevel.createPlanets(avoiding: [])
         initalLevel.position = CGPoint(x: -startSize.height / 2,
-                                       y: -initalLevel.startRectLocalSpace.origin.y - startSize.height / 2)
+                                       y: -initalLevel.startRectLocalSpace.center.y)
         
         let goalRectWorldSpaceX = initalLevel.position.x
         let goalRectWorldSpaceY = initalLevel.position.y
@@ -134,22 +136,22 @@ class GameScene: SKScene {
             fatalError()
         }
         
-        let level = Level(size: size,
-                          startSize: finalLevel.goalRectLocalSpace.size,
-                          num: holeNumber + levels.count)
+        let level = Level2(size: size,
+                          startRadius: finalLevel.goalRectLocalSpace.radius,
+                          number: holeNumber + levels.count)
         
         let positionX = finalLevel.position.x
-            + finalLevel.goalRectLocalSpace.midX
-            - level.startRectLocalSpace.midX
+            + finalLevel.goalRectLocalSpace.center.x
+            - level.startRectLocalSpace.center.x
         let positionY = finalLevel.position.y
-            + finalLevel.goalRectLocalSpace.midY
-            - level.startRectLocalSpace.midY
+            + finalLevel.goalRectLocalSpace.center.y
+            - level.startRectLocalSpace.center.y
         
         let offsetX = finalLevel.position.x - positionX
         let offsetY = finalLevel.position.y - positionY
         let finalLevelPlanetSafeRectsLevelSpace = finalLevel.planetRectsLocalSpace
             .map { $0.offsetBy(dx: offsetX, dy: offsetY) }
-        level.createPlanets(avoiding: finalLevelPlanetSafeRectsLevelSpace)
+//        level.createPlanets(avoiding: finalLevelPlanetSafeRectsLevelSpace)
         
         level.position = CGPoint(x: positionX, y: positionY)
         
@@ -234,7 +236,8 @@ class GameScene: SKScene {
                 levelToRemove.goalNode.borderNode.run(action)
                 levelToRemove.goalNode.innerNode.run(.group([
                     .fadeOut(withDuration: levelMoveDuration),
-                    .scale(to: 0, duration: levelMoveDuration)
+                    SKAction.scale(to: 0.5, duration: levelMoveDuration),
+                    .rotate(toAngle: -finalRotation, duration: levelMoveDuration)
                 ]))
                 
                 let emitter = SKEmitterNode(fileNamed: "goal.sks")!
@@ -310,9 +313,9 @@ class GameScene: SKScene {
         playerVelocityModifier = 1.0
         
         let currentColor = backgroundColor
-        let nextColor = SKColor(hue: CGFloat.random(in: 200..<360) / 360,
+        let nextColor = SKColor(hue: CGFloat.random(in: 220..<300) / 360,
                                 saturation: 1,
-                                brightness: 0.2,
+                                brightness: 0.1,
                                 alpha: 1.0)
         let backgroundAction: SKAction = .customAction(withDuration: levelMoveDuration, actionBlock: { _, time in
             let percent = time / CGFloat(levelMoveDuration)
@@ -368,6 +371,8 @@ class GameScene: SKScene {
             fatalError()
         }
         
+        planetContact = nil
+        
         physicsBody.fieldBitMask = SpriteCategory.none
         physicsBody.velocity = CGVector(dx: 0, dy: 0)
         physicsBody.isDynamic = false
@@ -389,7 +394,7 @@ class GameScene: SKScene {
         
         for (index, node) in playerPathNodes.enumerated() {
             let action = SKAction.sequence([
-                .wait(forDuration: 0.05 * TimeInterval(index)),
+                .wait(forDuration: 0.02 * TimeInterval(index)),
                 .fadeOut(withDuration: 0.5),
                 .removeFromParent()
             ])
@@ -448,31 +453,41 @@ class GameScene: SKScene {
             }
             
             cameraNode.run(.scale(to: min(scale, 2), duration: 0.25))
-            
+//            cameraNode.run(.scale(to: 5, duration: 0.25))
+
             if scale > 2.5 {
                 resetPlayerPosition()
             }
         }
         
         for (index, goalRect) in goalRectsWorldSpace.enumerated() {
-            let goalCenter = CGPoint(x: goalRect.midX, y: goalRect.midY)
-            let dist = goalCenter.distance(to: player.position)
+            let dist = goalRect.center.distance(to: player.position)
             
-            if dist < 60 {
-                levels[index].goalNode.innerNode.alpha = (dist - 10) / 50
+            if dist < goalRect.radius * 2 {
+                levels[index].goalNode.label.alpha = (dist - 10) / (goalRect.radius * 2)
             }
             
-            if dist < 40 {
+            if dist < goalRect.radius * 1.5 {
                 levels[index].goalNode.gravityField.strength = 0.2
                 
-                if playerVelocityMagnitude < 2 && dist < 4 {
+                if playerVelocityMagnitude < 1 && dist < 2 {
                     moveToLevel(at: index + 1)
+                } else if dist < 5 {
+                    playerVelocityModifier = 0.8
                 } else if playerVelocityMagnitude < 50 {
-                    playerVelocityModifier = 0.94
+                    playerVelocityModifier = 0.9
                 }
                 break
             }
         }
+        
+//        if let p = planetContact, playerVelocityMagnitude < 20 {
+//            print("resting planet")
+//            resetPlayerPathNodes()
+//            planetContact?.gravityField.strength = 0.2
+//            playerVelocityModifier = 0.5
+//            p.gravityField.isExclusive = true
+//        }
         
         //        cameraNode.run(.scale(to: 2, duration: 0.1))
     }
@@ -499,14 +514,36 @@ extension GameScene: SKPhysicsContactDelegate {
         if let player = contact.bodyA.node as? Player, let _ = player.physicsBody, let goal = contact.bodyB.node as? Goal,
             goal != lastLevel?.goalNode {
             goal.gravityField.strength = 4.5
-            playerVelocityModifier = 0.75
+            playerVelocityModifier = 0.9
         } else if let _ = contact.bodyA.node as? Planet {
             playerVelocityModifier = 0.95
+            print("hitting planet")
+        } else if let b = contact.bodyB.node as? Planet {
+            playerVelocityModifier = 0.95
+            print("hitting planetB")
+            planetContact = b
+            
         }
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
         playerVelocityModifier = 1.0
+        print("contact ended")
+        
+//        if let p = planetContact {
+//            p.removeAllActions()
+//            let duration: TimeInterval = 2
+//            p.run(.sequence([
+//                .wait(forDuration: 0.2),
+//                .customAction(withDuration: duration, actionBlock: { _, time in
+//                    let percent = time / CGFloat(duration)
+//                    p.gravityField.strength = Float(0.1 + (1.5 - 0.1) * (percent))
+//                    
+//                })
+//            
+//            ]))
+//        }
+//        planetContact = nil
     }
     
 }

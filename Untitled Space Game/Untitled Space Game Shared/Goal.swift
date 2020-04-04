@@ -14,6 +14,7 @@ class Goal: SKSpriteNode {
 
     let borderNode: SKShapeNode
     let innerNode: SKShapeNode
+    let label: SKLabelNode
 
     let gravityField: SKFieldNode = {
         let field = SKFieldNode.radialGravityField()
@@ -50,7 +51,8 @@ class Goal: SKSpriteNode {
                               endAngle: nextAngle,
                               clockwise: false)
 
-            outerBorderPath.addLine(to: CGPoint(x: outerBorderOuterRadius * cos(nextAngle), y: outerBorderOuterRadius * sin(nextAngle)))
+            outerBorderPath.addLine(to: CGPoint(x: outerBorderOuterRadius * cos(nextAngle),
+                                                y: outerBorderOuterRadius * sin(nextAngle)))
             outerBorderPath.addArc(center: .zero,
                               radius: outerBorderOuterRadius,
                               startAngle: nextAngle,
@@ -58,7 +60,8 @@ class Goal: SKSpriteNode {
                               clockwise: true)
             outerBorderPath.addLine(to: start)
             
-            let innerStart = CGPoint(x: innerBorderRadius * cos(angle), y: innerBorderRadius * sin(angle))
+            let innerStart = CGPoint(x: innerBorderRadius * cos(angle),
+                                     y: innerBorderRadius * sin(angle))
             innerBorderPath.move(to: innerStart)
 
             innerBorderPath.addArc(center: .zero,
@@ -77,13 +80,13 @@ class Goal: SKSpriteNode {
         innerNode.strokeColor = SKColor.white.withAlphaComponent(0.25)
         innerNode.lineWidth = 3
         
-        let label = SKLabelNode(text: levelNumber.description)
+        label = SKLabelNode(text: levelNumber.description)
         label.fontName = "Menlo Bold"
         label.horizontalAlignmentMode = .center
         label.verticalAlignmentMode = .center
         label.fontSize = 15
         label.fontColor = SKColor.white
-        innerNode.addChild(label)
+//        innerNode.addChild(label)
         
         super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
 
@@ -93,7 +96,7 @@ class Goal: SKSpriteNode {
         addChild(gravityField)
         addChild(borderNode)
         addChild(innerNode)
-
+addChild(label)
         let body = SKPhysicsBody(circleOfRadius: radius)
         body.contactTestBitMask = SpriteCategory.player
         body.collisionBitMask = SpriteCategory.none
@@ -108,6 +111,10 @@ class Goal: SKSpriteNode {
         action.timingMode = .easeInEaseOut
       
         borderNode.run(action)
+        
+        innerNode.run(.repeatForever(.sequence([
+            .rotate(byAngle: CGFloat.pi, duration: 30)
+        ])))
     }
 
     required init?(coder aDecoder: NSCoder) {

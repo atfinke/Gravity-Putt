@@ -39,8 +39,10 @@ class Level: SKNode {
                                      height: startSize.height)
 
         let goalRadius: CGFloat = 50
-        let goalPositionXVariable = CGFloat.random(in: -2...0.5) * CGFloat(1.0 / 16.0)
-        let goalPositionX = size.width * CGFloat(3.0 / 8.0) + size.width * goalPositionXVariable
+        let goalPositionXVariable = CGFloat.random(in: -1...1) * CGFloat(1.0 / 8.0)
+        let goalPositionX = size.width * CGFloat(3.0 / 8.0)
+            + size.width * goalPositionXVariable - goalRadius * 2
+        
 
         let goalHeightBounds = 0.5 - (goalRadius * 2) / size.height
         let goalPositionY = CGFloat.random(in: -(goalHeightBounds)...goalHeightBounds) * size.height
@@ -105,7 +107,7 @@ class Level: SKNode {
 
         let planetInsertionAttemptCount = Int.random(in: 4...10)
         for _ in 2..<planetInsertionAttemptCount {
-            let planetRadius = CGFloat.random(in: 0.15...0.3) * size.height
+            let planetRadius = CGFloat.random(in: 0.05...0.2) * size.height
             let planetRadiusWidthPercent = planetRadius / size.width
             let planetRadiusHeightPercent = planetRadius / size.height
 
@@ -117,7 +119,10 @@ class Level: SKNode {
 
             let planetSafeRect = CGRect(origin: planetPosition, size: planetSize)
                 .insetBy(dx: -planetSafeAreaPadding, dy: -planetSafeAreaPadding)
-
+            let _viz_planet = SKShapeNode(rect: planetSafeRect,
+                                          cornerRadius: planetSafeRect.width / 2)
+            _viz_planet.fillColor = SKColor.white.withAlphaComponent(0.1)
+            addChild(_viz_planet)
             if planetSafeRect.innerCircleIntersects(circleRect: startSafeArea) || planetSafeRect.innerCircleIntersects(circleRect: goalSafeArea) {
                 continue
             } else if !planetRectsLocalSpace.filter({ $0.innerCircleIntersects(circleRect: planetSafeRect) }).isEmpty {
