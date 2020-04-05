@@ -1,5 +1,5 @@
 //
-//  Level2.swift
+//  LevelNode.swift
 //  Untitled Space Game
 //
 //  Created by Andrew Finke on 3/31/20.
@@ -16,7 +16,6 @@ class LevelNode: SKNode {
 
     let goalNode: Goal
     let goalRectLocalSpace: SKCircleRect
-
     let startRectLocalSpace: SKCircleRect
 
     // MARK: - Initalization -
@@ -29,7 +28,7 @@ class LevelNode: SKNode {
         let originX = -size.width / 2
         let originY = -size.height / 2
 
-        let startPositionBoundaryLeftPadding: CGFloat = 20
+        let startPositionBoundaryLeftPadding: CGFloat = 50
         let startPositionBoundaryTopPadding: CGFloat = 50
         let startPositionBoundaryBottomPadding: CGFloat = 50
         let goalPositionBoundaryRightPadding: CGFloat = 40
@@ -80,18 +79,25 @@ class LevelNode: SKNode {
         let goalPositionY = CGFloat.random(in: goalMinCenterPositionY...goalMaxCenterPositionY)
         let goalPosition = CGPoint(x: goalPositionX, y: goalPositionY)
         goalNode = Goal(radius: goalRadius, levelNumber: number)
+        goalNode.alpha = 0
         goalNode.position = goalPosition
         goalRectLocalSpace = SKCircleRect(centerX: goalPosition.x,
                                           centerY: goalPosition.y,
                                           radius: goalRadius)
 
-        let planetMinBoundsPositionX = startMaxBoundsPositionX
-        let planetMaxBoundsPositionX = goalMinBoundsPositionX
+        let planetBoundsPadding: CGFloat = 20
+        let planetMinBoundsPositionX = startMaxBoundsPositionX + planetBoundsPadding
+        let planetMaxBoundsPositionX = goalMinBoundsPositionX - planetBoundsPadding
+        let planetBoundsPositionWidth = planetMaxBoundsPositionX - planetMinBoundsPositionX
+
+        let planetMinBoundsPositionY = -(size.height / 2) * (5 / 4)
+        let planetMaxBoundsPositionY = (size.height / 2) * (5 / 4)
+        let planetBoundsPositionHeight = planetMaxBoundsPositionY - planetMinBoundsPositionY
 
         let planetPositionBoundaryRect = CGRect(x: planetMinBoundsPositionX,
-                                                y: -size.height / 2,
-                                                width: goalMinBoundsPositionX - startMaxBoundsPositionX,
-                                                height: size.height)
+                                                y: planetMinBoundsPositionY,
+                                                width: planetBoundsPositionWidth,
+                                                height: planetBoundsPositionHeight)
 
         super.init()
 
@@ -117,8 +123,7 @@ class LevelNode: SKNode {
 
         let planetInsertionAttemptCount = Int.random(in: 4...6)
         for _ in 2..<planetInsertionAttemptCount {
-
-            let planetSafeAreaRadiusPaddingMultiplier: CGFloat = 1.75
+            let planetSafeAreaRadiusPaddingMultiplier: CGFloat = 1.5
             let maxPlanetSafeAreaRadius = (planetMaxBoundsPositionX - planetMinBoundsPositionX) / 2
             let maxPlanetRadius: CGFloat = maxPlanetSafeAreaRadius / planetSafeAreaRadiusPaddingMultiplier
 
@@ -127,20 +132,23 @@ class LevelNode: SKNode {
 
             let planetMinCenterPositionX = planetMinBoundsPositionX + planetRadiusSafeArea
             let planetMaxCenterPositionX = planetMaxBoundsPositionX - planetRadiusSafeArea
+            let planetMinCenterPositionY = planetMinBoundsPositionY + planetRadiusSafeArea
+            let planetMaxCenterPositionY = planetMaxBoundsPositionY - planetRadiusSafeArea
 
             let planetPositionX = CGFloat.random(in: planetMinCenterPositionX...planetMaxCenterPositionX)
-            let planetPositionY = CGFloat.random(in: startMinCenterPositionY...startMaxCenterPositionY)
+            let planetPositionY = CGFloat.random(in: planetMinCenterPositionY...planetMaxCenterPositionY)
             let planetPosition = CGPoint(x: planetPositionX, y: planetPositionY)
 
             let planetSafeRect = SKCircleRect(centerX: planetPositionX,
                                               centerY: planetPositionY,
                                               radius: planetRadiusSafeArea)
 
-            if planetSafeRect.innerCircleIntersects(circleRect: startSafeArea) || planetSafeRect.innerCircleIntersects(circleRect: goalSafeArea) {
+            if planetSafeRect.intersects(circleRect: startSafeArea) ||
+                planetSafeRect.intersects(circleRect: goalSafeArea) {
                 continue
-            } else if !localSpacePlanets.filter({ $0.innerCircleIntersects(circleRect: planetSafeRect) }).isEmpty {
+            } else if !localSpacePlanets.filter({ $0.intersects(circleRect: planetSafeRect) }).isEmpty {
                 continue
-            } else if !localSpacePlanets.filter({ $0.innerCircleIntersects(circleRect: planetSafeRect) }).isEmpty {
+            } else if !localSpacePlanets.filter({ $0.intersects(circleRect: planetSafeRect) }).isEmpty {
                 continue
             }
             localSpacePlanets.append(planetSafeRect)
@@ -219,7 +227,8 @@ class LevelNode: SKNode {
             let goalPositionX = CGFloat.random(in: xRange)
             let goalPositionY = CGFloat.random(in: yRange)
 
-            let goal = Goal(radius: radius, levelNumber: 0)
+            let goal = SKShapeNode(circleOfRadius: radius)
+            goal.strokeColor = .white
             goal.position = CGPoint(x: goalPositionX, y: goalPositionY)
             addChild(goal)
         }

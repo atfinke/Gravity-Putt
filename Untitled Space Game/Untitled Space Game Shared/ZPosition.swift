@@ -14,14 +14,15 @@ enum ZPosition: CGFloat {
     case hud = 800_000
 
     case player = 500_001
-    case player_path = 500_000
 
     case goalInnerBorder = 100_003
     case goalBorder = 100_002
     case goal = 100_001
     case goalParticleSystems = 100_000
 
-    case planet = 1_000
+    case planet = 1_001
+    case planetGravityFieldTexture = 1_000
 
+    case playerPath = 120
     case stars = 100
 }

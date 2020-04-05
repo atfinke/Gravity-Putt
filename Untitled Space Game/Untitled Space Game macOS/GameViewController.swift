@@ -32,13 +32,13 @@ class GameViewController: NSViewController {
 
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             if $0.keyCode == 124 {
-                scene.move(x: 125, y: 0)
+                scene.debugMove(x: 125, y: 0)
             } else if $0.keyCode == 123 {
-                scene.move(x: -125, y: 0)
+                scene.debugMove(x: -125, y: 0)
             } else if $0.keyCode == 126 {
-                scene.move(x: 0, y: 125)
+                scene.debugMove(x: 0, y: 125)
             } else if $0.keyCode == 125 {
-                scene.move(x: 0, y: -125)
+                scene.debugMove(x: 0, y: -125)
             } else {
                 return $0
             }

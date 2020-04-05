@@ -12,7 +12,7 @@ class Player: SKSpriteNode {
 
     // MARK: - Initalization -
 
-    init(radius: CGFloat, color: SKColor) {
+    init(radius: CGFloat) {
         super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
 
         let body = SKPhysicsBody(circleOfRadius: radius)
@@ -22,21 +22,18 @@ class Player: SKSpriteNode {
         body.categoryBitMask = SpriteCategory.player
         body.mass = 0.15
         body.linearDamping = 0
+        body.angularDamping = 1
         body.friction = 0.95
         physicsBody = body
 
-        let border = SKShapeNode(circleOfRadius: radius)
-        border.fillColor = color
-        border.lineWidth = 2
-        border.position = CGPoint(x: 0, y: 0)
-        addChild(border)
+        let shape = SKShapeNode(circleOfRadius: radius)
+        shape.fillColor = .white
+        shape.strokeColor = .white
+        shape.lineWidth = 2
+        shape.position = CGPoint(x: 0, y: 0)
+        addChild(shape)
 
-        //        let border = SKShapeNode(circleOfRadius: radius)
-        //        border.fillColor = SKColor(white: 0.1, alpha: 1)
-        //        border.strokeColor = SKColor(white: 0.2, alpha: 1)
-        //        border.lineWidth = 8
-        //        border.position = CGPoint(x: 0, y: 50)
-        //        addChild(border)
+        zPosition = ZPosition.player.rawValue
     }
 
     required init?(coder aDecoder: NSCoder) {

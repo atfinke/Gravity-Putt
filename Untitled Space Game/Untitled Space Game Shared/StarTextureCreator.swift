@@ -9,7 +9,7 @@
 import SpriteKit
 
 #if os(macOS)
-typealias ContextRenderer = StarAppKitRenderer
+typealias ContextRenderer = AppKitContextRenderer
 #else
 typealias ContextRenderer = UIGraphicsImageRenderer
 #endif
@@ -58,26 +58,3 @@ struct StarTextureCreator {
         return SKTexture(cgImage: cgImage)
     }
 }
-
-#if os(macOS)
-class StarAppKitRenderer {
-    let size: CGSize
-
-    init(size: CGSize) {
-        self.size = size
-    }
-
-    func image(actions: (NSGraphicsContext) -> Void) -> NSImage {
-        let image = NSImage(size: size)
-        image.lockFocusFlipped(true)
-
-        guard let ctx = NSGraphicsContext.current else {
-            fatalError()
-        }
-
-        actions(ctx)
-        image.unlockFocus()
-        return image
-    }
-}
-#endif
