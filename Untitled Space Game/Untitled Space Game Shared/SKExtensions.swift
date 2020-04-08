@@ -9,32 +9,39 @@
 import SpriteKit
 
 extension SKColor {
-    func lerp(color: SKColor, percent: CGFloat) -> SKColor {
+
+    func rgba() -> (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         #if os(macOS)
-        let ir = redComponent
-        let ig = greenComponent
-        let ib = blueComponent
-        let ia = alphaComponent
-        let fr = color.redComponent
-        let fg = color.greenComponent
-        let fb = color.blueComponent
-        let fa = color.alphaComponent
+        let red = redComponent
+        let green = greenComponent
+        let blue = blueComponent
+        let alpha = alphaComponent
         #else
-        var ir: CGFloat = 0
-        var ig: CGFloat = 0
-        var ib: CGFloat = 0
-        var ia: CGFloat = 0
-        getRed(&ir, green: &ig, blue: &ib, alpha: &ia)
-        var fr: CGFloat = 0
-        var fg: CGFloat = 0
-        var fb: CGFloat = 0
-        var fa: CGFloat = 0
-        color.getRed(&fr, green: &fg, blue: &fb, alpha: &fa)
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         #endif
+        return (red, green, blue, alpha)
+    }
+
+    func lerp(color: SKColor, percent: CGFloat) -> SKColor {
+        let (ir, ig, ib, ia) = rgba()
+        let (fr, fg, fb, fa) = color.rgba()
 
         return SKColor(red: ir + (fr - ir) * percent,
                        green: ig + (fg - ig) * percent,
                        blue: ib + (fb - ib) * percent,
                        alpha: ia + (fa - ia) * percent)
+    }
+}
+
+extension SKAction {
+    static func remove(after duration: TimeInterval) -> SKAction {
+        return .sequence([
+            .wait(forDuration: duration),
+            .removeFromParent()
+        ])
     }
 }

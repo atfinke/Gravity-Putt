@@ -8,40 +8,28 @@
 
 import SpriteKit
 
-class AimAssist: SKSpriteNode {
+class AimAssist: SKNode {
 
     // MARK: - Properties -
 
-    let tailLength: CGFloat = 100
-    let centerRadius: CGFloat
+    let tipNode: SKShapeNode
+    let center = SKShapeNode(circleOfRadius: Design.aimAssistInnerRadius)
     let tail: SKShapeNode
+    let tailLength: CGFloat = 100
 
     // MARK: - Initalization -
 
-    init() {
-        centerRadius = 8
-
-        let mainColor = SKColor(white: 1, alpha: 1.0)
-
-        let center = SKShapeNode(circleOfRadius: centerRadius)
+    override init() {
         center.fillColor = .clear
-        center.strokeColor = mainColor
         center.lineWidth = 3
 
-        let tip = SKShapeNode(circleOfRadius: 3)
-        tip.fillColor = .white
-        tip.strokeColor = .white
-        tip.lineWidth = 5
-        tip.position = CGPoint(x: 0, y: 20)
+        let tipPath = CGMutablePath()
+        tipPath.move(to: CGPoint(x: 0, y: 10))
+        tipPath.addLine(to: CGPoint(x: 6, y: 0))
+        tipPath.addLine(to: CGPoint(x: 0, y: -10))
 
-        let patha = CGMutablePath()
-        patha.move(to: CGPoint(x: 0, y: 10))
-        patha.addLine(to: CGPoint(x: 6, y: 0))
-        patha.addLine(to: CGPoint(x: 0, y: -10))
-
-        let tipNode = SKShapeNode(path: patha)
+        tipNode = SKShapeNode(path: tipPath)
         tipNode.fillColor = .clear
-        tipNode.strokeColor = .white
         tipNode.lineWidth = 5
         tipNode.zRotation = CGFloat.pi / 2
         tipNode.position = CGPoint(x: 0, y: 20)
@@ -52,18 +40,18 @@ class AimAssist: SKSpriteNode {
         let dashed = path.copy(dashingWithPhase: 0, lengths: [12, 12])
 
         tail = SKShapeNode(path: dashed)
-        tail.fillColor = mainColor
-        tail.strokeColor = mainColor
         tail.lineWidth = 5
-        tail.position = CGPoint(x: 0, y: -centerRadius * 2.5)
+        tail.position = CGPoint(x: 0, y: -Design.aimAssistInnerRadius * 2.5)
         tail.zRotation = CGFloat.pi
 
-        super.init(texture: nil, color: .clear, size: CGSize(width: 20, height: 20))
+        super.init()
         zPosition = ZPosition.aimAssist.rawValue
 
         addChild(center)
         addChild(tipNode)
         addChild(tail)
+
+        update(color: SKColor(white: 1, alpha: 1.0))
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -72,10 +60,16 @@ class AimAssist: SKSpriteNode {
 
     // MARK: - Helpers -
 
-    func updateTail(length: CGFloat) {
+    func update(tailLength: CGFloat) {
         let path = CGMutablePath()
         path.move(to: .zero)
-        path.addLine(to: CGPoint(x: 0, y: max(0, length - centerRadius * 2)))
+        path.addLine(to: CGPoint(x: 0, y: max(0, tailLength - Design.aimAssistInnerRadius * 2)))
         tail.path = path.copy(dashingWithPhase: 0, lengths: [12, 12])
+    }
+
+    func update(color: SKColor) {
+        tipNode.strokeColor = color
+        center.strokeColor = color
+        tail.strokeColor = color
     }
 }

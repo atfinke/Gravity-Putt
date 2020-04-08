@@ -8,12 +8,12 @@
 
 import SpriteKit
 
-class Player: SKSpriteNode {
+class Player: SKNode {
 
     // MARK: - Initalization -
 
     init(radius: CGFloat) {
-        super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
+        super.init()
 
         let body = SKPhysicsBody(circleOfRadius: radius)
         body.affectedByGravity = false

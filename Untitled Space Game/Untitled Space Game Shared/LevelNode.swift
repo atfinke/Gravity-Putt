@@ -8,20 +8,20 @@
 
 import SpriteKit
 
-class LevelNode: SKNode {
+class LevelNode: SKNode, Codable {
 
     // MARK: - Properties -
 
-    private let size: CGSize
-
+    let number: Int
     let goalNode: Goal
     let goalRectLocalSpace: SKCircleRect
     let startRectLocalSpace: SKCircleRect
+    var localSpacePlanets = [Planet: SKCircleRect]()
 
     // MARK: - Initalization -
 
     init(size: CGSize, number: Int) {
-        self.size = size
+        self.number = number
 
         let goalRadius: CGFloat = Design.goalRadius
 
@@ -29,11 +29,11 @@ class LevelNode: SKNode {
         let originY = -size.height / 2
 
         let startPositionBoundaryLeftPadding: CGFloat = 50
-        let startPositionBoundaryTopPadding: CGFloat = 50
-        let startPositionBoundaryBottomPadding: CGFloat = 50
-        let goalPositionBoundaryRightPadding: CGFloat = 40
-        let goalPositionBoundaryTopPadding: CGFloat = 40
-        let goalPositionBoundaryBottomPadding: CGFloat = 150
+        let startPositionBoundaryTopPadding: CGFloat = 100
+        let startPositionBoundaryBottomPadding: CGFloat = 100
+        let goalPositionBoundaryRightPadding: CGFloat = 50
+        let goalPositionBoundaryTopPadding: CGFloat = 100
+        let goalPositionBoundaryBottomPadding: CGFloat = 100
 
         let startMinBoundsPositionX = originX + startPositionBoundaryLeftPadding
         let startMaxBoundsPositionX = originX + (size.width / 4)
@@ -90,14 +90,39 @@ class LevelNode: SKNode {
         let planetMaxBoundsPositionX = goalMinBoundsPositionX - planetBoundsPadding
         let planetBoundsPositionWidth = planetMaxBoundsPositionX - planetMinBoundsPositionX
 
-        let planetMinBoundsPositionY = -(size.height / 2) * (5 / 4)
-        let planetMaxBoundsPositionY = (size.height / 2) * (5 / 4)
+        let planetMinBoundsPositionY = goalMinBoundsPositionY // -(size.height / 2) * (5 / 4)
+        let planetMaxBoundsPositionY = goalMaxBoundsPositionY // (size.height / 2) * (5 / 4)
         let planetBoundsPositionHeight = planetMaxBoundsPositionY - planetMinBoundsPositionY
 
         let planetPositionBoundaryRect = CGRect(x: planetMinBoundsPositionX,
                                                 y: planetMinBoundsPositionY,
                                                 width: planetBoundsPositionWidth,
                                                 height: planetBoundsPositionHeight)
+
+        let verticalPlanetBoundarySize: CGFloat = 300
+        let upperPlanetMinBoundsPositionX = startMinBoundsPositionX
+        let upperPlanetMaxBoundsPositionX = goalMinBoundsPositionX
+        let upperPlanetMinBoundsPositionY = goalMaxBoundsPositionY
+        let upperPlanetMaxBoundsPositionY = upperPlanetMinBoundsPositionY + verticalPlanetBoundarySize
+        let upperPlanetBoundsPositionWidth = upperPlanetMaxBoundsPositionX - upperPlanetMinBoundsPositionX
+        let upperPlanetBoundsPositionHeight = upperPlanetMaxBoundsPositionY - upperPlanetMinBoundsPositionY
+
+        let upperPlanetPositionBoundaryRect = CGRect(x: upperPlanetMinBoundsPositionX,
+                                                     y: upperPlanetMinBoundsPositionY,
+                                                     width: upperPlanetBoundsPositionWidth,
+                                                     height: upperPlanetBoundsPositionHeight)
+
+        let lowerPlanetMinBoundsPositionX = startMinBoundsPositionX
+        let lowerPlanetMaxBoundsPositionX = goalMinBoundsPositionX
+        let lowerPlanetMinBoundsPositionY = goalMinBoundsPositionY - verticalPlanetBoundarySize
+        let lowerPlanetMaxBoundsPositionY = goalMinBoundsPositionY
+        let lowerPlanetBoundsPositionWidth = lowerPlanetMaxBoundsPositionX - lowerPlanetMinBoundsPositionX
+        let lowerPlanetBoundsPositionHeight = lowerPlanetMaxBoundsPositionY - lowerPlanetMinBoundsPositionY
+
+        let lowerPlanetPositionBoundaryRect = CGRect(x: lowerPlanetMinBoundsPositionX,
+                                                     y: lowerPlanetMinBoundsPositionY,
+                                                     width: lowerPlanetBoundsPositionWidth,
+                                                     height: lowerPlanetBoundsPositionHeight)
 
         super.init()
 
@@ -110,7 +135,10 @@ class LevelNode: SKNode {
         vizSize(size: size)
         viz(startBoundary: startPositionBoundaryRect,
             goalBoundary: goalPositionBoundaryRect,
-            planetBoundary: planetPositionBoundaryRect)
+            planetBoundary: planetPositionBoundaryRect,
+            upperPlanetBoundary: upperPlanetPositionBoundaryRect,
+            lowerPlanetBoundary: lowerPlanetPositionBoundaryRect)
+
         vizPossibleGoalPositions(xRange: goalMinCenterPositionX...goalMaxCenterPositionX,
                                  yRange: goalMinCenterPositionY...goalMaxCenterPositionY,
                                  radius: goalRadius)
@@ -118,46 +146,57 @@ class LevelNode: SKNode {
 
         addChild(goalNode)
 
-        var localSpacePlanets = [SKCircleRect]()
+        var localSpaceSafeAreaPlanetRects = [SKCircleRect]()
         let minPlanetRadius = size.width / 25
 
         let planetInsertionAttemptCount = Int.random(in: 4...6)
         for _ in 2..<planetInsertionAttemptCount {
-            let planetSafeAreaRadiusPaddingMultiplier: CGFloat = 1.5
-            let maxPlanetSafeAreaRadius = (planetMaxBoundsPositionX - planetMinBoundsPositionX) / 2
-            let maxPlanetRadius: CGFloat = maxPlanetSafeAreaRadius / planetSafeAreaRadiusPaddingMultiplier
+            let maxPlanetSafeAreaRadius = min(planetBoundsPositionWidth, planetBoundsPositionHeight) / 2
+            guard let result = attemptPlanetCreation(maxSafeAreaRadius: maxPlanetSafeAreaRadius,
+                                                     minPlanetRadius: minPlanetRadius,
+                                                     minBoundsX: planetMinBoundsPositionX,
+                                                     maxBoundsX: planetMaxBoundsPositionX,
+                                                     minBoundsY: planetMinBoundsPositionY,
+                                                     maxBoundsY: planetMaxBoundsPositionY,
+                                                     startSafeArea: startSafeArea,
+                                                     goalSafeArea: goalSafeArea,
+                                                     localSpacePlanets: localSpaceSafeAreaPlanetRects) else { continue }
 
-            let planetRadius = CGFloat.random(in: minPlanetRadius...maxPlanetRadius)
-            let planetRadiusSafeArea = planetRadius * planetSafeAreaRadiusPaddingMultiplier
+            localSpacePlanets[result.planet] = result.rect
+            localSpaceSafeAreaPlanetRects.append(result.safe)
+        }
 
-            let planetMinCenterPositionX = planetMinBoundsPositionX + planetRadiusSafeArea
-            let planetMaxCenterPositionX = planetMaxBoundsPositionX - planetRadiusSafeArea
-            let planetMinCenterPositionY = planetMinBoundsPositionY + planetRadiusSafeArea
-            let planetMaxCenterPositionY = planetMaxBoundsPositionY - planetRadiusSafeArea
+        for _ in 0..<1 {
+            let maxPlanetSafeAreaRadius = min(upperPlanetBoundsPositionWidth, verticalPlanetBoundarySize) / 3
+            let useTop = Bool.random()
+            if useTop {
+                let maxPlanetSafeAreaRadius = verticalPlanetBoundarySize / 2
+                guard let result = attemptPlanetCreation(maxSafeAreaRadius: maxPlanetSafeAreaRadius,
+                                                         minPlanetRadius: minPlanetRadius,
+                                                         minBoundsX: upperPlanetMinBoundsPositionX,
+                                                         maxBoundsX: upperPlanetMaxBoundsPositionX,
+                                                         minBoundsY: upperPlanetMinBoundsPositionY,
+                                                         maxBoundsY: upperPlanetMaxBoundsPositionY,
+                                                         startSafeArea: startSafeArea,
+                                                         goalSafeArea: goalSafeArea,
+                                                         localSpacePlanets: localSpaceSafeAreaPlanetRects) else { break }
 
-            let planetPositionX = CGFloat.random(in: planetMinCenterPositionX...planetMaxCenterPositionX)
-            let planetPositionY = CGFloat.random(in: planetMinCenterPositionY...planetMaxCenterPositionY)
-            let planetPosition = CGPoint(x: planetPositionX, y: planetPositionY)
+                localSpacePlanets[result.planet] = result.rect
+                localSpaceSafeAreaPlanetRects.append(result.safe)
+            } else {
+                guard let result = attemptPlanetCreation(maxSafeAreaRadius: maxPlanetSafeAreaRadius,
+                                                         minPlanetRadius: minPlanetRadius,
+                                                         minBoundsX: lowerPlanetMinBoundsPositionX,
+                                                         maxBoundsX: lowerPlanetMaxBoundsPositionX,
+                                                         minBoundsY: lowerPlanetMinBoundsPositionY,
+                                                         maxBoundsY: lowerPlanetMaxBoundsPositionY,
+                                                         startSafeArea: startSafeArea,
+                                                         goalSafeArea: goalSafeArea,
+                                                         localSpacePlanets: localSpaceSafeAreaPlanetRects) else { break }
 
-            let planetSafeRect = SKCircleRect(centerX: planetPositionX,
-                                              centerY: planetPositionY,
-                                              radius: planetRadiusSafeArea)
-
-            if planetSafeRect.intersects(circleRect: startSafeArea) ||
-                planetSafeRect.intersects(circleRect: goalSafeArea) {
-                continue
-            } else if !localSpacePlanets.filter({ $0.intersects(circleRect: planetSafeRect) }).isEmpty {
-                continue
-            } else if !localSpacePlanets.filter({ $0.intersects(circleRect: planetSafeRect) }).isEmpty {
-                continue
+                localSpacePlanets[result.planet] = result.rect
+                localSpaceSafeAreaPlanetRects.append(result.safe)
             }
-            localSpacePlanets.append(planetSafeRect)
-            viz(planetSafeRect: planetSafeRect.cgRect)
-
-            let planet = Planet(radius: planetRadius, color: .blue)
-            planet.zPosition = ZPosition.planet.rawValue
-            planet.position = planetPosition
-            addChild(planet)
         }
     }
 
@@ -166,6 +205,125 @@ class LevelNode: SKNode {
     }
 
     // MARK: - Helpers -
+
+    func attemptPlanetCreation(maxSafeAreaRadius: CGFloat,
+                               minPlanetRadius: CGFloat,
+                               minBoundsX: CGFloat,
+                               maxBoundsX: CGFloat,
+                               minBoundsY: CGFloat,
+                               maxBoundsY: CGFloat,
+                               startSafeArea: SKCircleRect,
+                               goalSafeArea: SKCircleRect,
+                               localSpacePlanets: [SKCircleRect]) -> (planet: Planet, rect: SKCircleRect, safe: SKCircleRect)? {
+
+        let planetSafeAreaRadiusPaddingMultiplier: CGFloat = 1.5
+        let maxPlanetSafeAreaRadius = maxSafeAreaRadius
+        let maxPlanetRadius: CGFloat = maxPlanetSafeAreaRadius / planetSafeAreaRadiusPaddingMultiplier
+
+        let planetRadius = CGFloat.random(in: minPlanetRadius...maxPlanetRadius)
+        let planetRadiusSafeArea = planetRadius * planetSafeAreaRadiusPaddingMultiplier
+
+        let planetMinCenterPositionX = minBoundsX + planetRadiusSafeArea
+        let planetMaxCenterPositionX = maxBoundsX - planetRadiusSafeArea
+        let planetMinCenterPositionY = minBoundsY + planetRadiusSafeArea
+        let planetMaxCenterPositionY = maxBoundsY - planetRadiusSafeArea
+
+        let planetPositionX = CGFloat.random(in: planetMinCenterPositionX...planetMaxCenterPositionX)
+        let planetPositionY = CGFloat.random(in: planetMinCenterPositionY...planetMaxCenterPositionY)
+        let planetPosition = CGPoint(x: planetPositionX, y: planetPositionY)
+
+        let planetRect = SKCircleRect(centerX: planetPositionX,
+                                      centerY: planetPositionY,
+                                      radius: planetRadius)
+
+        let planetSafeRect = SKCircleRect(centerX: planetPositionX,
+                                          centerY: planetPositionY,
+                                          radius: planetRadiusSafeArea)
+
+        if planetSafeRect.intersects(circleRect: startSafeArea) ||
+            planetSafeRect.intersects(circleRect: goalSafeArea) {
+            return nil
+        } else if !localSpacePlanets.filter({ $0.intersects(circleRect: planetSafeRect) }).isEmpty {
+            return nil
+        } else if !localSpacePlanets.filter({ $0.intersects(circleRect: planetSafeRect) }).isEmpty {
+            return nil
+        }
+        viz(planetSafeRect: planetSafeRect.cgRect)
+
+        let hues = (0...90).map({ $0 }) + (220...360).map({ $0 })
+        let hue = CGFloat(hues.randomElement() ?? 0) / 360
+        let planetColor = SKColor(hue: hue,
+                                  saturation: 0.4,
+                                  brightness: 1.0,
+                                  alpha: 1)
+
+        let planet = Planet(radius: planetRadius, color: planetColor)
+        planet.zPosition = ZPosition.planet.rawValue
+        planet.position = planetPosition
+        addChild(planet)
+
+        return (planet, planetRect, planetSafeRect)
+    }
+
+    // MARK: - Codable -
+
+    enum CodingKeys: String, CodingKey {
+        case number
+        case position
+        case goalRectLocalSpace
+        case startRectLocalSpace
+        case localSpacePlanets
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(number, forKey: .number)
+        try container.encode(position, forKey: .position)
+        try container.encode(goalRectLocalSpace, forKey: .goalRectLocalSpace)
+        try container.encode(startRectLocalSpace, forKey: .startRectLocalSpace)
+        try container.encode(localSpacePlanets, forKey: .localSpacePlanets)
+    }
+
+    required public convenience init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        let number = try values.decode(Int.self, forKey: .number)
+        let position = try values.decode(CGPoint.self, forKey: .position)
+        let goalRectLocalSpace = try values.decode(SKCircleRect.self, forKey: .goalRectLocalSpace)
+        let startRectLocalSpace = try values.decode(SKCircleRect.self, forKey: .startRectLocalSpace)
+        let localSpacePlanets = try values.decode([Planet: SKCircleRect].self, forKey: .localSpacePlanets)
+
+        self.init(number: number,
+                  position: position,
+                  goalRectLocalSpace: goalRectLocalSpace,
+                  startRectLocalSpace: startRectLocalSpace,
+                  localSpacePlanets: localSpacePlanets)
+    }
+
+    init(number: Int,
+         position: CGPoint,
+         goalRectLocalSpace: SKCircleRect,
+         startRectLocalSpace: SKCircleRect,
+         localSpacePlanets: [Planet: SKCircleRect]) {
+
+        self.number = number
+        self.goalRectLocalSpace = goalRectLocalSpace
+        self.startRectLocalSpace = startRectLocalSpace
+        self.localSpacePlanets = localSpacePlanets
+
+        goalNode = Goal(radius: goalRectLocalSpace.radius, levelNumber: number)
+        goalNode.alpha = 0
+        goalNode.position = goalRectLocalSpace.center
+
+        super.init()
+
+        addChild(goalNode)
+        self.position = position
+
+        for (planet, rect) in localSpacePlanets {
+            planet.position = rect.center
+            addChild(planet)
+        }
+    }
 
     // MARK: - Viz -
 
@@ -178,21 +336,33 @@ class LevelNode: SKNode {
         addChild(viz)
     }
 
-    private func viz(startBoundary: CGRect, goalBoundary: CGRect, planetBoundary: CGRect) {
+    private func viz(startBoundary: CGRect,
+                     goalBoundary: CGRect,
+                     planetBoundary: CGRect,
+                     upperPlanetBoundary: CGRect,
+                     lowerPlanetBoundary: CGRect) {
         if !Debugging.isLevelVizOn {
             return
         }
         let startPositionBoundaryNode = SKShapeNode(rect: startBoundary)
-        startPositionBoundaryNode.fillColor = .blue
+        startPositionBoundaryNode.fillColor = SKColor.blue.withAlphaComponent(0.5)
         addChild(startPositionBoundaryNode)
 
         let goalPositionBoundaryNode = SKShapeNode(rect: goalBoundary)
-        goalPositionBoundaryNode.fillColor = .darkGray
+        goalPositionBoundaryNode.fillColor = SKColor.darkGray.withAlphaComponent(0.5)
         addChild(goalPositionBoundaryNode)
 
         let planetPositionBoundaryNode = SKShapeNode(rect: planetBoundary)
-        planetPositionBoundaryNode.fillColor = .green
+        planetPositionBoundaryNode.fillColor = SKColor.green.withAlphaComponent(0.5)
         addChild(planetPositionBoundaryNode)
+
+        let upperPlanetPositionBoundaryNode = SKShapeNode(rect: upperPlanetBoundary)
+        upperPlanetPositionBoundaryNode.fillColor = SKColor.red.withAlphaComponent(0.5)
+        addChild(upperPlanetPositionBoundaryNode)
+
+        let lowerPlanetPositionBoundaryNode = SKShapeNode(rect: lowerPlanetBoundary)
+        lowerPlanetPositionBoundaryNode.fillColor = SKColor.red.withAlphaComponent(0.5)
+        addChild(lowerPlanetPositionBoundaryNode)
     }
 
     private func viz(planetSafeRect: CGRect) {

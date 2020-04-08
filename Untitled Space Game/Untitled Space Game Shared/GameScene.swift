@@ -8,7 +8,17 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, Codable {
+
+    enum CodingKeys: String, CodingKey {
+        case cameraNodePosition
+        case lastLevel
+        case levels
+
+         case holeNumber
+         case holeScore
+         case totalScore
+    }
 
     // MARK: - Properties -
 
@@ -19,10 +29,16 @@ class GameScene: SKScene {
 
     var restingOnPlanet: Planet?
     var isPerformingOffscreenReset = false
+    var isPlayerReadyForHit = true {
+        didSet {
+            let white: CGFloat = isPlayerReadyForHit ? 1.0 : 0.5
+            aimAssist.update(color: SKColor(white: white, alpha: 1.0))
+        }
+    }
     var playerNeedsPhysicsBodyDynamics = false
     var playerVelocityModifier: CGFloat = 1.0
     let player: Player = {
-        let player = Player(radius: 5)
+        let player = Player(radius: Design.playerRadius)
         player.zRotation = -CGFloat.pi / 2
         return player
     }()
@@ -35,6 +51,7 @@ class GameScene: SKScene {
     var lastLevel: LevelNode?
     var activeLevelGoalNode: Goal?
     var activeLevelGoalNodeWorldSpace: SKCircleRect?
+    var planetNodesWorldSpace = [[Planet: SKCircleRect]]()
 
     var holeNumber = 1
     var holeScore = 0 {
@@ -81,6 +98,11 @@ class GameScene: SKScene {
 
         levels.append(level)
         addChild(level)
+
+        var adjusted = [Planet: SKCircleRect]()
+        level.localSpacePlanets.forEach { adjusted[$0.key] = $0.value.offsetBy(dx: positionX,
+                                                                               dy: positionY)}
+        planetNodesWorldSpace.append(adjusted)
     }
 
     func moveToNextLevel(isFirstLevel: Bool = false) {
@@ -94,12 +116,10 @@ class GameScene: SKScene {
         updateScoreLabel()
 
         // Remove the last last level (that was kept in case the user hits backwards)
-        let removeAfterTransitionAction: SKAction = .sequence([
-            .wait(forDuration: transitionDuration),
-            .removeFromParent()
-        ])
+        let removeAfterTransitionAction: SKAction = .remove(after: transitionDuration)
         if let lastLevel = lastLevel {
             lastLevel.run(removeAfterTransitionAction)
+            planetNodesWorldSpace.removeFirst()
         }
         if !isFirstLevel {
             lastLevel = levels.removeFirst()
@@ -163,7 +183,7 @@ class GameScene: SKScene {
         newActiveGoal.gravityField.isEnabled = true
         activeLevelGoalNode = newActiveGoal
 
-        let position = CGPoint(x: newActiveLevel.position.x + newActiveLevel.frame.size.width / 2,
+        let cameraPosition = CGPoint(x: newActiveLevel.position.x + newActiveLevel.frame.size.width / 2,
                                y: newActiveLevel.position.y + newActiveLevel.frame.size.height / 2)
 
         let goalSafeOffsetX = newActiveLevel.position.x
@@ -180,46 +200,12 @@ class GameScene: SKScene {
         newActiveGoal.run(goalAlphaAction)
 
         // Move camera
-        let cameraOffset = position - cameraNode.position
-        let cameraPositionAction = SKAction.move(to: position, duration: transitionDuration)
+        let cameraPositionAction = SKAction.move(to: cameraPosition, duration: transitionDuration)
         cameraPositionAction.timingFunction = transitionTiming
         cameraNode.run(cameraPositionAction)
 
-        var starDepthsToAdd = [Int: StarDepthNode]()
-        var starDepthsToRemove = [Int: StarDepthNode]()
-
-        for (depthLevel, depthNodesAtLevel) in starDepthLevelNodes.enumerated() {
-            let scale = 0.75 * CGFloat(depthLevel + 1) / CGFloat(starDepthLevelNodes.count)
-            let offset = cameraOffset.scaleComponents(by: scale)
-
-            for (depthLevelNodeIndex, depthLevelNode) in depthNodesAtLevel.enumerated() {
-                let newPosition = depthLevelNode.position + offset
-
-                let parallaxAction = SKAction.move(to: newPosition, duration: Design.levelTransitionDuration)
-                parallaxAction.timingFunction = transitionTiming
-                depthLevelNode.run(parallaxAction)
-
-                let cameraPaddedDistanceFromDepthNode = (position.x + size.width * 2) - (newPosition.x + depthLevelNode.frame.width)
-
-                if cameraPaddedDistanceFromDepthNode > 0 && depthLevelNodeIndex == depthNodesAtLevel.count - 1 {
-                    let starDepthNode = StarDepthNode(previousNode: depthLevelNode)
-                    starDepthNode.position = CGPoint(x: newPosition.x + depthLevelNode.frame.width,
-                                                     y: newActiveLevel.position.y)
-                    addChild(starDepthNode)
-                    starDepthsToAdd[depthLevel] = starDepthNode
-                } else if cameraPaddedDistanceFromDepthNode > size.width * 2 && depthLevelNodeIndex == 0 {
-                    starDepthsToRemove[depthLevel] = depthLevelNode
-                }
-            }
-        }
-
-        for (key, value) in starDepthsToAdd {
-            starDepthLevelNodes[key].append(value)
-        }
-        for (key, value) in starDepthsToRemove {
-            starDepthLevelNodes[key].removeFirst()
-            value.run(removeAfterTransitionAction)
-        }
+        let cameraOffset = cameraPosition - cameraNode.position
+        updateDepthNodes(forCameraPosition: cameraPosition, offset: cameraOffset)
 
         if Design.colors {
             let currentColor = backgroundColor
@@ -243,12 +229,29 @@ class GameScene: SKScene {
         DispatchQueue.global(qos: .userInitiated).async {
             self.addLevel()
         }
+
+        
+//
+//        do {
+//            try str?.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+//        } catch {
+//            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
+//        }
+//        print(str)
+//        print(123)
+        try! save()
+    }
+    
+    func save() throws {
+        let data = try JSONEncoder().encode(self)
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("data")
+        try data.write(to: url)
     }
 
     // MARK: - Aiming -
 
     func setTargeting(startLocation: CGPoint) {
-        aimAssist.updateTail(length: 0)
+        aimAssist.update(tailLength: 0)
         aimAssist.position = startLocation
         aimAssist.run(.fadeIn(withDuration: 0.15))
     }
@@ -259,40 +262,41 @@ class GameScene: SKScene {
                            pullBackLocation.y - aimAssist.position.y)
         aimAssist.zRotation = angle + CGFloat.pi
 
-        let bla = min(magnitude, 200)
-        aimAssist.updateTail(length: bla)
+        let length = min(magnitude, 200)
+        aimAssist.update(tailLength: length)
     }
 
     func finishedTargeting(pullBackLocation: CGPoint) {
-        guard let physicsBody = player.physicsBody else { fatalError() }
+        aimAssist.run(.fadeOut(withDuration: 0.15))
+
+        guard isPlayerReadyForHit, let physicsBody = player.physicsBody else { return }
 
         resetPlayerPathNodes()
 
         if let planet = contactPlanet {
-            let initalStrength = Design.planetFieldStrength / 10
+            let initalStrength = Design.planetFieldStrength / 100
             planet.gravityField.strength = initalStrength
 
-            let duration: TimeInterval = 1
+            let duration: TimeInterval = 1.5
             let action: SKAction = .customAction(withDuration: duration, actionBlock: { _, time in
-                    let progress = Float(time) / Float(duration)
-                    let strength = initalStrength + (Design.planetFieldStrength - initalStrength) * progress
-                    planet.gravityField.strength = strength
+                let progress = Float(time) / Float(duration)
+                let strength = initalStrength + (Design.planetFieldStrength - initalStrength) * progress
+                planet.gravityField.strength = strength
             })
             planet.run(action)
             contactPlanet = nil
         }
 
         let magnitude = pullBackLocation.distance(to: aimAssist.position)
-        let mag: CGFloat = min(magnitude / 5, 200)
+        let mag: CGFloat = max(min(magnitude / 5, 200), 5)
 
         let x = mag * -sin(aimAssist.zRotation)
         let y = mag * cos(aimAssist.zRotation)
 
         player.run(.applyImpulse(CGVector(dx: x, dy: y), duration: 0.5))
-        aimAssist.run(.fadeOut(withDuration: 0.15))
 
         let action: SKAction = .sequence([
-            .wait(forDuration: 0.05),
+            .wait(forDuration: 0.2),
             .run {
                 physicsBody.fieldBitMask = SpriteCategory.player
                 physicsBody.collisionBitMask = SpriteCategory.player
@@ -301,6 +305,8 @@ class GameScene: SKScene {
         player.run(action)
 
         holeScore += 1
+
+        isPlayerReadyForHit = false
     }
 
     // MARK: - Player -
@@ -330,6 +336,7 @@ class GameScene: SKScene {
         playerVelocityModifier = 1.0
 
         resetPlayerPathNodes()
+        isPlayerReadyForHit = true
     }
 
     func resetPlayerPathNodes() {
@@ -350,42 +357,44 @@ class GameScene: SKScene {
         guard let level = levels.first else { return }
         // Camera scale
 
-            let safeWidthPadding: CGFloat = size.width / 10
-            let levelMinXWorldSpace = level.position.x - size.width / 2 + safeWidthPadding
-            let levelMaxXWorldSpace = level.position.x + size.width / 2 - safeWidthPadding
+        let safeWidthPadding: CGFloat = size.width / 10
+        let levelMinXWorldSpace = level.position.x - size.width / 2 + safeWidthPadding
+        let levelMaxXWorldSpace = level.position.x + size.width / 2 - safeWidthPadding
 
-            let safeHeightPadding: CGFloat = size.height / 10
-            let levelMinYWorldSpace = level.position.y - size.height / 2 + safeHeightPadding
-            let levelMaxYWorldSpace = level.position.y + size.height / 2 - safeHeightPadding
+        let safeHeightPadding: CGFloat = size.height / 10
+        let levelMinYWorldSpace = level.position.y - size.height / 2 + safeHeightPadding
+        let levelMaxYWorldSpace = level.position.y + size.height / 2 - safeHeightPadding
 
-            var scale: CGFloat = 1.0
-            if player.position.x > levelMaxXWorldSpace {
-                scale = max(scale, 1.0 + (player.position.x - levelMaxXWorldSpace) / (size.width / 2))
-            } else if player.position.x < levelMinXWorldSpace {
-                scale = max(scale, 1.0 + (levelMinXWorldSpace - player.position.x) / (size.width / 2))
-            }
+        var scale: CGFloat = 1.0
+        if player.position.x > levelMaxXWorldSpace {
+            scale = max(scale, 1.0 + (player.position.x - levelMaxXWorldSpace) / (size.width / 2))
+        } else if player.position.x < levelMinXWorldSpace {
+            scale = max(scale, 1.0 + (levelMinXWorldSpace - player.position.x) / (size.width / 2))
+        }
 
-            if player.position.y > levelMaxYWorldSpace {
-                scale = max(scale, 1.0 + (player.position.y - levelMaxYWorldSpace) / (size.height / 2))
-            } else if player.position.y < levelMinYWorldSpace {
-                scale = max(scale, 1.0 + (levelMinYWorldSpace - player.position.y) / (size.height / 2))
-            }
+        if player.position.y > levelMaxYWorldSpace {
+            scale = max(scale, 1.0 + (player.position.y - levelMaxYWorldSpace) / (size.height / 2))
+        } else if player.position.y < levelMinYWorldSpace {
+            scale = max(scale, 1.0 + (levelMinYWorldSpace - player.position.y) / (size.height / 2))
+        }
 
-            let maxScale: CGFloat = 1.5
-            cameraNode.run(.scale(to: min(scale, maxScale), duration: 0.25))
-            if scale > maxScale && !isPerformingOffscreenReset {
-                isPerformingOffscreenReset = true
-                let resetAction: SKAction = .sequence([
-                    .wait(forDuration: 1.0),
-                    .run {
-                        self.resetPlayerPosition(to: nil)
-                        },
-                    .run {
-                        self.isPerformingOffscreenReset = false
-                    }
-                ])
-                run(resetAction)
-            }
+        let maxScale: CGFloat = 1.5
+        cameraNode.run(.scale(to: min(scale, maxScale), duration: 0.25))
+        if scale > maxScale && !isPerformingOffscreenReset {
+            isPerformingOffscreenReset = true
+            let resetAction: SKAction = .sequence([
+                .wait(forDuration: 1.0),
+                .run {
+                    self.resetPlayerPosition(to: nil)
+                },
+                .run {
+                    self.isPerformingOffscreenReset = false
+                }
+            ])
+            run(resetAction, withKey: "resetAction")
+        } else if scale <= maxScale && isPerformingOffscreenReset {
+            removeAction(forKey: "resetAction")
+        }
 
     }
 
@@ -417,7 +426,7 @@ class GameScene: SKScene {
                 let spacing = Design.playerPathSpacing
 
                 let projectedPoint = CGPoint(x: diffX / diffMag * spacing + lastPoint.x,
-                                       y: diffY / diffMag * spacing + lastPoint.y)
+                                             y: diffY / diffMag * spacing + lastPoint.y)
                 if player.position.distance(to: lastPoint) > spacing {
                     newPoint = projectedPoint
                 }
@@ -444,6 +453,20 @@ class GameScene: SKScene {
                                             dy: playerVelocity.dy * playerVelocityModifier)
         }
 
+        if contactPlanet == nil && Debugging.isPlanetInteractionOn {
+            for levelPlanetNodesWorldSpace in planetNodesWorldSpace {
+                for item in levelPlanetNodesWorldSpace {
+                    let rect = item.value
+                    let distance = rect.center.distance(to: player.position) - Design.playerRadius
+                    if distance - rect.radius < 1 {
+                        contactPlanet = item.key
+                        print(1)
+                        break
+                    }
+                }
+            }
+        }
+//            print(playerVelocityMagnitude)
         var newPlayerVelocityModifier: CGFloat = 1
         if let planet = contactPlanet {
             newPlayerVelocityModifier = 0.9
@@ -459,7 +482,7 @@ class GameScene: SKScene {
                 return
         }
 
-        let dist = goalRect.center.distance(to: player.position)
+        let dist = goalRect.center.distance(to: player.position) - Design.playerRadius
 
         if dist < goalRect.radius * 2 {
             goalNode.label.alpha = (dist - 10) / (goalRect.radius * 2)
@@ -468,16 +491,19 @@ class GameScene: SKScene {
         }
 
         if dist < goalRect.radius * 1.5 {
-            goalNode.gravityField.strength = 0.2
+            goalNode.gravityField.isExclusive = true
+            goalNode.gravityField.strength = 4.25
 
             if playerVelocityMagnitude < 1 && dist < 2 {
                 moveToNextLevel()
-            } else if dist < 5 {
-                newPlayerVelocityModifier = 0.8
+            } else if dist < goalRect.radius / 5 {
+                newPlayerVelocityModifier = 0.48
+                goalNode.gravityField.strength = 0.25
             } else {
-                newPlayerVelocityModifier = 0.9
+                newPlayerVelocityModifier = 0.69
             }
         } else {
+            goalNode.gravityField.isExclusive = false
             goalNode.gravityField.strength = Design.goalFieldStrength
         }
 
@@ -494,6 +520,61 @@ class GameScene: SKScene {
     // MARK: - Debug -
 
     func debugMove(x: CGFloat, y: CGFloat) {
+        #if DEBUG
         cameraNode.run(.moveBy(x: x, y: y, duration: 0.1))
+        #endif
+    }
+//
+//    enum CodingKeys: String, CodingKey {
+//           case cameraNodePosition
+//           case lastLevel
+//           case levels
+//
+//            case holeNumber
+//            case holeScore
+//            case totalScore
+//       }
+    public func encode(to encoder: Encoder) throws {
+//        let (r, g, b, a) = color.rgba()
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(lastLevel, forKey: .lastLevel)
+        try container.encode(levels, forKey: .levels)
+        
+        try container.encode(holeNumber, forKey: .holeNumber)
+        try container.encode(holeScore, forKey: .holeScore)
+        try container.encode(totalScore, forKey: .totalScore)
+    }
+    
+    
+    required public convenience init(from decoder: Decoder) throws {
+        self.init()
+        
+        
+        
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.lastLevel = try? values.decode(LevelNode.self, forKey: .lastLevel)
+        self.levels = try values.decode([LevelNode].self, forKey: .levels)
+         
+        self.holeNumber = try values.decode(Int.self, forKey: .holeNumber)
+        self.holeScore = try values.decode(Int.self, forKey: .holeScore)
+        self.totalScore = try values.decode(Int.self, forKey: .totalScore)
+        
+        for level in levels {
+            addChild(level)
+        }
+        moveToNextLevel(isFirstLevel: true)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override init(size: CGSize) {
+        super.init(size: size)
+    }
+    
+    override init() {
+        super.init()
+        scaleMode = .resizeFill
     }
 }

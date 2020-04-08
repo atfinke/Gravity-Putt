@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-struct SKCircleRect {
+struct SKCircleRect: Equatable, Codable {
 
     let center: CGPoint
     let radius: CGFloat

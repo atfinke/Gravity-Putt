@@ -8,11 +8,14 @@
 
 import SpriteKit
 
-class Planet: SKSpriteNode {
+class Planet: SKNode, Codable {
 
     // MARK: - Properties -
 
     static let texture = SKTexture(imageNamed: "circle")
+
+    let radius: CGFloat
+    let color: SKColor
     let gravityField: SKFieldNode = {
         let field = SKFieldNode.radialGravityField()
         field.strength = Design.planetFieldStrength
@@ -23,29 +26,14 @@ class Planet: SKSpriteNode {
     // MARK: - Initalization -
 
     init(radius: CGFloat, color: SKColor) {
-        super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
-
-        //        let planetColor = SKColor(hue: CGFloat.random(in: 0..<1),
-        //                                  saturation: 1,
-        //                                  brightness: 0.7,
-        //                                  alpha: 1.0)
-
-        //        let planetColor = SKColor(red: 100.0 / 255.0,
-        //                                  green: CGFloat.random(in: 0..<75) / 255,
-        //                                  blue: CGFloat.random(in: 0.4...1),
-        //                                  alpha: 1)
-        let hues = (0...90).map({ $0 }) + (220...360).map({ $0 })
-        let hue = CGFloat(hues.randomElement() ?? 0) / 360
-
-        let planetColor = SKColor(hue: hue,
-                                  saturation: 0.4,
-                                  brightness: 1.0,
-                                  alpha: 1)
+        self.radius = radius
+        self.color = color
+        super.init()
 
         let gravityFieldRegionRadius = radius * 3
         gravityField.region = SKRegion(radius: Float(gravityFieldRegionRadius))
 
-        let gravityFieldTexture = Planet.gravityFieldImage(radius: gravityFieldRegionRadius, color: planetColor)
+        let gravityFieldTexture = Planet.gravityFieldImage(radius: gravityFieldRegionRadius, color: color)
         let gravityFieldTextureNode = SKSpriteNode(texture: gravityFieldTexture)
         gravityFieldTextureNode.zPosition = ZPosition.planetGravityFieldTexture.rawValue
         addChild(gravityFieldTextureNode)
@@ -71,7 +59,7 @@ class Planet: SKSpriteNode {
         bodySprite.colorBlendFactor = 1
         bodySprite.zPosition = ZPosition.stars.rawValue + 2
         if Design.colors {
-            bodySprite.color = planetColor
+            bodySprite.color = color
         } else {
             bodySprite.color = SKColor(white: 0.2, alpha: 1)
         }
@@ -108,7 +96,7 @@ class Planet: SKSpriteNode {
         layer.endPoint = CGPoint(x: 1, y: 1)
         layer.frame = CGRect(origin: .zero, size: size)
         layer.colors = [
-            color.withAlphaComponent(0.25).cgColor,
+            color.withAlphaComponent(0.4).cgColor,
             color.withAlphaComponent(0.0).cgColor
         ]
         layer.cornerRadius = radius
@@ -120,4 +108,25 @@ class Planet: SKSpriteNode {
 
         return SKTexture(image: image)
     }
+
+    // MARK: - Codable -
+
+    enum CodingKeys: String, CodingKey {
+        case radius
+        case color
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(radius, forKey: .radius)
+        try container.encode(SKCodableColor(color), forKey: .color)
+    }
+
+    public required convenience init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        let radius = try values.decode(CGFloat.self, forKey: .radius)
+        let color = try values.decode(SKCodableColor.self, forKey: .color)
+        self.init(radius: radius, color: color.color)
+    }
+
 }

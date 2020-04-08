@@ -8,12 +8,14 @@
 
 import SpriteKit
 
-class Goal: SKSpriteNode {
+class Goal: SKNode {
 
     // MARK: - Properties -
 
     let borderNode: SKShapeNode
     let innerNode: SKShapeNode
+    let ringNode = SKShapeNode(circleOfRadius: 40)
+    
     let label: SKLabelNode
 
     let gravityField: SKFieldNode = {
@@ -89,10 +91,10 @@ class Goal: SKSpriteNode {
         label.fontSize = 15
         label.fontColor = SKColor.white
 
-        super.init(texture: nil, color: .clear, size: CGSize(width: radius * 2, height: radius * 2))
+        super.init()
 
         gravityField.minimumRadius = Float(radius)
-        gravityField.region = SKRegion(radius: Float(radius * 4))
+        gravityField.region = SKRegion(radius: Float(radius * 2))
 
         addChild(gravityField)
         addChild(borderNode)
@@ -119,6 +121,11 @@ class Goal: SKSpriteNode {
 
         borderNode.run(borderRotateAction)
         innerNode.run(innerRotateAction)
+        
+        ringNode.strokeColor = SKColor(white: 1, alpha: 1)
+        ringNode.lineWidth = 4
+        ringNode.alpha = 0
+        addChild(ringNode)
     }
 
     required init?(coder aDecoder: NSCoder) {

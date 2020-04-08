@@ -10,5 +10,5 @@ import Foundation
 
 struct Debugging {
     static let isLevelVizOn: Bool = false
-    static let isPlanetInteractionOn: Bool = true
+    static let isPlanetInteractionOn: Bool = false
 }

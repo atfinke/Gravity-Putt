@@ -11,12 +11,17 @@ import Foundation
 
 struct Design {
     static let colors: Bool = true
+
+    static let playerRadius: CGFloat = 5
+
     static let goalRadius: CGFloat = 40.0
     static let goalFieldStrength: Float = 2
     static let playerPathNodeRadius: CGFloat = 3
     static let playerPathSpacing: CGFloat = 15
 
     static let planetFieldStrength: Float = 1.2
+
+    static let aimAssistInnerRadius: CGFloat = 8
 
     static let levelTransitionDuration: TimeInterval = 2
     static let levelTransitionTimingFunction: ((Float) -> Float) = {
