@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1400F99D241BF47D003BFED8"
-               BuildableName = "Untitled Space Game.app"
-               BlueprintName = "Untitled Space Game macOS"
-               ReferencedContainer = "container:Untitled Space Game.xcodeproj">
+               BuildableName = "Space Golf.app"
+               BlueprintName = "Space Golf macOS"
+               ReferencedContainer = "container:Space Golf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1419B422243DAC5B00A74A63"
-               BuildableName = "GameTests.xctest"
-               BlueprintName = "GameTests"
-               ReferencedContainer = "container:Untitled Space Game.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -55,9 +45,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1400F99D241BF47D003BFED8"
-            BuildableName = "Untitled Space Game.app"
-            BlueprintName = "Untitled Space Game macOS"
-            ReferencedContainer = "container:Untitled Space Game.xcodeproj">
+            BuildableName = "Space Golf.app"
+            BlueprintName = "Space Golf macOS"
+            ReferencedContainer = "container:Space Golf.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1400F99D241BF47D003BFED8"
-            BuildableName = "Untitled Space Game.app"
-            BlueprintName = "Untitled Space Game macOS"
-            ReferencedContainer = "container:Untitled Space Game.xcodeproj">
+            BuildableName = "Space Golf.app"
+            BlueprintName = "Space Golf macOS"
+            ReferencedContainer = "container:Space Golf.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

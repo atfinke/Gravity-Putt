@@ -14,8 +14,6 @@ class Goal: SKNode {
 
     let borderNode: SKShapeNode
     let innerNode: SKShapeNode
-    let ringNode = SKShapeNode(circleOfRadius: 40)
-
     let label: SKLabelNode
 
     let gravityField: SKFieldNode = {
@@ -121,11 +119,6 @@ class Goal: SKNode {
 
         borderNode.run(borderRotateAction)
         innerNode.run(innerRotateAction)
-
-        ringNode.strokeColor = SKColor(white: 1, alpha: 1)
-        ringNode.lineWidth = 4
-        ringNode.alpha = 0
-        addChild(ringNode)
     }
 
     required init?(coder aDecoder: NSCoder) {

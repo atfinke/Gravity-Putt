@@ -8,29 +8,31 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
 
 class GameViewController: UIViewController {
 
-    let scene = GameScene.new()
-
+    // MARK: - Properties -
+    
+    let scene = SaveUtility.loadScene()
+    let skView: SKView = {
+        let view = SKView()
+        view.ignoresSiblingOrder = true
+        view.showsFPS = true
+        view.showsNodeCount = true
+        view.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
+        return view
+    }()
+    
+    // MARK: - View Life Cycle -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Present the scene
-        let skView = self.view as! SKView
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        skView.frame = view.bounds
         skView.presentScene(scene)
-
-        skView.ignoresSiblingOrder = true
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-
-        skView.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
-
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(doubleTapRecognizer))
-        tapGestureRecognizer.numberOfTapsRequired = 1
-        tapGestureRecognizer.numberOfTouchesRequired = 2
-        view.addGestureRecognizer(tapGestureRecognizer)
     }
 
     @objc func doubleTapRecognizer() {

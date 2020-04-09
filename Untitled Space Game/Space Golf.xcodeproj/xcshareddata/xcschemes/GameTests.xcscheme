@@ -17,9 +17,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1419B422243DAC5B00A74A63"
-               BuildableName = "GameTests.xctest"
-               BlueprintName = "GameTests"
-               ReferencedContainer = "container:Untitled Space Game.xcodeproj">
+               BuildableName = "Space Golf Tests.xctest"
+               BlueprintName = "Space Golf Tests"
+               ReferencedContainer = "container:Space Golf.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>

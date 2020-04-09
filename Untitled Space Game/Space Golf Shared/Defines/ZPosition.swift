@@ -20,9 +20,11 @@ enum ZPosition: CGFloat {
     case goal = 100_001
     case goalParticleSystems = 100_000
 
-    case planet = 1_001
-    case planetGravityFieldTexture = 1_000
-
+    case planetBody = 1_003
+    case planetBorder = 1_002
+    case planetGravityFieldTexture = 1_001
+    case planet = 1_000
+    
     case playerPath = 120
     case stars = 100
 }

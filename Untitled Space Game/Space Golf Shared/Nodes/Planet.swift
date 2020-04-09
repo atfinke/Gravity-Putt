@@ -51,18 +51,19 @@ class Planet: SKNode, Codable {
                                         color: .white,
                                         size: CGSize(width: radius * 2, height: radius * 2))
         borderSprite.colorBlendFactor = 1
+        borderSprite.zPosition = ZPosition.planetBorder.rawValue
         addChild(borderSprite)
 
         let bodyRadius = radius - borderWidth
         let bodySprite = SKSpriteNode(texture: Planet.texture,
                                       size: CGSize(width: bodyRadius * 2, height: bodyRadius * 2))
         bodySprite.colorBlendFactor = 1
-        bodySprite.zPosition = ZPosition.stars.rawValue + 2
         if Design.colors {
             bodySprite.color = color
         } else {
             bodySprite.color = SKColor(white: 0.2, alpha: 1)
         }
+        bodySprite.zPosition = ZPosition.planetBody.rawValue
         addChild(bodySprite)
 
         let physicsBody = SKPhysicsBody(circleOfRadius: radius)

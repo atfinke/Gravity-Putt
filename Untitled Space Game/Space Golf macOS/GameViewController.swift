@@ -29,7 +29,6 @@ class GameViewController: NSViewController {
         #if DEBUG
         skView.showsFPS = true
         skView.showsNodeCount = true
-        skView.showsQuadCount = true
         skView.showsDrawCount = true
         #else
         let alert = NSAlert()

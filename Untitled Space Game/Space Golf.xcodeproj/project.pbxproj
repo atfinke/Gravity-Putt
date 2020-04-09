@@ -128,26 +128,26 @@
 /* Begin PBXFileReference section */
 		1400F975241BF47C003BFED8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		1400F976241BF47D003BFED8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1400F97B241BF47D003BFED8 /* Untitled Space Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Untitled Space Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1400F97B241BF47D003BFED8 /* Space Golf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Golf.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1400F97E241BF47D003BFED8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1400F980241BF47D003BFED8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1400F983241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1400F986241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1400F988241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1400F98D241BF47D003BFED8 /* Untitled Space Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Untitled Space Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1400F98D241BF47D003BFED8 /* Space Golf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Golf.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1400F98F241BF47D003BFED8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1400F991241BF47D003BFED8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1400F994241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1400F997241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1400F999241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1400F99E241BF47D003BFED8 /* Untitled Space Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Untitled Space Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1400F99E241BF47D003BFED8 /* Space Golf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Golf.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1400F9A0241BF47D003BFED8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1400F9A2241BF47D003BFED8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1400F9A5241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1400F9A7241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		140266F02431F29800EF4AA8 /* ZPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPosition.swift; sourceTree = "<group>"; };
 		14078744243B23FA00A8B80B /* GameScene+Depth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Depth.swift"; sourceTree = "<group>"; };
-		1419B423243DAC5B00A74A63 /* GameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1419B423243DAC5B00A74A63 /* Space Golf Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Space Golf Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1419B425243DAC5B00A74A63 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		1419B427243DAC5B00A74A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1423A15A243EA4CA00E085D9 /* HoleStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleStat.swift; sourceTree = "<group>"; };
@@ -209,16 +209,16 @@
 		1400F96D241BF47C003BFED8 = {
 			isa = PBXGroup;
 			children = (
-				1400F972241BF47C003BFED8 /* Untitled Space Game Shared */,
-				1400F97D241BF47D003BFED8 /* Untitled Space Game iOS */,
-				1400F98E241BF47D003BFED8 /* Untitled Space Game tvOS */,
-				1400F99F241BF47D003BFED8 /* Untitled Space Game macOS */,
-				1419B424243DAC5B00A74A63 /* GameTests */,
+				1400F972241BF47C003BFED8 /* Space Golf Shared */,
+				1400F97D241BF47D003BFED8 /* Space Golf iOS */,
+				1400F98E241BF47D003BFED8 /* Space Golf tvOS */,
+				1400F99F241BF47D003BFED8 /* Space Golf macOS */,
+				1419B424243DAC5B00A74A63 /* Space Golf Tests */,
 				1400F97C241BF47D003BFED8 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		1400F972241BF47C003BFED8 /* Untitled Space Game Shared */ = {
+		1400F972241BF47C003BFED8 /* Space Golf Shared */ = {
 			isa = PBXGroup;
 			children = (
 				1423A168243EB66800E085D9 /* GameScene */,
@@ -229,21 +229,21 @@
 				1423A172243EB86400E085D9 /* Common */,
 				1400F976241BF47D003BFED8 /* Assets.xcassets */,
 			);
-			path = "Untitled Space Game Shared";
+			path = "Space Golf Shared";
 			sourceTree = "<group>";
 		};
 		1400F97C241BF47D003BFED8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1400F97B241BF47D003BFED8 /* Untitled Space Game.app */,
-				1400F98D241BF47D003BFED8 /* Untitled Space Game.app */,
-				1400F99E241BF47D003BFED8 /* Untitled Space Game.app */,
-				1419B423243DAC5B00A74A63 /* GameTests.xctest */,
+				1400F97B241BF47D003BFED8 /* Space Golf.app */,
+				1400F98D241BF47D003BFED8 /* Space Golf.app */,
+				1400F99E241BF47D003BFED8 /* Space Golf.app */,
+				1419B423243DAC5B00A74A63 /* Space Golf Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1400F97D241BF47D003BFED8 /* Untitled Space Game iOS */ = {
+		1400F97D241BF47D003BFED8 /* Space Golf iOS */ = {
 			isa = PBXGroup;
 			children = (
 				1400F97E241BF47D003BFED8 /* AppDelegate.swift */,
@@ -252,10 +252,10 @@
 				1400F985241BF47D003BFED8 /* LaunchScreen.storyboard */,
 				1400F988241BF47D003BFED8 /* Info.plist */,
 			);
-			path = "Untitled Space Game iOS";
+			path = "Space Golf iOS";
 			sourceTree = "<group>";
 		};
-		1400F98E241BF47D003BFED8 /* Untitled Space Game tvOS */ = {
+		1400F98E241BF47D003BFED8 /* Space Golf tvOS */ = {
 			isa = PBXGroup;
 			children = (
 				1400F98F241BF47D003BFED8 /* AppDelegate.swift */,
@@ -264,10 +264,10 @@
 				1400F996241BF47D003BFED8 /* LaunchScreen.storyboard */,
 				1400F999241BF47D003BFED8 /* Info.plist */,
 			);
-			path = "Untitled Space Game tvOS";
+			path = "Space Golf tvOS";
 			sourceTree = "<group>";
 		};
-		1400F99F241BF47D003BFED8 /* Untitled Space Game macOS */ = {
+		1400F99F241BF47D003BFED8 /* Space Golf macOS */ = {
 			isa = PBXGroup;
 			children = (
 				1400F9A0241BF47D003BFED8 /* AppDelegate.swift */,
@@ -275,16 +275,16 @@
 				1400F9A4241BF47D003BFED8 /* Main.storyboard */,
 				1400F9A7241BF47D003BFED8 /* Info.plist */,
 			);
-			path = "Untitled Space Game macOS";
+			path = "Space Golf macOS";
 			sourceTree = "<group>";
 		};
-		1419B424243DAC5B00A74A63 /* GameTests */ = {
+		1419B424243DAC5B00A74A63 /* Space Golf Tests */ = {
 			isa = PBXGroup;
 			children = (
 				1419B425243DAC5B00A74A63 /* GameTests.swift */,
 				1419B427243DAC5B00A74A63 /* Info.plist */,
 			);
-			path = GameTests;
+			path = "Space Golf Tests";
 			sourceTree = "<group>";
 		};
 		1423A166243EB63A00E085D9 /* Nodes */ = {
@@ -357,9 +357,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1400F97A241BF47D003BFED8 /* Untitled Space Game iOS */ = {
+		1400F97A241BF47D003BFED8 /* Space Golf iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1400F9B6241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Untitled Space Game iOS" */;
+			buildConfigurationList = 1400F9B6241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Space Golf iOS" */;
 			buildPhases = (
 				1400F977241BF47D003BFED8 /* Sources */,
 				1400F978241BF47D003BFED8 /* Frameworks */,
@@ -369,14 +369,14 @@
 			);
 			dependencies = (
 			);
-			name = "Untitled Space Game iOS";
+			name = "Space Golf iOS";
 			productName = "Untitled Space Game iOS";
-			productReference = 1400F97B241BF47D003BFED8 /* Untitled Space Game.app */;
+			productReference = 1400F97B241BF47D003BFED8 /* Space Golf.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1400F98C241BF47D003BFED8 /* Untitled Space Game tvOS */ = {
+		1400F98C241BF47D003BFED8 /* Space Golf tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1400F9B9241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Untitled Space Game tvOS" */;
+			buildConfigurationList = 1400F9B9241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Space Golf tvOS" */;
 			buildPhases = (
 				1400F989241BF47D003BFED8 /* Sources */,
 				1400F98A241BF47D003BFED8 /* Frameworks */,
@@ -386,14 +386,14 @@
 			);
 			dependencies = (
 			);
-			name = "Untitled Space Game tvOS";
+			name = "Space Golf tvOS";
 			productName = "Untitled Space Game tvOS";
-			productReference = 1400F98D241BF47D003BFED8 /* Untitled Space Game.app */;
+			productReference = 1400F98D241BF47D003BFED8 /* Space Golf.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1400F99D241BF47D003BFED8 /* Untitled Space Game macOS */ = {
+		1400F99D241BF47D003BFED8 /* Space Golf macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1400F9BC241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Untitled Space Game macOS" */;
+			buildConfigurationList = 1400F9BC241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Space Golf macOS" */;
 			buildPhases = (
 				1400F99A241BF47D003BFED8 /* Sources */,
 				1400F99B241BF47D003BFED8 /* Frameworks */,
@@ -403,14 +403,14 @@
 			);
 			dependencies = (
 			);
-			name = "Untitled Space Game macOS";
+			name = "Space Golf macOS";
 			productName = "Untitled Space Game macOS";
-			productReference = 1400F99E241BF47D003BFED8 /* Untitled Space Game.app */;
+			productReference = 1400F99E241BF47D003BFED8 /* Space Golf.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1419B422243DAC5B00A74A63 /* GameTests */ = {
+		1419B422243DAC5B00A74A63 /* Space Golf Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1419B42C243DAC5B00A74A63 /* Build configuration list for PBXNativeTarget "GameTests" */;
+			buildConfigurationList = 1419B42C243DAC5B00A74A63 /* Build configuration list for PBXNativeTarget "Space Golf Tests" */;
 			buildPhases = (
 				1419B41F243DAC5B00A74A63 /* Sources */,
 				1419B420243DAC5B00A74A63 /* Frameworks */,
@@ -421,9 +421,9 @@
 			dependencies = (
 				1419B429243DAC5B00A74A63 /* PBXTargetDependency */,
 			);
-			name = GameTests;
+			name = "Space Golf Tests";
 			productName = GameTests;
-			productReference = 1419B423243DAC5B00A74A63 /* GameTests.xctest */;
+			productReference = 1419B423243DAC5B00A74A63 /* Space Golf Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -451,7 +451,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1400F971241BF47C003BFED8 /* Build configuration list for PBXProject "Untitled Space Game" */;
+			buildConfigurationList = 1400F971241BF47C003BFED8 /* Build configuration list for PBXProject "Space Golf" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -464,10 +464,10 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1400F97A241BF47D003BFED8 /* Untitled Space Game iOS */,
-				1400F98C241BF47D003BFED8 /* Untitled Space Game tvOS */,
-				1400F99D241BF47D003BFED8 /* Untitled Space Game macOS */,
-				1419B422243DAC5B00A74A63 /* GameTests */,
+				1400F97A241BF47D003BFED8 /* Space Golf iOS */,
+				1400F98C241BF47D003BFED8 /* Space Golf tvOS */,
+				1400F99D241BF47D003BFED8 /* Space Golf macOS */,
+				1419B422243DAC5B00A74A63 /* Space Golf Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -643,7 +643,7 @@
 /* Begin PBXTargetDependency section */
 		1419B429243DAC5B00A74A63 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1400F99D241BF47D003BFED8 /* Untitled Space Game macOS */;
+			target = 1400F99D241BF47D003BFED8 /* Space Golf macOS */;
 			targetProxy = 1419B428243DAC5B00A74A63 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -807,14 +807,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				INFOPLIST_FILE = "Untitled Space Game iOS/Info.plist";
+				INFOPLIST_FILE = "Soace Golf iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
-				PRODUCT_NAME = "Untitled Space Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
+				PRODUCT_NAME = "Space Golf";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -827,14 +827,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				INFOPLIST_FILE = "Untitled Space Game iOS/Info.plist";
+				INFOPLIST_FILE = "Soace Golf iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
-				PRODUCT_NAME = "Untitled Space Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
+				PRODUCT_NAME = "Space Golf";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -848,13 +848,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "tvOS App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				INFOPLIST_FILE = "Untitled Space Game tvOS/Info.plist";
+				INFOPLIST_FILE = "Space Golf tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
-				PRODUCT_NAME = "Untitled Space Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
+				PRODUCT_NAME = "Space Golf";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -868,13 +868,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "tvOS App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				INFOPLIST_FILE = "Untitled Space Game tvOS/Info.plist";
+				INFOPLIST_FILE = "Space Golf tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
-				PRODUCT_NAME = "Untitled Space Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
+				PRODUCT_NAME = "Space Golf";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
@@ -892,15 +892,15 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = "Untitled Space Game macOS/Info.plist";
+				INFOPLIST_FILE = "Space Golf macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
-				PRODUCT_NAME = "Untitled Space Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
+				PRODUCT_NAME = "Space Golf";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -915,15 +915,15 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
-				INFOPLIST_FILE = "Untitled Space Game macOS/Info.plist";
+				INFOPLIST_FILE = "Space Golf macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.Untitled-Space-Game";
-				PRODUCT_NAME = "Untitled Space Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
+				PRODUCT_NAME = "Space Golf";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -947,7 +947,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Untitled Space Game.app/Contents/MacOS/Untitled Space Game";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Space Golf.app/Contents/MacOS/Space Golf";
 			};
 			name = Debug;
 		};
@@ -969,14 +969,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Untitled Space Game.app/Contents/MacOS/Untitled Space Game";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Space Golf.app/Contents/MacOS/Space Golf";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1400F971241BF47C003BFED8 /* Build configuration list for PBXProject "Untitled Space Game" */ = {
+		1400F971241BF47C003BFED8 /* Build configuration list for PBXProject "Space Golf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1400F9B4241BF47D003BFED8 /* Debug */,
@@ -985,7 +985,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1400F9B6241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Untitled Space Game iOS" */ = {
+		1400F9B6241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Space Golf iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1400F9B7241BF47D003BFED8 /* Debug */,
@@ -994,7 +994,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1400F9B9241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Untitled Space Game tvOS" */ = {
+		1400F9B9241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Space Golf tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1400F9BA241BF47D003BFED8 /* Debug */,
@@ -1003,7 +1003,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1400F9BC241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Untitled Space Game macOS" */ = {
+		1400F9BC241BF47D003BFED8 /* Build configuration list for PBXNativeTarget "Space Golf macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1400F9BD241BF47D003BFED8 /* Debug */,
@@ -1012,7 +1012,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1419B42C243DAC5B00A74A63 /* Build configuration list for PBXNativeTarget "GameTests" */ = {
+		1419B42C243DAC5B00A74A63 /* Build configuration list for PBXNativeTarget "Space Golf Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1419B42A243DAC5B00A74A63 /* Debug */,
