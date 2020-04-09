@@ -12,7 +12,7 @@ import GameplayKit
 
 class GameViewController: UIViewController {
 
-    let scene = GameScene.newGameScene()
+    let scene = GameScene.new()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -31,6 +31,21 @@
 		14078746243B23FA00A8B80B /* GameScene+Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14078744243B23FA00A8B80B /* GameScene+Depth.swift */; };
 		14078747243B23FA00A8B80B /* GameScene+Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14078744243B23FA00A8B80B /* GameScene+Depth.swift */; };
 		1419B426243DAC5B00A74A63 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419B425243DAC5B00A74A63 /* GameTests.swift */; };
+		1423A15B243EA4CA00E085D9 /* HoleStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A15A243EA4CA00E085D9 /* HoleStat.swift */; };
+		1423A15C243EA4CA00E085D9 /* HoleStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A15A243EA4CA00E085D9 /* HoleStat.swift */; };
+		1423A15D243EA4CA00E085D9 /* HoleStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A15A243EA4CA00E085D9 /* HoleStat.swift */; };
+		1423A15F243EAF3300E085D9 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A15E243EAF3300E085D9 /* GameStats.swift */; };
+		1423A160243EAF3300E085D9 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A15E243EAF3300E085D9 /* GameStats.swift */; };
+		1423A161243EAF3300E085D9 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A15E243EAF3300E085D9 /* GameStats.swift */; };
+		1423A163243EB19200E085D9 /* SaveUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A162243EB19200E085D9 /* SaveUtility.swift */; };
+		1423A164243EB19200E085D9 /* SaveUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A162243EB19200E085D9 /* SaveUtility.swift */; };
+		1423A165243EB19200E085D9 /* SaveUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A162243EB19200E085D9 /* SaveUtility.swift */; };
+		1423A16B243EB81200E085D9 /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A16A243EB81200E085D9 /* StarTextureCreator.swift */; };
+		1423A16C243EB81200E085D9 /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A16A243EB81200E085D9 /* StarTextureCreator.swift */; };
+		1423A16D243EB81200E085D9 /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A16A243EB81200E085D9 /* StarTextureCreator.swift */; };
+		1423A16F243EB84400E085D9 /* SKCircleRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A16E243EB84400E085D9 /* SKCircleRect.swift */; };
+		1423A170243EB84400E085D9 /* SKCircleRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A16E243EB84400E085D9 /* SKCircleRect.swift */; };
+		1423A171243EB84400E085D9 /* SKCircleRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A16E243EB84400E085D9 /* SKCircleRect.swift */; };
 		1430446D24341C91007B1992 /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430446C24341C91007B1992 /* LevelNode.swift */; };
 		1430446E24341C91007B1992 /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430446C24341C91007B1992 /* LevelNode.swift */; };
 		1430446F24341C91007B1992 /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430446C24341C91007B1992 /* LevelNode.swift */; };
@@ -70,15 +85,9 @@
 		14AA9C922438943E00842A27 /* CircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C912438943E00842A27 /* CircleRenderer.swift */; };
 		14AA9C932438943E00842A27 /* CircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C912438943E00842A27 /* CircleRenderer.swift */; };
 		14AA9C942438943E00842A27 /* CircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C912438943E00842A27 /* CircleRenderer.swift */; };
-		14AA9C9624395A4A00842A27 /* GameScene+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C9524395A4A00842A27 /* GameScene+Init.swift */; };
-		14AA9C9724395A4A00842A27 /* GameScene+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C9524395A4A00842A27 /* GameScene+Init.swift */; };
-		14AA9C9824395A4A00842A27 /* GameScene+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C9524395A4A00842A27 /* GameScene+Init.swift */; };
 		14AA9C9A2439617900842A27 /* GameScene+ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */; };
 		14AA9C9B2439617900842A27 /* GameScene+ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */; };
 		14AA9C9C2439617900842A27 /* GameScene+ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */; };
-		14B5727624270419006F85FE /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B5727524270419006F85FE /* StarTextureCreator.swift */; };
-		14B5727724270419006F85FE /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B5727524270419006F85FE /* StarTextureCreator.swift */; };
-		14B5727824270419006F85FE /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B5727524270419006F85FE /* StarTextureCreator.swift */; };
 		14B5727A2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 		14B5727B2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 		14B5727C2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
@@ -86,13 +95,11 @@
 		14D85598243C376B003883FB /* SKCodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D85596243C376B003883FB /* SKCodableColor.swift */; };
 		14D85599243C376B003883FB /* SKCodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D85596243C376B003883FB /* SKCodableColor.swift */; };
 		14E179C7243DACF300937C49 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1400F975241BF47C003BFED8 /* GameScene.swift */; };
-		14E179C8243DACF300937C49 /* GameScene+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C9524395A4A00842A27 /* GameScene+Init.swift */; };
 		14E179C9243DACF300937C49 /* GameScene+ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */; };
 		14E179CA243DACF300937C49 /* GameScene+Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14078744243B23FA00A8B80B /* GameScene+Depth.swift */; };
 		14E179CB243DACF300937C49 /* GameScene+Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145845F224207E8F00B0B922 /* GameScene+Mouse.swift */; };
 		14E179CD243DACF300937C49 /* ZPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140266F02431F29800EF4AA8 /* ZPosition.swift */; };
 		14E179CE243DACF300937C49 /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
-		14E179CF243DACF300937C49 /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B5727524270419006F85FE /* StarTextureCreator.swift */; };
 		14E179D0243DACF300937C49 /* AppKitContextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C89243885A400842A27 /* AppKitContextRenderer.swift */; };
 		14E179D1243DACF300937C49 /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430446C24341C91007B1992 /* LevelNode.swift */; };
 		14E179D2243DACF300937C49 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C8124387B1D00842A27 /* Debugging.swift */; };
@@ -143,6 +150,11 @@
 		1419B423243DAC5B00A74A63 /* GameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1419B425243DAC5B00A74A63 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		1419B427243DAC5B00A74A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1423A15A243EA4CA00E085D9 /* HoleStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleStat.swift; sourceTree = "<group>"; };
+		1423A15E243EAF3300E085D9 /* GameStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameStats.swift; sourceTree = "<group>"; };
+		1423A162243EB19200E085D9 /* SaveUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveUtility.swift; sourceTree = "<group>"; };
+		1423A16A243EB81200E085D9 /* StarTextureCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarTextureCreator.swift; sourceTree = "<group>"; };
+		1423A16E243EB84400E085D9 /* SKCircleRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKCircleRect.swift; sourceTree = "<group>"; };
 		1430446C24341C91007B1992 /* LevelNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
 		145845EF24207E7700B0B922 /* GameScene+Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Touch.swift"; sourceTree = "<group>"; };
 		145845F224207E8F00B0B922 /* GameScene+Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Mouse.swift"; sourceTree = "<group>"; };
@@ -157,9 +169,7 @@
 		14AA9C89243885A400842A27 /* AppKitContextRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKitContextRenderer.swift; sourceTree = "<group>"; };
 		14AA9C8D243888F100842A27 /* SKExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKExtensions.swift; sourceTree = "<group>"; };
 		14AA9C912438943E00842A27 /* CircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleRenderer.swift; sourceTree = "<group>"; };
-		14AA9C9524395A4A00842A27 /* GameScene+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Init.swift"; sourceTree = "<group>"; };
 		14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+ContactDelegate.swift"; sourceTree = "<group>"; };
-		14B5727524270419006F85FE /* StarTextureCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StarTextureCreator.swift; path = "Untitled Space Game Shared/StarTextureCreator.swift"; sourceTree = SOURCE_ROOT; };
 		14B572792428B5A8006F85FE /* StarDepthNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarDepthNode.swift; sourceTree = "<group>"; };
 		14D85596243C376B003883FB /* SKCodableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKCodableColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,28 +221,12 @@
 		1400F972241BF47C003BFED8 /* Untitled Space Game Shared */ = {
 			isa = PBXGroup;
 			children = (
-				1400F975241BF47C003BFED8 /* GameScene.swift */,
-				14AA9C9524395A4A00842A27 /* GameScene+Init.swift */,
-				14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */,
-				14078744243B23FA00A8B80B /* GameScene+Depth.swift */,
-				145845F224207E8F00B0B922 /* GameScene+Mouse.swift */,
-				145845EF24207E7700B0B922 /* GameScene+Touch.swift */,
-				140266F02431F29800EF4AA8 /* ZPosition.swift */,
-				14B572792428B5A8006F85FE /* StarDepthNode.swift */,
-				14B5727524270419006F85FE /* StarTextureCreator.swift */,
-				14AA9C89243885A400842A27 /* AppKitContextRenderer.swift */,
-				1430446C24341C91007B1992 /* LevelNode.swift */,
-				14AA9C8124387B1D00842A27 /* Debugging.swift */,
-				14AA9C8524387B2900842A27 /* Design.swift */,
-				1471669C241C4A3700E75D98 /* SpriteCategory.swift */,
-				14716698241C4A1600E75D98 /* AimAssist.swift */,
-				1471668C241C49DA00E75D98 /* Player.swift */,
-				14716694241C4A0500E75D98 /* Goal.swift */,
-				14716690241C49EA00E75D98 /* Planet.swift */,
-				14D85596243C376B003883FB /* SKCodableColor.swift */,
-				14AA9C8D243888F100842A27 /* SKExtensions.swift */,
-				145845F424208BEA00B0B922 /* CGExtensions.swift */,
-				14AA9C912438943E00842A27 /* CircleRenderer.swift */,
+				1423A168243EB66800E085D9 /* GameScene */,
+				1423A166243EB63A00E085D9 /* Nodes */,
+				1423A169243EB7E900E085D9 /* Rendering */,
+				1423A173243EB87100E085D9 /* Defines */,
+				1423A167243EB64E00E085D9 /* Stats */,
+				1423A172243EB86400E085D9 /* Common */,
 				1400F976241BF47D003BFED8 /* Assets.xcassets */,
 			);
 			path = "Untitled Space Game Shared";
@@ -291,6 +285,73 @@
 				1419B427243DAC5B00A74A63 /* Info.plist */,
 			);
 			path = GameTests;
+			sourceTree = "<group>";
+		};
+		1423A166243EB63A00E085D9 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				14716698241C4A1600E75D98 /* AimAssist.swift */,
+				14716694241C4A0500E75D98 /* Goal.swift */,
+				1430446C24341C91007B1992 /* LevelNode.swift */,
+				14716690241C49EA00E75D98 /* Planet.swift */,
+				1471668C241C49DA00E75D98 /* Player.swift */,
+				14B572792428B5A8006F85FE /* StarDepthNode.swift */,
+			);
+			path = Nodes;
+			sourceTree = "<group>";
+		};
+		1423A167243EB64E00E085D9 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				1423A15A243EA4CA00E085D9 /* HoleStat.swift */,
+				1423A15E243EAF3300E085D9 /* GameStats.swift */,
+				1423A162243EB19200E085D9 /* SaveUtility.swift */,
+			);
+			path = Stats;
+			sourceTree = "<group>";
+		};
+		1423A168243EB66800E085D9 /* GameScene */ = {
+			isa = PBXGroup;
+			children = (
+				1400F975241BF47C003BFED8 /* GameScene.swift */,
+				14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */,
+				14078744243B23FA00A8B80B /* GameScene+Depth.swift */,
+				145845F224207E8F00B0B922 /* GameScene+Mouse.swift */,
+				145845EF24207E7700B0B922 /* GameScene+Touch.swift */,
+			);
+			path = GameScene;
+			sourceTree = "<group>";
+		};
+		1423A169243EB7E900E085D9 /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				14AA9C89243885A400842A27 /* AppKitContextRenderer.swift */,
+				1423A16A243EB81200E085D9 /* StarTextureCreator.swift */,
+				14AA9C912438943E00842A27 /* CircleRenderer.swift */,
+			);
+			path = Rendering;
+			sourceTree = "<group>";
+		};
+		1423A172243EB86400E085D9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				145845F424208BEA00B0B922 /* CGExtensions.swift */,
+				1423A16E243EB84400E085D9 /* SKCircleRect.swift */,
+				14D85596243C376B003883FB /* SKCodableColor.swift */,
+				14AA9C8D243888F100842A27 /* SKExtensions.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		1423A173243EB87100E085D9 /* Defines */ = {
+			isa = PBXGroup;
+			children = (
+				14AA9C8124387B1D00842A27 /* Debugging.swift */,
+				14AA9C8524387B2900842A27 /* Design.swift */,
+				1471669C241C4A3700E75D98 /* SpriteCategory.swift */,
+				140266F02431F29800EF4AA8 /* ZPosition.swift */,
+			);
+			path = Defines;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,16 +517,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1430446D24341C91007B1992 /* LevelNode.swift in Sources */,
+				1423A16B243EB81200E085D9 /* StarTextureCreator.swift in Sources */,
 				14AA9C8624387B2900842A27 /* Design.swift in Sources */,
 				1471668D241C49DA00E75D98 /* Player.swift in Sources */,
 				1400F9AE241BF47D003BFED8 /* GameScene.swift in Sources */,
+				1423A163243EB19200E085D9 /* SaveUtility.swift in Sources */,
 				1400F981241BF47D003BFED8 /* GameViewController.swift in Sources */,
+				1423A16F243EB84400E085D9 /* SKCircleRect.swift in Sources */,
 				1400F97F241BF47D003BFED8 /* AppDelegate.swift in Sources */,
-				14AA9C9624395A4A00842A27 /* GameScene+Init.swift in Sources */,
+				1423A15B243EA4CA00E085D9 /* HoleStat.swift in Sources */,
 				145845F524208BEA00B0B922 /* CGExtensions.swift in Sources */,
 				14B5727A2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14AA9C8224387B1D00842A27 /* Debugging.swift in Sources */,
-				14B5727624270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1471669D241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
 				14D85597243C376B003883FB /* SKCodableColor.swift in Sources */,
 				140266F12431F29800EF4AA8 /* ZPosition.swift in Sources */,
@@ -478,6 +541,7 @@
 				145845F024207E7700B0B922 /* GameScene+Touch.swift in Sources */,
 				14716699241C4A1600E75D98 /* AimAssist.swift in Sources */,
 				14AA9C8E243888F100842A27 /* SKExtensions.swift in Sources */,
+				1423A15F243EAF3300E085D9 /* GameStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,16 +550,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1430446E24341C91007B1992 /* LevelNode.swift in Sources */,
+				1423A16C243EB81200E085D9 /* StarTextureCreator.swift in Sources */,
 				14AA9C8724387B2900842A27 /* Design.swift in Sources */,
 				1471668E241C49E000E75D98 /* Player.swift in Sources */,
 				1400F9AF241BF47D003BFED8 /* GameScene.swift in Sources */,
+				1423A164243EB19200E085D9 /* SaveUtility.swift in Sources */,
 				1400F992241BF47D003BFED8 /* GameViewController.swift in Sources */,
+				1423A170243EB84400E085D9 /* SKCircleRect.swift in Sources */,
 				1400F990241BF47D003BFED8 /* AppDelegate.swift in Sources */,
-				14AA9C9724395A4A00842A27 /* GameScene+Init.swift in Sources */,
+				1423A15C243EA4CA00E085D9 /* HoleStat.swift in Sources */,
 				145845F624208BEA00B0B922 /* CGExtensions.swift in Sources */,
 				14B5727B2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14AA9C8324387B1D00842A27 /* Debugging.swift in Sources */,
-				14B5727724270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1471669E241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
 				14D85598243C376B003883FB /* SKCodableColor.swift in Sources */,
 				140266F22431F29800EF4AA8 /* ZPosition.swift in Sources */,
@@ -508,6 +574,7 @@
 				145845F124207E7700B0B922 /* GameScene+Touch.swift in Sources */,
 				1471669A241C4A1600E75D98 /* AimAssist.swift in Sources */,
 				14AA9C8F243888F100842A27 /* SKExtensions.swift in Sources */,
+				1423A160243EAF3300E085D9 /* GameStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,16 +583,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				1430446F24341C91007B1992 /* LevelNode.swift in Sources */,
+				1423A16D243EB81200E085D9 /* StarTextureCreator.swift in Sources */,
 				14AA9C8824387B2900842A27 /* Design.swift in Sources */,
 				145845F324207E8F00B0B922 /* GameScene+Mouse.swift in Sources */,
 				1471668F241C49E000E75D98 /* Player.swift in Sources */,
+				1423A165243EB19200E085D9 /* SaveUtility.swift in Sources */,
 				1400F9B0241BF47D003BFED8 /* GameScene.swift in Sources */,
+				1423A171243EB84400E085D9 /* SKCircleRect.swift in Sources */,
 				1400F9A3241BF47D003BFED8 /* GameViewController.swift in Sources */,
-				14AA9C9824395A4A00842A27 /* GameScene+Init.swift in Sources */,
+				1423A15D243EA4CA00E085D9 /* HoleStat.swift in Sources */,
 				145845F724208BEA00B0B922 /* CGExtensions.swift in Sources */,
 				14B5727C2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14AA9C8424387B1D00842A27 /* Debugging.swift in Sources */,
-				14B5727824270419006F85FE /* StarTextureCreator.swift in Sources */,
 				1400F9A1241BF47D003BFED8 /* AppDelegate.swift in Sources */,
 				14D85599243C376B003883FB /* SKCodableColor.swift in Sources */,
 				140266F32431F29800EF4AA8 /* ZPosition.swift in Sources */,
@@ -538,6 +607,7 @@
 				14716692241C49EC00E75D98 /* Planet.swift in Sources */,
 				1471669B241C4A1600E75D98 /* AimAssist.swift in Sources */,
 				14AA9C90243888F100842A27 /* SKExtensions.swift in Sources */,
+				1423A161243EAF3300E085D9 /* GameStats.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -553,11 +623,9 @@
 				14E179DA243DACF300937C49 /* SKExtensions.swift in Sources */,
 				14E179D1243DACF300937C49 /* LevelNode.swift in Sources */,
 				14E179CE243DACF300937C49 /* StarDepthNode.swift in Sources */,
-				14E179C8243DACF300937C49 /* GameScene+Init.swift in Sources */,
 				14E179D5243DACF300937C49 /* AimAssist.swift in Sources */,
 				14E179D2243DACF300937C49 /* Debugging.swift in Sources */,
 				14E179D9243DACF300937C49 /* SKCodableColor.swift in Sources */,
-				14E179CF243DACF300937C49 /* StarTextureCreator.swift in Sources */,
 				14E179D4243DACF300937C49 /* SpriteCategory.swift in Sources */,
 				14E179CA243DACF300937C49 /* GameScene+Depth.swift in Sources */,
 				14E179DC243DACF300937C49 /* CircleRenderer.swift in Sources */,

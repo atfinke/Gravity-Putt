@@ -11,10 +11,11 @@ import SpriteKit
 extension GameScene {
 
     func createDepthNodes() {
+        guard let levelPosition = levels.first?.position else { fatalError() }
         let depthLevels = 20
 
         let maxCount: Int = 250
-        let minCount: Int = 60
+        let minCount: Int = 80
         let countInterval = CGFloat(maxCount - minCount) / CGFloat(depthLevels)
 
         let maxRadius: CGFloat = 1
@@ -27,9 +28,12 @@ extension GameScene {
             let minDepthRadius = (minRadius - 0.2) + radiusInterval * CGFloat(starDepthLevel)
             let maxDepthRadius = minRadius + radiusInterval * CGFloat(starDepthLevel)
 
-            let starDepthNode = StarDepthNode(size: CGSize(width: size.width * 2, height: size.height * 3),
+            let starDepthNode = StarDepthNode(size: CGSize(width: size.width * 2,
+                                                           height: size.height * 3),
                                               countRange: 0..<maxCount,
                                               radiusRange: minDepthRadius..<maxDepthRadius)
+            starDepthNode.position = CGPoint(x: levelPosition.x,
+                                             y: levelPosition.y)
             starDepthLevelNodes.append([starDepthNode])
 
             addChild(starDepthNode)

@@ -12,7 +12,7 @@ class Planet: SKNode, Codable {
 
     // MARK: - Properties -
 
-    static let texture = SKTexture(imageNamed: "circle")
+    static let texture = CircleRenderer.standard
 
     let radius: CGFloat
     let color: SKColor

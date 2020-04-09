@@ -8,50 +8,7 @@
 
 import CoreGraphics
 
-struct SKCircleRect: Equatable, Codable {
-
-    let center: CGPoint
-    let radius: CGFloat
-    var circumference: CGFloat {
-        return radius * 2
-    }
-
-    var cgRect: CGRect {
-        return CGRect(x: center.x - radius,
-                      y: center.y - radius,
-                      width: radius * 2,
-                      height: radius * 2)
-    }
-
-    internal init(center: CGPoint, radius: CGFloat) {
-        self.center = center
-        self.radius = radius
-    }
-
-    internal init(centerX: CGFloat, centerY: CGFloat, radius: CGFloat) {
-        self.center = CGPoint(x: centerX, y: centerY)
-        self.radius = radius
-    }
-
-    func intersects(circleRect rect: SKCircleRect) -> Bool {
-        let otherRadius = rect.radius
-        let otherCenter = rect.center
-
-        let distance = center.distance(to: otherCenter)
-        return distance <= (radius + otherRadius)
-    }
-
-    func insetBy(d: CGFloat) -> SKCircleRect {
-        let r = radius - d  / 2
-        return SKCircleRect(center: center, radius: r)
-    }
-
-    func offsetBy(dx: CGFloat, dy: CGFloat) -> SKCircleRect {
-        let c = CGPoint(x: center.x + dx, y: center.y + dy)
-        return SKCircleRect(center: c, radius: radius)
-    }
-
-}
+// MARK: - CGSize -
 
 extension CGSize {
 
@@ -68,6 +25,9 @@ extension CGSize {
     }
 
 }
+
+// MARK: - CGPoint -
+
 extension CGPoint {
     func distance(to point: CGPoint) -> CGFloat {
         return sqrt(pow(x - point.x, 2) + pow(y - point.y, 2))

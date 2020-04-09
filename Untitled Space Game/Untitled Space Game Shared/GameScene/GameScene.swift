@@ -10,14 +10,12 @@ import SpriteKit
 
 class GameScene: SKScene, Codable {
 
+    // MARK: - Types -
+
     enum CodingKeys: String, CodingKey {
-        case cameraNodePosition
         case lastLevel
         case levels
-
-         case holeNumber
-         case holeScore
-         case totalScore
+        case gameStats
     }
 
     // MARK: - Properties -
@@ -53,17 +51,8 @@ class GameScene: SKScene, Codable {
     var activeLevelGoalNodeWorldSpace: SKCircleRect?
     var planetNodesWorldSpace = [[Planet: SKCircleRect]]()
 
-    var holeNumber = 1
-    var holeScore = 0 {
-        didSet {
-            updateScoreLabel()
-        }
-    }
-    var totalScore = 0 {
-        didSet {
-            updateScoreLabel()
-        }
-    }
+    var holeDurationTimer: Timer?
+    var gameStats = GameStats()
 
     var starDepthLevelNodes = [[StarDepthNode]]()
     var contactGoal: Goal?
@@ -74,34 +63,110 @@ class GameScene: SKScene, Codable {
         }
     }
 
+    // MARK: - Initalization -
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override init(size: CGSize) {
+        super.init(size: size)
+    }
+
+    override init() {
+        super.init()
+        scaleMode = .resizeFill
+    }
+
+    required public convenience init(from decoder: Decoder) throws {
+        self.init()
+
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        self.lastLevel = try? values.decode(LevelNode.self, forKey: .lastLevel)
+        self.levels = try values.decode([LevelNode].self, forKey: .levels)
+        self.gameStats = try values.decode(GameStats.self, forKey: .gameStats)
+
+        if let level = lastLevel {
+            addChild(level)
+        }
+
+        for level in levels {
+            addChild(level)
+
+            var adjusted = [Planet: SKCircleRect]()
+            level.localSpacePlanets.forEach { adjusted[$0.key] = $0.value.offset(by: level.position) }
+            planetNodesWorldSpace.append(adjusted)
+
+        }
+        moveToNextLevel(isFirstLevel: true)
+    }
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(lastLevel, forKey: .lastLevel)
+        try container.encode(levels, forKey: .levels)
+        try container.encode(gameStats, forKey: .gameStats)
+    }
+
+    // MARK: - Setup -
+
+    func setUpScene() {
+        addChild(player)
+
+        backgroundColor = SKColor(white: 0, alpha: 1)
+
+        cameraNode.zPosition = ZPosition.hud.rawValue
+        addChild(cameraNode)
+        camera = cameraNode
+
+        statusLabel.alpha = 1
+        statusLabel.fontName = "Menlo-Regular"
+        statusLabel.fontSize = 22
+        statusLabel.position = CGPoint(x: 0, y: size.height / 2 - 30)
+        updateScoreLabel()
+        cameraNode.addChild(statusLabel)
+
+        aimAssist.alpha = 0.0
+        addChild(aimAssist)
+
+        physicsWorld.contactDelegate = self
+
+        if levels.isEmpty {
+            for _ in 0..<3 {
+                addLevel()
+            }
+            moveToNextLevel(isFirstLevel: true)
+        }
+        createDepthNodes()
+    }
+
     // MARK: - Level Management -
 
     func updateScoreLabel() {
-        statusLabel.text = "\(totalScore), +\(holeScore)"
+        statusLabel.text = "\(gameStats.totalScore), +\(gameStats.holeStrokes)"
     }
 
     func addLevel() {
-        guard let finalLevel = levels.last else {
-            fatalError()
-        }
-
-        let level = LevelNode(size: size, number: holeNumber + levels.count)
+        let level = LevelNode(size: size, number: gameStats.holeNumber + levels.count)
         level.goalNode.gravityField.isEnabled = false
 
-        let positionX = finalLevel.position.x
-            + finalLevel.goalRectLocalSpace.center.x
-            - level.startRectLocalSpace.center.x
-        let positionY = finalLevel.position.y
-            + finalLevel.goalRectLocalSpace.center.y
-            - level.startRectLocalSpace.center.y
-        level.position = CGPoint(x: positionX, y: positionY)
+        if let finalLevel = levels.last {
+            let positionX = finalLevel.position.x
+                + finalLevel.goalRectLocalSpace.center.x
+                - level.startRectLocalSpace.center.x
+            let positionY = finalLevel.position.y
+                + finalLevel.goalRectLocalSpace.center.y
+                - level.startRectLocalSpace.center.y
+            level.position = CGPoint(x: positionX, y: positionY)
+        } else {
+            level.position = CGPoint(x: 0, y: -level.startRectLocalSpace.center.y)
+        }
 
         levels.append(level)
         addChild(level)
 
         var adjusted = [Planet: SKCircleRect]()
-        level.localSpacePlanets.forEach { adjusted[$0.key] = $0.value.offsetBy(dx: positionX,
-                                                                               dy: positionY)}
+        level.localSpacePlanets.forEach { adjusted[$0.key] = $0.value.offset(by: level.position) }
         planetNodesWorldSpace.append(adjusted)
     }
 
@@ -109,21 +174,18 @@ class GameScene: SKScene, Codable {
         let transitionDuration = Design.levelTransitionDuration
         let transitionTiming = Design.levelTransitionTimingFunction
 
-        // Adjust score
-        holeNumber += 1
-        totalScore += holeScore
-        holeScore = 0
-        updateScoreLabel()
-
         // Remove the last last level (that was kept in case the user hits backwards)
         let removeAfterTransitionAction: SKAction = .remove(after: transitionDuration)
-        if let lastLevel = lastLevel {
-            lastLevel.run(removeAfterTransitionAction)
-            planetNodesWorldSpace.removeFirst()
-        }
+
         if !isFirstLevel {
+            if let lastLevel = lastLevel {
+                lastLevel.run(removeAfterTransitionAction)
+                planetNodesWorldSpace.removeFirst()
+            }
             lastLevel = levels.removeFirst()
+            gameStats.completedHole()
         }
+        updateScoreLabel()
 
         // Last Goal Animation
         if let newLastLevel = lastLevel {
@@ -184,12 +246,8 @@ class GameScene: SKScene, Codable {
         activeLevelGoalNode = newActiveGoal
 
         let cameraPosition = CGPoint(x: newActiveLevel.position.x + newActiveLevel.frame.size.width / 2,
-                               y: newActiveLevel.position.y + newActiveLevel.frame.size.height / 2)
-
-        let goalSafeOffsetX = newActiveLevel.position.x
-        let goalSafeOffsetY = newActiveLevel.position.y
-        activeLevelGoalNodeWorldSpace = newActiveLevel.goalRectLocalSpace.offsetBy(dx: goalSafeOffsetX,
-                                                                                   dy: goalSafeOffsetY)
+                                     y: newActiveLevel.position.y + newActiveLevel.frame.size.height / 2)
+        activeLevelGoalNodeWorldSpace = newActiveLevel.goalRectLocalSpace.offset(by: newActiveLevel.position)
 
         // Fade in new goal
         let goalAlphaAction: SKAction = .sequence([
@@ -200,12 +258,16 @@ class GameScene: SKScene, Codable {
         newActiveGoal.run(goalAlphaAction)
 
         // Move camera
-        let cameraPositionAction = SKAction.move(to: cameraPosition, duration: transitionDuration)
-        cameraPositionAction.timingFunction = transitionTiming
-        cameraNode.run(cameraPositionAction)
+        if isFirstLevel {
+            cameraNode.position = cameraPosition
+        } else {
+            let cameraPositionAction = SKAction.move(to: cameraPosition, duration: transitionDuration)
+            cameraPositionAction.timingFunction = transitionTiming
+            cameraNode.run(cameraPositionAction)
 
-        let cameraOffset = cameraPosition - cameraNode.position
-        updateDepthNodes(forCameraPosition: cameraPosition, offset: cameraOffset)
+            let cameraOffset = cameraPosition - cameraNode.position
+            updateDepthNodes(forCameraPosition: cameraPosition, offset: cameraOffset)
+        }
 
         if Design.colors {
             let currentColor = backgroundColor
@@ -226,26 +288,12 @@ class GameScene: SKScene, Codable {
         resetPlayerPosition()
         playerVelocityModifier = 1.0
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.addLevel()
+        if !isFirstLevel {
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.addLevel()
+                SaveUtility.save(scene: self)
+            }
         }
-
-        
-//
-//        do {
-//            try str?.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
-//        } catch {
-//            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-//        }
-//        print(str)
-//        print(123)
-        try! save()
-    }
-    
-    func save() throws {
-        let data = try JSONEncoder().encode(self)
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("data")
-        try data.write(to: url)
     }
 
     // MARK: - Aiming -
@@ -304,7 +352,8 @@ class GameScene: SKScene, Codable {
         ])
         player.run(action)
 
-        holeScore += 1
+        gameStats.holeStrokes += 1
+        updateScoreLabel()
 
         isPlayerReadyForHit = false
     }
@@ -327,8 +376,7 @@ class GameScene: SKScene, Codable {
         if let position = position {
             player.position = position
         } else {
-            let startRectWorldSpace = level.startRectLocalSpace.offsetBy(dx: level.position.x,
-                                                                         dy: level.position.y)
+            let startRectWorldSpace = level.startRectLocalSpace.offset(by: level.position)
             player.position = startRectWorldSpace.center
         }
 
@@ -381,6 +429,8 @@ class GameScene: SKScene, Codable {
         let maxScale: CGFloat = 1.5
         cameraNode.run(.scale(to: min(scale, maxScale), duration: 0.25))
         if scale > maxScale && !isPerformingOffscreenReset {
+            gameStats.fores += 1
+
             isPerformingOffscreenReset = true
             let resetAction: SKAction = .sequence([
                 .wait(forDuration: 1.0),
@@ -466,7 +516,7 @@ class GameScene: SKScene, Codable {
                 }
             }
         }
-//            print(playerVelocityMagnitude)
+        //            print(playerVelocityMagnitude)
         var newPlayerVelocityModifier: CGFloat = 1
         if let planet = contactPlanet {
             newPlayerVelocityModifier = 0.9
@@ -517,6 +567,10 @@ class GameScene: SKScene, Codable {
         }
     }
 
+    override func didMove(to view: SKView) {
+        setUpScene()
+    }
+
     // MARK: - Debug -
 
     func debugMove(x: CGFloat, y: CGFloat) {
@@ -524,57 +578,5 @@ class GameScene: SKScene, Codable {
         cameraNode.run(.moveBy(x: x, y: y, duration: 0.1))
         #endif
     }
-//
-//    enum CodingKeys: String, CodingKey {
-//           case cameraNodePosition
-//           case lastLevel
-//           case levels
-//
-//            case holeNumber
-//            case holeScore
-//            case totalScore
-//       }
-    public func encode(to encoder: Encoder) throws {
-//        let (r, g, b, a) = color.rgba()
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(lastLevel, forKey: .lastLevel)
-        try container.encode(levels, forKey: .levels)
-        
-        try container.encode(holeNumber, forKey: .holeNumber)
-        try container.encode(holeScore, forKey: .holeScore)
-        try container.encode(totalScore, forKey: .totalScore)
-    }
-    
-    
-    required public convenience init(from decoder: Decoder) throws {
-        self.init()
-        
-        
-        
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        self.lastLevel = try? values.decode(LevelNode.self, forKey: .lastLevel)
-        self.levels = try values.decode([LevelNode].self, forKey: .levels)
-         
-        self.holeNumber = try values.decode(Int.self, forKey: .holeNumber)
-        self.holeScore = try values.decode(Int.self, forKey: .holeScore)
-        self.totalScore = try values.decode(Int.self, forKey: .totalScore)
-        
-        for level in levels {
-            addChild(level)
-        }
-        moveToNextLevel(isFirstLevel: true)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override init(size: CGSize) {
-        super.init(size: size)
-    }
-    
-    override init() {
-        super.init()
-        scaleMode = .resizeFill
-    }
+
 }

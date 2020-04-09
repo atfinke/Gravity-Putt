@@ -90,8 +90,8 @@ class LevelNode: SKNode, Codable {
         let planetMaxBoundsPositionX = goalMinBoundsPositionX - planetBoundsPadding
         let planetBoundsPositionWidth = planetMaxBoundsPositionX - planetMinBoundsPositionX
 
-        let planetMinBoundsPositionY = goalMinBoundsPositionY // -(size.height / 2) * (5 / 4)
-        let planetMaxBoundsPositionY = goalMaxBoundsPositionY // (size.height / 2) * (5 / 4)
+        let planetMinBoundsPositionY = goalMinBoundsPositionY
+        let planetMaxBoundsPositionY = goalMaxBoundsPositionY
         let planetBoundsPositionHeight = planetMaxBoundsPositionY - planetMinBoundsPositionY
 
         let planetPositionBoundaryRect = CGRect(x: planetMinBoundsPositionX,
@@ -125,6 +125,8 @@ class LevelNode: SKNode, Codable {
                                                      height: lowerPlanetBoundsPositionHeight)
 
         super.init()
+
+        name = number.description
 
         let startSafeAreaWidthInset = -startRectLocalSpace.radius * 3 / 4
         let startSafeArea = startRectLocalSpace.insetBy(d: startSafeAreaWidthInset)
@@ -315,6 +317,8 @@ class LevelNode: SKNode, Codable {
         goalNode.position = goalRectLocalSpace.center
 
         super.init()
+
+        name = number.description
 
         addChild(goalNode)
         self.position = position

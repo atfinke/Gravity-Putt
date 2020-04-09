@@ -14,22 +14,14 @@ class GameViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if NSClassFromString("XCTestCase") != nil {
             return
         }
-        
-//        scaleMode = .resizeFill
-//        let filename = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("data")
-//        let data = try! Data(contentsOf: filename)
-//        let scene = try! JSONDecoder().decode(GameScene.self, from: data)
-        
-
-
-        let scene = GameScene.newGameScene()
 
         // Present the scene
         let skView = self.view as! SKView
+        let scene = SaveUtility.loadScene()
         skView.presentScene(scene)
 
         skView.ignoresSiblingOrder = true
