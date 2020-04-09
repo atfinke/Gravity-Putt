@@ -22,7 +22,6 @@ class GameScene: SKScene, Codable {
 
     let cameraNode = SKCameraNode()
     let statusLabel = SKLabelNode(text: "")
-
     let aimAssist = AimAssist()
 
     var restingOnPlanet: Planet?
@@ -50,6 +49,7 @@ class GameScene: SKScene, Codable {
     var activeLevelGoalNode: Goal?
     var activeLevelGoalNodeWorldSpace: SKCircleRect?
     var planetNodesWorldSpace = [[Planet: SKCircleRect]]()
+    let createQueue = DispatchQueue(label: "com.andrewfinke.create", qos: .userInitiated)
 
     var holeDurationTimer: Timer?
     var gameStats = GameStats()
@@ -62,6 +62,8 @@ class GameScene: SKScene, Codable {
             contactPlanet?.gravityField.isExclusive = true
         }
     }
+
+    var blueLayer: SKShapeNode?
 
     // MARK: - Initalization -
 
@@ -111,9 +113,17 @@ class GameScene: SKScene, Codable {
     // MARK: - Setup -
 
     func setUpScene() {
+        let blueLayer = SKShapeNode(rectOf: size * 3)
+        blueLayer.fillColor = SKColor.blue.withAlphaComponent(0.05)
+        addChild(blueLayer)
+        self.blueLayer = blueLayer
+
         addChild(player)
 
-        backgroundColor = SKColor(white: 0, alpha: 1)
+        backgroundColor = SKColor(hue: 280 / 360,
+                                  saturation: 1,
+                                  brightness: CGFloat.random(in: 0.05...0.1),
+                                  alpha: 1.0)
 
         cameraNode.zPosition = ZPosition.hud.rawValue
         addChild(cameraNode)
@@ -132,12 +142,13 @@ class GameScene: SKScene, Codable {
         physicsWorld.contactDelegate = self
 
         if levels.isEmpty {
-            for _ in 0..<3 {
+            for _ in 0..<12 {
                 addLevel()
             }
             moveToNextLevel(isFirstLevel: true)
         }
         createDepthNodes()
+        blueLayer.position = levels.first?.position ?? .zero
     }
 
     // MARK: - Level Management -
@@ -171,7 +182,7 @@ class GameScene: SKScene, Codable {
     }
 
     func moveToNextLevel(isFirstLevel: Bool = false) {
-        let transitionDuration = Design.levelTransitionDuration
+        let transitionDuration = isFirstLevel ? 0.5 : Design.levelTransitionDuration
         let transitionTiming = Design.levelTransitionTimingFunction
 
         // Remove the last last level (that was kept in case the user hits backwards)
@@ -197,8 +208,8 @@ class GameScene: SKScene, Codable {
             let initalColor = goalNode.borderNode.strokeColor
             let nextColor = goalNode.borderNode.strokeColor.withAlphaComponent(1)
             let finalColor = SKColor(red: 1, green: 1, blue: 1, alpha: 0.5)
-            let initalColorChangeDuration = Design.levelTransitionDuration * (1 / 4)
-            let nextColorChangeDuration = Design.levelTransitionDuration * (3 / 4)
+            let initalColorChangeDuration = transitionDuration * (1 / 4)
+            let nextColorChangeDuration = transitionDuration * (3 / 4)
 
             let currentRotation = goalNode.borderNode.zRotation
             let minAmountToRotate = -CGFloat.pi * 5
@@ -260,10 +271,12 @@ class GameScene: SKScene, Codable {
         // Move camera
         if isFirstLevel {
             cameraNode.position = cameraPosition
+            blueLayer?.position = cameraPosition
         } else {
             let cameraPositionAction = SKAction.move(to: cameraPosition, duration: transitionDuration)
             cameraPositionAction.timingFunction = transitionTiming
             cameraNode.run(cameraPositionAction)
+            blueLayer?.run(cameraPositionAction)
 
             let cameraOffset = cameraPosition - cameraNode.position
             updateDepthNodes(forCameraPosition: cameraPosition, offset: cameraOffset)
@@ -271,9 +284,9 @@ class GameScene: SKScene, Codable {
 
         if Design.colors {
             let currentColor = backgroundColor
-            let nextColor = SKColor(hue: CGFloat.random(in: 220..<300) / 360,
+            let nextColor = SKColor(hue: 280 / 360,
                                     saturation: 1,
-                                    brightness: 0.1,
+                                    brightness: CGFloat.random(in: 0.05...0.1),
                                     alpha: 1.0)
             let backgroundAction: SKAction = .customAction(withDuration: transitionDuration, actionBlock: { _, time in
                 let percent = time / CGFloat(transitionDuration)
@@ -289,7 +302,7 @@ class GameScene: SKScene, Codable {
         playerVelocityModifier = 1.0
 
         if !isFirstLevel {
-            DispatchQueue.global(qos: .userInitiated).async {
+            createQueue.asyncAfter(deadline: .now() + transitionDuration + 0.2) {
                 self.addLevel()
                 SaveUtility.save(scene: self)
             }
@@ -385,6 +398,10 @@ class GameScene: SKScene, Codable {
 
         resetPlayerPathNodes()
         isPlayerReadyForHit = true
+
+        let scale: SKAction = .scale(to: 1, duration: 0.5)
+        scale.timingMode = .easeInEaseOut
+        cameraNode.run(scale)
     }
 
     func resetPlayerPathNodes() {
@@ -450,12 +467,14 @@ class GameScene: SKScene, Codable {
 
     // MARK: - SKScene Overrides -
 
-    override func update(_ currentTime: TimeInterval) {
+    override func didFinishUpdate() {
         guard let physicsBody = player.physicsBody else {
             fatalError()
         }
 
-        updateCamera()
+        if !isPlayerReadyForHit {
+            updateCamera()
+        }
 
         guard physicsBody.fieldBitMask == SpriteCategory.player else {
             return
@@ -516,11 +535,11 @@ class GameScene: SKScene, Codable {
                 }
             }
         }
-        //            print(playerVelocityMagnitude)
+
         var newPlayerVelocityModifier: CGFloat = 1
         if let planet = contactPlanet {
             newPlayerVelocityModifier = 0.9
-            if playerVelocityMagnitude < 2 {
+            if playerVelocityMagnitude < 4 {
                 resetPlayerPosition(to: player.position)
                 restingOnPlanet = planet
                 return

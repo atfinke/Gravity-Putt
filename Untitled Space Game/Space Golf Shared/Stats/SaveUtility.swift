@@ -28,6 +28,9 @@ struct SaveUtility {
     // MARK: - Helpers -
 
     static func loadScene() -> GameScene {
+        guard Debugging.isLoadingOn else {
+            return GameScene()
+        }
         do {
             let data = try Data(contentsOf: SaveUtility.sceneURL)
             let scene = try JSONDecoder().decode(GameScene.self, from: data)

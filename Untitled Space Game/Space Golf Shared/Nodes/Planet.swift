@@ -13,9 +13,19 @@ class Planet: SKNode, Codable {
     // MARK: - Properties -
 
     static let texture = CircleRenderer.standard
+    static let gravityFieldShaderSource: String = {
+        guard let path = Bundle.main.path(forResource: "PlanetShader", ofType: "fsh") else {
+            fatalError()
+        }
+        guard let source = try? String(contentsOfFile: path) else {
+            fatalError()
+        }
+        return source
+    }()
 
     let radius: CGFloat
     let color: SKColor
+
     let gravityField: SKFieldNode = {
         let field = SKFieldNode.radialGravityField()
         field.strength = Design.planetFieldStrength
@@ -28,23 +38,8 @@ class Planet: SKNode, Codable {
     init(radius: CGFloat, color: SKColor) {
         self.radius = radius
         self.color = color
+
         super.init()
-
-        let gravityFieldRegionRadius = radius * 3
-        gravityField.region = SKRegion(radius: Float(gravityFieldRegionRadius))
-
-        let gravityFieldTexture = Planet.gravityFieldImage(radius: gravityFieldRegionRadius, color: color)
-        let gravityFieldTextureNode = SKSpriteNode(texture: gravityFieldTexture)
-        gravityFieldTextureNode.zPosition = ZPosition.planetGravityFieldTexture.rawValue
-        addChild(gravityFieldTextureNode)
-
-        let gravityFieldTextureDuration = TimeInterval.random(in: 5...10)
-        let gravityFieldTextureAction: SKAction = .repeatForever(.sequence([
-            .fadeAlpha(to: CGFloat.random(in: 0.5...0.8), duration: gravityFieldTextureDuration),
-            .fadeAlpha(to: 1, duration: gravityFieldTextureDuration)
-        ]))
-        gravityFieldTextureAction.timingMode = .easeInEaseOut
-        gravityFieldTextureNode.run(gravityFieldTextureAction)
 
         let borderWidth = max(6, 0.09 * radius)
         let borderSprite = SKSpriteNode(texture: Planet.texture,
@@ -65,6 +60,17 @@ class Planet: SKNode, Codable {
         }
         bodySprite.zPosition = ZPosition.planetBody.rawValue
         addChild(bodySprite)
+
+        let gravityFieldRegionRadius = radius * 3
+        gravityField.region = SKRegion(radius: Float(gravityFieldRegionRadius))
+        let gravityFieldShaderNodeSize = CGSize(width: gravityFieldRegionRadius * 2,
+                                                height: gravityFieldRegionRadius * 2)
+        let gravityFieldShaderNode = SKSpriteNode(texture: nil,
+                                                   color: .clear,
+                                                   size: gravityFieldShaderNodeSize)
+        gravityFieldShaderNode.shader = gravityFieldShader(color: color)
+        gravityFieldShaderNode.zPosition = ZPosition.planetGravityFieldShader.rawValue
+        addChild(gravityFieldShaderNode)
 
         let physicsBody = SKPhysicsBody(circleOfRadius: radius)
         physicsBody.isDynamic = false
@@ -88,26 +94,21 @@ class Planet: SKNode, Codable {
 
     // MARK: - Helpers -
 
-    static func gravityFieldImage(radius: CGFloat, color: SKColor) -> SKTexture {
-        let size = CGSize(width: radius * 2, height: radius * 2)
+   func gravityFieldShader(color: SKColor) -> SKShader {
+        let ic = color.withAlphaComponent(0.75).rgba()
+        let iv = vector_float4([Float(ic.red), Float(ic.green), Float(ic.blue), Float(ic.alpha)])
 
-        let layer = CAGradientLayer()
-        layer.type = .radial
-        layer.startPoint = CGPoint(x: 0.5, y: 0.5)
-        layer.endPoint = CGPoint(x: 1, y: 1)
-        layer.frame = CGRect(origin: .zero, size: size)
-        layer.colors = [
-            color.withAlphaComponent(0.4).cgColor,
-            color.withAlphaComponent(0.0).cgColor
+        let fc = color.withAlphaComponent(0.0).rgba()
+        let fv = vector_float4([Float(fc.red), Float(fc.green), Float(fc.blue), Float(fc.alpha)])
+
+        let uniforms: [SKUniform] = [
+            SKUniform(name: "u_start_color", vectorFloat4: iv),
+            SKUniform(name: "u_end_color", vectorFloat4: fv),
+            SKUniform(name: "u_duration", float: Float.random(in: 2...7)),
+            SKUniform(name: "u_min_alpha", float: Float.random(in: 0.5...0.8))
         ]
-        layer.cornerRadius = radius
 
-        let renderer = ContextRenderer(size: size)
-        let image = renderer.image { context in
-            layer.render(in: context.cgContext)
-        }
-
-        return SKTexture(image: image)
+        return SKShader(source: Planet.gravityFieldShaderSource, uniforms: uniforms)
     }
 
     // MARK: - Codable -

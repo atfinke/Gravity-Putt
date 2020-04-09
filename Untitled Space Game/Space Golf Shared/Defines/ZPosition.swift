@@ -22,9 +22,9 @@ enum ZPosition: CGFloat {
 
     case planetBody = 1_003
     case planetBorder = 1_002
-    case planetGravityFieldTexture = 1_001
+    case planetGravityFieldShader = 1_001
     case planet = 1_000
-    
+
     case playerPath = 120
     case stars = 100
 }

@@ -29,11 +29,11 @@ class LevelNode: SKNode, Codable {
         let originY = -size.height / 2
 
         let startPositionBoundaryLeftPadding: CGFloat = 50
-        let startPositionBoundaryTopPadding: CGFloat = 100
-        let startPositionBoundaryBottomPadding: CGFloat = 100
+        let startPositionBoundaryTopPadding: CGFloat = 20
+        let startPositionBoundaryBottomPadding: CGFloat = 20
         let goalPositionBoundaryRightPadding: CGFloat = 50
-        let goalPositionBoundaryTopPadding: CGFloat = 100
-        let goalPositionBoundaryBottomPadding: CGFloat = 100
+        let goalPositionBoundaryTopPadding: CGFloat = 20
+        let goalPositionBoundaryBottomPadding: CGFloat = 20
 
         let startMinBoundsPositionX = originX + startPositionBoundaryLeftPadding
         let startMaxBoundsPositionX = originX + (size.width / 4)
