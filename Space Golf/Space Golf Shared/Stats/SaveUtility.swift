@@ -14,7 +14,7 @@ struct SaveUtility {
 
     static private let sceneURL: URL = {
         #if os(macOS)
-        let doc = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let doc = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("atf_golf")
         #else
         let doc = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         #endif

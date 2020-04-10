@@ -80,9 +80,7 @@ class GameTests: XCTestCase {
 
         XCTAssertEqual(scene.lastLevel, decoded.lastLevel)
         XCTAssertEqual(scene.levels.map({ $0.position }), decoded.levels.map({ $0.position }))
-        XCTAssertEqual(scene.holeNumber, decoded.holeNumber)
-        XCTAssertEqual(scene.holeScore, decoded.holeScore)
-        XCTAssertEqual(scene.totalScore, decoded.totalScore)
+        XCTAssertEqual(scene.gameStats, decoded.gameStats)
     }
 
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct HoleStat: Codable {
+struct HoleStat: Codable, Equatable {
     let number: Int
     let duration: Int
     let strokes: Int

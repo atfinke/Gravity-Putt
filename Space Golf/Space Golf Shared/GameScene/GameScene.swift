@@ -154,7 +154,7 @@ class GameScene: SKScene, Codable {
     // MARK: - Level Management -
 
     func updateScoreLabel() {
-        statusLabel.text = "\(gameStats.totalScore), +\(gameStats.holeStrokes)"
+        statusLabel.text = "\(gameStats.completedHolesScore), +\(gameStats.holeStrokes)"
     }
 
     func addLevel() {

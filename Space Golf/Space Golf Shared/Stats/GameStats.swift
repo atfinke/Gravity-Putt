@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GameStats: Codable {
+class GameStats: Codable, Equatable {
 
     // MARK: - Properties -
 
@@ -22,8 +22,8 @@ class GameStats: Codable {
     var holeNumber: Int {
         return (holeStats.last?.number ?? 0) + 1
     }
-    var totalScore: Int {
-        return holeStats.map({ $0.strokes }).reduce(holeStrokes, +)
+    var completedHolesStrokes: Int {
+        return holeStats.map({ $0.strokes }).reduce(0, +)
     }
     var holeInOnes: Int {
         return holeStats.filter({ $0.strokes == 1 }).count
@@ -47,5 +47,15 @@ class GameStats: Codable {
 
         holeStrokes = 0
         holeDuration = 0
+    }
+    
+    // MARK: - Equatable -
+    
+    static func == (lhs: GameStats, rhs: GameStats) -> Bool {
+        return lhs.holeStrokes == rhs.holeStrokes &&
+            lhs.holeDuration == rhs.holeDuration &&
+            lhs.fores == rhs.fores &&
+            lhs.totalPower == rhs.totalPower &&
+            lhs.holeStats == rhs.holeStats
     }
 }
