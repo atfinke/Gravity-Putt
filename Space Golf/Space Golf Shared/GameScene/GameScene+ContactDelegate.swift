@@ -27,6 +27,9 @@ extension GameScene: SKPhysicsContactDelegate {
             contactGoal = goal
         } else if let planet = type(type: Planet.self, in: contact) {
             contactPlanet = planet
+            guard let magnitude = player.physicsBody?.velocity.magnitude() else { fatalError() }
+            let normalized = min(1, magnitude / 90)
+            hapticsUtility.playHitPlanet(normalizedImpact: normalized)
         }
     }
 

@@ -8,6 +8,14 @@
 
 import CoreGraphics
 
+// MARK: - CGFloat -
+
+extension CGFloat {
+    func lerp(value: CGFloat, alpha: CGFloat) -> CGFloat {
+        return self + alpha * (value - self)
+    }
+}
+
 // MARK: - CGSize -
 
 extension CGSize {
@@ -57,6 +65,8 @@ extension CGPoint {
         return CGPoint(x: lhs.x * rhs.width, y: lhs.y * rhs.height)
     }
 }
+
+// MARK: - CGVector -
 
 extension CGVector {
     func magnitude() -> CGFloat {

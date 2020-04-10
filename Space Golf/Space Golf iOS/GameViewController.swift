@@ -32,6 +32,7 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        scene.presentingController = self
         view.backgroundColor = .black
     }
 

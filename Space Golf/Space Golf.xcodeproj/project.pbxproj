@@ -99,6 +99,10 @@
 		14AC4AED243F11FB000F6D3C /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14AC4AEC243F11FB000F6D3C /* PlanetShader.fsh */; };
 		14AC4AEE243F11FB000F6D3C /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14AC4AEC243F11FB000F6D3C /* PlanetShader.fsh */; };
 		14AC4AEF243F11FB000F6D3C /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14AC4AEC243F11FB000F6D3C /* PlanetShader.fsh */; };
+		14AC4AF42440D937000F6D3C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AC4AF32440D937000F6D3C /* GameKit.framework */; };
+		14AC4AF62440F56E000F6D3C /* HapticsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AC4AF52440F56E000F6D3C /* HapticsUtility.swift */; };
+		14AC4AF72440F56E000F6D3C /* HapticsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AC4AF52440F56E000F6D3C /* HapticsUtility.swift */; };
+		14AC4AF82440F56E000F6D3C /* HapticsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AC4AF52440F56E000F6D3C /* HapticsUtility.swift */; };
 		14B5727A2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 		14B5727B2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 		14B5727C2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
@@ -181,6 +185,8 @@
 		14AA9C912438943E00842A27 /* CircleRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleRenderer.swift; sourceTree = "<group>"; };
 		14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+ContactDelegate.swift"; sourceTree = "<group>"; };
 		14AC4AEC243F11FB000F6D3C /* PlanetShader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = PlanetShader.fsh; sourceTree = "<group>"; };
+		14AC4AF32440D937000F6D3C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		14AC4AF52440F56E000F6D3C /* HapticsUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsUtility.swift; sourceTree = "<group>"; };
 		14B572792428B5A8006F85FE /* StarDepthNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarDepthNode.swift; sourceTree = "<group>"; };
 		14D85596243C376B003883FB /* SKCodableColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKCodableColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14AC4AF42440D937000F6D3C /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +233,7 @@
 				1400F99F241BF47D003BFED8 /* Space Golf macOS */,
 				1419B424243DAC5B00A74A63 /* Space Golf Tests */,
 				1400F97C241BF47D003BFED8 /* Products */,
+				14AC4AF22440D937000F6D3C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -236,7 +244,7 @@
 				1423A166243EB63A00E085D9 /* Nodes */,
 				1423A169243EB7E900E085D9 /* Rendering */,
 				1423A173243EB87100E085D9 /* Defines */,
-				1423A167243EB64E00E085D9 /* Stats */,
+				1423A167243EB64E00E085D9 /* Utils */,
 				1423A172243EB86400E085D9 /* Common */,
 				1400F976241BF47D003BFED8 /* Assets.xcassets */,
 			);
@@ -311,15 +319,16 @@
 			path = Nodes;
 			sourceTree = "<group>";
 		};
-		1423A167243EB64E00E085D9 /* Stats */ = {
+		1423A167243EB64E00E085D9 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				1423A15A243EA4CA00E085D9 /* HoleStat.swift */,
 				1423A15E243EAF3300E085D9 /* GameStats.swift */,
 				1423A162243EB19200E085D9 /* SaveUtility.swift */,
+				14AC4AF52440F56E000F6D3C /* HapticsUtility.swift */,
 				148FF741243FCC8C007073B5 /* LeaderboardUtility.swift */,
 			);
-			path = Stats;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		1423A168243EB66800E085D9 /* GameScene */ = {
@@ -364,6 +373,14 @@
 				140266F02431F29800EF4AA8 /* ZPosition.swift */,
 			);
 			path = Defines;
+			sourceTree = "<group>";
+		};
+		14AC4AF22440D937000F6D3C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14AC4AF32440D937000F6D3C /* GameKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -542,6 +559,7 @@
 				1400F97F241BF47D003BFED8 /* AppDelegate.swift in Sources */,
 				1423A15B243EA4CA00E085D9 /* HoleStat.swift in Sources */,
 				145845F524208BEA00B0B922 /* CGExtensions.swift in Sources */,
+				14AC4AF62440F56E000F6D3C /* HapticsUtility.swift in Sources */,
 				14B5727A2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14AA9C8224387B1D00842A27 /* Debugging.swift in Sources */,
 				1471669D241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
@@ -576,6 +594,7 @@
 				1400F990241BF47D003BFED8 /* AppDelegate.swift in Sources */,
 				1423A15C243EA4CA00E085D9 /* HoleStat.swift in Sources */,
 				145845F624208BEA00B0B922 /* CGExtensions.swift in Sources */,
+				14AC4AF72440F56E000F6D3C /* HapticsUtility.swift in Sources */,
 				14B5727B2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14AA9C8324387B1D00842A27 /* Debugging.swift in Sources */,
 				1471669E241C4A3700E75D98 /* SpriteCategory.swift in Sources */,
@@ -610,6 +629,7 @@
 				1400F9A3241BF47D003BFED8 /* GameViewController.swift in Sources */,
 				1423A15D243EA4CA00E085D9 /* HoleStat.swift in Sources */,
 				145845F724208BEA00B0B922 /* CGExtensions.swift in Sources */,
+				14AC4AF82440F56E000F6D3C /* HapticsUtility.swift in Sources */,
 				14B5727C2428B5A8006F85FE /* StarDepthNode.swift in Sources */,
 				14AA9C8424387B1D00842A27 /* Debugging.swift in Sources */,
 				1400F9A1241BF47D003BFED8 /* AppDelegate.swift in Sources */,

@@ -10,7 +10,7 @@ import SpriteKit
 
 struct CircleRenderer {
 
-    static let standard = CircleRenderer.create(radius: 50)
+    static let standard = CircleRenderer.create(radius: 100)
 
     static func create(radius: CGFloat) -> SKTexture {
         let size = CGSize(width: radius * 2, height: radius * 2)

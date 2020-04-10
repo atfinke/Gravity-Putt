@@ -29,11 +29,10 @@ extension SKColor {
     func lerp(color: SKColor, percent: CGFloat) -> SKColor {
         let (ir, ig, ib, ia) = rgba()
         let (fr, fg, fb, fa) = color.rgba()
-
-        return SKColor(red: ir + (fr - ir) * percent,
-                       green: ig + (fg - ig) * percent,
-                       blue: ib + (fb - ib) * percent,
-                       alpha: ia + (fa - ia) * percent)
+        return SKColor(red: ir.lerp(value: fr, alpha: percent),
+                       green: ig.lerp(value: fg, alpha: percent),
+                       blue: ib.lerp(value: fb, alpha: percent),
+                       alpha: ia.lerp(value: fa, alpha: percent))
     }
 }
 

@@ -22,6 +22,7 @@ class GameViewController: NSViewController {
         // Present the scene
         let skView = self.view as! SKView
         let scene = SaveUtility.loadScene()
+        scene.presentingController = self
         skView.presentScene(scene)
 
         skView.ignoresSiblingOrder = true
@@ -52,6 +53,11 @@ class GameViewController: NSViewController {
             }
             return nil
         }
+    }
+    
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        print(view.frame)
     }
 
 }
