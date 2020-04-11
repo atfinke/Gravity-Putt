@@ -11,6 +11,8 @@ import Foundation
 
 struct Design {
     static let colors: Bool = true
+    
+    static let leaderboardButtonSize: CGFloat = 28
 
     static let playerRadius: CGFloat = 5
 

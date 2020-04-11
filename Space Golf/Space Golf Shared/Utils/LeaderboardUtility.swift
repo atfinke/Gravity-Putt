@@ -9,19 +9,6 @@
 import Foundation
 import GameKit
 
-#if os(macOS)
-typealias Controller = NSViewController
-extension NSViewController {
-    func present(_ controller: NSViewController,
-                 animated: Bool,
-                 completion:(() -> Void)?) {
-        presentAsModalWindow(controller)
-    }
-}
-#else
-typealias Controller = UIViewController
-#endif
-
 class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
     
     // MARK: - Types -
@@ -62,7 +49,7 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         GKScore.report(mapped, withCompletionHandler: nil)
     }
     
-    func authenticate(authController: @escaping (Controller) -> (),
+    func authenticate(authController: @escaping (SKController) -> (),
                       completion: @escaping (_ success: Bool) -> ()) {
         localPlayer.authenticateHandler = { controller, error in
             DispatchQueue.main.async {

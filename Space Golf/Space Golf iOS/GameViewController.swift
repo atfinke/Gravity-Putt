@@ -47,13 +47,8 @@ class GameViewController: UIViewController {
         }
     }
 
-    @objc func doubleTapRecognizer() {
-        scene.resetPlayerPosition()
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print(view.safeAreaInsets)
     }
 
     override var prefersStatusBarHidden: Bool {

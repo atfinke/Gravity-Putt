@@ -8,6 +8,45 @@
 
 import SpriteKit
 
+#if os(macOS)
+typealias SKFont = NSFont
+typealias SKController = NSViewController
+extension NSViewController {
+    func present(_ controller: NSViewController,
+                 animated: Bool,
+                 completion:(() -> Void)?) {
+        presentAsModalWindow(controller)
+    }
+}
+#else
+typealias SKFont = UIFont
+typealias SKController = UIViewController
+#endif
+
+extension SKFont {
+    
+    static func score(string: String,
+                      size: CGFloat,
+                      weight: SKFont.Weight) -> NSAttributedString {
+        let initalFont = SKFont.systemFont(ofSize: size, weight: weight)
+        guard let descriptor = initalFont.fontDescriptor.withDesign(.rounded) else {
+            fatalError()
+        }
+        #if os(macOS)
+        guard let font = SKFont(descriptor: descriptor, size: size) else {
+            fatalError()
+        }
+        #else
+        let font = SKFont(descriptor: descriptor, size: size)
+        #endif
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: SKColor.white
+        ]
+        return NSAttributedString(string: string, attributes: attributes)
+    }
+}
+
 extension SKColor {
 
     func rgba() -> (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {

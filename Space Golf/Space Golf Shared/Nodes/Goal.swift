@@ -82,12 +82,29 @@ class Goal: SKNode {
         innerNode.lineWidth = 3
         innerNode.zPosition = ZPosition.goalInnerBorder.rawValue
 
-        label = SKLabelNode(text: levelNumber.description)
-        label.fontName = "Menlo Bold"
+        label = SKLabelNode(text: "")
         label.horizontalAlignmentMode = .center
         label.verticalAlignmentMode = .center
-        label.fontSize = 15
-        label.fontColor = SKColor.white
+        
+        let fontSize: CGFloat = 15
+        let initalFont = SKFont.systemFont(ofSize: fontSize, weight: .semibold)
+        guard let descriptor = initalFont.fontDescriptor.withDesign(.monospaced) else {
+            fatalError()
+        }
+        #if os(macOS)
+        guard let font = SKFont(descriptor: descriptor, size: fontSize) else {
+            fatalError()
+        }
+        #else
+        let font = SKFont(descriptor: descriptor, size: fontSize)
+        #endif
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: SKColor.white
+        ]
+        label.attributedText = NSAttributedString(string: levelNumber.description,
+                                                  attributes: attributes)
 
         super.init()
 

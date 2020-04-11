@@ -20,9 +20,10 @@ class GameScene: SKScene, Codable {
     
     // MARK: - Properties -
     
-    let cameraNode = SKCameraNode()
-    let statusLabel = SKLabelNode(text: "")
     let aimAssist = AimAssist()
+    let cameraNode = SKCameraNode()
+    let strokesLabel = SKLabelNode(text: "")
+    let holeLabel = SKLabelNode(text: "")
     
     var restingOnPlanet: Planet?
     var isPerformingOffscreenReset = false
@@ -49,7 +50,8 @@ class GameScene: SKScene, Codable {
     var activeLevelGoalNode: Goal?
     var activeLevelGoalNodeWorldSpace: SKCircleRect?
     var planetNodesWorldSpace = [[Planet: SKCircleRect]]()
-    let createQueue = DispatchQueue(label: "com.andrewfinke.create", qos: .userInitiated)
+    let createQueue = DispatchQueue(label: "com.andrewfinke.create",
+                                    qos: .userInitiated)
     
     var holeDurationTimer: Timer?
     var gameStats = GameStats()
@@ -67,13 +69,15 @@ class GameScene: SKScene, Codable {
     
     var blueLayer: SKShapeNode?
     var levelSize: CGSize = .zero
-    var presentingController: Controller? {
+    var presentingController: SKController? {
         didSet {
             guard let presentingSize = presentingController?.view.frame.size else { fatalError() }
             let usableHeight = size.width / presentingSize.width * presentingSize.height
             levelSize = CGSize(width: size.width, height: usableHeight)
         }
     }
+    
+    let leaderboardButton = LeaderboardButton()
     
     // MARK: - Initalization -
     
@@ -122,32 +126,17 @@ class GameScene: SKScene, Codable {
     
     // MARK: - Setup -
     
-    func setUpScene() {
-        let blueLayer = SKShapeNode(rectOf: size * 3)
-        blueLayer.fillColor = SKColor.blue.withAlphaComponent(0.05)
-        addChild(blueLayer)
-        self.blueLayer = blueLayer
-        
-        addChild(player)
+    func setupScene() {
+        setupCamera()
         
         backgroundColor = SKColor(hue: 280 / 360,
-                                  saturation: 1,
-                                  brightness: CGFloat.random(in: 0.05...0.1),
-                                  alpha: 1.0)
-        
-        cameraNode.zPosition = ZPosition.hud.rawValue
-        addChild(cameraNode)
-        camera = cameraNode
-        
-        statusLabel.alpha = 1
-        statusLabel.fontName = "Menlo-Regular"
-        statusLabel.fontSize = 22
-        statusLabel.position = CGPoint(x: 0, y: size.height / 2 - 30)
-        updateScoreLabel()
-        cameraNode.addChild(statusLabel)
+        saturation: 1,
+        brightness: CGFloat.random(in: 0.05...0.1),
+        alpha: 1.0)
         
         aimAssist.alpha = 0.0
         addChild(aimAssist)
+        addChild(player)
         
         physicsWorld.contactDelegate = self
         
@@ -158,13 +147,58 @@ class GameScene: SKScene, Codable {
             moveToNextLevel(isFirstLevel: true)
         }
         createDepthNodes()
+        
+        let blueLayer = SKShapeNode(rectOf: size * 3)
+        blueLayer.fillColor = SKColor.blue.withAlphaComponent(0.05)
         blueLayer.position = levels.first?.position ?? .zero
+        addChild(blueLayer)
+        self.blueLayer = blueLayer
+    }
+    
+    func setupCamera() {
+        cameraNode.zPosition = ZPosition.hud.rawValue
+        addChild(cameraNode)
+        camera = cameraNode
+        
+        let inset: CGFloat = 40
+        leaderboardButton.position = CGPoint(x: -levelSize.width / 2 + inset,
+                                             y: -levelSize.height / 2 + inset)
+        leaderboardButton.tapped = {
+            print(12123)
+        }
+        cameraNode.addChild(leaderboardButton)
+        
+        strokesLabel.horizontalAlignmentMode = .left
+        strokesLabel.verticalAlignmentMode = .center
+        strokesLabel.alpha = 1
+        strokesLabel.position = CGPoint(x:  leaderboardButton.position.x + Design.leaderboardButtonSize,
+                                       y: leaderboardButton.position.y)
+        cameraNode.addChild(strokesLabel)
+        
+        holeLabel.horizontalAlignmentMode = .left
+        holeLabel.verticalAlignmentMode = .center
+        holeLabel.alpha = 1
+        
+        cameraNode.addChild(holeLabel)
+        
+        updateScoreLabel()
+        
     }
     
     // MARK: - Level Management -
     
     func updateScoreLabel() {
-        statusLabel.text = "\(gameStats.completedHolesStrokes), +\(gameStats.holeStrokes)"
+        strokesLabel.attributedText = SKFont.score(string: "\(gameStats.completedHolesStrokes)",
+            size: 18,
+            weight: .semibold)
+        
+        holeLabel.attributedText = SKFont.score(string: "+\(gameStats.holeStrokes)",
+            size: 16,
+            weight: .semibold)
+        
+        let xOffset = strokesLabel.position.x + strokesLabel.frame.size.width + 5
+        holeLabel.position = CGPoint(x: xOffset,
+                                     y: strokesLabel.position.y)
     }
     
     func addLevel() {
@@ -606,14 +640,16 @@ class GameScene: SKScene, Codable {
     }
     
     override func didMove(to view: SKView) {
-        setUpScene()
+        setupScene()
         
+        #if !targetEnvironment(simulator)
         guard let presentingController = presentingController else { fatalError() }
         leaderboardUtility.authenticate(authController: { controller in
             presentingController.present(controller, animated: true, completion: nil)
         }, completion: { success in
-            
+
         })
+        #endif
     }
     
     // MARK: - Debug -

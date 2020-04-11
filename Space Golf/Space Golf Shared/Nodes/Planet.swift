@@ -105,6 +105,7 @@ class Planet: SKNode, Codable {
             SKUniform(name: "u_start_color", vectorFloat4: iv),
             SKUniform(name: "u_end_color", vectorFloat4: fv),
             SKUniform(name: "u_duration", float: Float.random(in: 2...7)),
+            SKUniform(name: "u_delay", float: Float.random(in: 0...15)),
             SKUniform(name: "u_min_alpha", float: Float.random(in: 0.5...0.8))
         ]
 
