@@ -67,7 +67,6 @@
 		1471669E241C4A3700E75D98 /* SpriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471669C241C4A3700E75D98 /* SpriteCategory.swift */; };
 		1471669F241C4A3700E75D98 /* SpriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471669C241C4A3700E75D98 /* SpriteCategory.swift */; };
 		148FF73A243FB705007073B5 /* StarTextureCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A16A243EB81200E085D9 /* StarTextureCreator.swift */; };
-		148FF73C243FB72C007073B5 /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14AC4AEC243F11FB000F6D3C /* PlanetShader.fsh */; };
 		148FF73D243FB74C007073B5 /* HoleStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A15A243EA4CA00E085D9 /* HoleStat.swift */; };
 		148FF73E243FB74F007073B5 /* GameStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A15E243EAF3300E085D9 /* GameStats.swift */; };
 		148FF73F243FB799007073B5 /* SaveUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1423A162243EB19200E085D9 /* SaveUtility.swift */; };
@@ -108,6 +107,16 @@
 		14B5727A2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 		14B5727B2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 		14B5727C2428B5A8006F85FE /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
+		14B67CA82443090C0096604F /* HapticsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AC4AF52440F56E000F6D3C /* HapticsUtility.swift */; };
+		14B67CA92443090C0096604F /* LeaderboardUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148FF741243FCC8C007073B5 /* LeaderboardUtility.swift */; };
+		14B67CAB244309270096604F /* AimAssist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14716698241C4A1600E75D98 /* AimAssist.swift */; };
+		14B67CAC244309270096604F /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14716694241C4A0500E75D98 /* Goal.swift */; };
+		14B67CAD244309270096604F /* LeaderboardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148FF745244130B4007073B5 /* LeaderboardButton.swift */; };
+		14B67CAE244309270096604F /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430446C24341C91007B1992 /* LevelNode.swift */; };
+		14B67CAF244309270096604F /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14716690241C49EA00E75D98 /* Planet.swift */; };
+		14B67CB0244309270096604F /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14AC4AEC243F11FB000F6D3C /* PlanetShader.fsh */; };
+		14B67CB1244309270096604F /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471668C241C49DA00E75D98 /* Player.swift */; };
+		14B67CB2244309270096604F /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 		14D85597243C376B003883FB /* SKCodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D85596243C376B003883FB /* SKCodableColor.swift */; };
 		14D85598243C376B003883FB /* SKCodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D85596243C376B003883FB /* SKCodableColor.swift */; };
 		14D85599243C376B003883FB /* SKCodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D85596243C376B003883FB /* SKCodableColor.swift */; };
@@ -115,16 +124,10 @@
 		14E179C9243DACF300937C49 /* GameScene+ContactDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C992439617900842A27 /* GameScene+ContactDelegate.swift */; };
 		14E179CA243DACF300937C49 /* GameScene+Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14078744243B23FA00A8B80B /* GameScene+Depth.swift */; };
 		14E179CD243DACF300937C49 /* ZPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140266F02431F29800EF4AA8 /* ZPosition.swift */; };
-		14E179CE243DACF300937C49 /* StarDepthNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14B572792428B5A8006F85FE /* StarDepthNode.swift */; };
 		14E179D0243DACF300937C49 /* AppKitContextRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C89243885A400842A27 /* AppKitContextRenderer.swift */; };
-		14E179D1243DACF300937C49 /* LevelNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1430446C24341C91007B1992 /* LevelNode.swift */; };
 		14E179D2243DACF300937C49 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C8124387B1D00842A27 /* Debugging.swift */; };
 		14E179D3243DACF300937C49 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C8524387B2900842A27 /* Design.swift */; };
 		14E179D4243DACF300937C49 /* SpriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471669C241C4A3700E75D98 /* SpriteCategory.swift */; };
-		14E179D5243DACF300937C49 /* AimAssist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14716698241C4A1600E75D98 /* AimAssist.swift */; };
-		14E179D6243DACF300937C49 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471668C241C49DA00E75D98 /* Player.swift */; };
-		14E179D7243DACF300937C49 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14716694241C4A0500E75D98 /* Goal.swift */; };
-		14E179D8243DACF300937C49 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14716690241C49EA00E75D98 /* Planet.swift */; };
 		14E179D9243DACF300937C49 /* SKCodableColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D85596243C376B003883FB /* SKCodableColor.swift */; };
 		14E179DA243DACF300937C49 /* SKExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AA9C8D243888F100842A27 /* SKExtensions.swift */; };
 		14E179DB243DACF300937C49 /* CGExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 145845F424208BEA00B0B922 /* CGExtensions.swift */; };
@@ -536,7 +539,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				148FF73C243FB72C007073B5 /* PlanetShader.fsh in Resources */,
+				14B67CB0244309270096604F /* PlanetShader.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -661,24 +664,27 @@
 				148FF740243FB7A4007073B5 /* SKCircleRect.swift in Sources */,
 				14E179DB243DACF300937C49 /* CGExtensions.swift in Sources */,
 				148FF73F243FB799007073B5 /* SaveUtility.swift in Sources */,
+				14B67CAC244309270096604F /* Goal.swift in Sources */,
 				14E179DA243DACF300937C49 /* SKExtensions.swift in Sources */,
-				14E179D1243DACF300937C49 /* LevelNode.swift in Sources */,
 				148FF73A243FB705007073B5 /* StarTextureCreator.swift in Sources */,
-				14E179CE243DACF300937C49 /* StarDepthNode.swift in Sources */,
-				14E179D5243DACF300937C49 /* AimAssist.swift in Sources */,
+				14B67CA82443090C0096604F /* HapticsUtility.swift in Sources */,
 				14E179D2243DACF300937C49 /* Debugging.swift in Sources */,
+				14B67CAB244309270096604F /* AimAssist.swift in Sources */,
+				14B67CAD244309270096604F /* LeaderboardButton.swift in Sources */,
+				14B67CB2244309270096604F /* StarDepthNode.swift in Sources */,
 				14E179D9243DACF300937C49 /* SKCodableColor.swift in Sources */,
 				148FF73D243FB74C007073B5 /* HoleStat.swift in Sources */,
 				14E179D4243DACF300937C49 /* SpriteCategory.swift in Sources */,
+				14B67CAE244309270096604F /* LevelNode.swift in Sources */,
 				14E179CA243DACF300937C49 /* GameScene+Depth.swift in Sources */,
+				14B67CB1244309270096604F /* Player.swift in Sources */,
 				14E179DC243DACF300937C49 /* CircleRenderer.swift in Sources */,
-				14E179D8243DACF300937C49 /* Planet.swift in Sources */,
 				14E179D0243DACF300937C49 /* AppKitContextRenderer.swift in Sources */,
 				14E179C7243DACF300937C49 /* GameScene.swift in Sources */,
-				14E179D6243DACF300937C49 /* Player.swift in Sources */,
+				14B67CA92443090C0096604F /* LeaderboardUtility.swift in Sources */,
 				148FF73E243FB74F007073B5 /* GameStats.swift in Sources */,
-				14E179D7243DACF300937C49 /* Goal.swift in Sources */,
 				1419B426243DAC5B00A74A63 /* GameTests.swift in Sources */,
+				14B67CAF244309270096604F /* Planet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

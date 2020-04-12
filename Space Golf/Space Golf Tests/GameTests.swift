@@ -69,13 +69,19 @@ class GameTests: XCTestCase {
     }
 
     func testGameScene() throws {
+        class MVC: NSViewController {
+            override func loadView() {
+                view = NSView(frame: NSRect(x: 0, y: 0, width: 1000, height: 600))
+            }
+        }
+        
         let scene = GameScene(size: CGSize(width: 1000, height: 800))
-        scene.setUpScene()
+        scene.presentingController = MVC()
+        scene.setupScene()
 
-        sleep(2)
+        sleep(1)
 
         let data = try JSONEncoder().encode(scene)
-
         let decoded = try JSONDecoder().decode(GameScene.self, from: data)
 
         XCTAssertEqual(scene.lastLevel, decoded.lastLevel)
