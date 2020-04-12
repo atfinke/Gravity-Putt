@@ -3,10 +3,8 @@ on: [push, pull_request]
 
 jobs:
     build:
-        
-        name: Test
+        name: Build iOS
         runs-on: macOS-latest
         steps:
             - uses: actions/checkout@v1
-            - name: Build
-              run: xcodebuild -list
+              run: xcodebuild clean build -project Space\ Golf/Space\ Golf.xcodeproj -scheme 'Space Golf iOS' -destination 'platform=iOS Simulator,OS=13.4,name=iPhone 11' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
