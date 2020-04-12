@@ -1,0 +1,11 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+    build:
+        name: Build tvOS
+        runs-on: macOS-latest
+        steps:
+            - uses: actions/checkout@v1
+            - name: Build Apple TV 4K
+              run: xcodebuild clean build -project Space\ Golf/Space\ Golf.xcodeproj -scheme 'Space Golf tvOS' -destination 'platform=iOS Simulator,OS=13.3,name=Apple TV 4k' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
