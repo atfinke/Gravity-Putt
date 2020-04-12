@@ -6,7 +6,11 @@ void main() {
         vec4 color = mix(u_start_color, u_end_color, d);
         float progress = sin((u_time - u_delay) * (3 / 2) * (1 / u_duration)) / 2 + 0.5;
         float alpha = mix(u_min_alpha, 1, progress);
-        gl_FragColor = vec4(mix(defaultShading, color, color.a)) * alpha;
+        if (d > 0.9) {
+            gl_FragColor = vec4(mix(defaultShading, color, color.a)) * alpha * 0.9;
+        } else {
+            gl_FragColor = vec4(mix(defaultShading, color, color.a)) * alpha;
+        }
     } else {
         gl_FragColor = defaultShading;
     }

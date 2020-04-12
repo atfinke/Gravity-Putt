@@ -21,7 +21,7 @@ class AimAssist: SKNode {
 
     override init() {
         center.fillColor = .clear
-        center.lineWidth = 3
+        center.lineWidth = 4
 
         let tipPath = CGMutablePath()
         tipPath.move(to: CGPoint(x: 0, y: 10))
@@ -29,6 +29,8 @@ class AimAssist: SKNode {
         tipPath.addLine(to: CGPoint(x: 0, y: -10))
 
         tipNode = SKShapeNode(path: tipPath)
+        tipNode.lineCap = .round
+        tipNode.lineJoin = .round
         tipNode.fillColor = .clear
         tipNode.lineWidth = 5
         tipNode.zRotation = CGFloat.pi / 2
@@ -40,6 +42,8 @@ class AimAssist: SKNode {
         let dashed = path.copy(dashingWithPhase: 0, lengths: [12, 12])
 
         tail = SKShapeNode(path: dashed)
+        tail.lineCap = .round
+        tail.lineJoin = .round
         tail.lineWidth = 5
         tail.position = CGPoint(x: 0, y: -Design.aimAssistInnerRadius * 2.5)
         tail.zRotation = CGFloat.pi

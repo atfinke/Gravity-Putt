@@ -252,10 +252,10 @@ class LevelNode: SKNode, Codable {
         }
         viz(planetSafeRect: planetSafeRect.cgRect)
 
-        let hues = (0...90).map({ $0 }) + (220...360).map({ $0 })
+        let hues = (0...70).map({ $0 }) + (220...360).map({ $0 })
         let hue = CGFloat(hues.randomElement() ?? 0) / 360
         let planetColor = SKColor(hue: hue,
-                                  saturation: 0.4,
+                                  saturation: 0.8,
                                   brightness: 1.0,
                                   alpha: 1)
 

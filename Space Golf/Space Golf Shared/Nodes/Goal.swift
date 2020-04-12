@@ -75,17 +75,21 @@ class Goal: SKNode {
         borderNode.strokeColor = SKColor.green.withAlphaComponent(0.5)
         borderNode.fillColor = SKColor.black
         borderNode.lineWidth = 3
+        borderNode.lineCap = .round
+        borderNode.lineJoin = .round
         borderNode.zPosition = ZPosition.goalBorder.rawValue
 
         innerNode = SKShapeNode(path: innerBorderPath)
         innerNode.strokeColor = SKColor.white.withAlphaComponent(0.25)
         innerNode.lineWidth = 3
+        innerNode.lineCap = .round
+        innerNode.lineJoin = .round
         innerNode.zPosition = ZPosition.goalInnerBorder.rawValue
 
         label = SKLabelNode(text: "")
         label.horizontalAlignmentMode = .center
         label.verticalAlignmentMode = .center
-        
+
         let fontSize: CGFloat = 15
         let initalFont = SKFont.systemFont(ofSize: fontSize, weight: .semibold)
         guard let descriptor = initalFont.fontDescriptor.withDesign(.monospaced) else {
@@ -98,7 +102,7 @@ class Goal: SKNode {
         #else
         let font = SKFont(descriptor: descriptor, size: fontSize)
         #endif
-        
+
         let attributes: [NSAttributedString.Key: Any] = [
             .font: font,
             .foregroundColor: SKColor.white

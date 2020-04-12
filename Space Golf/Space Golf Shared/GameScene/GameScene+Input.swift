@@ -13,14 +13,26 @@ import SpriteKit
 extension GameScene {
 
     override func mouseDown(with event: NSEvent) {
+        if leaderboardRect.contains(event.location(in: cameraNode)) {
+            let controller = leaderboardUtility.leaderboardController()
+            presentingController?.present(controller, animated: true, completion: nil)
+            return
+        }
+
         setTargeting(startLocation: event.location(in: self))
     }
 
     override func mouseDragged(with event: NSEvent) {
+        if leaderboardRect.contains(event.location(in: cameraNode)) {
+            return
+        }
         setTargeting(pullBackLocation: event.location(in: self))
     }
 
     override func mouseUp(with event: NSEvent) {
+        if leaderboardRect.contains(event.location(in: cameraNode)) {
+            return
+        }
         finishedTargeting(pullBackLocation: event.location(in: self))
     }
 
@@ -35,6 +47,13 @@ extension GameScene {
 extension GameScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let cameraLocation = touches.first?.location(in: cameraNode),
+            leaderboardRect.contains(cameraLocation) {
+            let controller = leaderboardUtility.leaderboardController()
+            presentingController?.present(controller, animated: true, completion: nil)
+            return
+        }
+
         if touches.count == 2 {
             resetPlayerPosition()
             return
@@ -47,6 +66,11 @@ extension GameScene {
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let cameraLocation = touches.first?.location(in: cameraNode),
+            leaderboardRect.contains(cameraLocation) {
+            return
+        }
+
         guard touches.count == 1, let location = touches.first?.location(in: self) else {
             return
         }
@@ -54,6 +78,11 @@ extension GameScene {
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let cameraLocation = touches.first?.location(in: cameraNode),
+            leaderboardRect.contains(cameraLocation) {
+            return
+        }
+
         guard touches.count == 1, let location = touches.first?.location(in: self) else {
             return
         }

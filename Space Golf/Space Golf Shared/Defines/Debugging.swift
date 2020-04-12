@@ -9,7 +9,7 @@
 import Foundation
 
 struct Debugging {
-    static let isLoadingOn: Bool = true
+    static let isLoadingOn: Bool = false
     static let isLevelVizOn: Bool = false
     static let isPlanetInteractionOn: Bool = true
 }

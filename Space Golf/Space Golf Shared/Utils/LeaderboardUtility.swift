@@ -10,9 +10,9 @@ import Foundation
 import GameKit
 
 class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
-    
+
     // MARK: - Types -
-    
+
     enum Leaderboard: String {
         case averageStrokesPerHole = "com.andrewfinke.space.golf.leaderboard.asph"
         case averageTimePerHole = "com.andrewfinke.space.golf.leaderboard.atph"
@@ -20,20 +20,20 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         case fores = "com.andrewfinke.space.golf.leaderboard.fores"
         case holeInOnes = "com.andrewfinke.space.golf.leaderboard.aces"
     }
-    
+
     // MARK: - Properties -
-    
+
     private let localPlayer = GKLocalPlayer.local
-    
+
     // MARK: - Helpers -
-    
+
     func submit(stats: GameStats) {
         let completedHoles = CGFloat(stats.holeStats.count)
         let totalTime = CGFloat(stats.holeStats.map({ $0.duration }).reduce(0, +))
-        
+
         let averageStrokesPerHole = CGFloat(stats.completedHolesStrokes) / completedHoles
         let averageTimePerHole = totalTime / completedHoles
-        
+
         let scores: [Leaderboard: Int64] = [
             .averageStrokesPerHole: Int64(averageStrokesPerHole * 1_000),
             .averageTimePerHole: Int64(averageTimePerHole * 1_000),
@@ -48,9 +48,9 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         }
         GKScore.report(mapped, withCompletionHandler: nil)
     }
-    
-    func authenticate(authController: @escaping (SKController) -> (),
-                      completion: @escaping (_ success: Bool) -> ()) {
+
+    func authenticate(authController: @escaping (SKController) -> Void,
+                      completion: @escaping (_ success: Bool) -> Void) {
         localPlayer.authenticateHandler = { controller, error in
             DispatchQueue.main.async {
                 if let controller = controller {
@@ -64,16 +64,23 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
             }
         }
     }
-    
+
     func leaderboardController() -> GKGameCenterViewController {
         let controller = GKGameCenterViewController()
         controller.gameCenterDelegate = self
         controller.viewState = .leaderboards
         return controller
     }
-    
+
     // MARK: - GKGameCenterControllerDelegate -
-    
+
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        #if os(macOS)
+        gameCenterViewController.dismiss(nil)
+        #else
+        gameCenterViewController.presentingViewController?
+            .dismiss(animated: true, completion: nil)
+        #endif
+        
     }
 }

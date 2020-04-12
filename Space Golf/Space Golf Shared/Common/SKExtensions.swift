@@ -24,7 +24,7 @@ typealias SKController = UIViewController
 #endif
 
 extension SKFont {
-    
+
     static func score(string: String,
                       size: CGFloat,
                       weight: SKFont.Weight) -> NSAttributedString {

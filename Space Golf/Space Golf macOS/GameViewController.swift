@@ -31,7 +31,7 @@ class GameViewController: NSViewController {
         skView.showsFPS = true
         skView.showsNodeCount = true
         skView.showsDrawCount = true
-        
+
         #else
         let alert = NSAlert()
         alert.messageText = "thanks for looking at this"
@@ -55,7 +55,7 @@ class GameViewController: NSViewController {
             return nil
         }
     }
-    
+
     override func viewDidLayout() {
         super.viewDidLayout()
         print(view.frame)

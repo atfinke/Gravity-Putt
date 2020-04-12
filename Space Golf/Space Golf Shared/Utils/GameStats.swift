@@ -48,9 +48,9 @@ class GameStats: Codable, Equatable {
         holeStrokes = 0
         holeDuration = 0
     }
-    
+
     // MARK: - Equatable -
-    
+
     static func == (lhs: GameStats, rhs: GameStats) -> Bool {
         return lhs.holeStrokes == rhs.holeStrokes &&
             lhs.holeDuration == rhs.holeDuration &&

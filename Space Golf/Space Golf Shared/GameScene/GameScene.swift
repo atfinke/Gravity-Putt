@@ -26,6 +26,7 @@ class GameScene: SKScene, Codable {
     let holeLabel = SKLabelNode(text: "")
     
     var restingOnPlanet: Planet?
+    var isOffscreenResetQueued = false
     var isPerformingOffscreenReset = false
     var isPlayerReadyForHit = true {
         didSet {
@@ -67,7 +68,6 @@ class GameScene: SKScene, Codable {
         }
     }
     
-    var blueLayer: SKShapeNode?
     var levelSize: CGSize = .zero
     var presentingController: SKController? {
         didSet {
@@ -78,6 +78,7 @@ class GameScene: SKScene, Codable {
     }
     
     let leaderboardButton = LeaderboardButton()
+    var leaderboardRect = CGRect()
     
     // MARK: - Initalization -
     
@@ -130,9 +131,9 @@ class GameScene: SKScene, Codable {
         setupCamera()
         
         backgroundColor = SKColor(hue: 280 / 360,
-        saturation: 1,
-        brightness: CGFloat.random(in: 0.05...0.1),
-        alpha: 1.0)
+                                  saturation: 1,
+                                  brightness: CGFloat.random(in: 0.05...0.1),
+                                  alpha: 1.0)
         
         aimAssist.alpha = 0.0
         addChild(aimAssist)
@@ -147,12 +148,6 @@ class GameScene: SKScene, Codable {
             moveToNextLevel(isFirstLevel: true)
         }
         createDepthNodes()
-        
-        let blueLayer = SKShapeNode(rectOf: size * 3)
-        blueLayer.fillColor = SKColor.blue.withAlphaComponent(0.05)
-        blueLayer.position = levels.first?.position ?? .zero
-        addChild(blueLayer)
-        self.blueLayer = blueLayer
     }
     
     func setupCamera() {
@@ -163,16 +158,13 @@ class GameScene: SKScene, Codable {
         let inset: CGFloat = 40
         leaderboardButton.position = CGPoint(x: -levelSize.width / 2 + inset,
                                              y: -levelSize.height / 2 + inset)
-        leaderboardButton.tapped = {
-            print(12123)
-        }
         cameraNode.addChild(leaderboardButton)
         
         strokesLabel.horizontalAlignmentMode = .left
         strokesLabel.verticalAlignmentMode = .center
         strokesLabel.alpha = 1
-        strokesLabel.position = CGPoint(x:  leaderboardButton.position.x + Design.leaderboardButtonSize,
-                                       y: leaderboardButton.position.y)
+        strokesLabel.position = CGPoint(x: leaderboardButton.position.x + Design.leaderboardButtonSize,
+                                        y: leaderboardButton.position.y)
         cameraNode.addChild(strokesLabel)
         
         holeLabel.horizontalAlignmentMode = .left
@@ -182,7 +174,6 @@ class GameScene: SKScene, Codable {
         cameraNode.addChild(holeLabel)
         
         updateScoreLabel()
-        
     }
     
     // MARK: - Level Management -
@@ -193,12 +184,16 @@ class GameScene: SKScene, Codable {
             weight: .semibold)
         
         holeLabel.attributedText = SKFont.score(string: "+\(gameStats.holeStrokes)",
-            size: 16,
+            size: 15,
             weight: .semibold)
         
         let xOffset = strokesLabel.position.x + strokesLabel.frame.size.width + 5
         holeLabel.position = CGPoint(x: xOffset,
-                                     y: strokesLabel.position.y)
+                                     y: leaderboardButton.position.y)
+        
+        leaderboardRect = CGRect(x: leaderboardButton.frame.minX,
+                                 y: leaderboardButton.frame.minY,
+                                 width: holeLabel.frame.maxX - leaderboardButton.frame.minX, height: leaderboardButton.frame.height)
     }
     
     func addLevel() {
@@ -315,12 +310,10 @@ class GameScene: SKScene, Codable {
         // Move camera
         if isFirstLevel {
             cameraNode.position = cameraPosition
-            blueLayer?.position = cameraPosition
         } else {
             let cameraPositionAction = SKAction.move(to: cameraPosition, duration: transitionDuration)
             cameraPositionAction.timingFunction = transitionTiming
             cameraNode.run(cameraPositionAction)
-            blueLayer?.run(cameraPositionAction)
             
             let cameraOffset = cameraPosition - cameraNode.position
             updateDepthNodes(forCameraPosition: cameraPosition, offset: cameraOffset)
@@ -398,7 +391,7 @@ class GameScene: SKScene, Codable {
         }
         
         let magnitude = pullBackLocation.distance(to: aimAssist.position)
-        let mag: CGFloat = max(min(magnitude / 5, 200), 5)
+        let mag: CGFloat = max(min(magnitude, 200) / 4, 10)
         
         let x = mag * -sin(aimAssist.zRotation)
         let y = mag * cos(aimAssist.zRotation)
@@ -409,7 +402,6 @@ class GameScene: SKScene, Codable {
             .wait(forDuration: 0.2),
             .run {
                 physicsBody.fieldBitMask = SpriteCategory.player
-                physicsBody.collisionBitMask = SpriteCategory.player
             }
         ])
         player.run(action)
@@ -431,7 +423,6 @@ class GameScene: SKScene, Codable {
         contactGoal = nil
         
         physicsBody.fieldBitMask = SpriteCategory.none
-        physicsBody.collisionBitMask = SpriteCategory.none
         physicsBody.velocity = CGVector(dx: 0, dy: 0)
         physicsBody.isDynamic = false
         
@@ -467,11 +458,11 @@ class GameScene: SKScene, Codable {
         guard !isPerformingOffscreenReset, let level = levels.first else { return }
         // Camera scale
         
-        let safeWidthPadding: CGFloat = size.width / 10
+        let safeWidthPadding: CGFloat = levelSize.width / 10
         let levelMinXWorldSpace = level.position.x - levelSize.width / 2 + safeWidthPadding
         let levelMaxXWorldSpace = level.position.x + levelSize.width / 2 - safeWidthPadding
         
-        let safeHeightPadding: CGFloat = size.height / 10
+        let safeHeightPadding: CGFloat = levelSize.height / 10
         let levelMinYWorldSpace = level.position.y - levelSize.height / 2 + safeHeightPadding
         let levelMaxYWorldSpace = level.position.y + levelSize.height / 2 - safeHeightPadding
         
@@ -488,31 +479,39 @@ class GameScene: SKScene, Codable {
             scale = max(scale, 1.0 + (levelMinYWorldSpace - player.position.y) / (levelSize.height / 2))
         }
         
-        let maxScale: CGFloat = 1.5
+        let maxScale: CGFloat = 1.6
         cameraNode.run(.scale(to: min(scale, maxScale), duration: 0.25))
-        if scale > maxScale {
-            gameStats.fores += 1
+        if scale > maxScale && !isOffscreenResetQueued {
             
-            isPerformingOffscreenReset = true
+            isOffscreenResetQueued = true
+            let wait: TimeInterval = 1
             let resetAction: SKAction = .sequence([
-                .wait(forDuration: 1.0),
+                .wait(forDuration: wait),
                 .run {
+                    self.gameStats.fores += 1
                     self.resetPlayerPosition(to: nil)
-                },
-                .run {
-                    self.isPerformingOffscreenReset = false
+                    self.isOffscreenResetQueued = false
                 }
             ])
             run(resetAction, withKey: "resetAction")
             
             let cameraAction: SKAction = .sequence([
-                .wait(forDuration: 1.0),
-                .scale(to: 1, duration: 0.5)
+                .wait(forDuration: wait * 0.5),
+                .run {
+                    self.isPerformingOffscreenReset = true
+                },
+                .wait(forDuration: wait * 0.5),
+                .scale(to: 1, duration: 0.5),
+                .run {
+                    self.isPerformingOffscreenReset = false
+                }
             ])
             cameraAction.timingMode = .easeInEaseOut
             cameraNode.run(cameraAction)
-        } else if scale <= maxScale && isPerformingOffscreenReset {
+        } else if scale <= maxScale && isOffscreenResetQueued {
+            isOffscreenResetQueued = false
             removeAction(forKey: "resetAction")
+            cameraNode.removeAllActions()
         }
         
     }
@@ -646,8 +645,8 @@ class GameScene: SKScene, Codable {
         guard let presentingController = presentingController else { fatalError() }
         leaderboardUtility.authenticate(authController: { controller in
             presentingController.present(controller, animated: true, completion: nil)
-        }, completion: { success in
-
+        }, completion: { _ in
+            
         })
         #endif
     }

@@ -8,91 +8,40 @@
 
 import SpriteKit
 
-class LeaderboardButton: SKNode {
-    
-    // MARK: - Properties -
-    
-    var tapped: (() -> Void)?
-    
+class LeaderboardButton: SKSpriteNode {
+
     // MARK: - Initalization -
-    
-    override init() {
-        super.init()
-        
-        let size: CGFloat = Design.leaderboardButtonSize / 2
-        let outerRadius: CGFloat = 5
-        let innerRadius: CGFloat = outerRadius / 2
-        let spikes = 5
-        let spikeAngle = (CGFloat.pi * 2) / CGFloat(spikes)
-        let halfSpikeAngle = spikeAngle / 2
 
-        let path = CGMutablePath()
-        path.addArc(center: .zero,
-                    radius: size,
-                    startAngle: 0,
-                    endAngle: CGFloat.pi * 2,
-                    clockwise: false)
-        for spike in 0..<spikes {
-            let angle = spikeAngle * CGFloat(spike)
+    init() {
+        super.init(texture: nil,
+                   color: .clear,
+                   size: CGSize(width: Design.leaderboardButtonSize,
+                                              height: Design.leaderboardButtonSize))
 
-            let leftTriangle = CGPoint(x: cos(angle - halfSpikeAngle) * innerRadius,
-                                       y: sin(angle - halfSpikeAngle) * innerRadius)
-            let topTriangle = CGPoint(x: cos(angle) * outerRadius,
-                                      y: sin(angle) * outerRadius)
-            let rightTriangle = CGPoint(x: cos(angle + halfSpikeAngle) * innerRadius,
-                                        y: sin(angle + halfSpikeAngle) * innerRadius)
+        let circleNode = SKShapeNode(circleOfRadius: Design.leaderboardButtonSize / 2)
+        circleNode.strokeColor = SKColor.white.withAlphaComponent(1)
+        circleNode.lineWidth = 2
+        circleNode.fillColor = SKColor.purple.withAlphaComponent(0.5)
+        addChild(circleNode)
 
-            path.move(to: leftTriangle)
-            path.addLine(to: topTriangle)
-            path.addLine(to: rightTriangle)
-        }
-        
-        let aaa = CGMutablePath()
-        aaa.addRects([
-            CGRect(x: -6, y: -6, width: 4, height: 2),
-            CGRect(x: -2, y: -6, width: 4, height: 6),
-            CGRect(x: 2, y: -6, width: 4, height: 4)
-        
+        let rectPath = CGMutablePath()
+        rectPath.addRects([
+            CGRect(x: -6, y: -5, width: 4, height: 7),
+            CGRect(x: -2, y: -5, width: 4, height: 11),
+            CGRect(x: 2, y: -5, width: 4, height: 9)
+
         ])
-        
-        let nodeaaa = SKShapeNode(path: aaa)
-                nodeaaa.strokeColor = SKColor.purple.withAlphaComponent(0.5)
-//                nodeaaa.lineWidth = 2
-        //        node.zRotation = CGFloat.pi / 2
-                nodeaaa.fillColor = SKColor.white
-               
-        
-        
-        let node = SKShapeNode(path: path)
-        node.strokeColor = SKColor.white.withAlphaComponent(1)
-        node.lineWidth = 2
-//        node.zRotation = CGFloat.pi / 2
-        node.fillColor = SKColor.purple.withAlphaComponent(0.5)
-        addChild(node)
-         addChild(nodeaaa)
+
+        let rectNode = SKShapeNode(path: rectPath)
+        rectNode.strokeColor = SKColor.purple.withAlphaComponent(0.5)
+        rectNode.fillColor = SKColor.white
+        rectNode.lineCap = .round
+        rectNode.lineJoin = .round
+        circleNode.addChild(rectNode)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-}
 
-#if os(macOS)
-extension LeaderboardButton {
-    override func mouseDown(with event: NSEvent) {
-        let location = event.location(in: self)
-        if frame.contains(location) {
-            tapped?()
-        }
-    }
 }
-#else
-extension LeaderboardButton {
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let location = touches.first?.location(in: self), frame.contains(location) {
-            tapped?()
-        }
-    }
-}
-#endif
