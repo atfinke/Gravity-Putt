@@ -47,7 +47,7 @@ struct SaveUtility {
                 let data = try JSONEncoder().encode(scene)
                 try data.write(to: SaveUtility.sceneURL)
             } catch {
-                fatalError(error.localizedDescription)
+//                fatalError(error.localizedDescription)
             }
         }
     }

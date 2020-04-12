@@ -8,23 +8,41 @@
 
 import UIKit
 import SpriteKit
-import GameplayKit
 
 class GameViewController: UIViewController {
 
+    let scene = SaveUtility.loadScene()
+    let skView: SKView = {
+        let view = SKView()
+        view.ignoresSiblingOrder = true
+
+        #if DEBUG
+        view.showsFPS = true
+        view.showsNodeCount = true
+        #endif
+
+        view.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
+        view.alpha = 0
+        return view
+    }()
+
+    // MARK: - View Life Cycle -
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        scene.presentingController = self
+        view.backgroundColor = .black
+    }
 
-        let scene = GameScene.new()
-
-        // Present the scene
-        let skView = self.view as! SKView
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        skView.frame = view.bounds
+        view.addSubview(skView)
         skView.presentScene(scene)
 
-        skView.ignoresSiblingOrder = true
-
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        UIView.animate(withDuration: 1.0) {
+            self.skView.alpha = 1
+        }
     }
 
 }

@@ -47,10 +47,6 @@ class GameViewController: UIViewController {
         }
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
-
     override var prefersStatusBarHidden: Bool {
         return true
     }

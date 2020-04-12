@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-#if os(macOS)
+#if os(macOS) || os(tvOS)
 class HapticsUtility {
     func playCompletedHole() {}
     func playHitPlanet(normalizedImpact: CGFloat) {}

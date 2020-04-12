@@ -68,7 +68,9 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
     func leaderboardController() -> GKGameCenterViewController {
         let controller = GKGameCenterViewController()
         controller.gameCenterDelegate = self
+        #if !os(tvOS)
         controller.viewState = .leaderboards
+        #endif
         return controller
     }
 
