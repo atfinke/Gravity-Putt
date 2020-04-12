@@ -8,4 +8,4 @@ jobs:
         steps:
             - name: Build
               run: xcodebuild clean build -project 'Space Golf.xcodeproj' -scheme 'Space Golf iOS' -destination 'platform=iOS Simulator,OS=13.4,name=iPhone 11' CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO
-              working-directory: './Space Golf'
+              working-directory: './Space\ Golf'
