@@ -2,9 +2,11 @@ name: CI
 on: [push, pull_request]
 
 jobs:
-    test:
+    build:
+        
         name: Test
         runs-on: macOS-latest
         steps:
+            - uses: actions/checkout@v1
             - name: Build
               run: xcodebuild -list
