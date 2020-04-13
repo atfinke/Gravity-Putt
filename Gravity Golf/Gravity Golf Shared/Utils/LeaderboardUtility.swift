@@ -18,7 +18,8 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         case averageTimePerHole = "com.andrewfinke.space.golf.leaderboard.atph"
         case completedHoles = "com.andrewfinke.space.golf.leaderboard.completed"
         case fores = "com.andrewfinke.space.golf.leaderboard.fores"
-        case holeInOnes = "com.andrewfinke.space.golf.leaderboard.aces"
+        case aces = "com.andrewfinke.space.golf.leaderboard.aces"
+        case acesStreak = "com.andrewfinke.space.golf.leaderboard.aces.streak"
     }
 
     // MARK: - Properties -
@@ -33,7 +34,19 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         }
 
         let completedHoles = CGFloat(stats.holeStats.count)
-        let totalTime = CGFloat(stats.holeStats.map({ $0.duration }).reduce(0, +))
+        var totalTime: CGFloat = 0
+        
+        var currentAcesStreak = 0
+        var maxAcesStreak = 0
+        for hole in stats.holeStats {
+            totalTime += CGFloat(hole.duration)
+            if hole.strokes == 1 {
+                currentAcesStreak += 1
+                maxAcesStreak = max(maxAcesStreak, currentAcesStreak)
+            } else {
+                currentAcesStreak = 0
+            }
+        }
 
         let averageStrokesPerHole = CGFloat(stats.completedHolesStrokes) / completedHoles
         let averageTimePerHole = totalTime / completedHoles
@@ -43,7 +56,8 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
             .averageTimePerHole: Int64(averageTimePerHole * 1_000),
             .completedHoles: Int64(completedHoles),
             .fores: Int64(stats.fores),
-            .holeInOnes: Int64(stats.holeInOnes)
+            .aces: Int64(stats.aces),
+            .acesStreak: Int64(maxAcesStreak)
         ]
         let mapped = scores.map { key, value -> GKScore in
             let score = GKScore(leaderboardIdentifier: key.rawValue)

@@ -16,7 +16,7 @@ struct SaveUtility {
         #if os(macOS)
         let dir = FileManager.default
             .urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("Space Golf")
+            .appendingPathComponent("Gravity Golf")
         try? FileManager.default
             .createDirectory(at: dir,
                              withIntermediateDirectories: true,

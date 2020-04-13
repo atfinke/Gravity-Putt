@@ -25,7 +25,7 @@ class GameStats: Codable, Equatable {
     var completedHolesStrokes: Int {
         return holeStats.map({ $0.strokes }).reduce(0, +)
     }
-    var holeInOnes: Int {
+    var aces: Int {
         return holeStats.filter({ $0.strokes == 1 }).count
     }
 

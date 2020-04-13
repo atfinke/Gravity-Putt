@@ -9,15 +9,15 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1419B422243DAC5B00A74A63"
-               BuildableName = "Space Golf Tests.xctest"
-               BlueprintName = "Space Golf Tests"
-               ReferencedContainer = "container:Space Golf.xcodeproj">
+               BlueprintIdentifier = "1400F98C241BF47D003BFED8"
+               BuildableName = "Gravity Golf.app"
+               BlueprintName = "Gravity Golf tvOS"
+               ReferencedContainer = "container:Gravity Golf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -28,16 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1419B422243DAC5B00A74A63"
-               BuildableName = "Space Golf Tests.xctest"
-               BlueprintName = "Space Golf Tests"
-               ReferencedContainer = "container:Space Golf.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
@@ -50,6 +40,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "1400F98C241BF47D003BFED8"
+            BuildableName = "Gravity Golf.app"
+            BlueprintName = "Gravity Golf tvOS"
+            ReferencedContainer = "container:Gravity Golf.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,15 +57,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1419B422243DAC5B00A74A63"
-            BuildableName = "Space Golf Tests.xctest"
-            BlueprintName = "Space Golf Tests"
-            ReferencedContainer = "container:Space Golf.xcodeproj">
+            BlueprintIdentifier = "1400F98C241BF47D003BFED8"
+            BuildableName = "Gravity Golf.app"
+            BlueprintName = "Gravity Golf tvOS"
+            ReferencedContainer = "container:Gravity Golf.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

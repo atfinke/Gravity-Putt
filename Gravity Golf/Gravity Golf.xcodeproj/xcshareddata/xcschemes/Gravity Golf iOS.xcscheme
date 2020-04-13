@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1400F99D241BF47D003BFED8"
-               BuildableName = "Space Golf.app"
-               BlueprintName = "Space Golf macOS"
-               ReferencedContainer = "container:Space Golf.xcodeproj">
+               BlueprintIdentifier = "1400F97A241BF47D003BFED8"
+               BuildableName = "Gravity Golf.app"
+               BlueprintName = "Gravity Golf iOS"
+               ReferencedContainer = "container:Gravity Golf.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,10 +44,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1400F99D241BF47D003BFED8"
-            BuildableName = "Space Golf.app"
-            BlueprintName = "Space Golf macOS"
-            ReferencedContainer = "container:Space Golf.xcodeproj">
+            BlueprintIdentifier = "1400F97A241BF47D003BFED8"
+            BuildableName = "Gravity Golf.app"
+            BlueprintName = "Gravity Golf iOS"
+            ReferencedContainer = "container:Gravity Golf.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,10 +61,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1400F99D241BF47D003BFED8"
-            BuildableName = "Space Golf.app"
-            BlueprintName = "Space Golf macOS"
-            ReferencedContainer = "container:Space Golf.xcodeproj">
+            BlueprintIdentifier = "1400F97A241BF47D003BFED8"
+            BuildableName = "Gravity Golf.app"
+            BlueprintName = "Gravity Golf iOS"
+            ReferencedContainer = "container:Gravity Golf.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
