@@ -1,6 +1,6 @@
 //
 //  Planet.swift
-//  Untitled Space Game iOS
+//  Gravity Golf iOS
 //
 //  Created by Andrew Finke on 3/13/20.
 //  Copyright © 2020 Andrew Finke. All rights reserved.

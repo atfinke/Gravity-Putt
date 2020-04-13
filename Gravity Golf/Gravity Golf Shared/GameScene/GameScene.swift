@@ -1,6 +1,6 @@
 //
 //  GameScene.swift
-//  Untitled Space Game Shared
+//  Gravity Golf Shared
 //
 //  Created by Andrew Finke on 3/13/20.
 //  Copyright © 2020 Andrew Finke. All rights reserved.

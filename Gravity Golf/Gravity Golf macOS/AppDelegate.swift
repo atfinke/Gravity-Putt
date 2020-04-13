@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Untitled Space Game macOS
+//  Gravity Golf macOS
 //
 //  Created by Andrew Finke on 3/13/20.
 //  Copyright © 2020 Andrew Finke. All rights reserved.

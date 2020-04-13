@@ -17,10 +17,6 @@
 		1400F9A3241BF47D003BFED8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1400F9A2241BF47D003BFED8 /* GameViewController.swift */; };
 		1400F9A6241BF47D003BFED8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1400F9A4241BF47D003BFED8 /* Main.storyboard */; };
 		1419B426243DAC5B00A74A63 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419B425243DAC5B00A74A63 /* GameTests.swift */; };
-		1461FA4F2444299A00ACE95D /* IntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA4E2444299A00ACE95D /* IntroScene.swift */; };
-		1461FA502444299A00ACE95D /* IntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA4E2444299A00ACE95D /* IntroScene.swift */; };
-		1461FA512444299A00ACE95D /* IntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA4E2444299A00ACE95D /* IntroScene.swift */; };
-		1461FA522444299A00ACE95D /* IntroScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA4E2444299A00ACE95D /* IntroScene.swift */; };
 		1461FA5424442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		1461FA5524442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		1461FA5624442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
@@ -174,7 +170,6 @@
 		1419B423243DAC5B00A74A63 /* Gravity Golf Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gravity Golf Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1419B425243DAC5B00A74A63 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		1419B427243DAC5B00A74A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1461FA4E2444299A00ACE95D /* IntroScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroScene.swift; sourceTree = "<group>"; };
 		1461FA5324442B3400ACE95D /* NSExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSExtensions.swift; sourceTree = "<group>"; };
 		14AC4AF32440D937000F6D3C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		14E12539244421B300D34DF5 /* PlanetShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PlanetShader.fsh; sourceTree = "<group>"; };
@@ -326,7 +321,6 @@
 				14E12552244421B300D34DF5 /* Common */,
 				14E12557244421B300D34DF5 /* Rendering */,
 				14E12541244421B300D34DF5 /* Assets.xcassets */,
-				1461FA4E2444299A00ACE95D /* IntroScene.swift */,
 			);
 			path = "Gravity Golf Shared";
 			sourceTree = "<group>";
@@ -593,7 +587,6 @@
 				14E12593244421B300D34DF5 /* GameScene+Input.swift in Sources */,
 				14E125C7244421B300D34DF5 /* AppKitContextRenderer.swift in Sources */,
 				14E125A3244421B300D34DF5 /* SpriteCategory.swift in Sources */,
-				1461FA4F2444299A00ACE95D /* IntroScene.swift in Sources */,
 				14E125A7244421B300D34DF5 /* ZPosition.swift in Sources */,
 				14E12583244421B300D34DF5 /* HoleStat.swift in Sources */,
 				14E125CB244421B300D34DF5 /* CircleRenderer.swift in Sources */,
@@ -631,7 +624,6 @@
 				14E12594244421B300D34DF5 /* GameScene+Input.swift in Sources */,
 				14E125C8244421B300D34DF5 /* AppKitContextRenderer.swift in Sources */,
 				14E125A4244421B300D34DF5 /* SpriteCategory.swift in Sources */,
-				1461FA502444299A00ACE95D /* IntroScene.swift in Sources */,
 				14E125A8244421B300D34DF5 /* ZPosition.swift in Sources */,
 				14E12584244421B300D34DF5 /* HoleStat.swift in Sources */,
 				14E125CC244421B300D34DF5 /* CircleRenderer.swift in Sources */,
@@ -669,7 +661,6 @@
 				14E12595244421B300D34DF5 /* GameScene+Input.swift in Sources */,
 				14E125C9244421B300D34DF5 /* AppKitContextRenderer.swift in Sources */,
 				14E125A5244421B300D34DF5 /* SpriteCategory.swift in Sources */,
-				1461FA512444299A00ACE95D /* IntroScene.swift in Sources */,
 				14E125A9244421B300D34DF5 /* ZPosition.swift in Sources */,
 				14E12585244421B300D34DF5 /* HoleStat.swift in Sources */,
 				14E125CD244421B300D34DF5 /* CircleRenderer.swift in Sources */,
@@ -708,7 +699,6 @@
 				14E1258A244421B300D34DF5 /* GameStats.swift in Sources */,
 				14E125CE244421B300D34DF5 /* CircleRenderer.swift in Sources */,
 				14E125AA244421B300D34DF5 /* ZPosition.swift in Sources */,
-				1461FA522444299A00ACE95D /* IntroScene.swift in Sources */,
 				1419B426243DAC5B00A74A63 /* GameTests.swift in Sources */,
 				14E12586244421B300D34DF5 /* HoleStat.swift in Sources */,
 			);
