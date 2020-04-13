@@ -24,7 +24,7 @@ class GameViewController: UIViewController {
         view.showsDrawCount = true
         #endif
 
-        view.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
+        view.preferredFramesPerSecond = 60
         view.alpha = 0
         return view
     }()

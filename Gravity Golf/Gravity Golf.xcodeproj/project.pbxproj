@@ -170,6 +170,7 @@
 		1419B423243DAC5B00A74A63 /* Gravity Golf Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gravity Golf Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1419B425243DAC5B00A74A63 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		1419B427243DAC5B00A74A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1460A5D424450F66003B6B28 /* PlusStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusStore.swift; sourceTree = "<group>"; };
 		1461FA5324442B3400ACE95D /* NSExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSExtensions.swift; sourceTree = "<group>"; };
 		14AC4AF32440D937000F6D3C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		14E12539244421B300D34DF5 /* PlanetShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PlanetShader.fsh; sourceTree = "<group>"; };
@@ -348,6 +349,7 @@
 				14E12544244421B300D34DF5 /* HoleStat.swift */,
 				14E12547244421B300D34DF5 /* LeaderboardUtility.swift */,
 				14E12543244421B300D34DF5 /* SaveUtility.swift */,
+				1460A5D424450F66003B6B28 /* PlusStore.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";

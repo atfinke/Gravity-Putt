@@ -150,6 +150,10 @@ class LevelNode: SKNode, Codable {
         viz(startSafeArea: startSafeArea.cgRect, goalSafeArea: goalSafeArea.cgRect)
 
         addChild(goalNode)
+        
+        if number == 1 {
+            return
+        }
 
         var localSpaceSafeAreaPlanetRects = [SKCircleRect]()
         let minPlanetRadius = size.width / 25

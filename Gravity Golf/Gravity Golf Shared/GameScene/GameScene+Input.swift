@@ -48,6 +48,10 @@ extension GameScene {
         finishedTargeting(pullBackLocation: sceneLocation)
         #endif
     }
+    
+    private func inputCancelled {
+        aimAssist.run(.fadeOut(withDuration: 0.15))
+    }
 }
 
 #if os(macOS)
@@ -90,6 +94,9 @@ extension GameScene {
         inputUp(sceneLocation: touch.location(in: self),
                 cameraLocation: touch.location(in: cameraNode))
     }
-
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        inputCancelled()
+    }
 }
 #endif

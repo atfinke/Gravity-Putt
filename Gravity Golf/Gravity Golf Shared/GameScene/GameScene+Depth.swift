@@ -22,7 +22,7 @@ extension GameScene {
         let minCount: Int = 180
         let countInterval = CGFloat(maxCount - minCount) / CGFloat(depthLevels)
 
-        let maxRadius: CGFloat = 1
+        let maxRadius: CGFloat = 0.9
         let minRadius: CGFloat = 0.4
         let radiusInterval = CGFloat(maxRadius - minRadius) / CGFloat(depthLevels)
 
