@@ -21,4 +21,5 @@ enum ZPosition: CGFloat {
 
     case playerPath = 120
     case stars = 100
+    case background = 1
 }

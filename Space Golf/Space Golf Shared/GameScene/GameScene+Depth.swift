@@ -34,7 +34,7 @@ extension GameScene {
                                               radiusRange: minDepthRadius..<maxDepthRadius)
             starDepthNode.position = CGPoint(x: levelPosition.x,
                                              y: levelPosition.y)
-            starDepthLevelNodes.append([starDepthNode])
+            starDepthNodes.append([starDepthNode])
 
             addChild(starDepthNode)
         }
@@ -44,8 +44,8 @@ extension GameScene {
         var starDepthsToAdd = [Int: StarDepthNode]()
         var starDepthsToRemove = [Int: StarDepthNode]()
 
-        for (depthLevel, depthNodesAtLevel) in starDepthLevelNodes.enumerated() {
-            let scale = 0.75 * CGFloat(depthLevel + 1) / CGFloat(starDepthLevelNodes.count)
+        for (depthLevel, depthNodesAtLevel) in starDepthNodes.enumerated() {
+            let scale = 0.75 * CGFloat(depthLevel + 1) / CGFloat(starDepthNodes.count)
             let offset = cameraOffset.scaleComponents(by: scale)
 
             for (depthLevelNodeIndex, depthLevelNode) in depthNodesAtLevel.enumerated() {
@@ -70,10 +70,10 @@ extension GameScene {
         }
 
         for (key, value) in starDepthsToAdd {
-            starDepthLevelNodes[key].append(value)
+            starDepthNodes[key].append(value)
         }
         for (key, value) in starDepthsToRemove {
-            starDepthLevelNodes[key].removeFirst()
+            starDepthNodes[key].removeFirst()
             value.run(.remove(after: Design.levelTransitionDuration))
         }
 
