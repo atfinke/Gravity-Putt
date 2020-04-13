@@ -147,23 +147,24 @@
 /* Begin PBXFileReference section */
 		1400F975241BF47C003BFED8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		1400F976241BF47D003BFED8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1400F97B241BF47D003BFED8 /* Space Golf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Golf.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1400F97B241BF47D003BFED8 /* Gravity Putt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gravity Putt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1400F97E241BF47D003BFED8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1400F980241BF47D003BFED8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1400F986241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1400F988241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1400F98D241BF47D003BFED8 /* Space Golf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Golf.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1400F98D241BF47D003BFED8 /* Gravity Putt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gravity Putt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1400F98F241BF47D003BFED8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1400F991241BF47D003BFED8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1400F997241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1400F999241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1400F99E241BF47D003BFED8 /* Space Golf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Space Golf.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1400F99E241BF47D003BFED8 /* Gravity Putt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gravity Putt.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1400F9A0241BF47D003BFED8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1400F9A2241BF47D003BFED8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1400F9A5241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1400F9A7241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		140266F02431F29800EF4AA8 /* ZPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZPosition.swift; sourceTree = "<group>"; };
 		14078744243B23FA00A8B80B /* GameScene+Depth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameScene+Depth.swift"; sourceTree = "<group>"; };
+		140AE9D624430E7400A8925B /* Space Golf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Space Golf.entitlements"; sourceTree = "<group>"; };
 		1419B423243DAC5B00A74A63 /* Space Golf Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Space Golf Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1419B425243DAC5B00A74A63 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		1419B427243DAC5B00A74A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -258,9 +259,9 @@
 		1400F97C241BF47D003BFED8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1400F97B241BF47D003BFED8 /* Space Golf.app */,
-				1400F98D241BF47D003BFED8 /* Space Golf.app */,
-				1400F99E241BF47D003BFED8 /* Space Golf.app */,
+				1400F97B241BF47D003BFED8 /* Gravity Putt.app */,
+				1400F98D241BF47D003BFED8 /* Gravity Putt.app */,
+				1400F99E241BF47D003BFED8 /* Gravity Putt.app */,
 				1419B423243DAC5B00A74A63 /* Space Golf Tests.xctest */,
 			);
 			name = Products;
@@ -291,6 +292,7 @@
 		1400F99F241BF47D003BFED8 /* Space Golf macOS */ = {
 			isa = PBXGroup;
 			children = (
+				140AE9D624430E7400A8925B /* Space Golf.entitlements */,
 				1400F9A0241BF47D003BFED8 /* AppDelegate.swift */,
 				1400F9A2241BF47D003BFED8 /* GameViewController.swift */,
 				1400F9A4241BF47D003BFED8 /* Main.storyboard */,
@@ -403,7 +405,7 @@
 			);
 			name = "Space Golf iOS";
 			productName = "Untitled Space Game iOS";
-			productReference = 1400F97B241BF47D003BFED8 /* Space Golf.app */;
+			productReference = 1400F97B241BF47D003BFED8 /* Gravity Putt.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1400F98C241BF47D003BFED8 /* Space Golf tvOS */ = {
@@ -420,7 +422,7 @@
 			);
 			name = "Space Golf tvOS";
 			productName = "Untitled Space Game tvOS";
-			productReference = 1400F98D241BF47D003BFED8 /* Space Golf.app */;
+			productReference = 1400F98D241BF47D003BFED8 /* Gravity Putt.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1400F99D241BF47D003BFED8 /* Space Golf macOS */ = {
@@ -437,7 +439,7 @@
 			);
 			name = "Space Golf macOS";
 			productName = "Untitled Space Game macOS";
-			productReference = 1400F99E241BF47D003BFED8 /* Space Golf.app */;
+			productReference = 1400F99E241BF47D003BFED8 /* Gravity Putt.app */;
 			productType = "com.apple.product-type.application";
 		};
 		1419B422243DAC5B00A74A63 /* Space Golf Tests */ = {
@@ -840,7 +842,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2020.04.08;
+				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "$(SRCROOT)/Space Golf iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -850,7 +852,7 @@
 				);
 				MARKETING_VERSION = 2020.04;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
-				PRODUCT_NAME = "Space Golf";
+				PRODUCT_NAME = "Gravity Putt";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -862,7 +864,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2020.04.08;
+				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "$(SRCROOT)/Space Golf iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
@@ -872,7 +874,7 @@
 				);
 				MARKETING_VERSION = 2020.04;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
-				PRODUCT_NAME = "Space Golf";
+				PRODUCT_NAME = "Gravity Putt";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -885,18 +887,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "tvOS App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "Space Golf tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2020.04;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
-				PRODUCT_NAME = "Space Golf";
+				PRODUCT_NAME = "Gravity Putt";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 13.2;
+				TVOS_DEPLOYMENT_TARGET = 13.1;
 			};
 			name = Debug;
 		};
@@ -905,18 +909,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "tvOS App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "Space Golf tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 2020.04;
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
-				PRODUCT_NAME = "Space Golf";
+				PRODUCT_NAME = "Gravity Putt";
 				SDKROOT = appletvos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 13.2;
+				TVOS_DEPLOYMENT_TARGET = 13.1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -925,9 +931,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Space Golf macOS/Space Golf.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Space Golf macOS/Info.plist";
@@ -936,9 +944,10 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 2020.04;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
-				PRODUCT_NAME = "Space Golf";
+				PRODUCT_NAME = "Gravity Putt";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};
@@ -948,9 +957,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Space Golf macOS/Space Golf.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = "Space Golf macOS/Info.plist";
@@ -959,9 +970,10 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 2020.04;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
-				PRODUCT_NAME = "Space Golf";
+				PRODUCT_NAME = "Gravity Putt";
 				SDKROOT = macosx;
 				SWIFT_VERSION = 5.0;
 			};

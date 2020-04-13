@@ -88,7 +88,7 @@ class HapticsUtility {
         lastPlaybackDate = Date()
 
         startEngine()
-        
+
         let impact = sqrt(normalizedImpact)
         do {
             let volume = CGFloat(0.1).lerp(value: 1, alpha: impact)

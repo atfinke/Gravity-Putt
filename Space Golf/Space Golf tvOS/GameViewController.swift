@@ -21,7 +21,7 @@ class GameViewController: UIViewController {
         view.showsNodeCount = true
         #endif
 
-        view.preferredFramesPerSecond = UIScreen.main.maximumFramesPerSecond
+        view.preferredFramesPerSecond = 48
         view.alpha = 0
         return view
     }()
@@ -32,6 +32,10 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         scene.presentingController = self
         view.backgroundColor = .black
+
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(pressedPlayPause))
+        recognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.playPause.rawValue)]
+        view.addGestureRecognizer(recognizer)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -43,6 +47,11 @@ class GameViewController: UIViewController {
         UIView.animate(withDuration: 1.0) {
             self.skView.alpha = 1
         }
+    }
+
+    @objc
+    func pressedPlayPause() {
+        scene.showLeaderboard()
     }
 
 }

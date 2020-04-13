@@ -8,7 +8,6 @@
 
 import Cocoa
 import SpriteKit
-import GameplayKit
 
 class GameViewController: NSViewController {
 
@@ -32,14 +31,6 @@ class GameViewController: NSViewController {
         skView.showsNodeCount = true
         skView.showsDrawCount = true
 
-        #else
-        let alert = NSAlert()
-        alert.messageText = "thanks for looking at this"
-        alert.informativeText = "1. lmk what sucks\n2. final version is for touch/ios\n3. right click to reset (only if things seem broken)\n4. there is no end"
-        alert.addButton(withTitle: "cool")
-        alert.runModal()
-        #endif
-
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             if $0.keyCode == 124 {
                 scene.debugMove(x: 125, y: 0)
@@ -54,11 +45,6 @@ class GameViewController: NSViewController {
             }
             return nil
         }
+        #endif
     }
-
-    override func viewDidLayout() {
-        super.viewDidLayout()
-        print(view.frame)
-    }
-
 }

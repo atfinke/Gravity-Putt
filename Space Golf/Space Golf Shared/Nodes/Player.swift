@@ -26,11 +26,19 @@ class Player: SKNode {
         body.friction = 0.95
         physicsBody = body
 
-        let shape = SKShapeNode(circleOfRadius: radius)
-        shape.fillColor = .white
-        shape.strokeColor = .white
-        shape.lineWidth = 2
-        shape.position = CGPoint(x: 0, y: 0)
+        let rendererSize = CGSize(width: 20, height: 30)
+        let renderer = ContextRenderer(size: rendererSize)
+        let image = renderer.image { ctx in
+            SKColor.white.setFill()
+            let center = CGPoint(x: rendererSize.width / 2, y: rendererSize.height / 2)
+            ctx.cgContext.addArc(center: center,
+                                 radius: radius,
+                                 startAngle: 0,
+                                 endAngle: CGFloat.pi * 2,
+                                 clockwise: true)
+            ctx.cgContext.fillPath()
+        }
+        let shape = SKSpriteNode(texture: SKTexture(image: image))
         addChild(shape)
 
         zPosition = ZPosition.player.rawValue

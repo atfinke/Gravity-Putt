@@ -28,6 +28,10 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
     // MARK: - Helpers -
 
     func submit(stats: GameStats) {
+        guard localPlayer.isAuthenticated else {
+            return
+        }
+
         let completedHoles = CGFloat(stats.holeStats.count)
         let totalTime = CGFloat(stats.holeStats.map({ $0.duration }).reduce(0, +))
 
@@ -51,6 +55,15 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
 
     func authenticate(authController: @escaping (SKController) -> Void,
                       completion: @escaping (_ success: Bool) -> Void) {
+        #if DEBUG && os(macOS)
+        return
+        #endif
+
+        guard !localPlayer.isAuthenticated else {
+            completion(true)
+            return
+        }
+
         localPlayer.authenticateHandler = { controller, error in
             DispatchQueue.main.async {
                 if let controller = controller {
@@ -68,6 +81,7 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
     func leaderboardController() -> GKGameCenterViewController {
         let controller = GKGameCenterViewController()
         controller.gameCenterDelegate = self
+        controller.title = "Game Center"
         #if !os(tvOS)
         controller.viewState = .leaderboards
         #endif
@@ -83,6 +97,6 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         gameCenterViewController.presentingViewController?
             .dismiss(animated: true, completion: nil)
         #endif
-        
+
     }
 }

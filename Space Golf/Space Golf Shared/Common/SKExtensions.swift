@@ -29,7 +29,7 @@ extension SKFont {
                       size: CGFloat,
                       weight: SKFont.Weight) -> NSAttributedString {
         let initalFont = SKFont.systemFont(ofSize: size, weight: weight)
-        guard let descriptor = initalFont.fontDescriptor.withDesign(.rounded) else {
+        guard let descriptor = initalFont.fontDescriptor.withDesign(.monospaced) else {
             fatalError()
         }
         #if os(macOS)

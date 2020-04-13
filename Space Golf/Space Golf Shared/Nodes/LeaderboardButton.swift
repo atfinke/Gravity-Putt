@@ -8,36 +8,47 @@
 
 import SpriteKit
 
-class LeaderboardButton: SKSpriteNode {
+class LeaderboardButton: SKNode {
 
     // MARK: - Initalization -
 
-    init() {
-        super.init(texture: nil,
-                   color: .clear,
-                   size: CGSize(width: Design.leaderboardButtonSize,
-                                              height: Design.leaderboardButtonSize))
+    override init() {
+        super.init()
+        let rendererSize = CGSize(width: Design.leaderboardButtonSize + 2,
+                                  height: Design.leaderboardButtonSize + 2)
+        let renderer = ContextRenderer(size: rendererSize)
+        let image = renderer.image { ctx in
+            SKColor.purple.withAlphaComponent(0.75).setFill()
 
-        let circleNode = SKShapeNode(circleOfRadius: Design.leaderboardButtonSize / 2)
-        circleNode.strokeColor = SKColor.white.withAlphaComponent(1)
-        circleNode.lineWidth = 2
-        circleNode.fillColor = SKColor.purple.withAlphaComponent(0.5)
-        addChild(circleNode)
+            let center = CGPoint(x: rendererSize.width / 2, y: rendererSize.height / 2)
+            ctx.cgContext.addArc(center: center,
+                                 radius: Design.leaderboardButtonSize / 2,
+                                 startAngle: 0,
+                                 endAngle: CGFloat.pi * 2,
+                                 clockwise: true)
+            ctx.cgContext.fillPath()
 
-        let rectPath = CGMutablePath()
-        rectPath.addRects([
-            CGRect(x: -6, y: -5, width: 4, height: 7),
-            CGRect(x: -2, y: -5, width: 4, height: 11),
-            CGRect(x: 2, y: -5, width: 4, height: 9)
+            ctx.cgContext.beginPath()
+            SKColor.white.setStroke()
+            ctx.cgContext.setLineWidth(2)
+            ctx.cgContext.addArc(center: center,
+                                 radius: Design.leaderboardButtonSize / 2,
+                                 startAngle: 0,
+                                 endAngle: CGFloat.pi * 2,
+                                 clockwise: true)
+            ctx.cgContext.strokePath()
 
-        ])
-
-        let rectNode = SKShapeNode(path: rectPath)
-        rectNode.strokeColor = SKColor.purple.withAlphaComponent(0.5)
-        rectNode.fillColor = SKColor.white
-        rectNode.lineCap = .round
-        rectNode.lineJoin = .round
-        circleNode.addChild(rectNode)
+            ctx.cgContext.beginPath()
+            SKColor.white.setFill()
+            ctx.cgContext.addRects([
+                CGRect(x: center.x - 6.5, y: center.y - 1, width: 4, height: 7),
+                CGRect(x: center.x - 2, y: center.y - 6, width: 4, height: 12),
+                CGRect(x: center.x + 2.5, y: center.y - 3, width: 4, height: 9)
+            ])
+            ctx.cgContext.fillPath()
+        }
+        let body = SKSpriteNode(texture: SKTexture(image: image))
+        addChild(body)
     }
 
     required init?(coder aDecoder: NSCoder) {

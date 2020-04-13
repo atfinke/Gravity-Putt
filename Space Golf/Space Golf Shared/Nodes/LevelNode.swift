@@ -78,7 +78,7 @@ class LevelNode: SKNode, Codable {
         let goalPositionX = CGFloat.random(in: goalMinCenterPositionX...goalMaxCenterPositionX)
         let goalPositionY = CGFloat.random(in: goalMinCenterPositionY...goalMaxCenterPositionY)
         let goalPosition = CGPoint(x: goalPositionX, y: goalPositionY)
-        goalNode = Goal(radius: goalRadius, levelNumber: number)
+        goalNode = Goal(levelNumber: number)
         goalNode.alpha = 0
         goalNode.position = goalPosition
         goalRectLocalSpace = SKCircleRect(centerX: goalPosition.x,
@@ -208,6 +208,20 @@ class LevelNode: SKNode, Codable {
 
     // MARK: - Helpers -
 
+    func addingStartingPositionGoal() {
+        let initalGoal = Goal(levelNumber: 0)
+        initalGoal.gravityField.removeFromParent()
+        initalGoal.borderNode.color = SKColor(red: 1, green: 1, blue: 1, alpha: 1)
+        initalGoal.innerNode.removeFromParent()
+        initalGoal.label.removeFromParent()
+        initalGoal.borderNode.removeAllActions()
+        initalGoal.zRotation = -CGFloat.pi * (1 / 2)
+        initalGoal.xScale = 0.5
+        initalGoal.yScale = 0.5
+        initalGoal.position = startRectLocalSpace.center
+        addChild(initalGoal)
+    }
+
     func attemptPlanetCreation(maxSafeAreaRadius: CGFloat,
                                minPlanetRadius: CGFloat,
                                minBoundsX: CGFloat,
@@ -312,7 +326,7 @@ class LevelNode: SKNode, Codable {
         self.startRectLocalSpace = startRectLocalSpace
         self.localSpacePlanets = localSpacePlanets
 
-        goalNode = Goal(radius: goalRectLocalSpace.radius, levelNumber: number)
+        goalNode = Goal(levelNumber: number)
         goalNode.alpha = 0
         goalNode.position = goalRectLocalSpace.center
 
@@ -401,10 +415,10 @@ class LevelNode: SKNode, Codable {
             let goalPositionX = CGFloat.random(in: xRange)
             let goalPositionY = CGFloat.random(in: yRange)
 
-            let goal = SKShapeNode(circleOfRadius: radius)
-            goal.strokeColor = .white
-            goal.position = CGPoint(x: goalPositionX, y: goalPositionY)
-            addChild(goal)
+            let goalViz = SKShapeNode(circleOfRadius: radius)
+            goalViz.strokeColor = .white
+            goalViz.position = CGPoint(x: goalPositionX, y: goalPositionY)
+            addChild(goalViz)
         }
     }
 

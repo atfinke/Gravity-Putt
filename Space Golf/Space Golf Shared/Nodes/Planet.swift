@@ -46,7 +46,6 @@ class Planet: SKNode, Codable {
                                         color: .white,
                                         size: CGSize(width: radius * 2, height: radius * 2))
         borderSprite.colorBlendFactor = 1
-        borderSprite.zPosition = ZPosition.planetBorder.rawValue
         addChild(borderSprite)
 
         let bodyRadius = radius - borderWidth
@@ -58,7 +57,6 @@ class Planet: SKNode, Codable {
         } else {
             bodySprite.color = SKColor(white: 0.2, alpha: 1)
         }
-        bodySprite.zPosition = ZPosition.planetBody.rawValue
         addChild(bodySprite)
 
         let gravityFieldRegionRadius = radius * 3
@@ -69,7 +67,6 @@ class Planet: SKNode, Codable {
                                                    color: .clear,
                                                    size: gravityFieldShaderNodeSize)
         gravityFieldShaderNode.shader = gravityFieldShader(color: color)
-        gravityFieldShaderNode.zPosition = ZPosition.planetGravityFieldShader.rawValue
         addChild(gravityFieldShaderNode)
 
         let physicsBody = SKPhysicsBody(circleOfRadius: radius)
@@ -105,7 +102,7 @@ class Planet: SKNode, Codable {
             SKUniform(name: "u_start_color", vectorFloat4: iv),
             SKUniform(name: "u_end_color", vectorFloat4: fv),
             SKUniform(name: "u_duration", float: Float.random(in: 2...7)),
-            SKUniform(name: "u_delay", float: Float.random(in: 0...15)),
+            SKUniform(name: "u_delay", float: Float.random(in: 0...30)),
             SKUniform(name: "u_min_alpha", float: Float.random(in: 0.5...0.8))
         ]
 

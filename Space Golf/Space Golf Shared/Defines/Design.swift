@@ -18,6 +18,8 @@ struct Design {
 
     static let goalRadius: CGFloat = 40.0
     static let goalFieldStrength: Float = 2
+    static let goalAsStartScale: CGFloat = 0.5
+
     static let playerPathNodeRadius: CGFloat = 3
     static let playerPathSpacing: CGFloat = 15
 

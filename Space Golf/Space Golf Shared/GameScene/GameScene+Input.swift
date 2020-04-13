@@ -8,38 +8,65 @@
 
 import SpriteKit
 
+extension GameScene {
+
+    func showLeaderboard() {
+        let controller = leaderboardUtility.leaderboardController()
+        presentingController?.present(controller, animated: true, completion: nil)
+    }
+
+    private func inputDown(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        if leaderboardRect.contains(cameraLocation) {
+            showLeaderboard()
+            return
+        }
+        #if os(tvOS)
+        setTargeting(startLocation: sceneLocation + CGPoint(x: 0, y: -levelSize.height/2 + 100))
+        #else
+        setTargeting(startLocation: sceneLocation)
+        #endif
+    }
+
+    private func inputMoved(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        if leaderboardRect.contains(cameraLocation) {
+            return
+        }
+        #if os(tvOS)
+        setTargeting(pullBackLocation: sceneLocation + CGPoint(x: 0, y: -levelSize.height/2 + 100))
+        #else
+        setTargeting(pullBackLocation: sceneLocation)
+        #endif
+    }
+
+    private func inputUp(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        if leaderboardRect.contains(cameraLocation) {
+            return
+        }
+        #if os(tvOS)
+        finishedTargeting(pullBackLocation: sceneLocation + CGPoint(x: 0, y: -levelSize.height/2 + 100))
+        #else
+        finishedTargeting(pullBackLocation: sceneLocation)
+        #endif
+    }
+}
+
 #if os(macOS)
 
 extension GameScene {
-
     override func mouseDown(with event: NSEvent) {
-        if leaderboardRect.contains(event.location(in: cameraNode)) {
-            let controller = leaderboardUtility.leaderboardController()
-            presentingController?.present(controller, animated: true, completion: nil)
-            return
-        }
-
-        setTargeting(startLocation: event.location(in: self))
+        inputDown(sceneLocation: event.location(in: self),
+                  cameraLocation: event.location(in: cameraNode))
     }
 
     override func mouseDragged(with event: NSEvent) {
-        if leaderboardRect.contains(event.location(in: cameraNode)) {
-            return
-        }
-        setTargeting(pullBackLocation: event.location(in: self))
+        inputMoved(sceneLocation: event.location(in: self),
+                   cameraLocation: event.location(in: cameraNode))
     }
 
     override func mouseUp(with event: NSEvent) {
-        if leaderboardRect.contains(event.location(in: cameraNode)) {
-            return
-        }
-        finishedTargeting(pullBackLocation: event.location(in: self))
+        inputUp(sceneLocation: event.location(in: self),
+                cameraLocation: event.location(in: cameraNode))
     }
-
-    override func rightMouseUp(with event: NSEvent) {
-        resetPlayerPosition()
-    }
-
 }
 
 #else
@@ -47,46 +74,21 @@ extension GameScene {
 extension GameScene {
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let cameraLocation = touches.first?.location(in: cameraNode),
-            leaderboardRect.contains(cameraLocation) {
-            let controller = leaderboardUtility.leaderboardController()
-            presentingController?.present(controller, animated: true, completion: nil)
-            return
-        }
-
-        if touches.count == 2 {
-            resetPlayerPosition()
-            return
-        }
-
-        guard let location = touches.first?.location(in: self) else {
-            return
-        }
-        setTargeting(startLocation: location)
+        guard let touch = touches.first else { return }
+        inputDown(sceneLocation: touch.location(in: self),
+                  cameraLocation: touch.location(in: cameraNode))
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let cameraLocation = touches.first?.location(in: cameraNode),
-            leaderboardRect.contains(cameraLocation) {
-            return
-        }
-
-        guard touches.count == 1, let location = touches.first?.location(in: self) else {
-            return
-        }
-        setTargeting(pullBackLocation: location)
+        guard let touch = touches.first else { return }
+        inputMoved(sceneLocation: touch.location(in: self),
+                   cameraLocation: touch.location(in: cameraNode))
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let cameraLocation = touches.first?.location(in: cameraNode),
-            leaderboardRect.contains(cameraLocation) {
-            return
-        }
-
-        guard touches.count == 1, let location = touches.first?.location(in: self) else {
-            return
-        }
-        finishedTargeting(pullBackLocation: location)
+        guard let touch = touches.first else { return }
+        inputUp(sceneLocation: touch.location(in: self),
+                cameraLocation: touch.location(in: cameraNode))
     }
 
 }

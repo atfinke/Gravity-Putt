@@ -12,8 +12,8 @@ class Goal: SKNode {
 
     // MARK: - Properties -
 
-    let borderNode: SKShapeNode
-    let innerNode: SKShapeNode
+    let borderNode: SKSpriteNode
+    let innerNode: SKSpriteNode
     let label: SKLabelNode
 
     let gravityField: SKFieldNode = {
@@ -23,17 +23,15 @@ class Goal: SKNode {
         return field
     }()
 
-    // MARK: - Initalization -
-
-    init(radius: CGFloat, levelNumber: Int) {
+    static let textures: (outer: SKTexture, inner: SKTexture) = {
         let outerBorderPath = CGMutablePath()
         outerBorderPath.move(to: .zero)
-        let outerBorderOuterRadius: CGFloat = radius
+        let outerBorderOuterRadius: CGFloat = Design.goalRadius
         let outerBorderInnerRadius = outerBorderOuterRadius - 10
 
         let innerBorderPath = CGMutablePath()
         innerBorderPath.move(to: .zero)
-        let innerBorderRadius = radius / 2
+        let innerBorderRadius = Design.goalRadius / 2
 
         let segments: CGFloat = 4
         let offset = CGFloat.pi / segments / 2
@@ -71,27 +69,57 @@ class Goal: SKNode {
                                    clockwise: false)
         }
 
-        borderNode = SKShapeNode(path: outerBorderPath)
-        borderNode.strokeColor = SKColor.green.withAlphaComponent(0.5)
-        borderNode.fillColor = SKColor.black
-        borderNode.lineWidth = 3
-        borderNode.lineCap = .round
-        borderNode.lineJoin = .round
-        borderNode.zPosition = ZPosition.goalBorder.rawValue
+        let outerNodeRenderSize = CGSize(width: outerBorderOuterRadius * 2 + 5, height: outerBorderOuterRadius * 2 + 5)
+        let outerNodeRenderer = ContextRenderer(size: outerNodeRenderSize)
+        let outerNodeImage = outerNodeRenderer.image { ctx in
+            SKColor.white.setStroke()
+            SKColor.black.setFill()
+            ctx.cgContext.setLineWidth(3)
+            ctx.cgContext.setLineJoin(.round)
+            ctx.cgContext.setLineCap(.round)
 
-        innerNode = SKShapeNode(path: innerBorderPath)
-        innerNode.strokeColor = SKColor.white.withAlphaComponent(0.25)
-        innerNode.lineWidth = 3
-        innerNode.lineCap = .round
-        innerNode.lineJoin = .round
-        innerNode.zPosition = ZPosition.goalInnerBorder.rawValue
+            let center = CGPoint(x: outerNodeRenderSize.width / 2, y: outerNodeRenderSize.height / 2)
+            var transform = CGAffineTransform(translationX: center.x, y: center.y)
+            guard let path = outerBorderPath.copy(using: &transform) else { fatalError() }
+            ctx.cgContext.addPath(path)
+            ctx.cgContext.strokePath()
+        }
+        let outerTexture = SKTexture(image: outerNodeImage)
+
+        let innerNodeRenderSize = CGSize(width: innerBorderRadius * 2 + 5, height: innerBorderRadius * 2 + 5)
+        let innerNodeRenderer = ContextRenderer(size: innerNodeRenderSize)
+        let innerNodeImage = innerNodeRenderer.image { ctx in
+            SKColor.white.withAlphaComponent(0.5).setStroke()
+            ctx.cgContext.setLineWidth(3)
+            ctx.cgContext.setLineJoin(.round)
+            ctx.cgContext.setLineCap(.round)
+
+            let center = CGPoint(x: innerNodeRenderSize.width / 2, y: innerNodeRenderSize.height / 2)
+            var transform = CGAffineTransform(translationX: center.x, y: center.y)
+            guard let path = innerBorderPath.copy(using: &transform) else { fatalError() }
+            ctx.cgContext.addPath(path)
+            ctx.cgContext.strokePath()
+        }
+        let innerTexture = SKTexture(image: innerNodeImage)
+
+        return (outerTexture, innerTexture)
+    }()
+
+    // MARK: - Initalization -
+
+    init(levelNumber: Int) {
+        borderNode = SKSpriteNode(texture: Goal.textures.outer)
+        borderNode.colorBlendFactor = 1
+        borderNode.color = SKColor.green.withAlphaComponent(0.8)
+
+        innerNode = SKSpriteNode(texture: Goal.textures.inner)
 
         label = SKLabelNode(text: "")
         label.horizontalAlignmentMode = .center
         label.verticalAlignmentMode = .center
 
         let fontSize: CGFloat = 15
-        let initalFont = SKFont.systemFont(ofSize: fontSize, weight: .semibold)
+        let initalFont = SKFont.systemFont(ofSize: fontSize, weight: .bold)
         guard let descriptor = initalFont.fontDescriptor.withDesign(.monospaced) else {
             fatalError()
         }
@@ -112,20 +140,13 @@ class Goal: SKNode {
 
         super.init()
 
-        gravityField.minimumRadius = Float(radius)
-        gravityField.region = SKRegion(radius: Float(radius * 2))
+        gravityField.minimumRadius = Float(Design.goalRadius)
+        gravityField.region = SKRegion(radius: Float(Design.goalRadius * 2))
 
         addChild(gravityField)
         addChild(borderNode)
         addChild(innerNode)
         addChild(label)
-
-        let body = SKPhysicsBody(circleOfRadius: radius)
-        body.contactTestBitMask = SpriteCategory.player
-        body.collisionBitMask = SpriteCategory.none
-        body.categoryBitMask = SpriteCategory.none
-        body.isDynamic = false
-        physicsBody = body
 
         zPosition = ZPosition.goal.rawValue
 

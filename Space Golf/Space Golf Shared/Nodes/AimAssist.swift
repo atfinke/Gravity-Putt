@@ -12,27 +12,47 @@ class AimAssist: SKNode {
 
     // MARK: - Properties -
 
-    let tipNode: SKShapeNode
-    let center = SKShapeNode(circleOfRadius: Design.aimAssistInnerRadius)
+    let tipNode: SKSpriteNode
+    let center: SKSpriteNode
     let tail: SKShapeNode
     let tailLength: CGFloat = 100
 
     // MARK: - Initalization -
 
     override init() {
-        center.fillColor = .clear
-        center.lineWidth = 4
+        let centerRendererSize = CGSize(width: Design.aimAssistInnerRadius * 2 + 5,
+                                        height: Design.aimAssistInnerRadius * 2 + 5)
+        let centerRenderer = ContextRenderer(size: centerRendererSize)
+        let centerImage = centerRenderer.image { ctx in
+            SKColor.white.setStroke()
+            ctx.cgContext.setLineWidth(4)
 
-        let tipPath = CGMutablePath()
-        tipPath.move(to: CGPoint(x: 0, y: 10))
-        tipPath.addLine(to: CGPoint(x: 6, y: 0))
-        tipPath.addLine(to: CGPoint(x: 0, y: -10))
+            let center = CGPoint(x: centerRendererSize.width / 2,
+                                 y: centerRendererSize.height / 2)
+            ctx.cgContext.addArc(center: center,
+                                 radius: Design.aimAssistInnerRadius,
+                                 startAngle: 0,
+                                 endAngle: CGFloat.pi * 2,
+                                 clockwise: false)
+            ctx.cgContext.strokePath()
+        }
+        center = SKSpriteNode(texture: SKTexture(image: centerImage))
 
-        tipNode = SKShapeNode(path: tipPath)
-        tipNode.lineCap = .round
-        tipNode.lineJoin = .round
-        tipNode.fillColor = .clear
-        tipNode.lineWidth = 5
+        let tipRendererSize = CGSize(width: 20, height: 30)
+        let tipRenderer = ContextRenderer(size: tipRendererSize)
+        let tipImage = tipRenderer.image { ctx in
+            SKColor.white.setStroke()
+            ctx.cgContext.setLineWidth(5)
+            ctx.cgContext.setLineJoin(.round)
+            ctx.cgContext.setLineCap(.round)
+
+            let center = CGPoint(x: tipRendererSize.width / 2, y: tipRendererSize.height / 2)
+            ctx.cgContext.move(to: CGPoint(x: center.x, y: center.y + 10))
+            ctx.cgContext.addLine(to: CGPoint(x: center.x + 6, y: center.y))
+            ctx.cgContext.addLine(to: CGPoint(x: center.x, y: center.y - 10))
+            ctx.cgContext.strokePath()
+        }
+        tipNode = SKSpriteNode(texture: SKTexture(image: tipImage))
         tipNode.zRotation = CGFloat.pi / 2
         tipNode.position = CGPoint(x: 0, y: 20)
 
@@ -47,6 +67,7 @@ class AimAssist: SKNode {
         tail.lineWidth = 5
         tail.position = CGPoint(x: 0, y: -Design.aimAssistInnerRadius * 2.5)
         tail.zRotation = CGFloat.pi
+        tail.strokeColor = .white
 
         super.init()
         zPosition = ZPosition.aimAssist.rawValue
@@ -54,8 +75,6 @@ class AimAssist: SKNode {
         addChild(center)
         addChild(tipNode)
         addChild(tail)
-
-        update(color: SKColor(white: 1, alpha: 1.0))
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -71,9 +90,9 @@ class AimAssist: SKNode {
         tail.path = path.copy(dashingWithPhase: 0, lengths: [12, 12])
     }
 
-    func update(color: SKColor) {
-        tipNode.strokeColor = color
-        center.strokeColor = color
-        tail.strokeColor = color
+    func update(componentAlphas: CGFloat) {
+        tipNode.alpha = componentAlphas
+        center.alpha = componentAlphas
+        tail.alpha = componentAlphas
     }
 }

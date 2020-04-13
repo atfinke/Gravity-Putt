@@ -74,7 +74,7 @@ class GameTests: XCTestCase {
                 view = NSView(frame: NSRect(x: 0, y: 0, width: 1000, height: 600))
             }
         }
-        
+
         let scene = GameScene(size: CGSize(width: 1000, height: 800))
         scene.presentingController = MVC()
         scene.setupScene()

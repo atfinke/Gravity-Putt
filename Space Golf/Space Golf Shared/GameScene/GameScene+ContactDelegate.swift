@@ -23,9 +23,7 @@ extension GameScene: SKPhysicsContactDelegate {
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
-        if let goal = type(type: Goal.self, in: contact) {
-            contactGoal = goal
-        } else if let planet = type(type: Planet.self, in: contact) {
+        if let planet = type(type: Planet.self, in: contact) {
             contactPlanet = planet
             guard let magnitude = player.physicsBody?.velocity.magnitude() else { fatalError() }
             let normalized = min(1, magnitude / 90)
@@ -34,9 +32,7 @@ extension GameScene: SKPhysicsContactDelegate {
     }
 
     func didEnd(_ contact: SKPhysicsContact) {
-        if let _ = type(type: Goal.self, in: contact) {
-            contactGoal = nil
-        } else if let _ = type(type: Planet.self, in: contact) {
+        if let _ = type(type: Planet.self, in: contact) {
             contactPlanet = nil
         }
     }
