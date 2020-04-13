@@ -46,8 +46,7 @@ class Planet: SKNode, Codable {
                                         color: .white,
                                         size: CGSize(width: radius * 2, height: radius * 2))
         borderSprite.colorBlendFactor = 1
-        addChild(borderSprite)
-
+        
         let bodyRadius = radius - borderWidth
         let bodySprite = SKSpriteNode(texture: Planet.texture,
                                       size: CGSize(width: bodyRadius * 2, height: bodyRadius * 2))
@@ -57,8 +56,7 @@ class Planet: SKNode, Codable {
         } else {
             bodySprite.color = SKColor(white: 0.2, alpha: 1)
         }
-        addChild(bodySprite)
-
+        
         let gravityFieldRegionRadius = radius * 3
         gravityField.region = SKRegion(radius: Float(gravityFieldRegionRadius))
         let gravityFieldShaderNodeSize = CGSize(width: gravityFieldRegionRadius * 2,
@@ -67,7 +65,10 @@ class Planet: SKNode, Codable {
                                                    color: .clear,
                                                    size: gravityFieldShaderNodeSize)
         gravityFieldShaderNode.shader = gravityFieldShader(color: color)
+        
         addChild(gravityFieldShaderNode)
+        addChild(borderSprite)
+        addChild(bodySprite)
 
         let physicsBody = SKPhysicsBody(circleOfRadius: radius)
         physicsBody.isDynamic = false

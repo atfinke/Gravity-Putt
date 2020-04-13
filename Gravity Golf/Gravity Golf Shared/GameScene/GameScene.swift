@@ -23,8 +23,9 @@ class GameScene: SKScene, Codable {
     // Nodes
     let aimAssist = AimAssist()
     let cameraNode = SKCameraNode()
-    let strokesLabel = SKLabelNode(text: "")
-    let holeLabel = SKLabelNode(text: "")
+    let strokesLabel = SKLabelNode()
+    let holeLabel = SKLabelNode()
+    let introLabel = SKLabelNode()
     let leaderboardButton = LeaderboardButton()
     let backgroundColorNode = SKSpriteNode(color: .white, size: CGSize(width: 10, height: 10))
     
@@ -117,7 +118,7 @@ class GameScene: SKScene, Codable {
             level.localSpacePlanets.forEach { adjusted[$0.key] = $0.value.offset(by: level.position) }
             planetNodesWorldSpace.append(adjusted)
         }
-        moveToNextLevel(isFirstLevel: true)
+        moveToNextLevel(isFirstLevel: true, duration: nil)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -132,29 +133,45 @@ class GameScene: SKScene, Codable {
     func setupScene() {
         setupCamera()
         
-        backgroundColorNode.color = SKColor(hue: 280 / 360,
-                                            saturation: 1,
-                                            brightness: CGFloat.random(in: 0.05...0.1),
-                                            alpha: 1.0)
+        backgroundColorNode.color = .randomBackgroundColor
         backgroundColorNode.xScale = size.width / 10 * 2
         backgroundColorNode.yScale = size.height / 10 * 2
         backgroundColorNode.zPosition = ZPosition.background.rawValue
         backgroundColorNode.position = cameraNode.position
         addChild(backgroundColorNode)
         
+        if gameStats.holeNumber == 1 {
+            introLabel.numberOfLines = 2
+            introLabel.color = .white
+            introLabel.attributedText = NSAttributedString.stylized(string: "Gravity\nGolf",
+                                                               size: 40,
+                                                               weight: .semibold)
+            introLabel.position = CGPoint(x: -size.width / 2 + introLabel.frame.width, y: 0)
+            introLabel.zPosition = ZPosition.introLabel.rawValue
+            addChild(introLabel)
+            
+            addLevel()
+            addLevel()
+            
+            player.position = levels[1].position // some far off place
+            
+            let action: SKAction = .sequence([
+                .wait(forDuration: 4),
+                .run {
+                    self.moveToNextLevel(isFirstLevel: true,
+                                         duration: Design.levelTransitionDuration * 2)
+                }
+            ])
+            run(action)
+        }
+        levels[0].addingStartingPositionGoal()
+        
         aimAssist.alpha = 0.0
         addChild(aimAssist)
         addChild(player)
         
-        physicsWorld.contactDelegate = self
-        
-        if levels.isEmpty {
-            addLevel()
-            addLevel()
-            moveToNextLevel(isFirstLevel: true)
-        }
-        levels[0].addingStartingPositionGoal()
         createDepthNodes()
+        physicsWorld.contactDelegate = self
     }
     
     func setupCamera() {
@@ -181,18 +198,34 @@ class GameScene: SKScene, Codable {
         cameraNode.addChild(holeLabel)
         
         updateScoreLabel()
+        
+        if gameStats.holeNumber == 1 {
+            strokesLabel.alpha = 0
+            holeLabel.alpha = 0
+            leaderboardButton.alpha = 0
+        }
+    }
+    
+    func authenticate() {
+        guard gameStats.holeNumber > 1 else { return }
+        #if !targetEnvironment(simulator)
+        guard let presentingController = presentingController else { fatalError() }
+        leaderboardUtility.authenticate(authController: { controller in
+            presentingController.present(controller, animated: true, completion: nil)
+        }, completion: { _ in
+            
+        })
+        #endif
     }
     
     // MARK: - Level Management -
     
     func updateScoreLabel() {
-        strokesLabel.attributedText = SKFont.score(string: "\(gameStats.completedHolesStrokes)",
-            size: 18,
-            weight: .semibold)
+        strokesLabel.attributedText = NSAttributedString.stylized(string: "\(gameStats.completedHolesStrokes)",
+            size: 18, weight: .semibold)
         
-        holeLabel.attributedText = SKFont.score(string: "+\(gameStats.holeStrokes)",
-            size: 15,
-            weight: .semibold)
+        holeLabel.attributedText = NSAttributedString.stylized(string: "+\(gameStats.holeStrokes)",
+            size: 15, weight: .semibold)
         
         let xOffset = strokesLabel.position.x + strokesLabel.frame.size.width + 5
         holeLabel.position = CGPoint(x: xOffset,
@@ -217,7 +250,7 @@ class GameScene: SKScene, Codable {
                 - level.startRectLocalSpace.center.y
             level.position = CGPoint(x: positionX, y: positionY)
         } else {
-            level.position = CGPoint(x: 0, y: -level.startRectLocalSpace.center.y)
+            level.position = CGPoint(x: size.width, y: -level.startRectLocalSpace.center.y)
         }
         
         levels.append(level)
@@ -228,8 +261,9 @@ class GameScene: SKScene, Codable {
         planetNodesWorldSpace.append(adjusted)
     }
     
-    func moveToNextLevel(isFirstLevel: Bool = false) {
-        let transitionDuration = isFirstLevel ? 0.5 : Design.levelTransitionDuration
+    func moveToNextLevel(isFirstLevel: Bool = false,
+                         duration: TimeInterval? = Design.levelTransitionDuration) {
+        let transitionDuration = duration ?? 0.5
         let transitionTiming = Design.levelTransitionTimingFunction
         
         // Remove the last last level (that was kept in case the user hits backwards)
@@ -318,24 +352,22 @@ class GameScene: SKScene, Codable {
         newActiveGoal.run(goalAlphaAction)
         
         // Move camera
-        if isFirstLevel {
-            cameraNode.position = cameraPosition
-        } else {
+        if transitionDuration > 0.5 {
             let cameraPositionAction = SKAction.move(to: cameraPosition, duration: transitionDuration)
             cameraPositionAction.timingFunction = transitionTiming
             cameraNode.run(cameraPositionAction)
             
             let cameraOffset = cameraPosition - cameraNode.position
-            updateDepthNodes(forCameraPosition: cameraPosition, offset: cameraOffset)
+            updateDepthNodes(forCameraPosition: cameraPosition,
+                             offset: cameraOffset,
+                             duration: transitionDuration)
+        } else {
+            cameraNode.position = cameraPosition
         }
         
         if Design.colors {
-            let color = SKColor(hue: 280 / 360,
-                                saturation: 1,
-                                brightness: CGFloat.random(in: 0.1...0.15),
-                                alpha: 1.0)
             let backgroundAction: SKAction = .group([
-                .colorize(with: color, colorBlendFactor: 1, duration: transitionDuration),
+                .colorize(with: .randomBackgroundColor, colorBlendFactor: 1, duration: transitionDuration),
                 .move(to: cameraPosition, duration: transitionDuration)
             ])
             backgroundAction.timingFunction = transitionTiming
@@ -345,6 +377,24 @@ class GameScene: SKScene, Codable {
         // Player updates
         resetPlayerPosition()
         playerVelocityModifier = 1.0
+        
+        if gameStats.holeNumber == 2 {
+            let fadeAction: SKAction = .sequence([
+                .wait(forDuration: transitionDuration),
+                .fadeIn(withDuration: transitionDuration / 2)
+            ])
+            strokesLabel.run(fadeAction)
+            holeLabel.run(fadeAction)
+            leaderboardButton.run(fadeAction)
+            introLabel.run(.remove(after: transitionDuration))
+            
+            let authAction: SKAction = .sequence([
+                .wait(forDuration: transitionDuration),
+                .run {
+                    self.authenticate()
+                }])
+            run(authAction)
+        }
     }
     
     // MARK: - Aiming -
@@ -637,15 +687,7 @@ class GameScene: SKScene, Codable {
     
     override func didMove(to view: SKView) {
         setupScene()
-        
-        #if !targetEnvironment(simulator)
-        guard let presentingController = presentingController else { fatalError() }
-        leaderboardUtility.authenticate(authController: { controller in
-            presentingController.present(controller, animated: true, completion: nil)
-        }, completion: { _ in
-            
-        })
-        #endif
+        authenticate()
     }
     
     // MARK: - Debug -

@@ -19,6 +19,7 @@ class GameViewController: UIViewController {
         #if DEBUG
         view.showsFPS = true
         view.showsNodeCount = true
+        view.showsDrawCount = true
         #endif
 
         view.preferredFramesPerSecond = 48

@@ -11,7 +11,11 @@ import SpriteKit
 extension GameScene {
 
     func createDepthNodes() {
-        guard let levelPosition = levels.first?.position else { fatalError() }
+        guard var levelPosition = levels.first?.position else { fatalError() }
+        if gameStats.holeNumber == 1 {
+            levelPosition = introLabel.position
+        }
+        
         let depthLevels = 15
 
         let maxCount: Int = 350
@@ -40,7 +44,9 @@ extension GameScene {
         }
     }
 
-    func updateDepthNodes(forCameraPosition cameraPosition: CGPoint, offset cameraOffset: CGPoint) {
+    func updateDepthNodes(forCameraPosition cameraPosition: CGPoint,
+                          offset cameraOffset: CGPoint,
+                          duration: TimeInterval) {
         var starDepthsToAdd = [Int: StarDepthNode]()
         var starDepthsToRemove = [Int: StarDepthNode]()
 
@@ -51,7 +57,7 @@ extension GameScene {
             for (depthLevelNodeIndex, depthLevelNode) in depthNodesAtLevel.enumerated() {
                 let newPosition = depthLevelNode.position + offset
 
-                let parallaxAction = SKAction.move(to: newPosition, duration: Design.levelTransitionDuration)
+                let parallaxAction = SKAction.move(to: newPosition, duration: duration)
                 parallaxAction.timingFunction = Design.levelTransitionTimingFunction
                 depthLevelNode.run(parallaxAction)
 
@@ -74,7 +80,7 @@ extension GameScene {
         }
         for (key, value) in starDepthsToRemove {
             starDepthNodes[key].removeFirst()
-            value.run(.remove(after: Design.levelTransitionDuration))
+            value.run(.remove(after: duration))
         }
 
     }

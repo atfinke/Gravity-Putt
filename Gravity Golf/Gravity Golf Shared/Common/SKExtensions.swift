@@ -23,32 +23,8 @@ typealias SKFont = UIFont
 typealias SKController = UIViewController
 #endif
 
-extension SKFont {
-
-    static func score(string: String,
-                      size: CGFloat,
-                      weight: SKFont.Weight) -> NSAttributedString {
-        let initalFont = SKFont.systemFont(ofSize: size, weight: weight)
-        guard let descriptor = initalFont.fontDescriptor.withDesign(.monospaced) else {
-            fatalError()
-        }
-        #if os(macOS)
-        guard let font = SKFont(descriptor: descriptor, size: size) else {
-            fatalError()
-        }
-        #else
-        let font = SKFont(descriptor: descriptor, size: size)
-        #endif
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: font,
-            .foregroundColor: SKColor.white
-        ]
-        return NSAttributedString(string: string, attributes: attributes)
-    }
-}
-
 extension SKColor {
-
+    
     func rgba() -> (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         #if os(macOS)
         let red = redComponent
@@ -64,7 +40,7 @@ extension SKColor {
         #endif
         return (red, green, blue, alpha)
     }
-
+    
     func lerp(color: SKColor, percent: CGFloat) -> SKColor {
         let (ir, ig, ib, ia) = rgba()
         let (fr, fg, fb, fa) = color.rgba()
@@ -72,6 +48,13 @@ extension SKColor {
                        green: ig.lerp(value: fg, alpha: percent),
                        blue: ib.lerp(value: fb, alpha: percent),
                        alpha: ia.lerp(value: fa, alpha: percent))
+    }
+    
+    static var randomBackgroundColor: SKColor {
+        return SKColor(hue: 280 / 360,
+                       saturation: 1,
+                       brightness: CGFloat.random(in: 0.08...0.12),
+                       alpha: 1.0)
     }
 }
 

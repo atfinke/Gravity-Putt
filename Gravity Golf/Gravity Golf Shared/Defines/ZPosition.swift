@@ -20,6 +20,8 @@ enum ZPosition: CGFloat {
     case planet = 1_000
 
     case playerPath = 120
+    
+    case introLabel = 110
     case stars = 100
     case background = 1
 }

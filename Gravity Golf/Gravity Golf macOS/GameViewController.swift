@@ -10,36 +10,44 @@ import Cocoa
 import SpriteKit
 
 class GameViewController: NSViewController {
-
+    
+    let scene = SaveUtility.loadScene()
+    let skView: SKView = {
+        let view = SKView()
+        view.ignoresSiblingOrder = true
+        
+        #if DEBUG
+        view.showsFPS = true
+        view.showsNodeCount = true
+        view.showsDrawCount = true
+        #endif
+        
+        view.preferredFramesPerSecond = 60
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        scene.presentingController = self
+        
         if NSClassFromString("XCTestCase") != nil {
             return
         }
-
-        // Present the scene
-        let skView = self.view as! SKView
-        let scene = SaveUtility.loadScene()
-        scene.presentingController = self
+        
+        skView.frame = view.bounds
+        view.addSubview(skView)
         skView.presentScene(scene)
-
-        skView.ignoresSiblingOrder = true
-
+        
         #if DEBUG
-        skView.showsFPS = true
-        skView.showsNodeCount = true
-        skView.showsDrawCount = true
-
         NSEvent.addLocalMonitorForEvents(matching: .keyDown) {
             if $0.keyCode == 124 {
-                scene.debugMove(x: 125, y: 0)
+                self.scene.debugMove(x: 125, y: 0)
             } else if $0.keyCode == 123 {
-                scene.debugMove(x: -125, y: 0)
+                self.scene.debugMove(x: -125, y: 0)
             } else if $0.keyCode == 126 {
-                scene.debugMove(x: 0, y: 125)
+                self.scene.debugMove(x: 0, y: 125)
             } else if $0.keyCode == 125 {
-                scene.debugMove(x: 0, y: -125)
+                self.scene.debugMove(x: 0, y: -125)
             } else {
                 return $0
             }

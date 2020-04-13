@@ -70,7 +70,10 @@ class LevelNode: SKNode, Codable {
                                               height: goalBoundsPositionHeight)
 
         let startPositionX = CGFloat.random(in: startMinCenterPositionX...startMaxCenterPositionX)
-        let startPositionY = CGFloat.random(in: startMinCenterPositionY...startMaxCenterPositionY)
+        var startPositionY = CGFloat.random(in: startMinCenterPositionY...startMaxCenterPositionY)
+        if number == 1 {
+            startPositionY = 0
+        }
         startRectLocalSpace = SKCircleRect(centerX: startPositionX,
                                            centerY: startPositionY,
                                            radius: goalRadius)
@@ -266,11 +269,11 @@ class LevelNode: SKNode, Codable {
         }
         viz(planetSafeRect: planetSafeRect.cgRect)
 
-        let hues = (0...70).map({ $0 }) + (220...360).map({ $0 })
+        let hues = (0...50).map({ $0 }) + (220...360).map({ $0 })
         let hue = CGFloat(hues.randomElement() ?? 0) / 360
         let planetColor = SKColor(hue: hue,
                                   saturation: 0.8,
-                                  brightness: 1.0,
+                                  brightness: CGFloat.random(in: 0.8...1),
                                   alpha: 1)
 
         let planet = Planet(radius: planetRadius, color: planetColor)
