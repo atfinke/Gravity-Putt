@@ -8,10 +8,6 @@
 
 import StoreKit
 
-#if os(iOS)
-import Firebase
-#endif
-
 class Store: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     // MARK: - Types -
@@ -81,9 +77,7 @@ class Store: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
         let payment = SKPayment(product: unlockLevelsProduct)
         queue.add(payment)
         
-        #if os(iOS)
-        Analytics.logEvent("purchaseAttempt", parameters: nil)
-        #endif
+        AnalyticsUtility.log(event: "purchaseAttempt", parameters: nil)
     }
     
     // MARK: - SKProductsRequestDelegate -
@@ -109,19 +103,13 @@ class Store: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
                 break
             case .purchased:
                 finish(transaction: transaction, success: true)
-                #if os(iOS)
-                Analytics.logEvent("purchaseCompleted", parameters: nil)
-                #endif
+                AnalyticsUtility.log(event: "purchaseCompleted", parameters: nil)
             case .failed:
                 finish(transaction: transaction, success: false)
-                #if os(iOS)
-                Analytics.logEvent("purchaseFailed", parameters: nil)
-                #endif
+                AnalyticsUtility.log(event: "purchaseFailed", parameters: nil)
             case .restored:
                 finish(transaction: transaction, success: true)
-                #if os(iOS)
-                Analytics.logEvent("purchaseRestored", parameters: nil)
-                #endif
+                AnalyticsUtility.log(event: "purchaseRestored", parameters: nil)
             case .deferred:
                 break
             @unknown default:

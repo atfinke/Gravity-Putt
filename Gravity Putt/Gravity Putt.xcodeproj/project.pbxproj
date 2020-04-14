@@ -22,6 +22,18 @@
 		1461FA5624442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		1461FA5724442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		146DC32C24467C45002DF97C /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC32924467C45002DF97C /* FirebaseCrashlytics.xcframework */; };
+		146DC4AC24467E99002DF97C /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC33224467E29002DF97C /* AppCenterCrashes.framework */; };
+		146DC4AD24467E99002DF97C /* AppCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC3B224467E2A002DF97C /* AppCenterAnalytics.framework */; };
+		146DC4AE24467E99002DF97C /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC3B324467E2A002DF97C /* AppCenter.framework */; };
+		146DC4AF24467E9D002DF97C /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC44A24467E2A002DF97C /* AppCenterCrashes.framework */; };
+		146DC4B024467E9D002DF97C /* AppCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC4A924467E2A002DF97C /* AppCenterAnalytics.framework */; };
+		146DC4B124467E9D002DF97C /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC4AA24467E2A002DF97C /* AppCenter.framework */; };
+		146DC4B324467F01002DF97C /* AnalyticsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DC4B224467F01002DF97C /* AnalyticsUtility.swift */; };
+		146DC4B424467F01002DF97C /* AnalyticsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DC4B224467F01002DF97C /* AnalyticsUtility.swift */; };
+		146DC4B524467F01002DF97C /* AnalyticsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DC4B224467F01002DF97C /* AnalyticsUtility.swift */; };
+		146DC4B624467F01002DF97C /* AnalyticsUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146DC4B224467F01002DF97C /* AnalyticsUtility.swift */; };
+		146DC4B82446825D002DF97C /* appcenter.txt in Resources */ = {isa = PBXBuildFile; fileRef = 146DC4B72446825D002DF97C /* appcenter.txt */; };
+		146DC4BA24468278002DF97C /* appcenter.txt in Resources */ = {isa = PBXBuildFile; fileRef = 146DC4B924468278002DF97C /* appcenter.txt */; };
 		149C263F2445246500270F8C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1460A5D424450F66003B6B28 /* Store.swift */; };
 		149C26402445246500270F8C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1460A5D424450F66003B6B28 /* Store.swift */; };
 		149C26412445246600270F8C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1460A5D424450F66003B6B28 /* Store.swift */; };
@@ -215,6 +227,15 @@
 		146DC32924467C45002DF97C /* FirebaseCrashlytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCrashlytics.xcframework; sourceTree = "<group>"; };
 		146DC32A24467C45002DF97C /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run; sourceTree = "<group>"; };
 		146DC32B24467C45002DF97C /* upload-symbols */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "upload-symbols"; sourceTree = "<group>"; };
+		146DC33224467E29002DF97C /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenterCrashes.framework; sourceTree = "<group>"; };
+		146DC3B224467E2A002DF97C /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenterAnalytics.framework; sourceTree = "<group>"; };
+		146DC3B324467E2A002DF97C /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenter.framework; sourceTree = "<group>"; };
+		146DC44A24467E2A002DF97C /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenterCrashes.framework; sourceTree = "<group>"; };
+		146DC4A924467E2A002DF97C /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenterAnalytics.framework; sourceTree = "<group>"; };
+		146DC4AA24467E2A002DF97C /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenter.framework; sourceTree = "<group>"; };
+		146DC4B224467F01002DF97C /* AnalyticsUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsUtility.swift; sourceTree = "<group>"; };
+		146DC4B72446825D002DF97C /* appcenter.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = appcenter.txt; sourceTree = "<group>"; };
+		146DC4B924468278002DF97C /* appcenter.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = appcenter.txt; sourceTree = "<group>"; };
 		149C2643244527AC00270F8C /* UnlockLevelsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockLevelsNode.swift; sourceTree = "<group>"; };
 		149C26482445382D00270F8C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		149C264A2445383500270F8C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS13.4.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -300,6 +321,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				149C264B2445383500270F8C /* StoreKit.framework in Frameworks */,
+				146DC4B124467E9D002DF97C /* AppCenter.framework in Frameworks */,
+				146DC4B024467E9D002DF97C /* AppCenterAnalytics.framework in Frameworks */,
+				146DC4AF24467E9D002DF97C /* AppCenterCrashes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,7 +332,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				14AC4AF42440D937000F6D3C /* GameKit.framework in Frameworks */,
+				146DC4AE24467E99002DF97C /* AppCenter.framework in Frameworks */,
 				149C264D2445383A00270F8C /* StoreKit.framework in Frameworks */,
+				146DC4AD24467E99002DF97C /* AppCenterAnalytics.framework in Frameworks */,
+				146DC4AC24467E99002DF97C /* AppCenterCrashes.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +398,7 @@
 			children = (
 				1400F98F241BF47D003BFED8 /* AppDelegate.swift */,
 				1400F991241BF47D003BFED8 /* GameViewController.swift */,
+				146DC4B924468278002DF97C /* appcenter.txt */,
 				1400F996241BF47D003BFED8 /* LaunchScreen.storyboard */,
 				1400F999241BF47D003BFED8 /* Info.plist */,
 			);
@@ -382,6 +410,7 @@
 			children = (
 				140AE9D624430E7400A8925B /* Gravity Golf.entitlements */,
 				1400F9A0241BF47D003BFED8 /* AppDelegate.swift */,
+				146DC4B72446825D002DF97C /* appcenter.txt */,
 				1400F9A2241BF47D003BFED8 /* GameViewController.swift */,
 				1400F9A4241BF47D003BFED8 /* Main.storyboard */,
 				1400F9A7241BF47D003BFED8 /* Info.plist */,
@@ -408,7 +437,36 @@
 			path = FirebaseCrashlytics;
 			sourceTree = "<group>";
 		};
-		149C264E24464B4E00270F8C /* Analytics */ = {
+		146DC33024467E29002DF97C /* AppCenter-SDK-Apple */ = {
+			isa = PBXGroup;
+			children = (
+				146DC33124467E29002DF97C /* macOS */,
+				146DC44924467E2A002DF97C /* tvOS */,
+			);
+			path = "AppCenter-SDK-Apple";
+			sourceTree = "<group>";
+		};
+		146DC33124467E29002DF97C /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				146DC33224467E29002DF97C /* AppCenterCrashes.framework */,
+				146DC3B224467E2A002DF97C /* AppCenterAnalytics.framework */,
+				146DC3B324467E2A002DF97C /* AppCenter.framework */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		146DC44924467E2A002DF97C /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				146DC44A24467E2A002DF97C /* AppCenterCrashes.framework */,
+				146DC4A924467E2A002DF97C /* AppCenterAnalytics.framework */,
+				146DC4AA24467E2A002DF97C /* AppCenter.framework */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		146DC4AB24467E2F002DF97C /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
 				149C268624464F7200270F8C /* GoogleService-Info.plist */,
@@ -426,6 +484,15 @@
 				149C265724464B4E00270F8C /* GoogleDataTransport.xcframework */,
 				149C265824464B4E00270F8C /* FIRAnalyticsConnector.framework */,
 				149C265924464B4E00270F8C /* GoogleUtilities.xcframework */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		149C264E24464B4E00270F8C /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				146DC33024467E29002DF97C /* AppCenter-SDK-Apple */,
+				146DC4AB24467E2F002DF97C /* Firebase */,
 			);
 			path = Analytics;
 			sourceTree = "<group>";
@@ -494,6 +561,7 @@
 				14E12547244421B300D34DF5 /* LeaderboardUtility.swift */,
 				14E12543244421B300D34DF5 /* SaveUtility.swift */,
 				1460A5D424450F66003B6B28 /* Store.swift */,
+				146DC4B224467F01002DF97C /* AnalyticsUtility.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -703,6 +771,7 @@
 			files = (
 				14E1255C244421B300D34DF5 /* PlanetShader.fsh in Resources */,
 				14E1257C244421B300D34DF5 /* Assets.xcassets in Resources */,
+				146DC4BA24468278002DF97C /* appcenter.txt in Resources */,
 				1400F998241BF47D003BFED8 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,6 +781,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14E1255D244421B300D34DF5 /* PlanetShader.fsh in Resources */,
+				146DC4B82446825D002DF97C /* appcenter.txt in Resources */,
 				14E1257D244421B300D34DF5 /* Assets.xcassets in Resources */,
 				1400F9A6241BF47D003BFED8 /* Main.storyboard in Resources */,
 			);
@@ -752,7 +822,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./$(SRC_ROOT)/Gravity\\ Putt\\ Shared/Analytics/FirebaseCrashlytics/run\n";
+			shellScript = "./$(SRC_ROOT)/Gravity\\ Putt\\ Shared/Analytics/Firebase/FirebaseCrashlytics/run\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -777,6 +847,7 @@
 				14E12573244421B300D34DF5 /* LeaderboardButton.swift in Sources */,
 				14E12567244421B300D34DF5 /* AimAssist.swift in Sources */,
 				14E125B3244421B300D34DF5 /* SKCircleRect.swift in Sources */,
+				146DC4B324467F01002DF97C /* AnalyticsUtility.swift in Sources */,
 				14E1256F244421B300D34DF5 /* Planet.swift in Sources */,
 				14E12597244421B300D34DF5 /* GameScene+Depth.swift in Sources */,
 				14E125C3244421B300D34DF5 /* StarTextureCreator.swift in Sources */,
@@ -816,6 +887,7 @@
 				14E12574244421B300D34DF5 /* LeaderboardButton.swift in Sources */,
 				14E12568244421B300D34DF5 /* AimAssist.swift in Sources */,
 				14E125B4244421B300D34DF5 /* SKCircleRect.swift in Sources */,
+				146DC4B424467F01002DF97C /* AnalyticsUtility.swift in Sources */,
 				14E12570244421B300D34DF5 /* Planet.swift in Sources */,
 				14E12598244421B300D34DF5 /* GameScene+Depth.swift in Sources */,
 				14E125C4244421B300D34DF5 /* StarTextureCreator.swift in Sources */,
@@ -855,6 +927,7 @@
 				14E12575244421B300D34DF5 /* LeaderboardButton.swift in Sources */,
 				14E12569244421B300D34DF5 /* AimAssist.swift in Sources */,
 				14E125B5244421B300D34DF5 /* SKCircleRect.swift in Sources */,
+				146DC4B524467F01002DF97C /* AnalyticsUtility.swift in Sources */,
 				14E12571244421B300D34DF5 /* Planet.swift in Sources */,
 				14E12599244421B300D34DF5 /* GameScene+Depth.swift in Sources */,
 				14E125C5244421B300D34DF5 /* StarTextureCreator.swift in Sources */,
@@ -891,6 +964,7 @@
 				14E125C2244421B300D34DF5 /* SKExtensions.swift in Sources */,
 				14E125A6244421B300D34DF5 /* SpriteCategory.swift in Sources */,
 				14E1259E244421B300D34DF5 /* GameScene+ContactDelegate.swift in Sources */,
+				146DC4B624467F01002DF97C /* AnalyticsUtility.swift in Sources */,
 				14E125C6244421B300D34DF5 /* StarTextureCreator.swift in Sources */,
 				14E12562244421B300D34DF5 /* LevelNode.swift in Sources */,
 				14E1257A244421B300D34DF5 /* Player.swift in Sources */,
@@ -1087,9 +1161,9 @@
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Putt iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1116,9 +1190,9 @@
 				EXCLUDED_SOURCE_FILE_NAMES = fastlane_scene_data;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Putt iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1143,7 +1217,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
 				INFOPLIST_FILE = "Gravity Putt tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1167,7 +1245,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
 				INFOPLIST_FILE = "Gravity Putt tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1196,7 +1278,11 @@
 				CURRENT_PROJECT_VERSION = 2020.04.11;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
 				INFOPLIST_FILE = "Gravity Putt macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1223,7 +1309,11 @@
 				CURRENT_PROJECT_VERSION = 2020.04.11;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
 				INFOPLIST_FILE = "Gravity Putt macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

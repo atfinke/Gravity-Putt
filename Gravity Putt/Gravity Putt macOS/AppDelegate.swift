@@ -7,17 +7,18 @@
 //
 
 import Cocoa
+import AppCenter
+import AppCenterAnalytics
+import AppCenterCrashes
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        UserDefaults.standard.register(defaults: ["NSApplicationCrashOnExceptions": true])
+        MSAppCenter.start("{Your App Secret}", withServices: [MSAnalytics.self, MSCrashes.self])
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {
         return true

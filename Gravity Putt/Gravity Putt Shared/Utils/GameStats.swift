@@ -9,10 +9,6 @@
 import Foundation
 import CoreGraphics
 
-#if os(iOS)
-import Firebase
-#endif
-
 class GameStats: Codable, Equatable {
     
     // MARK: - Types -
@@ -54,16 +50,14 @@ class GameStats: Codable, Equatable {
                             strokes: holeStrokes)
         holeStats.append(stat)
         
-        #if os(iOS)
         if holeStrokes == 1 {
-            Analytics.logEvent(Event.fore.rawValue, parameters: nil)
+            AnalyticsUtility.log(event: Event.fore.rawValue, parameters: nil)
         }
-        Analytics.logEvent(Event.completedHole.rawValue, parameters: [
-            "number": holeNumber,
-            "duration": holeDuration,
-            "strokes": holeStrokes
+        AnalyticsUtility.log(event: Event.completedHole.rawValue, parameters: [
+            "number": holeNumber.description,
+            "duration": holeDuration.description,
+            "strokes": holeStrokes.description
         ])
-        #endif
 
         holeStrokes = 0
         holeDuration = 0
@@ -71,18 +65,14 @@ class GameStats: Codable, Equatable {
     
     func hitShot(power: CGFloat) {
         holeStrokes += 1
-        #if os(iOS)
-        Analytics.logEvent(Event.stroke.rawValue, parameters: [
-            "power": power
+        AnalyticsUtility.log(event: Event.stroke.rawValue, parameters: [
+            "power": Int(power).description
         ])
-        #endif
     }
     
     func hitFore() {
         fores += 1
-        #if os(iOS)
-        Analytics.logEvent(Event.fore.rawValue, parameters: nil)
-        #endif
+        AnalyticsUtility.log(event: Event.fore.rawValue, parameters: nil)
     }
 
     // MARK: - Equatable -
