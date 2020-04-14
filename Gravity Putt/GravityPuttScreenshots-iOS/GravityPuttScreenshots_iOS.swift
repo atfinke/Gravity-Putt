@@ -1,6 +1,6 @@
 //
-//  GravityGolfScreenshots_iOS.swift
-//  GravityGolfScreenshots-iOS
+//  GravityPuttScreenshots_iOS.swift
+//  GravityPuttScreenshots-iOS
 //
 //  Created by Andrew Finke on 4/14/20.
 //  Copyright © 2020 Andrew Finke. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class GravityGolfScreenshots_iOS: XCTestCase {
+class GravityPuttScreenshots_iOS: XCTestCase {
 
     let app = XCUIApplication()
     

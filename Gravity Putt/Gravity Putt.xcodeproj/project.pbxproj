@@ -47,7 +47,7 @@
 		149C268524464ED700270F8C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C268324464EB400270F8C /* libsqlite3.tbd */; };
 		149C268724464F7200270F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 149C268624464F7200270F8C /* GoogleService-Info.plist */; };
 		14AC4AF42440D937000F6D3C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AC4AF32440D937000F6D3C /* GameKit.framework */; };
-		14C4ADBD2446545900816A11 /* GravityGolfScreenshots_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ADBC2446545900816A11 /* GravityGolfScreenshots_iOS.swift */; };
+		14C4ADBD2446545900816A11 /* GravityPuttScreenshots_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ADBC2446545900816A11 /* GravityPuttScreenshots_iOS.swift */; };
 		14C4ADD92446593900816A11 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E12550244421B300D34DF5 /* Debugging.swift */; };
 		14C4ADDA2446593900816A11 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E12551244421B300D34DF5 /* Design.swift */; };
 		14C4ADDB2446593900816A11 /* SpriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1254E244421B300D34DF5 /* SpriteCategory.swift */; };
@@ -233,7 +233,7 @@
 		149C268624464F7200270F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		14AC4AF32440D937000F6D3C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		14C4ADBA2446545900816A11 /* GravityPuttScreenshots-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GravityPuttScreenshots-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		14C4ADBC2446545900816A11 /* GravityGolfScreenshots_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityGolfScreenshots_iOS.swift; sourceTree = "<group>"; };
+		14C4ADBC2446545900816A11 /* GravityPuttScreenshots_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityPuttScreenshots_iOS.swift; sourceTree = "<group>"; };
 		14C4ADBE2446545900816A11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		14C4ADC4244658E000816A11 /* fastlane_scene_data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fastlane_scene_data; sourceTree = "<group>"; };
 		14C4ADEC24465B6C00816A11 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -431,7 +431,7 @@
 			isa = PBXGroup;
 			children = (
 				14C4ADEC24465B6C00816A11 /* SnapshotHelper.swift */,
-				14C4ADBC2446545900816A11 /* GravityGolfScreenshots_iOS.swift */,
+				14C4ADBC2446545900816A11 /* GravityPuttScreenshots_iOS.swift */,
 				14C4ADBE2446545900816A11 /* Info.plist */,
 			);
 			path = "GravityPuttScreenshots-iOS";
@@ -879,7 +879,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14C4ADD92446593900816A11 /* Debugging.swift in Sources */,
-				14C4ADBD2446545900816A11 /* GravityGolfScreenshots_iOS.swift in Sources */,
+				14C4ADBD2446545900816A11 /* GravityPuttScreenshots_iOS.swift in Sources */,
 				14C4ADDB2446593900816A11 /* SpriteCategory.swift in Sources */,
 				14C4ADDC2446593900816A11 /* ZPosition.swift in Sources */,
 				14C4ADDA2446593900816A11 /* Design.swift in Sources */,
@@ -1050,6 +1050,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/FirebaseAnalytics",
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/FirebaseAnalytics";
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Putt iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1063,7 +1064,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/FirebaseAnalytics";
 			};
 			name = Debug;
 		};
@@ -1079,6 +1080,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/FirebaseAnalytics",
 				);
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/FirebaseAnalytics";
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Putt iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1092,7 +1094,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/FirebaseAnalytics";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

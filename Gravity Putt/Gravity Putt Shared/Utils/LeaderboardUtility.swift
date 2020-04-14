@@ -1,6 +1,6 @@
 //
 //  LeaderboardUtility.swift
-//  Space Golf
+//  Gravity Putt
 //
 //  Created by Andrew Finke on 4/9/20.
 //  Copyright © 2020 Andrew Finke. All rights reserved.

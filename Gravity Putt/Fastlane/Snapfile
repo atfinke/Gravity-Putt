@@ -14,8 +14,8 @@ languages([
   "en-US"
 ])
 
-scheme "GravityGolfScreenshots-iOS"
+scheme "GravityPuttScreenshots-iOS"
 
 clear_previous_screenshots false
 
-project "./Gravity Golf.xcodeproj"
+project "./Gravity Putt.xcodeproj"

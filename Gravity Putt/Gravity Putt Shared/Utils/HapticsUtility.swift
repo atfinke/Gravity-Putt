@@ -1,6 +1,6 @@
 //
 //  HapticUtility.swift
-//  Space Golf
+//  Gravity Putt
 //
 //  Created by Andrew Finke on 4/10/20.
 //  Copyright © 2020 Andrew Finke. All rights reserved.
