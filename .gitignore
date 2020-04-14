@@ -92,3 +92,6 @@ fastlane/test_output
 iOSInjectionProject/
 
 Gravity Putt/Fastlane/screenshots
+
+Gravity Putt/Gravity Putt macOS/appcenter.txt
+Gravity Putt/Gravity Putt tvOS/appcenter.txt
