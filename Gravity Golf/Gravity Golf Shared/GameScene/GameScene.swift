@@ -30,7 +30,7 @@ class GameScene: SKScene, Codable {
     let leaderboardButton = LeaderboardButton()
     let backgroundColorNode = SKSpriteNode(color: .white, size: CGSize(width: 10, height: 10))
     
-    var unlockNode: UnlockLevelsNode?
+    let unlockLevelsNode = UnlockLevelsNode()
     var starDepthNodes = [[StarDepthNode]]()
     var restingOnPlanet: Planet?
     var contactPlanet: Planet? {
@@ -100,6 +100,17 @@ class GameScene: SKScene, Codable {
     override init() {
         super.init()
         scaleMode = .aspectFill
+        store.unlockStateUpdated = { success in
+            DispatchQueue.main.async {
+                if self.unlockLevelsNode.parent != nil {
+                    let action: SKAction = .sequence([
+                        .fadeOut(withDuration: 0.15),
+                        .removeFromParent()
+                    ])
+                    self.unlockLevelsNode.run(action)
+                }
+            }
+        }
     }
     
     required public convenience init(from decoder: Decoder) throws {
@@ -175,10 +186,6 @@ class GameScene: SKScene, Codable {
         
         createDepthNodes()
         physicsWorld.contactDelegate = self
-        
-        let unlockLevelsNode = UnlockLevelsNode()
-        cameraNode.addChild(unlockLevelsNode)
-        self.unlockNode = unlockLevelsNode
     }
     
     func setupCamera() {
@@ -396,6 +403,15 @@ class GameScene: SKScene, Codable {
                     self.authenticate()
                 }])
             run(authAction)
+        } else if gameStats.holeNumber >= 20 && !store.hasUnlockedAllLevels() {
+            unlockLevelsNode.alpha = 0
+            unlockLevelsNode.updatePrice()
+            cameraNode.addChild(unlockLevelsNode)
+             let action: SKAction = .sequence([
+                           .wait(forDuration: transitionDuration),
+                           .fadeIn(withDuration: 0.2)
+             ])
+            unlockLevelsNode.run(action)
         }
     }
     
@@ -712,9 +728,7 @@ class GameScene: SKScene, Codable {
     }
     
     func attemptUnlockPurchase() {
-        store.purchaseUnlockLevels { result in
-            
-        }
+        store.purchaseUnlockLevels()
     }
     
     func attemptRestore() {

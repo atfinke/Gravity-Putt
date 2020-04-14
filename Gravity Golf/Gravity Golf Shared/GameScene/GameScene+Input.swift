@@ -13,22 +13,21 @@ extension GameScene {
     private func inputDown(sceneLocation: CGPoint, cameraLocation: CGPoint) {
         guard introLabel.parent == nil else { return }
         
-        if let unlockNode = unlockNode {
-            let buyButton = unlockNode.button.frame.offsetBy(dx: unlockNode.position.x,
-                                                             dy: unlockNode.position.y)
-            let restoreButton = unlockNode.button.frame.offsetBy(dx: unlockNode.position.x,
-                                                                 dy: unlockNode.position.y)
-            
-            if buyButton.contains(cameraLocation) {
-                attemptUnlockPurchase()
-                return
-            } else if restoreButton.contains(cameraLocation) {
-                attemptRestore()
-                return
-            }
+        let pos = unlockLevelsNode.position
+        let buyButton = unlockLevelsNode.button.frame.offsetBy(dx: pos.x,
+                                                               dy: pos.y)
+        let restoreButton = unlockLevelsNode.restoreButton.frame.offsetBy(dx: pos.x,
+                                                                          dy: pos.y)
+        
+        if buyButton.contains(cameraLocation) {
+            attemptUnlockPurchase()
+            return
+        } else if restoreButton.contains(cameraLocation) {
+            attemptRestore()
+            return
         }
         
-        guard unlockNode?.parent == nil else { return }
+        guard unlockLevelsNode.parent == nil else { return }
         
         if leaderboardRect.contains(cameraLocation) {
             showLeaderboard()
@@ -43,7 +42,7 @@ extension GameScene {
     }
     
     private func inputMoved(sceneLocation: CGPoint, cameraLocation: CGPoint) {
-        guard introLabel.parent == nil && unlockNode?.parent == nil else { return }
+        guard introLabel.parent == nil && unlockLevelsNode.parent == nil else { return }
         if leaderboardRect.contains(cameraLocation) {
             return
         }
@@ -55,7 +54,7 @@ extension GameScene {
     }
     
     private func inputUp(sceneLocation: CGPoint, cameraLocation: CGPoint) {
-        guard introLabel.parent == nil && unlockNode?.parent == nil else { return }
+        guard introLabel.parent == nil && unlockLevelsNode.parent == nil else { return }
         if leaderboardRect.contains(cameraLocation) {
             return
         }

@@ -10,12 +10,16 @@ import SpriteKit
 
 class UnlockLevelsNode: SKNode {
     
+    // MARK: - Properties -
+    
     let background = SKShapeNode(rectOf: CGSize(width: 500, height: 150), cornerRadius: 20)
     let backgroundLabel = SKLabelNode()
     let button = SKShapeNode(rectOf: CGSize(width: 100, height: 50), cornerRadius: 10)
     let buttonLabel = SKLabelNode()
     let restoreButton = SKShapeNode(rectOf: CGSize(width: 100, height: 50), cornerRadius: 10)
     let restoreButtonLabel = SKLabelNode()
+    
+    // MARK: - Initalization -
     
     override init() {
         super.init()
@@ -28,7 +32,7 @@ class UnlockLevelsNode: SKNode {
         backgroundLabel.numberOfLines = 5
         backgroundLabel.verticalAlignmentMode = .center
         backgroundLabel.horizontalAlignmentMode = .center
-        let text = NSAttributedString.stylized(string: "Thanks for playing the front 20!\n\nPlease consider unlocking\nunlimited levels to keep playing.",
+        let text = NSAttributedString.stylized(string: "Thanks for playing the first 20!\n\nPlease consider unlocking\nunlimited levels to keep playing.",
                                                size: 22,
                                                weight: .semibold)
         let mutableText = NSMutableAttributedString(attributedString: text)
@@ -47,13 +51,9 @@ class UnlockLevelsNode: SKNode {
         
         buttonLabel.verticalAlignmentMode = .center
         buttonLabel.horizontalAlignmentMode = .center
-        buttonLabel.attributedText = NSAttributedString.stylized(string: "$1.99",
-                                                           size: 22,
-                                                           weight: .semibold)
         button.addChild(buttonLabel)
         
-        
-        restoreButton.fillColor = SKColor.red.withAlphaComponent(0.4)
+        restoreButton.fillColor = SKColor.red.withAlphaComponent(0.6)
         restoreButton.strokeColor = SKColor.white
         restoreButton.position = CGPoint(x: 0, y: button.frame.minY - 50)
         addChild(restoreButton)
@@ -61,8 +61,8 @@ class UnlockLevelsNode: SKNode {
         restoreButtonLabel.verticalAlignmentMode = .center
         restoreButtonLabel.horizontalAlignmentMode = .center
         restoreButtonLabel.attributedText = NSAttributedString.stylized(string: "Restore",
-                                                           size: 18,
-                                                           weight: .medium)
+                                                                        size: 18,
+                                                                        weight: .medium)
         restoreButton.addChild(restoreButtonLabel)
     }
     
@@ -70,5 +70,12 @@ class UnlockLevelsNode: SKNode {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Helpers -
     
+    func updatePrice() {
+        let price = UserDefaults.standard.string(forKey: "unlockLevelsProductPrice") ?? "N/A"
+        buttonLabel.attributedText = NSAttributedString.stylized(string: price,
+                                                                 size: 22,
+                                                                 weight: .semibold)
+    }
 }

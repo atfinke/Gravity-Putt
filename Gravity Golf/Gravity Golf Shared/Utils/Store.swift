@@ -19,12 +19,27 @@ class Store: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     
     // MARK: - Properties -
     
-    private static let unlockLevelsIdentifier = "com.andrewfinke.space.golf.unlock-levels"
-    
+    private static let unlockLevelsIdentifier = "com.andrewfinke.space.golf.unlock.levels"
+    private static let priceFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        return formatter
+    }()
+
     private let queue = SKPaymentQueue.default()
-    private var unlockLevelsProduct: SKProduct?
-    private var purchaseHandler: ((_ result: Result<Bool, StoreError>) -> Void)?
+    private var unlockLevelsProduct: SKProduct? {
+        didSet {
+            guard let p = unlockLevelsProduct else { return }
+            Store.priceFormatter.locale = p.priceLocale
+            let price = Store.priceFormatter.string(from: p.price)
+            UserDefaults.standard.set(price, forKey: "unlockLevelsProductPrice")
+        }
+    }
     
+    var unlockStateUpdated: ((Bool) -> Void)?
+    var hasPurchasedUnlockLevels: Bool {
+        return UserDefaults.standard.bool(forKey: Store.unlockLevelsIdentifier)
+    }
     // MARK: - Initalization -
     
     override init() {
@@ -51,18 +66,14 @@ class Store: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
         return UserDefaults.standard.bool(forKey: Store.unlockLevelsIdentifier)
     }
     
-    func purchaseUnlockLevels(completion: @escaping (_ result: Result<Bool, StoreError>) -> Void) {
+    func purchaseUnlockLevels() {
         guard SKPaymentQueue.canMakePayments() else {
-            completion(.failure(.unableToMakePayments))
             return
         }
-        
         guard let unlockLevelsProduct = self.unlockLevelsProduct else {
-            completion(.failure(.noProduct))
             return
         }
         
-        self.purchaseHandler = completion
         let payment = SKPayment(product: unlockLevelsProduct)
         queue.add(payment)
     }
@@ -105,9 +116,8 @@ class Store: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
     // MARK: - Helpers -
     
     func finish(transaction: SKPaymentTransaction, success: Bool) {
-        purchaseHandler?(.success(success))
-        purchaseHandler = nil
         queue.finishTransaction(transaction)
         UserDefaults.standard.set(success, forKey: Store.unlockLevelsIdentifier)
+        unlockStateUpdated?(success)
     }
 }
