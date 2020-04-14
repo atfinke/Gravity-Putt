@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import StoreKit
 
 class GameScene: SKScene, Codable {
     
@@ -29,6 +30,7 @@ class GameScene: SKScene, Codable {
     let leaderboardButton = LeaderboardButton()
     let backgroundColorNode = SKSpriteNode(color: .white, size: CGSize(width: 10, height: 10))
     
+    var unlockNode: UnlockLevelsNode?
     var starDepthNodes = [[StarDepthNode]]()
     var restingOnPlanet: Planet?
     var contactPlanet: Planet? {
@@ -83,6 +85,7 @@ class GameScene: SKScene, Codable {
             levelSize = CGSize(width: size.width, height: usableHeight)
         }
     }
+    let store = Store()
     
     // MARK: - Initalization -
     
@@ -172,6 +175,10 @@ class GameScene: SKScene, Codable {
         
         createDepthNodes()
         physicsWorld.contactDelegate = self
+        
+        let unlockLevelsNode = UnlockLevelsNode()
+        cameraNode.addChild(unlockLevelsNode)
+        self.unlockNode = unlockLevelsNode
     }
     
     func setupCamera() {
@@ -204,18 +211,6 @@ class GameScene: SKScene, Codable {
             holeLabel.alpha = 0
             leaderboardButton.alpha = 0
         }
-    }
-    
-    func authenticate() {
-        guard gameStats.holeNumber > 1 else { return }
-        #if !targetEnvironment(simulator)
-        guard let presentingController = presentingController else { fatalError() }
-        leaderboardUtility.authenticate(authController: { controller in
-            presentingController.present(controller, animated: true, completion: nil)
-        }, completion: { _ in
-            
-        })
-        #endif
     }
     
     // MARK: - Level Management -
@@ -269,7 +264,9 @@ class GameScene: SKScene, Codable {
         // Remove the last last level (that was kept in case the user hits backwards)
         let removeAfterTransitionAction: SKAction = .remove(after: transitionDuration)
         
-        if !isFirstLevel {
+        if isFirstLevel {
+            introLabel.run(.remove(after: transitionDuration))
+        } else {
             if let lastLevel = lastLevel {
                 lastLevel.run(removeAfterTransitionAction)
                 planetNodesWorldSpace.removeFirst()
@@ -285,6 +282,11 @@ class GameScene: SKScene, Codable {
                 if stats.holeNumber > 10 {
                     self.leaderboardUtility.submit(stats: stats)
                 }
+            }
+            if gameStats.holeNumber == 10 {
+                #if !os(tvOS)
+                SKStoreReviewController.requestReview()
+                #endif
             }
         }
         updateScoreLabel()
@@ -688,6 +690,35 @@ class GameScene: SKScene, Codable {
     override func didMove(to view: SKView) {
         setupScene()
         authenticate()
+    }
+    
+    // MARK: - Other -
+    
+    func authenticate() {
+        guard gameStats.holeNumber > 1 else { return }
+        #if !targetEnvironment(simulator)
+        guard let presentingController = presentingController else { fatalError() }
+        leaderboardUtility.authenticate(authController: { controller in
+            presentingController.present(controller, animated: true, completion: nil)
+        }, completion: { _ in
+            
+        })
+        #endif
+    }
+    
+    func showLeaderboard() {
+        let controller = leaderboardUtility.leaderboardController()
+        presentingController?.present(controller, animated: true, completion: nil)
+    }
+    
+    func attemptUnlockPurchase() {
+        store.purchaseUnlockLevels { result in
+            
+        }
+    }
+    
+    func attemptRestore() {
+        store.restore()
     }
     
     // MARK: - Debug -

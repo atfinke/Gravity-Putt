@@ -9,25 +9,41 @@
 import SpriteKit
 
 extension GameScene {
-
-    func showLeaderboard() {
-        let controller = leaderboardUtility.leaderboardController()
-        presentingController?.present(controller, animated: true, completion: nil)
-    }
-
+    
     private func inputDown(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        guard introLabel.parent == nil else { return }
+        
+        if let unlockNode = unlockNode {
+            let buyButton = unlockNode.button.frame.offsetBy(dx: unlockNode.position.x,
+                                                             dy: unlockNode.position.y)
+            let restoreButton = unlockNode.button.frame.offsetBy(dx: unlockNode.position.x,
+                                                                 dy: unlockNode.position.y)
+            
+            if buyButton.contains(cameraLocation) {
+                attemptUnlockPurchase()
+                return
+            } else if restoreButton.contains(cameraLocation) {
+                attemptRestore()
+                return
+            }
+        }
+        
+        guard unlockNode?.parent == nil else { return }
+        
         if leaderboardRect.contains(cameraLocation) {
             showLeaderboard()
             return
         }
+        
         #if os(tvOS)
         setTargeting(startLocation: sceneLocation + CGPoint(x: 0, y: -levelSize.height/2 + 100))
         #else
         setTargeting(startLocation: sceneLocation)
         #endif
     }
-
+    
     private func inputMoved(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        guard introLabel.parent == nil && unlockNode?.parent == nil else { return }
         if leaderboardRect.contains(cameraLocation) {
             return
         }
@@ -37,8 +53,9 @@ extension GameScene {
         setTargeting(pullBackLocation: sceneLocation)
         #endif
     }
-
+    
     private func inputUp(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        guard introLabel.parent == nil && unlockNode?.parent == nil else { return }
         if leaderboardRect.contains(cameraLocation) {
             return
         }
@@ -49,7 +66,7 @@ extension GameScene {
         #endif
     }
     
-    private func inputCancelled {
+    private func inputCancelled() {
         aimAssist.run(.fadeOut(withDuration: 0.15))
     }
 }
@@ -61,12 +78,12 @@ extension GameScene {
         inputDown(sceneLocation: event.location(in: self),
                   cameraLocation: event.location(in: cameraNode))
     }
-
+    
     override func mouseDragged(with event: NSEvent) {
         inputMoved(sceneLocation: event.location(in: self),
                    cameraLocation: event.location(in: cameraNode))
     }
-
+    
     override func mouseUp(with event: NSEvent) {
         inputUp(sceneLocation: event.location(in: self),
                 cameraLocation: event.location(in: cameraNode))
@@ -76,19 +93,19 @@ extension GameScene {
 #else
 
 extension GameScene {
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         inputDown(sceneLocation: touch.location(in: self),
                   cameraLocation: touch.location(in: cameraNode))
     }
-
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         inputMoved(sceneLocation: touch.location(in: self),
                    cameraLocation: touch.location(in: cameraNode))
     }
-
+    
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         inputUp(sceneLocation: touch.location(in: self),

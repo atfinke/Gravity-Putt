@@ -21,6 +21,14 @@
 		1461FA5524442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		1461FA5624442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		1461FA5724442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
+		149C263F2445246500270F8C /* PlusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1460A5D424450F66003B6B28 /* PlusStore.swift */; };
+		149C26402445246500270F8C /* PlusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1460A5D424450F66003B6B28 /* PlusStore.swift */; };
+		149C26412445246600270F8C /* PlusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1460A5D424450F66003B6B28 /* PlusStore.swift */; };
+		149C26422445246600270F8C /* PlusStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1460A5D424450F66003B6B28 /* PlusStore.swift */; };
+		149C2644244527AC00270F8C /* UnlockLevelsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C2643244527AC00270F8C /* UnlockLevelsNode.swift */; };
+		149C2645244527AC00270F8C /* UnlockLevelsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C2643244527AC00270F8C /* UnlockLevelsNode.swift */; };
+		149C2646244527AC00270F8C /* UnlockLevelsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C2643244527AC00270F8C /* UnlockLevelsNode.swift */; };
+		149C2647244527AC00270F8C /* UnlockLevelsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 149C2643244527AC00270F8C /* UnlockLevelsNode.swift */; };
 		14AC4AF42440D937000F6D3C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AC4AF32440D937000F6D3C /* GameKit.framework */; };
 		14E1255B244421B300D34DF5 /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14E12539244421B300D34DF5 /* PlanetShader.fsh */; };
 		14E1255C244421B300D34DF5 /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14E12539244421B300D34DF5 /* PlanetShader.fsh */; };
@@ -172,6 +180,7 @@
 		1419B427243DAC5B00A74A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1460A5D424450F66003B6B28 /* PlusStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlusStore.swift; sourceTree = "<group>"; };
 		1461FA5324442B3400ACE95D /* NSExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSExtensions.swift; sourceTree = "<group>"; };
+		149C2643244527AC00270F8C /* UnlockLevelsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockLevelsNode.swift; sourceTree = "<group>"; };
 		14AC4AF32440D937000F6D3C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		14E12539244421B300D34DF5 /* PlanetShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PlanetShader.fsh; sourceTree = "<group>"; };
 		14E1253A244421B300D34DF5 /* LevelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
@@ -337,6 +346,7 @@
 				14E12539244421B300D34DF5 /* PlanetShader.fsh */,
 				14E12540244421B300D34DF5 /* Player.swift */,
 				14E1253D244421B300D34DF5 /* StarDepthNode.swift */,
+				149C2643244527AC00270F8C /* UnlockLevelsNode.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -568,7 +578,9 @@
 				1461FA5424442B3400ACE95D /* NSExtensions.swift in Sources */,
 				14E12563244421B300D34DF5 /* Goal.swift in Sources */,
 				14E125AB244421B300D34DF5 /* Debugging.swift in Sources */,
+				149C2644244527AC00270F8C /* UnlockLevelsNode.swift in Sources */,
 				14E1256B244421B300D34DF5 /* StarDepthNode.swift in Sources */,
+				149C263F2445246500270F8C /* PlusStore.swift in Sources */,
 				14E125AF244421B300D34DF5 /* Design.swift in Sources */,
 				14E1258B244421B300D34DF5 /* HapticsUtility.swift in Sources */,
 				14E1259B244421B300D34DF5 /* GameScene+ContactDelegate.swift in Sources */,
@@ -605,7 +617,9 @@
 				1461FA5524442B3400ACE95D /* NSExtensions.swift in Sources */,
 				14E12564244421B300D34DF5 /* Goal.swift in Sources */,
 				14E125AC244421B300D34DF5 /* Debugging.swift in Sources */,
+				149C2645244527AC00270F8C /* UnlockLevelsNode.swift in Sources */,
 				14E1256C244421B300D34DF5 /* StarDepthNode.swift in Sources */,
+				149C26402445246500270F8C /* PlusStore.swift in Sources */,
 				14E125B0244421B300D34DF5 /* Design.swift in Sources */,
 				14E1258C244421B300D34DF5 /* HapticsUtility.swift in Sources */,
 				14E1259C244421B300D34DF5 /* GameScene+ContactDelegate.swift in Sources */,
@@ -642,7 +656,9 @@
 				1461FA5624442B3400ACE95D /* NSExtensions.swift in Sources */,
 				14E12565244421B300D34DF5 /* Goal.swift in Sources */,
 				14E125AD244421B300D34DF5 /* Debugging.swift in Sources */,
+				149C2646244527AC00270F8C /* UnlockLevelsNode.swift in Sources */,
 				14E1256D244421B300D34DF5 /* StarDepthNode.swift in Sources */,
+				149C26412445246600270F8C /* PlusStore.swift in Sources */,
 				14E125B1244421B300D34DF5 /* Design.swift in Sources */,
 				14E1258D244421B300D34DF5 /* HapticsUtility.swift in Sources */,
 				14E1259D244421B300D34DF5 /* GameScene+ContactDelegate.swift in Sources */,
@@ -679,8 +695,10 @@
 				14E12576244421B300D34DF5 /* LeaderboardButton.swift in Sources */,
 				14E125AE244421B300D34DF5 /* Debugging.swift in Sources */,
 				14E1259A244421B300D34DF5 /* GameScene+Depth.swift in Sources */,
+				149C26422445246600270F8C /* PlusStore.swift in Sources */,
 				14E1256E244421B300D34DF5 /* StarDepthNode.swift in Sources */,
 				1461FA5724442B3400ACE95D /* NSExtensions.swift in Sources */,
+				149C2647244527AC00270F8C /* UnlockLevelsNode.swift in Sources */,
 				14E125BE244421B300D34DF5 /* SKCodableColor.swift in Sources */,
 				14E125C2244421B300D34DF5 /* SKExtensions.swift in Sources */,
 				14E125A6244421B300D34DF5 /* SpriteCategory.swift in Sources */,

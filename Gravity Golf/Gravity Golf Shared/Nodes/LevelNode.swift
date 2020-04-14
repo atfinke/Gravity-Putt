@@ -79,7 +79,10 @@ class LevelNode: SKNode, Codable {
                                            radius: goalRadius)
 
         let goalPositionX = CGFloat.random(in: goalMinCenterPositionX...goalMaxCenterPositionX)
-        let goalPositionY = CGFloat.random(in: goalMinCenterPositionY...goalMaxCenterPositionY)
+        var goalPositionY = CGFloat.random(in: goalMinCenterPositionY...goalMaxCenterPositionY)
+        if number == 1 {
+            goalPositionY = 0
+        }
         let goalPosition = CGPoint(x: goalPositionX, y: goalPositionY)
         goalNode = Goal(levelNumber: number)
         goalNode.alpha = 0
