@@ -13,7 +13,7 @@ class GameStats: Codable, Equatable {
     // MARK: - Properties -
 
     var holeStrokes = 0
-    private(set) var holeDuration = 0
+    var holeDuration = 0
 
     var fores = 0
     private(set) var totalPower = 0.0

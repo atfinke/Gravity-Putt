@@ -438,6 +438,10 @@ class GameScene: SKScene, Codable {
         
         guard isPlayerReadyForHit, let physicsBody = player.physicsBody else { return }
         
+        if gameStats.holeStrokes == 0 {
+            gameStats.holeDuration = 0
+        }
+        
         resetPlayerPathNodes()
         
         if let planet = contactPlanet {
