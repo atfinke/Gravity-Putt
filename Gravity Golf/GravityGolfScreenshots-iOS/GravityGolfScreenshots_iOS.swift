@@ -23,9 +23,9 @@ class GravityGolfScreenshots_iOS: XCTestCase {
         XCUIDevice.shared.orientation = .landscapeLeft
         sleep(0)
         snapshot("0")
-        sleep(1)
+        sleep(2)
         snapshot("1")
-        sleep(4)
+        sleep(3)
         snapshot("2")
     }
 }
