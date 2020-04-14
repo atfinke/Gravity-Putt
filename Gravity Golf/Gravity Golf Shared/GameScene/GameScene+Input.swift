@@ -19,12 +19,14 @@ extension GameScene {
         let restoreButton = unlockLevelsNode.restoreButton.frame.offsetBy(dx: pos.x,
                                                                           dy: pos.y)
         
-        if buyButton.contains(cameraLocation) {
-            attemptUnlockPurchase()
-            return
-        } else if restoreButton.contains(cameraLocation) {
-            attemptRestore()
-            return
+        if unlockLevelsNode.parent != nil {
+            if buyButton.contains(cameraLocation) {
+                attemptUnlockPurchase()
+                return
+            } else if restoreButton.contains(cameraLocation) {
+                attemptRestore()
+                return
+            }
         }
         
         guard unlockLevelsNode.parent == nil else { return }
