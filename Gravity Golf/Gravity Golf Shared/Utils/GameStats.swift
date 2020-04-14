@@ -7,16 +7,25 @@
 //
 
 import Foundation
+import CoreGraphics
+
+#if os(iOS)
+import Firebase
+#endif
 
 class GameStats: Codable, Equatable {
+    
+    // MARK: - Types -
+    
+    private enum Event: String {
+        case ace, stroke, fore, completedHole
+    }
 
     // MARK: - Properties -
 
-    var holeStrokes = 0
+    private(set) var holeStrokes = 0
     var holeDuration = 0
-
-    var fores = 0
-    private(set) var totalPower = 0.0
+    private(set) var fores = 0
 
     var holeStats = [HoleStat]()
     var holeNumber: Int {
@@ -44,9 +53,36 @@ class GameStats: Codable, Equatable {
                             duration: holeDuration,
                             strokes: holeStrokes)
         holeStats.append(stat)
+        
+        #if os(iOS)
+        if holeStrokes == 1 {
+            Analytics.logEvent(Event.fore.rawValue, parameters: nil)
+        }
+        Analytics.logEvent(Event.completedHole.rawValue, parameters: [
+            "number": holeNumber,
+            "duration": holeDuration,
+            "strokes": holeStrokes
+        ])
+        #endif
 
         holeStrokes = 0
         holeDuration = 0
+    }
+    
+    func hitShot(power: CGFloat) {
+        holeStrokes += 1
+        #if os(iOS)
+        Analytics.logEvent(Event.stroke.rawValue, parameters: [
+            "power": power
+        ])
+        #endif
+    }
+    
+    func hitFore() {
+        fores += 1
+        #if os(iOS)
+        Analytics.logEvent(Event.fore.rawValue, parameters: nil)
+        #endif
     }
 
     // MARK: - Equatable -
@@ -55,7 +91,7 @@ class GameStats: Codable, Equatable {
         return lhs.holeStrokes == rhs.holeStrokes &&
             lhs.holeDuration == rhs.holeDuration &&
             lhs.fores == rhs.fores &&
-            lhs.totalPower == rhs.totalPower &&
             lhs.holeStats == rhs.holeStats
     }
 }
+

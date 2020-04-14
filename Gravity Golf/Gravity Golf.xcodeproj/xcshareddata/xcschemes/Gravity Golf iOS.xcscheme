@@ -28,6 +28,16 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "14C4ADB92446545900816A11"
+               BuildableName = "GravityGolfScreenshots-iOS.xctest"
+               BlueprintName = "GravityGolfScreenshots-iOS"
+               ReferencedContainer = "container:Gravity Golf.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

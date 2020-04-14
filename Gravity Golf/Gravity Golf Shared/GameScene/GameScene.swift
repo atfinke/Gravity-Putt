@@ -186,6 +186,30 @@ class GameScene: SKScene, Codable {
         
         createDepthNodes()
         physicsWorld.contactDelegate = self
+        
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            gameStats.hitShot(power: 1)
+            gameStats.hitShot(power: 1)
+            updateScoreLabel()
+            
+            let action: SKAction = .sequence([
+                .wait(forDuration: 4),
+                .run {
+                    self.moveToNextLevel(isFirstLevel: false)
+                    self.gameStats.hitShot(power: 1)
+                    self.updateScoreLabel()
+                },
+                .wait(forDuration: 4),
+                .run {
+                    self.moveToNextLevel(isFirstLevel: false)
+                    self.gameStats.hitShot(power: 1)
+                    self.updateScoreLabel()
+                }
+            ])
+            run(action)
+        }
+        #endif
     }
     
     func setupCamera() {
@@ -289,11 +313,6 @@ class GameScene: SKScene, Codable {
                 if stats.holeNumber > 10 {
                     self.leaderboardUtility.submit(stats: stats)
                 }
-            }
-            if gameStats.holeNumber == 10 {
-                #if !os(tvOS)
-                SKStoreReviewController.requestReview()
-                #endif
             }
         }
         updateScoreLabel()
@@ -403,7 +422,11 @@ class GameScene: SKScene, Codable {
                     self.authenticate()
                 }])
             run(authAction)
-        } else if gameStats.holeNumber >= 20 && !store.hasUnlockedAllLevels() {
+        } else if gameStats.holeNumber % 100 == 11 {
+            #if !os(tvOS)
+            SKStoreReviewController.requestReview()
+            #endif
+        } else if gameStats.holeNumber >= 21 && !store.hasUnlockedAllLevels() {
             unlockLevelsNode.alpha = 0
             unlockLevelsNode.updatePrice()
             cameraNode.addChild(unlockLevelsNode)
@@ -474,7 +497,7 @@ class GameScene: SKScene, Codable {
         ])
         player.run(action)
         
-        gameStats.holeStrokes += 1
+        gameStats.hitShot(power: mag)
         updateScoreLabel()
         
         isPlayerReadyForHit = false
@@ -548,6 +571,7 @@ class GameScene: SKScene, Codable {
         
         let maxScale: CGFloat = 1.6
         cameraNode.run(.scale(to: min(scale, maxScale), duration: 0.25))
+
         if scale > maxScale && !isOffscreenResetQueued {
             
             isOffscreenResetQueued = true
@@ -555,7 +579,7 @@ class GameScene: SKScene, Codable {
             let resetAction: SKAction = .sequence([
                 .wait(forDuration: wait),
                 .run {
-                    self.gameStats.fores += 1
+                    self.gameStats.hitFore()
                     self.resetPlayerPosition(to: nil)
                     self.isOffscreenResetQueued = false
                 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,7 +32,28 @@
 		149C26492445382D00270F8C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C26482445382D00270F8C /* StoreKit.framework */; };
 		149C264B2445383500270F8C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C264A2445383500270F8C /* StoreKit.framework */; };
 		149C264D2445383A00270F8C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C264C2445383A00270F8C /* StoreKit.framework */; };
+		149C266E24464B4E00270F8C /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265924464B4E00270F8C /* GoogleUtilities.xcframework */; };
+		149C267524464D9D00270F8C /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265524464B4E00270F8C /* FirebaseCore.xcframework */; };
+		149C267624464DA400270F8C /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265824464B4E00270F8C /* FIRAnalyticsConnector.framework */; };
+		149C267724464DAF00270F8C /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265224464B4E00270F8C /* FirebaseAnalytics.framework */; };
+		149C267824464DB800270F8C /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265024464B4E00270F8C /* GoogleAppMeasurement.framework */; };
+		149C267924464DBB00270F8C /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C264F24464B4E00270F8C /* nanopb.xcframework */; };
+		149C267A24464DC500270F8C /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265124464B4E00270F8C /* PromisesObjC.xcframework */; };
+		149C267B24464DCB00270F8C /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265324464B4E00270F8C /* FirebaseCoreDiagnostics.xcframework */; };
+		149C267C24464DCE00270F8C /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265424464B4E00270F8C /* FirebaseInstallations.xcframework */; };
+		149C267E24464DF600270F8C /* GoogleDataTransportCCTSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265624464B4E00270F8C /* GoogleDataTransportCCTSupport.xcframework */; };
+		149C267F24464DFA00270F8C /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265724464B4E00270F8C /* GoogleDataTransport.xcframework */; };
+		149C268424464ECD00270F8C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C268224464EAC00270F8C /* libz.tbd */; };
+		149C268524464ED700270F8C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C268324464EB400270F8C /* libsqlite3.tbd */; };
+		149C268724464F7200270F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 149C268624464F7200270F8C /* GoogleService-Info.plist */; };
 		14AC4AF42440D937000F6D3C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AC4AF32440D937000F6D3C /* GameKit.framework */; };
+		14C4ADBD2446545900816A11 /* GravityGolfScreenshots_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ADBC2446545900816A11 /* GravityGolfScreenshots_iOS.swift */; };
+		14C4ADD92446593900816A11 /* Debugging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E12550244421B300D34DF5 /* Debugging.swift */; };
+		14C4ADDA2446593900816A11 /* Design.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E12551244421B300D34DF5 /* Design.swift */; };
+		14C4ADDB2446593900816A11 /* SpriteCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1254E244421B300D34DF5 /* SpriteCategory.swift */; };
+		14C4ADDC2446593900816A11 /* ZPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1254F244421B300D34DF5 /* ZPosition.swift */; };
+		14C4ADE924465AA800816A11 /* fastlane_scene_data in Resources */ = {isa = PBXBuildFile; fileRef = 14C4ADC4244658E000816A11 /* fastlane_scene_data */; };
+		14C4ADED24465B6C00816A11 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ADEC24465B6C00816A11 /* SnapshotHelper.swift */; };
 		14E1255B244421B300D34DF5 /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14E12539244421B300D34DF5 /* PlanetShader.fsh */; };
 		14E1255C244421B300D34DF5 /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14E12539244421B300D34DF5 /* PlanetShader.fsh */; };
 		14E1255D244421B300D34DF5 /* PlanetShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 14E12539244421B300D34DF5 /* PlanetShader.fsh */; };
@@ -159,6 +180,13 @@
 			remoteGlobalIDString = 1400F99D241BF47D003BFED8;
 			remoteInfo = "Untitled Space Game macOS";
 		};
+		14C4ADBF2446545900816A11 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1400F96E241BF47C003BFED8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1400F97A241BF47D003BFED8;
+			remoteInfo = "Gravity Golf iOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -187,7 +215,28 @@
 		149C26482445382D00270F8C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		149C264A2445383500270F8C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS13.4.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		149C264C2445383A00270F8C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		149C264F24464B4E00270F8C /* nanopb.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = nanopb.xcframework; sourceTree = "<group>"; };
+		149C265024464B4E00270F8C /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
+		149C265124464B4E00270F8C /* PromisesObjC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PromisesObjC.xcframework; sourceTree = "<group>"; };
+		149C265224464B4E00270F8C /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		149C265324464B4E00270F8C /* FirebaseCoreDiagnostics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCoreDiagnostics.xcframework; sourceTree = "<group>"; };
+		149C265424464B4E00270F8C /* FirebaseInstallations.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseInstallations.xcframework; sourceTree = "<group>"; };
+		149C265524464B4E00270F8C /* FirebaseCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCore.xcframework; sourceTree = "<group>"; };
+		149C265624464B4E00270F8C /* GoogleDataTransportCCTSupport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleDataTransportCCTSupport.xcframework; sourceTree = "<group>"; };
+		149C265724464B4E00270F8C /* GoogleDataTransport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleDataTransport.xcframework; sourceTree = "<group>"; };
+		149C265824464B4E00270F8C /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
+		149C265924464B4E00270F8C /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleUtilities.xcframework; sourceTree = "<group>"; };
+		149C267024464C0C00270F8C /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
+		149C267124464C2400270F8C /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		149C268224464EAC00270F8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		149C268324464EB400270F8C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
+		149C268624464F7200270F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		14AC4AF32440D937000F6D3C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		14C4ADBA2446545900816A11 /* GravityGolfScreenshots-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GravityGolfScreenshots-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		14C4ADBC2446545900816A11 /* GravityGolfScreenshots_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityGolfScreenshots_iOS.swift; sourceTree = "<group>"; };
+		14C4ADBE2446545900816A11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		14C4ADC4244658E000816A11 /* fastlane_scene_data */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fastlane_scene_data; sourceTree = "<group>"; };
+		14C4ADEC24465B6C00816A11 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
 		14E12539244421B300D34DF5 /* PlanetShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = PlanetShader.fsh; sourceTree = "<group>"; };
 		14E1253A244421B300D34DF5 /* LevelNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelNode.swift; sourceTree = "<group>"; };
 		14E1253B244421B300D34DF5 /* Goal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
@@ -225,6 +274,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				149C26492445382D00270F8C /* StoreKit.framework in Frameworks */,
+				149C267B24464DCB00270F8C /* FirebaseCoreDiagnostics.xcframework in Frameworks */,
+				149C268524464ED700270F8C /* libsqlite3.tbd in Frameworks */,
+				149C267524464D9D00270F8C /* FirebaseCore.xcframework in Frameworks */,
+				149C267824464DB800270F8C /* GoogleAppMeasurement.framework in Frameworks */,
+				149C268424464ECD00270F8C /* libz.tbd in Frameworks */,
+				149C266E24464B4E00270F8C /* GoogleUtilities.xcframework in Frameworks */,
+				149C267624464DA400270F8C /* FIRAnalyticsConnector.framework in Frameworks */,
+				149C267F24464DFA00270F8C /* GoogleDataTransport.xcframework in Frameworks */,
+				149C267C24464DCE00270F8C /* FirebaseInstallations.xcframework in Frameworks */,
+				149C267724464DAF00270F8C /* FirebaseAnalytics.framework in Frameworks */,
+				149C267924464DBB00270F8C /* nanopb.xcframework in Frameworks */,
+				149C267E24464DF600270F8C /* GoogleDataTransportCCTSupport.xcframework in Frameworks */,
+				149C267A24464DC500270F8C /* PromisesObjC.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,6 +314,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14C4ADB72446545900816A11 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -263,6 +332,7 @@
 				1400F98E241BF47D003BFED8 /* Gravity Golf tvOS */,
 				1400F99F241BF47D003BFED8 /* Gravity Golf macOS */,
 				1419B424243DAC5B00A74A63 /* Gravity Golf Tests */,
+				14C4ADBB2446545900816A11 /* GravityGolfScreenshots-iOS */,
 				1400F97C241BF47D003BFED8 /* Products */,
 				14AC4AF22440D937000F6D3C /* Frameworks */,
 			);
@@ -275,6 +345,7 @@
 				1400F98D241BF47D003BFED8 /* Gravity Golf.app */,
 				1400F99E241BF47D003BFED8 /* Gravity Golf.app */,
 				1419B423243DAC5B00A74A63 /* Gravity Golf Tests.xctest */,
+				14C4ADBA2446545900816A11 /* GravityGolfScreenshots-iOS.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -322,15 +393,48 @@
 			path = "Gravity Golf Tests";
 			sourceTree = "<group>";
 		};
+		149C264E24464B4E00270F8C /* FirebaseAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				149C268624464F7200270F8C /* GoogleService-Info.plist */,
+				149C267024464C0C00270F8C /* Firebase.h */,
+				149C267124464C2400270F8C /* module.modulemap */,
+				149C264F24464B4E00270F8C /* nanopb.xcframework */,
+				149C265024464B4E00270F8C /* GoogleAppMeasurement.framework */,
+				149C265124464B4E00270F8C /* PromisesObjC.xcframework */,
+				149C265224464B4E00270F8C /* FirebaseAnalytics.framework */,
+				149C265324464B4E00270F8C /* FirebaseCoreDiagnostics.xcframework */,
+				149C265424464B4E00270F8C /* FirebaseInstallations.xcframework */,
+				149C265524464B4E00270F8C /* FirebaseCore.xcframework */,
+				149C265624464B4E00270F8C /* GoogleDataTransportCCTSupport.xcframework */,
+				149C265724464B4E00270F8C /* GoogleDataTransport.xcframework */,
+				149C265824464B4E00270F8C /* FIRAnalyticsConnector.framework */,
+				149C265924464B4E00270F8C /* GoogleUtilities.xcframework */,
+			);
+			path = FirebaseAnalytics;
+			sourceTree = "<group>";
+		};
 		14AC4AF22440D937000F6D3C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				149C268324464EB400270F8C /* libsqlite3.tbd */,
+				149C268224464EAC00270F8C /* libz.tbd */,
 				149C264C2445383A00270F8C /* StoreKit.framework */,
 				149C264A2445383500270F8C /* StoreKit.framework */,
 				149C26482445382D00270F8C /* StoreKit.framework */,
 				14AC4AF32440D937000F6D3C /* GameKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		14C4ADBB2446545900816A11 /* GravityGolfScreenshots-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				14C4ADEC24465B6C00816A11 /* SnapshotHelper.swift */,
+				14C4ADBC2446545900816A11 /* GravityGolfScreenshots_iOS.swift */,
+				14C4ADBE2446545900816A11 /* Info.plist */,
+			);
+			path = "GravityGolfScreenshots-iOS";
 			sourceTree = "<group>";
 		};
 		14E12537244421B300D34DF5 /* Gravity Golf Shared */ = {
@@ -342,7 +446,9 @@
 				14E1254D244421B300D34DF5 /* Defines */,
 				14E12552244421B300D34DF5 /* Common */,
 				14E12557244421B300D34DF5 /* Rendering */,
+				149C264E24464B4E00270F8C /* FirebaseAnalytics */,
 				14E12541244421B300D34DF5 /* Assets.xcassets */,
+				14C4ADC4244658E000816A11 /* fastlane_scene_data */,
 			);
 			path = "Gravity Golf Shared";
 			sourceTree = "<group>";
@@ -492,6 +598,24 @@
 			productReference = 1419B423243DAC5B00A74A63 /* Gravity Golf Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		14C4ADB92446545900816A11 /* GravityGolfScreenshots-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 14C4ADC32446545900816A11 /* Build configuration list for PBXNativeTarget "GravityGolfScreenshots-iOS" */;
+			buildPhases = (
+				14C4ADB62446545900816A11 /* Sources */,
+				14C4ADB72446545900816A11 /* Frameworks */,
+				14C4ADB82446545900816A11 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				14C4ADC02446545900816A11 /* PBXTargetDependency */,
+			);
+			name = "GravityGolfScreenshots-iOS";
+			productName = "GravityGolfScreenshots-iOS";
+			productReference = 14C4ADBA2446545900816A11 /* GravityGolfScreenshots-iOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -515,6 +639,10 @@
 						CreatedOnToolsVersion = 11.4;
 						TestTargetID = 1400F99D241BF47D003BFED8;
 					};
+					14C4ADB92446545900816A11 = {
+						CreatedOnToolsVersion = 11.4;
+						TestTargetID = 1400F97A241BF47D003BFED8;
+					};
 				};
 			};
 			buildConfigurationList = 1400F971241BF47C003BFED8 /* Build configuration list for PBXProject "Gravity Golf" */;
@@ -534,6 +662,7 @@
 				1400F98C241BF47D003BFED8 /* Gravity Golf tvOS */,
 				1400F99D241BF47D003BFED8 /* Gravity Golf macOS */,
 				1419B422243DAC5B00A74A63 /* Gravity Golf Tests */,
+				14C4ADB92446545900816A11 /* GravityGolfScreenshots-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -544,6 +673,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				14E1255B244421B300D34DF5 /* PlanetShader.fsh in Resources */,
+				149C268724464F7200270F8C /* GoogleService-Info.plist in Resources */,
+				14C4ADE924465AA800816A11 /* fastlane_scene_data in Resources */,
 				14E1257B244421B300D34DF5 /* Assets.xcassets in Resources */,
 				1400F987241BF47D003BFED8 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -575,6 +706,13 @@
 			files = (
 				14E1257E244421B300D34DF5 /* Assets.xcassets in Resources */,
 				14E1255E244421B300D34DF5 /* PlanetShader.fsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		14C4ADB82446545900816A11 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +874,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		14C4ADB62446545900816A11 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				14C4ADD92446593900816A11 /* Debugging.swift in Sources */,
+				14C4ADBD2446545900816A11 /* GravityGolfScreenshots_iOS.swift in Sources */,
+				14C4ADDB2446593900816A11 /* SpriteCategory.swift in Sources */,
+				14C4ADDC2446593900816A11 /* ZPosition.swift in Sources */,
+				14C4ADDA2446593900816A11 /* Design.swift in Sources */,
+				14C4ADED24465B6C00816A11 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -743,6 +894,11 @@
 			isa = PBXTargetDependency;
 			target = 1400F99D241BF47D003BFED8 /* Gravity Golf macOS */;
 			targetProxy = 1419B428243DAC5B00A74A63 /* PBXContainerItemProxy */;
+		};
+		14C4ADC02446545900816A11 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1400F97A241BF47D003BFED8 /* Gravity Golf iOS */;
+			targetProxy = 14C4ADBF2446545900816A11 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -890,6 +1046,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2020.04.10.1;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Golf iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -897,11 +1060,13 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2020.04;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Golf";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics";
 			};
 			name = Debug;
 		};
@@ -912,6 +1077,14 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2020.04.10.1;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				EXCLUDED_SOURCE_FILE_NAMES = fastlane_scene_data;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Golf iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -919,11 +1092,13 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2020.04;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Golf";
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -935,12 +1110,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+				);
 				INFOPLIST_FILE = "Gravity Golf tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2020.04;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Golf";
 				SDKROOT = appletvos;
@@ -957,12 +1139,19 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2020.04.09;
 				DEVELOPMENT_TEAM = 72S993BNAV;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+				);
 				INFOPLIST_FILE = "Gravity Golf tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 2020.04;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Golf";
 				SDKROOT = appletvos;
@@ -984,6 +1173,10 @@
 				CURRENT_PROJECT_VERSION = 2020.04.11;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+				);
 				INFOPLIST_FILE = "Gravity Golf macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1010,6 +1203,10 @@
 				CURRENT_PROJECT_VERSION = 2020.04.11;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gravity\\ Golf\\ Shared/FirebaseAnalytics",
+				);
 				INFOPLIST_FILE = "Gravity Golf macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1069,6 +1266,49 @@
 			};
 			name = Release;
 		};
+		14C4ADC12446545900816A11 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S993BNAV;
+				INFOPLIST_FILE = "GravityGolfScreenshots-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.GravityGolfScreenshots-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Gravity Golf iOS";
+			};
+			name = Debug;
+		};
+		14C4ADC22446545900816A11 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 72S993BNAV;
+				INFOPLIST_FILE = "GravityGolfScreenshots-iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.andrewfinke.GravityGolfScreenshots-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Gravity Golf iOS";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1113,6 +1353,15 @@
 			buildConfigurations = (
 				1419B42A243DAC5B00A74A63 /* Debug */,
 				1419B42B243DAC5B00A74A63 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		14C4ADC32446545900816A11 /* Build configuration list for PBXNativeTarget "GravityGolfScreenshots-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				14C4ADC12446545900816A11 /* Debug */,
+				14C4ADC22446545900816A11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

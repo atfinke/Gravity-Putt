@@ -17,9 +17,11 @@ class GameViewController: NSViewController {
         view.ignoresSiblingOrder = true
         
         #if DEBUG
-        view.showsFPS = true
-        view.showsNodeCount = true
-        view.showsDrawCount = true
+        if !UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
+            view.showsFPS = true
+            view.showsNodeCount = true
+            view.showsDrawCount = true
+        }
         #endif
         
         view.preferredFramesPerSecond = 60

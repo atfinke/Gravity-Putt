@@ -65,5 +65,17 @@ struct SaveUtility {
             }
         }
     }
+    
+    static func fastlaneSave(data: Data) {
+        do {
+            #if os(tvOS)
+            UserDefaults.standard.set(data, forKey: "data")
+            #else
+            try data.write(to: SaveUtility.sceneURL)
+            #endif
+        } catch {
+            fatalError(error.localizedDescription)
+        }
+    }
 
 }

@@ -9,6 +9,10 @@
 import Foundation
 import GameKit
 
+#if os(iOS)
+import Firebase
+#endif
+
 class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
 
     // MARK: - Types -
@@ -85,8 +89,15 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
                 } else if let error = error {
                     print(error.localizedDescription)
                     completion(false)
+                    #if os(iOS)
+                    Analytics.logEvent("authFailed", parameters: nil)
+                    #endif
                 } else {
                     completion(true)
+                    #if os(iOS)
+                    Analytics.setUserID(self.localPlayer.displayName)
+                    Analytics.logEvent("authSuccess", parameters: nil)
+                    #endif
                 }
             }
         }
@@ -98,6 +109,10 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         controller.title = "Game Center"
         #if !os(tvOS)
         controller.viewState = .leaderboards
+        #endif
+        
+        #if os(iOS)
+        Analytics.logEvent("showLeaderboards", parameters: nil)
         #endif
         return controller
     }
