@@ -57,4 +57,9 @@ class GameViewController: NSViewController {
         }
         #endif
     }
+    
+    override func viewDidLayout() {
+        super.viewDidLayout()
+        skView.frame = view.bounds
+    }
 }
