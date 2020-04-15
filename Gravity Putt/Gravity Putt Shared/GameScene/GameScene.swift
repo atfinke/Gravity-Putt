@@ -429,6 +429,7 @@ class GameScene: SKScene, Codable {
             SKStoreReviewController.requestReview()
             #endif
         } else if gameStats.holeNumber >= 21 && !store.hasUnlockedAllLevels() {
+            #if !os(tvOS)
             unlockLevelsNode.alpha = 0
             unlockLevelsNode.updatePrice()
             cameraNode.addChild(unlockLevelsNode)
@@ -437,6 +438,7 @@ class GameScene: SKScene, Codable {
                 .fadeIn(withDuration: 0.5)
             ])
             unlockLevelsNode.run(action)
+            #endif
         }
     }
     
