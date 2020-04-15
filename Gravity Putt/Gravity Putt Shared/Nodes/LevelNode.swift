@@ -29,11 +29,11 @@ class LevelNode: SKNode, Codable {
         let originY = -size.height / 2
 
         let startPositionBoundaryLeftPadding: CGFloat = 70
-        let startPositionBoundaryTopPadding: CGFloat = 40
-        let startPositionBoundaryBottomPadding: CGFloat = 40
+        let startPositionBoundaryTopPadding: CGFloat = 50
+        let startPositionBoundaryBottomPadding: CGFloat = 50
         let goalPositionBoundaryRightPadding: CGFloat = 70
-        let goalPositionBoundaryTopPadding: CGFloat = 40
-        let goalPositionBoundaryBottomPadding: CGFloat = 40
+        let goalPositionBoundaryTopPadding: CGFloat = 50
+        let goalPositionBoundaryBottomPadding: CGFloat = 50
 
         let startMinBoundsPositionX = originX + startPositionBoundaryLeftPadding
         let startMaxBoundsPositionX = originX + (size.width / 4)
@@ -242,7 +242,7 @@ class LevelNode: SKNode, Codable {
                                goalSafeArea: SKCircleRect,
                                localSpacePlanets: [SKCircleRect]) -> (planet: Planet, rect: SKCircleRect, safe: SKCircleRect)? {
 
-        let planetSafeAreaRadiusPaddingMultiplier: CGFloat = 1.5
+        let planetSafeAreaRadiusPaddingMultiplier: CGFloat = 1.3
         let maxPlanetSafeAreaRadius = maxSafeAreaRadius
         let maxPlanetRadius: CGFloat = maxPlanetSafeAreaRadius / planetSafeAreaRadiusPaddingMultiplier
 

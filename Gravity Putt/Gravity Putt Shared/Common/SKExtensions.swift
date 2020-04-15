@@ -53,7 +53,7 @@ extension SKColor {
     static var randomBackgroundColor: SKColor {
         return SKColor(hue: 280 / 360,
                        saturation: 1,
-                       brightness: CGFloat.random(in: 0.08...0.12),
+                       brightness: CGFloat.random(in: 0.05...0.09),
                        alpha: 1.0)
     }
     
@@ -61,7 +61,7 @@ extension SKColor {
         let hues = (0...50).map({ $0 }) + (220...360).map({ $0 })
         let hue = CGFloat(hues.randomElement() ?? 0) / 360
         return SKColor(hue: hue,
-                       saturation: 0.8,
+                       saturation: 0.9,
                        brightness: CGFloat.random(in: 0.8...1),
                        alpha: 1)
     }

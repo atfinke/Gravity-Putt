@@ -17,11 +17,7 @@ class PlanetAssetsPrewarm {
     private let queue = DispatchQueue(label: "com.andrewfinke.space.golf.planet", qos: .userInteractive)
     private var queued = [(SKColor, SKShader)]()
     
-    var isEnabled = false {
-        didSet {
-            print("queue enabled: \(isEnabled)")
-        }
-    }
+    var isEnabled = false
     
     private init() {
         for _ in 0..<queueCapacity {
