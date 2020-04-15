@@ -10,6 +10,7 @@ import Foundation
 
 #if os(iOS)
 import Firebase
+import FirebaseAnalytics
 #else
 import AppCenterAnalytics
 #endif

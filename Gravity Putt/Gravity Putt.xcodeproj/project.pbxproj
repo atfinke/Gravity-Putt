@@ -398,9 +398,9 @@
 			children = (
 				1400F98F241BF47D003BFED8 /* AppDelegate.swift */,
 				1400F991241BF47D003BFED8 /* GameViewController.swift */,
-				146DC4B924468278002DF97C /* appcenter.txt */,
 				1400F996241BF47D003BFED8 /* LaunchScreen.storyboard */,
 				1400F999241BF47D003BFED8 /* Info.plist */,
+				146DC4B924468278002DF97C /* appcenter.txt */,
 			);
 			path = "Gravity Putt tvOS";
 			sourceTree = "<group>";
@@ -410,10 +410,10 @@
 			children = (
 				140AE9D624430E7400A8925B /* Gravity Golf.entitlements */,
 				1400F9A0241BF47D003BFED8 /* AppDelegate.swift */,
-				146DC4B72446825D002DF97C /* appcenter.txt */,
 				1400F9A2241BF47D003BFED8 /* GameViewController.swift */,
 				1400F9A4241BF47D003BFED8 /* Main.storyboard */,
 				1400F9A7241BF47D003BFED8 /* Info.plist */,
+				146DC4B72446825D002DF97C /* appcenter.txt */,
 			);
 			path = "Gravity Putt macOS";
 			sourceTree = "<group>";
@@ -1161,9 +1161,9 @@
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/Firebase",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/Firebase";
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Putt iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1190,9 +1190,9 @@
 				EXCLUDED_SOURCE_FILE_NAMES = fastlane_scene_data;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/Firebase",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/Firebase";
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Putt iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1219,9 +1219,9 @@
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/AppCenter-SDK-Apple/tvOS/",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/AppCenter-SDK-Apple/tvOS/";
 				INFOPLIST_FILE = "Gravity Putt tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1247,9 +1247,9 @@
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/AppCenter-SDK-Apple/tvOS/",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/AppCenter-SDK-Apple/tvOS/";
 				INFOPLIST_FILE = "Gravity Putt tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1280,9 +1280,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/AppCenter-SDK-Apple/macOS/",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/AppCenter-SDK-Apple/macOS/";
 				INFOPLIST_FILE = "Gravity Putt macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1311,9 +1311,9 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**",
+					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/AppCenter-SDK-Apple/macOS/",
 				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/AppCenter-SDK-Apple/macOS/";
 				INFOPLIST_FILE = "Gravity Putt macOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

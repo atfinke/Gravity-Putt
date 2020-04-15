@@ -16,7 +16,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         UserDefaults.standard.register(defaults: ["NSApplicationCrashOnExceptions": true])
-        MSAppCenter.start("{Your App Secret}", withServices: [MSAnalytics.self, MSCrashes.self])
+        guard let url = Bundle.main.url(forResource: "appcenter", withExtension: "txt"), let app = try? String(contentsOf: url) else { fatalError() }
+        MSAppCenter.start(app, withServices: [MSAnalytics.self, MSCrashes.self])
     }
 
 
