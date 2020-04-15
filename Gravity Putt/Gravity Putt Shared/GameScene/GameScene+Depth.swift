@@ -13,11 +13,11 @@ extension GameScene {
     func createDepthNodes() {
         guard var levelPosition = levels.first?.position else { fatalError() }
         if gameStats.holeNumber == 1 {
-            levelPosition = introLabel.position
+            levelPosition = CGPoint(x: introLabel.position.x + levelSize.width / 2, y: 0)
         }
         
         let depthLevels = 15
-        let depthSize = CGSize(width: levelSize.width * 2, height: levelSize.height * 2)
+        let depthSize = CGSize(width: levelSize.width * 2, height: levelSize.height * 3)
         let area = depthSize.width * depthSize.height
 
         let maxCountDivisor: CGFloat = 4000
@@ -26,7 +26,7 @@ extension GameScene {
         let minCount: Int = 180
         let countInterval = CGFloat(maxCount - minCount) / CGFloat(depthLevels)
 
-        let maxRadius: CGFloat = 0.7
+        let maxRadius: CGFloat = 0.8
         let minRadius: CGFloat = 0.4
         let radiusInterval = CGFloat(maxRadius - minRadius) / CGFloat(depthLevels)
 
@@ -54,7 +54,7 @@ extension GameScene {
         var starDepthsToRemove = [Int: StarDepthNode]()
 
         for (depthLevel, depthNodesAtLevel) in starDepthNodes.enumerated() {
-            let scale = 0.75 * CGFloat(depthLevel + 1) / CGFloat(starDepthNodes.count)
+            let scale = 0.5 * pow(CGFloat(depthLevel + 1) / CGFloat(starDepthNodes.count), 1/3)
             let offset = cameraOffset.scaleComponents(by: scale)
 
             for (depthLevelNodeIndex, depthLevelNode) in depthNodesAtLevel.enumerated() {

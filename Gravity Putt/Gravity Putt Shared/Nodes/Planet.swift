@@ -35,7 +35,7 @@ class Planet: SKNode, Codable {
 
     // MARK: - Initalization -
 
-    init(radius: CGFloat, color: SKColor) {
+    init(radius: CGFloat, color: SKColor, shader: SKShader) {
         self.radius = radius
         self.color = color
 
@@ -64,7 +64,7 @@ class Planet: SKNode, Codable {
         let gravityFieldShaderNode = SKSpriteNode(texture: nil,
                                                    color: .clear,
                                                    size: gravityFieldShaderNodeSize)
-        gravityFieldShaderNode.shader = gravityFieldShader(color: color)
+        gravityFieldShaderNode.shader = shader
         
         addChild(gravityFieldShaderNode)
         addChild(borderSprite)
@@ -92,7 +92,7 @@ class Planet: SKNode, Codable {
 
     // MARK: - Helpers -
 
-   func gravityFieldShader(color: SKColor) -> SKShader {
+   static func gravityFieldShader(color: SKColor) -> SKShader {
         let ic = color.withAlphaComponent(0.75).rgba()
         let iv = vector_float4([Float(ic.red), Float(ic.green), Float(ic.blue), Float(ic.alpha)])
 
@@ -127,7 +127,8 @@ class Planet: SKNode, Codable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         let radius = try values.decode(CGFloat.self, forKey: .radius)
         let color = try values.decode(SKCodableColor.self, forKey: .color)
-        self.init(radius: radius, color: color.color)
+        let shader = Planet.gravityFieldShader(color: color.color)
+        self.init(radius: radius, color: color.color, shader: shader)
     }
 
 }

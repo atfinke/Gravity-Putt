@@ -14,9 +14,9 @@ class UnlockLevelsNode: SKNode {
     
     let background = SKShapeNode(rectOf: CGSize(width: 500, height: 150), cornerRadius: 20)
     let backgroundLabel = SKLabelNode()
-    let button = SKShapeNode(rectOf: CGSize(width: 100, height: 50), cornerRadius: 10)
+    let button = SKShapeNode(rectOf: CGSize(width: 110, height: 60), cornerRadius: 10)
     let buttonLabel = SKLabelNode()
-    let restoreButton = SKShapeNode(rectOf: CGSize(width: 100, height: 50), cornerRadius: 10)
+    let restoreButton = SKShapeNode(rectOf: CGSize(width: 110, height: 60), cornerRadius: 10)
     let restoreButtonLabel = SKLabelNode()
     
     // MARK: - Initalization -
@@ -24,6 +24,7 @@ class UnlockLevelsNode: SKNode {
     override init() {
         super.init()
         
+        background.lineWidth = 4
         background.position = CGPoint(x: 0, y: 60)
         background.fillColor = SKColor.black.withAlphaComponent(0.85)
         background.strokeColor = SKColor.white
@@ -44,6 +45,7 @@ class UnlockLevelsNode: SKNode {
         
         background.addChild(backgroundLabel)
         
+        button.lineWidth = 3
         button.fillColor = SKColor.purple.withAlphaComponent(0.9)
         button.strokeColor = SKColor.white
         button.position = CGPoint(x: 0, y: background.frame.minY - 50)
@@ -53,6 +55,7 @@ class UnlockLevelsNode: SKNode {
         buttonLabel.horizontalAlignmentMode = .center
         button.addChild(buttonLabel)
         
+        restoreButton.lineWidth = 3
         restoreButton.fillColor = SKColor.red.withAlphaComponent(0.6)
         restoreButton.strokeColor = SKColor.white
         restoreButton.position = CGPoint(x: 0, y: button.frame.minY - 50)

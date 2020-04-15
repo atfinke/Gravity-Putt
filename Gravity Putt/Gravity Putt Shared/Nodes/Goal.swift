@@ -89,7 +89,7 @@ class Goal: SKNode {
         let innerNodeRenderSize = CGSize(width: innerBorderRadius * 2 + 5, height: innerBorderRadius * 2 + 5)
         let innerNodeRenderer = ContextRenderer(size: innerNodeRenderSize)
         let innerNodeImage = innerNodeRenderer.image { ctx in
-            SKColor.white.withAlphaComponent(0.5).setStroke()
+            SKColor(white: 0.5, alpha: 1).setStroke()
             ctx.cgContext.setLineWidth(3)
             ctx.cgContext.setLineJoin(.round)
             ctx.cgContext.setLineCap(.round)
@@ -111,8 +111,10 @@ class Goal: SKNode {
         borderNode = SKSpriteNode(texture: Goal.textures.outer)
         borderNode.colorBlendFactor = 1
         borderNode.color = SKColor.green.withAlphaComponent(0.8)
+        borderNode.zPosition = ZPosition.goal.rawValue
         
         innerNode = SKSpriteNode(texture: Goal.textures.inner)
+        innerNode.zPosition = ZPosition.goal.rawValue
         
         label = SKLabelNode(text: "")
         label.horizontalAlignmentMode = .center

@@ -317,6 +317,14 @@ class GameScene: SKScene, Codable {
         }
         updateScoreLabel()
         
+        let genAction: SKAction = .sequence([
+            .wait(forDuration: transitionDuration),
+            .run {
+                PlanetAssetsPrewarm.shared.isEnabled = true
+            }
+        ])
+        run(genAction)
+        
         // Last Goal Animation
         if let newLastLevel = lastLevel {
             let goalNode = newLastLevel.goalNode
@@ -406,7 +414,7 @@ class GameScene: SKScene, Codable {
         resetPlayerPosition()
         playerVelocityModifier = 1.0
         
-        if gameStats.holeNumber == 2 {
+        if gameStats.holeNumber == 3 {
             let fadeAction: SKAction = .sequence([
                 .wait(forDuration: transitionDuration),
                 .fadeIn(withDuration: transitionDuration / 2)
@@ -415,13 +423,7 @@ class GameScene: SKScene, Codable {
             holeLabel.run(fadeAction)
             leaderboardButton.run(fadeAction)
             introLabel.run(.remove(after: transitionDuration))
-            
-            let authAction: SKAction = .sequence([
-                .wait(forDuration: transitionDuration),
-                .run {
-                    self.authenticate()
-                }])
-            run(authAction)
+            authenticate()
         } else if gameStats.holeNumber % 100 == 11 {
             #if !os(tvOS)
             SKStoreReviewController.requestReview()
@@ -430,10 +432,10 @@ class GameScene: SKScene, Codable {
             unlockLevelsNode.alpha = 0
             unlockLevelsNode.updatePrice()
             cameraNode.addChild(unlockLevelsNode)
-             let action: SKAction = .sequence([
-                           .wait(forDuration: transitionDuration),
-                           .fadeIn(withDuration: 0.2)
-             ])
+            let action: SKAction = .sequence([
+                .wait(forDuration: transitionDuration),
+                .fadeIn(withDuration: 0.5)
+            ])
             unlockLevelsNode.run(action)
         }
     }
@@ -460,6 +462,7 @@ class GameScene: SKScene, Codable {
         aimAssist.run(.fadeOut(withDuration: 0.15))
         
         guard isPlayerReadyForHit, let physicsBody = player.physicsBody else { return }
+        PlanetAssetsPrewarm.shared.isEnabled = false
         
         if gameStats.holeStrokes == 0 {
             gameStats.holeDuration = 0
@@ -573,7 +576,6 @@ class GameScene: SKScene, Codable {
         cameraNode.run(.scale(to: min(scale, maxScale), duration: 0.25))
 
         if scale > maxScale && !isOffscreenResetQueued {
-            
             isOffscreenResetQueued = true
             let wait: TimeInterval = 1
             let resetAction: SKAction = .sequence([

@@ -16,6 +16,10 @@
 		1400F9A1241BF47D003BFED8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1400F9A0241BF47D003BFED8 /* AppDelegate.swift */; };
 		1400F9A3241BF47D003BFED8 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1400F9A2241BF47D003BFED8 /* GameViewController.swift */; };
 		1400F9A6241BF47D003BFED8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1400F9A4241BF47D003BFED8 /* Main.storyboard */; };
+		140DD75E244699C50045531A /* PlanetAssetsPrewarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DD75D244699C50045531A /* PlanetAssetsPrewarm.swift */; };
+		140DD75F244699C50045531A /* PlanetAssetsPrewarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DD75D244699C50045531A /* PlanetAssetsPrewarm.swift */; };
+		140DD760244699C50045531A /* PlanetAssetsPrewarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DD75D244699C50045531A /* PlanetAssetsPrewarm.swift */; };
+		140DD761244699C50045531A /* PlanetAssetsPrewarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140DD75D244699C50045531A /* PlanetAssetsPrewarm.swift */; };
 		1419B426243DAC5B00A74A63 /* GameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419B425243DAC5B00A74A63 /* GameTests.swift */; };
 		1461FA5424442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		1461FA5524442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
@@ -219,6 +223,7 @@
 		1400F9A5241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1400F9A7241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		140AE9D624430E7400A8925B /* Gravity Golf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gravity Golf.entitlements"; sourceTree = "<group>"; };
+		140DD75D244699C50045531A /* PlanetAssetsPrewarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlanetAssetsPrewarm.swift; path = "Gravity Putt Shared/Nodes/PlanetAssetsPrewarm.swift"; sourceTree = SOURCE_ROOT; };
 		1419B423243DAC5B00A74A63 /* Gravity Putt Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gravity Putt Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1419B425243DAC5B00A74A63 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
 		1419B427243DAC5B00A74A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -562,6 +567,7 @@
 				14E12543244421B300D34DF5 /* SaveUtility.swift */,
 				1460A5D424450F66003B6B28 /* Store.swift */,
 				146DC4B224467F01002DF97C /* AnalyticsUtility.swift */,
+				140DD75D244699C50045531A /* PlanetAssetsPrewarm.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -831,6 +837,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140DD75E244699C50045531A /* PlanetAssetsPrewarm.swift in Sources */,
 				14E125BB244421B300D34DF5 /* SKCodableColor.swift in Sources */,
 				14E125BF244421B300D34DF5 /* SKExtensions.swift in Sources */,
 				1461FA5424442B3400ACE95D /* NSExtensions.swift in Sources */,
@@ -871,6 +878,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140DD75F244699C50045531A /* PlanetAssetsPrewarm.swift in Sources */,
 				14E125BC244421B300D34DF5 /* SKCodableColor.swift in Sources */,
 				14E125C0244421B300D34DF5 /* SKExtensions.swift in Sources */,
 				1461FA5524442B3400ACE95D /* NSExtensions.swift in Sources */,
@@ -911,6 +919,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140DD760244699C50045531A /* PlanetAssetsPrewarm.swift in Sources */,
 				14E125BD244421B300D34DF5 /* SKCodableColor.swift in Sources */,
 				14E125C1244421B300D34DF5 /* SKExtensions.swift in Sources */,
 				1461FA5624442B3400ACE95D /* NSExtensions.swift in Sources */,
@@ -965,6 +974,7 @@
 				14E125A6244421B300D34DF5 /* SpriteCategory.swift in Sources */,
 				14E1259E244421B300D34DF5 /* GameScene+ContactDelegate.swift in Sources */,
 				146DC4B624467F01002DF97C /* AnalyticsUtility.swift in Sources */,
+				140DD761244699C50045531A /* PlanetAssetsPrewarm.swift in Sources */,
 				14E125C6244421B300D34DF5 /* StarTextureCreator.swift in Sources */,
 				14E12562244421B300D34DF5 /* LevelNode.swift in Sources */,
 				14E1257A244421B300D34DF5 /* Player.swift in Sources */,

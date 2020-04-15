@@ -56,6 +56,15 @@ extension SKColor {
                        brightness: CGFloat.random(in: 0.08...0.12),
                        alpha: 1.0)
     }
+    
+    static var randomPlanetColor: SKColor {
+        let hues = (0...50).map({ $0 }) + (220...360).map({ $0 })
+        let hue = CGFloat(hues.randomElement() ?? 0) / 360
+        return SKColor(hue: hue,
+                       saturation: 0.8,
+                       brightness: CGFloat.random(in: 0.8...1),
+                       alpha: 1)
+    }
 }
 
 extension SKAction {

@@ -28,12 +28,12 @@ class LevelNode: SKNode, Codable {
         let originX = -size.width / 2
         let originY = -size.height / 2
 
-        let startPositionBoundaryLeftPadding: CGFloat = 50
-        let startPositionBoundaryTopPadding: CGFloat = 20
-        let startPositionBoundaryBottomPadding: CGFloat = 20
-        let goalPositionBoundaryRightPadding: CGFloat = 50
-        let goalPositionBoundaryTopPadding: CGFloat = 20
-        let goalPositionBoundaryBottomPadding: CGFloat = 20
+        let startPositionBoundaryLeftPadding: CGFloat = 70
+        let startPositionBoundaryTopPadding: CGFloat = 40
+        let startPositionBoundaryBottomPadding: CGFloat = 40
+        let goalPositionBoundaryRightPadding: CGFloat = 70
+        let goalPositionBoundaryTopPadding: CGFloat = 40
+        let goalPositionBoundaryBottomPadding: CGFloat = 40
 
         let startMinBoundsPositionX = originX + startPositionBoundaryLeftPadding
         let startMaxBoundsPositionX = originX + (size.width / 4)
@@ -276,14 +276,8 @@ class LevelNode: SKNode, Codable {
         }
         viz(planetSafeRect: planetSafeRect.cgRect)
 
-        let hues = (0...50).map({ $0 }) + (220...360).map({ $0 })
-        let hue = CGFloat(hues.randomElement() ?? 0) / 360
-        let planetColor = SKColor(hue: hue,
-                                  saturation: 0.8,
-                                  brightness: CGFloat.random(in: 0.8...1),
-                                  alpha: 1)
-
-        let planet = Planet(radius: planetRadius, color: planetColor)
+        let assets = PlanetAssetsPrewarm.shared.grabAssets()
+        let planet = Planet(radius: planetRadius, color: assets.color, shader: assets.shader)
         planet.zPosition = ZPosition.planet.rawValue
         planet.position = planetPosition
         addChild(planet)
