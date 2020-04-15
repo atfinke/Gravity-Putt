@@ -17,12 +17,16 @@ extension GameScene {
         }
         
         let depthLevels = 15
+        let depthSize = CGSize(width: levelSize.width * 2, height: levelSize.height * 2)
+        let area = depthSize.width * depthSize.height
 
-        let maxCount: Int = 350
+        let maxCountDivisor: CGFloat = 4000
+        let maxCount: Int = Int(area / maxCountDivisor)
+        print("maxCount: \(maxCount)")
         let minCount: Int = 180
         let countInterval = CGFloat(maxCount - minCount) / CGFloat(depthLevels)
 
-        let maxRadius: CGFloat = 0.9
+        let maxRadius: CGFloat = 0.7
         let minRadius: CGFloat = 0.4
         let radiusInterval = CGFloat(maxRadius - minRadius) / CGFloat(depthLevels)
 
@@ -32,9 +36,8 @@ extension GameScene {
             let minDepthRadius = (minRadius - 0.2) + radiusInterval * CGFloat(starDepthLevel)
             let maxDepthRadius = minRadius + radiusInterval * CGFloat(starDepthLevel)
 
-            let starDepthNode = StarDepthNode(size: CGSize(width: size.width * 2,
-                                                           height: size.height * 2),
-                                              countRange: 0..<maxCount,
+            let starDepthNode = StarDepthNode(size: depthSize,
+                                              countRange: minCount..<maxCount,
                                               radiusRange: minDepthRadius..<maxDepthRadius)
             starDepthNode.position = CGPoint(x: levelPosition.x,
                                              y: levelPosition.y)
