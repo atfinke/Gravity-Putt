@@ -45,15 +45,15 @@ class GameStats: Codable, Equatable {
     // MARK: - Helpers -
 
     func completedHole() {
-        let stat = HoleStat(number: holeNumber,
-                            duration: holeDuration,
-                            strokes: holeStrokes)
+        let stat = HoleStat(n: holeNumber,
+                            d: holeDuration,
+                            s: holeStrokes)
         holeStats.append(stat)
         
         if holeStrokes == 1 {
-            AnalyticsUtility.log(event: Event.fore.rawValue, parameters: nil)
+            AnalyticsUtility.shared.queue(event: Event.fore.rawValue, parameters: nil)
         }
-        AnalyticsUtility.log(event: Event.completedHole.rawValue, parameters: [
+        AnalyticsUtility.shared.queue(event: Event.completedHole.rawValue, parameters: [
             "number": holeNumber.description,
             "duration": holeDuration.description,
             "strokes": holeStrokes.description
@@ -65,14 +65,14 @@ class GameStats: Codable, Equatable {
     
     func hitShot(power: CGFloat) {
         holeStrokes += 1
-        AnalyticsUtility.log(event: Event.stroke.rawValue, parameters: [
+        AnalyticsUtility.shared.queue(event: Event.stroke.rawValue, parameters: [
             "power": Int(power).description
         ])
     }
     
     func hitFore() {
         fores += 1
-        AnalyticsUtility.log(event: Event.fore.rawValue, parameters: nil)
+        AnalyticsUtility.shared.queue(event: Event.fore.rawValue, parameters: nil)
     }
 
     // MARK: - Equatable -

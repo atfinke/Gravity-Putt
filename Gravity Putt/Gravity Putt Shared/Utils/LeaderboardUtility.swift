@@ -85,10 +85,10 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
                 } else if let error = error {
                     print(error.localizedDescription)
                     completion(false)
-                    AnalyticsUtility.log(event: "authFailed", parameters: nil)
+                    AnalyticsUtility.shared.queue(event: "authFailed", parameters: nil)
                 } else {
                     completion(true)
-                    AnalyticsUtility.log(event: "authSuccess", parameters: nil)
+                    AnalyticsUtility.shared.queue(event: "authSuccess", parameters: nil)
                 }
             }
         }
@@ -102,7 +102,7 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         controller.viewState = .leaderboards
         #endif
         
-        AnalyticsUtility.log(event: "showLeaderboards", parameters: nil)
+        AnalyticsUtility.shared.queue(event: "showLeaderboards", parameters: nil)
         return controller
     }
 

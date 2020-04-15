@@ -13,14 +13,16 @@ class PlanetAssetsPrewarm {
     
     static let shared = PlanetAssetsPrewarm()
     
-    private let queueCapacity = 10
+    private static let queueCapacity = 15
     private let queue = DispatchQueue(label: "com.andrewfinke.space.golf.planet", qos: .userInteractive)
     private var queued = [(SKColor, SKShader)]()
+    private var garbage = [(SKColor, SKShader)]()
     
     var isEnabled = false
+    var justRecycled = false
     
     private init() {
-        for _ in 0..<queueCapacity {
+        for _ in 0..<PlanetAssetsPrewarm.queueCapacity {
             generateAsset()
         }
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { _ in
@@ -28,7 +30,7 @@ class PlanetAssetsPrewarm {
                 return
             }
             self.queue.sync {
-                if self.queued.count < self.queueCapacity {
+                if self.queued.count < PlanetAssetsPrewarm.queueCapacity {
                     self.generateAsset()
                 }
             }
@@ -46,7 +48,22 @@ class PlanetAssetsPrewarm {
             while queued.isEmpty {
                 self.generateAsset()
             }
-            return queued.removeFirst()
+            let removed = queued.removeFirst()
+            
+            // save the planet, recycle
+            if justRecycled {
+                garbage.append(removed)
+            } else {
+                queued.append(removed)
+            }
+            justRecycled.toggle()
+            
+            if garbage.count > PlanetAssetsPrewarm.queueCapacity {
+                queued.append(contentsOf: garbage)
+                garbage = []
+            }
+            
+            return removed
         }
     }
 }

@@ -77,7 +77,7 @@ class Store: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
         let payment = SKPayment(product: unlockLevelsProduct)
         queue.add(payment)
         
-        AnalyticsUtility.log(event: "purchaseAttempt", parameters: nil)
+        AnalyticsUtility.shared.queue(event: "purchaseAttempt", parameters: nil)
     }
     
     // MARK: - SKProductsRequestDelegate -
@@ -103,13 +103,13 @@ class Store: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserver {
                 break
             case .purchased:
                 finish(transaction: transaction, success: true)
-                AnalyticsUtility.log(event: "purchaseCompleted", parameters: nil)
+                AnalyticsUtility.shared.queue(event: "purchaseCompleted", parameters: nil)
             case .failed:
                 finish(transaction: transaction, success: false)
-                AnalyticsUtility.log(event: "purchaseFailed", parameters: nil)
+                AnalyticsUtility.shared.queue(event: "purchaseFailed", parameters: nil)
             case .restored:
                 finish(transaction: transaction, success: true)
-                AnalyticsUtility.log(event: "purchaseRestored", parameters: nil)
+                AnalyticsUtility.shared.queue(event: "purchaseRestored", parameters: nil)
             case .deferred:
                 break
             @unknown default:

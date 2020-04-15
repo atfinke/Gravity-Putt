@@ -9,7 +9,17 @@
 import Foundation
 
 struct HoleStat: Codable, Equatable {
-    let number: Int
-    let duration: Int
-    let strokes: Int
+    let n: Int // number (name is written to json for every object, keep short)
+    let d: Int // duration
+    let s: Int // strokes
+    
+    var number: Int {
+        return n
+    }
+    var duration: Int {
+        return d
+    }
+    var strokes: Int {
+        return s
+    }
 }

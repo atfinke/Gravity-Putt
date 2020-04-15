@@ -22,7 +22,7 @@ extension GameScene {
 
         let maxCountDivisor: CGFloat = 4000
         let maxCount: Int = Int(area / maxCountDivisor)
-        print("maxCount: \(maxCount)")
+
         let minCount: Int = 180
         let countInterval = CGFloat(maxCount - minCount) / CGFloat(depthLevels)
 

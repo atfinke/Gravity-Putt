@@ -242,7 +242,7 @@ class LevelNode: SKNode, Codable {
                                goalSafeArea: SKCircleRect,
                                localSpacePlanets: [SKCircleRect]) -> (planet: Planet, rect: SKCircleRect, safe: SKCircleRect)? {
 
-        let planetSafeAreaRadiusPaddingMultiplier: CGFloat = 1.3
+        let planetSafeAreaRadiusPaddingMultiplier: CGFloat = 1.5
         let maxPlanetSafeAreaRadius = maxSafeAreaRadius
         let maxPlanetRadius: CGFloat = maxPlanetSafeAreaRadius / planetSafeAreaRadiusPaddingMultiplier
 

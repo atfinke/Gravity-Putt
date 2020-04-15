@@ -321,6 +321,7 @@ class GameScene: SKScene, Codable {
             .wait(forDuration: transitionDuration),
             .run {
                 PlanetAssetsPrewarm.shared.isEnabled = true
+                AnalyticsUtility.shared.flushQueue()
             }
         ])
         run(genAction)
@@ -423,10 +424,20 @@ class GameScene: SKScene, Codable {
             holeLabel.run(fadeAction)
             leaderboardButton.run(fadeAction)
             introLabel.run(.remove(after: transitionDuration))
-            authenticate()
+            let action: SKAction = .sequence([
+                .wait(forDuration: transitionDuration + 0.1),
+                .run(authenticate)
+            ])
+            run(action)
         } else if gameStats.holeNumber % 100 == 11 {
             #if !os(tvOS)
-            SKStoreReviewController.requestReview()
+            let action: SKAction = .sequence([
+                .wait(forDuration: transitionDuration + 0.1),
+                .run {
+                     SKStoreReviewController.requestReview()
+                }
+            ])
+            run(action)
             #endif
         } else if gameStats.holeNumber >= 21 && !store.hasUnlockedAllLevels() {
             #if !os(tvOS)
