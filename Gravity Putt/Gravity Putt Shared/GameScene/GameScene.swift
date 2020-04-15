@@ -439,7 +439,7 @@ class GameScene: SKScene, Codable {
             ])
             run(action)
             #endif
-        } else if gameStats.holeNumber >= 21 && !store.hasUnlockedAllLevels() {
+        } else if gameStats.holeNumber >= 19 && !store.hasUnlockedAllLevels() {
             #if !os(tvOS)
             unlockLevelsNode.alpha = 0
             unlockLevelsNode.updatePrice()
@@ -450,6 +450,12 @@ class GameScene: SKScene, Codable {
             ])
             unlockLevelsNode.run(action)
             #endif
+        }
+        
+        if gameStats.holeNumber == 19 {
+            AnalyticsUtility.shared.queue(event: "completed18", parameters: nil)
+        } else if gameStats.holeNumber == 20 {
+            AnalyticsUtility.shared.queue(event: "completed19", parameters: nil)
         }
     }
     

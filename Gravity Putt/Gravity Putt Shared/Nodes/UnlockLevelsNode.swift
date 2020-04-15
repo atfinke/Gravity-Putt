@@ -33,7 +33,7 @@ class UnlockLevelsNode: SKNode {
         backgroundLabel.numberOfLines = 5
         backgroundLabel.verticalAlignmentMode = .center
         backgroundLabel.horizontalAlignmentMode = .center
-        let text = NSAttributedString.stylized(string: "Thanks for playing the first 20!\n\nPlease consider unlocking\nunlimited levels to keep playing.",
+        let text = NSAttributedString.stylized(string: "Thanks for playing the first 18!\n\nPlease consider unlocking\nunlimited levels to keep playing.",
                                                size: 22,
                                                weight: .semibold)
         let mutableText = NSMutableAttributedString(attributedString: text)
