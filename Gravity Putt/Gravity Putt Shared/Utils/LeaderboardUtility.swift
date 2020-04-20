@@ -70,10 +70,6 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
 
     func authenticate(authController: @escaping (SKController) -> Void,
                       completion: @escaping (_ success: Bool) -> Void) {
-        #if DEBUG && os(macOS)
-        return
-        #endif
-
         guard !localPlayer.isAuthenticated else {
             completion(true)
             return
