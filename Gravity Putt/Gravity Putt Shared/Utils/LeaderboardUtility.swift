@@ -49,16 +49,17 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
         }
 
         let averageStrokesPerHole = CGFloat(stats.completedHolesStrokes) / completedHoles
-        let averageTimePerHole = totalTime / completedHoles
+//        let averageTimePerHole = totalTime / completedHoles
 
-        let scores: [Leaderboard: Int64] = [
-            .averageStrokesPerHole: Int64(averageStrokesPerHole * 1_000),
-            .averageTimePerHole: Int64(averageTimePerHole * 1_000),
+        var scores: [Leaderboard: Int64] = [
             .completedHoles: Int64(completedHoles),
             .fores: Int64(stats.fores),
             .aces: Int64(stats.aces),
             .acesStreak: Int64(maxAcesStreak)
         ]
+        if completedHoles >= 10 {
+            scores[.averageStrokesPerHole] = Int64(averageStrokesPerHole * 1_000)
+        }
         let mapped = scores.map { key, value -> GKScore in
             let score = GKScore(leaderboardIdentifier: key.rawValue)
             score.value = value
