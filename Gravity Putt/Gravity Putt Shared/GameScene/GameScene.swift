@@ -310,9 +310,7 @@ class GameScene: SKScene, Codable {
                 SaveUtility.save(scene: self)
                 
                 let stats = self.gameStats
-                if stats.holeNumber > 10 {
-                    self.leaderboardUtility.submit(stats: stats)
-                }
+                self.leaderboardUtility.submit(stats: stats)
             }
         }
         updateScoreLabel()

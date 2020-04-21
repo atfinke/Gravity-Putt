@@ -45,9 +45,7 @@ extension GameScene {
     
     private func inputMoved(sceneLocation: CGPoint, cameraLocation: CGPoint) {
         guard introLabel.parent == nil && unlockLevelsNode.parent == nil else { return }
-        if leaderboardRect.contains(cameraLocation) {
-            return
-        }
+
         #if os(tvOS)
         setTargeting(pullBackLocation: sceneLocation + CGPoint(x: 0, y: -levelSize.height/2 + 100))
         #else
@@ -57,9 +55,7 @@ extension GameScene {
     
     private func inputUp(sceneLocation: CGPoint, cameraLocation: CGPoint) {
         guard introLabel.parent == nil && unlockLevelsNode.parent == nil else { return }
-        if leaderboardRect.contains(cameraLocation) {
-            return
-        }
+
         #if os(tvOS)
         finishedTargeting(pullBackLocation: sceneLocation + CGPoint(x: 0, y: -levelSize.height/2 + 100))
         #else

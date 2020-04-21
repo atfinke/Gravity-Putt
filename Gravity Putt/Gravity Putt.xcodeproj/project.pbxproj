@@ -222,7 +222,6 @@
 		1400F9A2241BF47D003BFED8 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		1400F9A5241BF47D003BFED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1400F9A7241BF47D003BFED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		140AE9D624430E7400A8925B /* Gravity Golf.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gravity Golf.entitlements"; sourceTree = "<group>"; };
 		140DD75D244699C50045531A /* PlanetAssetsPrewarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PlanetAssetsPrewarm.swift; path = "Gravity Putt Shared/Nodes/PlanetAssetsPrewarm.swift"; sourceTree = SOURCE_ROOT; };
 		1419B423243DAC5B00A74A63 /* Gravity Putt Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Gravity Putt Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1419B425243DAC5B00A74A63 /* GameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameTests.swift; sourceTree = "<group>"; };
@@ -261,6 +260,7 @@
 		149C268224464EAC00270F8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
 		149C268324464EB400270F8C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 		149C268624464F7200270F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		14A826D7244D410900A7BB1C /* Gravity Putt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gravity Putt.entitlements"; sourceTree = "<group>"; };
 		14AC4AF32440D937000F6D3C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		14C4ADBA2446545900816A11 /* GravityPuttScreenshots-iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GravityPuttScreenshots-iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		14C4ADBC2446545900816A11 /* GravityPuttScreenshots_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GravityPuttScreenshots_iOS.swift; sourceTree = "<group>"; };
@@ -413,7 +413,7 @@
 		1400F99F241BF47D003BFED8 /* Gravity Putt macOS */ = {
 			isa = PBXGroup;
 			children = (
-				140AE9D624430E7400A8925B /* Gravity Golf.entitlements */,
+				14A826D7244D410900A7BB1C /* Gravity Putt.entitlements */,
 				1400F9A0241BF47D003BFED8 /* AppDelegate.swift */,
 				1400F9A2241BF47D003BFED8 /* GameViewController.swift */,
 				1400F9A4241BF47D003BFED8 /* Main.storyboard */,
@@ -1166,7 +1166,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2020.04.14;
+				CURRENT_PROJECT_VERSION = 2020.04.19;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1180,7 +1180,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.04;
+				MARKETING_VERSION = 2020.04.01;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Putt";
@@ -1195,7 +1195,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2020.04.14;
+				CURRENT_PROJECT_VERSION = 2020.04.19;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				EXCLUDED_SOURCE_FILE_NAMES = fastlane_scene_data;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1209,7 +1209,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.04;
+				MARKETING_VERSION = 2020.04.01;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Putt";
@@ -1225,7 +1225,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "tvOS App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2020.04.14;
+				CURRENT_PROJECT_VERSION = 2020.04.19;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1237,7 +1237,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.04;
+				MARKETING_VERSION = 2020.04.01;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Putt";
@@ -1253,7 +1253,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "tvOS App Icon & Top Shelf Image";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2020.04.14;
+				CURRENT_PROJECT_VERSION = 2020.04.19;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1265,7 +1265,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.04;
+				MARKETING_VERSION = 2020.04.01;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Putt";
@@ -1285,7 +1285,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2020.04.14;
+				CURRENT_PROJECT_VERSION = 2020.04.19;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1299,7 +1299,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 2020.04;
+				MARKETING_VERSION = 2020.04.01;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Putt";
@@ -1316,7 +1316,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2020.04.14;
+				CURRENT_PROJECT_VERSION = 2020.04.19;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1330,7 +1330,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
-				MARKETING_VERSION = 2020.04;
+				MARKETING_VERSION = 2020.04.01;
 				OTHER_SWIFT_FLAGS = "-Xfrontend -debug-time-function-bodies";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Putt";
