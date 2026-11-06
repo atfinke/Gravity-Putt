@@ -11,6 +11,7 @@ import SpriteKit
 extension GameScene {
     
     private func inputDown(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        isTargetingInput = false
         guard introLabel.parent == nil else { return }
         
         let pos = unlockLevelsNode.position
@@ -36,6 +37,7 @@ extension GameScene {
             return
         }
         
+        isTargetingInput = true
         #if os(tvOS)
         setTargeting(startLocation: sceneLocation + CGPoint(x: 0, y: -levelSize.height/2 + 100))
         #else
@@ -44,6 +46,7 @@ extension GameScene {
     }
     
     private func inputMoved(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        guard isTargetingInput else { return }
         guard introLabel.parent == nil && unlockLevelsNode.parent == nil else { return }
 
         #if os(tvOS)
@@ -54,6 +57,8 @@ extension GameScene {
     }
     
     private func inputUp(sceneLocation: CGPoint, cameraLocation: CGPoint) {
+        guard isTargetingInput else { return }
+        isTargetingInput = false
         guard introLabel.parent == nil && unlockLevelsNode.parent == nil else { return }
 
         #if os(tvOS)
@@ -64,6 +69,7 @@ extension GameScene {
     }
     
     private func inputCancelled() {
+        isTargetingInput = false
         aimAssist.run(.fadeOut(withDuration: 0.15))
     }
 }

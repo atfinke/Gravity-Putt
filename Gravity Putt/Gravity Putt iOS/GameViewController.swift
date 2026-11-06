@@ -37,17 +37,33 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         scene.presentingController = self
         view.backgroundColor = .black
+        view.addSubview(skView)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        skView.frame = view.bounds
-        view.addSubview(skView)
-        skView.presentScene(scene)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateViewport()
 
+        guard skView.scene == nil, view.bounds.width > 0, view.bounds.height > 0 else { return }
+        skView.presentScene(scene)
         UIView.animate(withDuration: 1.0) {
             self.skView.alpha = 1
         }
+    }
+
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+        updateViewport()
+    }
+
+    private func updateViewport() {
+        skView.frame = view.bounds
+        scene.updateViewport(viewSize: view.bounds.size,
+                             safeArea: view.bounds.inset(by: view.safeAreaInsets))
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscape
     }
 
     override var prefersStatusBarHidden: Bool {

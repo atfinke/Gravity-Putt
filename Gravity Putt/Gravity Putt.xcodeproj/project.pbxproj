@@ -25,7 +25,6 @@
 		1461FA5524442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		1461FA5624442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
 		1461FA5724442B3400ACE95D /* NSExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461FA5324442B3400ACE95D /* NSExtensions.swift */; };
-		146DC32C24467C45002DF97C /* FirebaseCrashlytics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC32924467C45002DF97C /* FirebaseCrashlytics.xcframework */; };
 		146DC4AC24467E99002DF97C /* AppCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC33224467E29002DF97C /* AppCenterCrashes.framework */; };
 		146DC4AD24467E99002DF97C /* AppCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC3B224467E2A002DF97C /* AppCenterAnalytics.framework */; };
 		146DC4AE24467E99002DF97C /* AppCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 146DC3B324467E2A002DF97C /* AppCenter.framework */; };
@@ -49,19 +48,6 @@
 		149C26492445382D00270F8C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C26482445382D00270F8C /* StoreKit.framework */; };
 		149C264B2445383500270F8C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C264A2445383500270F8C /* StoreKit.framework */; };
 		149C264D2445383A00270F8C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C264C2445383A00270F8C /* StoreKit.framework */; };
-		149C266E24464B4E00270F8C /* GoogleUtilities.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265924464B4E00270F8C /* GoogleUtilities.xcframework */; };
-		149C267524464D9D00270F8C /* FirebaseCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265524464B4E00270F8C /* FirebaseCore.xcframework */; };
-		149C267624464DA400270F8C /* FIRAnalyticsConnector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265824464B4E00270F8C /* FIRAnalyticsConnector.framework */; };
-		149C267724464DAF00270F8C /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265224464B4E00270F8C /* FirebaseAnalytics.framework */; };
-		149C267824464DB800270F8C /* GoogleAppMeasurement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265024464B4E00270F8C /* GoogleAppMeasurement.framework */; };
-		149C267924464DBB00270F8C /* nanopb.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C264F24464B4E00270F8C /* nanopb.xcframework */; };
-		149C267A24464DC500270F8C /* PromisesObjC.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265124464B4E00270F8C /* PromisesObjC.xcframework */; };
-		149C267B24464DCB00270F8C /* FirebaseCoreDiagnostics.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265324464B4E00270F8C /* FirebaseCoreDiagnostics.xcframework */; };
-		149C267C24464DCE00270F8C /* FirebaseInstallations.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265424464B4E00270F8C /* FirebaseInstallations.xcframework */; };
-		149C267E24464DF600270F8C /* GoogleDataTransportCCTSupport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265624464B4E00270F8C /* GoogleDataTransportCCTSupport.xcframework */; };
-		149C267F24464DFA00270F8C /* GoogleDataTransport.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C265724464B4E00270F8C /* GoogleDataTransport.xcframework */; };
-		149C268424464ECD00270F8C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C268224464EAC00270F8C /* libz.tbd */; };
-		149C268524464ED700270F8C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 149C268324464EB400270F8C /* libsqlite3.tbd */; };
 		149C268724464F7200270F8C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 149C268624464F7200270F8C /* GoogleService-Info.plist */; };
 		14AC4AF42440D937000F6D3C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14AC4AF32440D937000F6D3C /* GameKit.framework */; };
 		14C4ADBD2446545900816A11 /* GravityPuttScreenshots_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C4ADBC2446545900816A11 /* GravityPuttScreenshots_iOS.swift */; };
@@ -187,6 +173,9 @@
 		14E125CC244421B300D34DF5 /* CircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1255A244421B300D34DF5 /* CircleRenderer.swift */; };
 		14E125CD244421B300D34DF5 /* CircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1255A244421B300D34DF5 /* CircleRenderer.swift */; };
 		14E125CE244421B300D34DF5 /* CircleRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14E1255A244421B300D34DF5 /* CircleRenderer.swift */; };
+		F13000000000000000000005 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = F13000000000000000000002 /* FirebaseCore */; };
+		F13000000000000000000006 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F13000000000000000000003 /* FirebaseAnalytics */; };
+		F13000000000000000000007 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = F13000000000000000000004 /* FirebaseCrashlytics */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,9 +217,6 @@
 		1419B427243DAC5B00A74A63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1460A5D424450F66003B6B28 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		1461FA5324442B3400ACE95D /* NSExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSExtensions.swift; sourceTree = "<group>"; };
-		146DC32924467C45002DF97C /* FirebaseCrashlytics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCrashlytics.xcframework; sourceTree = "<group>"; };
-		146DC32A24467C45002DF97C /* run */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = run; sourceTree = "<group>"; };
-		146DC32B24467C45002DF97C /* upload-symbols */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = "upload-symbols"; sourceTree = "<group>"; };
 		146DC33224467E29002DF97C /* AppCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenterCrashes.framework; sourceTree = "<group>"; };
 		146DC3B224467E2A002DF97C /* AppCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenterAnalytics.framework; sourceTree = "<group>"; };
 		146DC3B324467E2A002DF97C /* AppCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AppCenter.framework; sourceTree = "<group>"; };
@@ -244,21 +230,6 @@
 		149C26482445382D00270F8C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		149C264A2445383500270F8C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS13.4.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		149C264C2445383A00270F8C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		149C264F24464B4E00270F8C /* nanopb.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = nanopb.xcframework; sourceTree = "<group>"; };
-		149C265024464B4E00270F8C /* GoogleAppMeasurement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleAppMeasurement.framework; sourceTree = "<group>"; };
-		149C265124464B4E00270F8C /* PromisesObjC.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = PromisesObjC.xcframework; sourceTree = "<group>"; };
-		149C265224464B4E00270F8C /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
-		149C265324464B4E00270F8C /* FirebaseCoreDiagnostics.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCoreDiagnostics.xcframework; sourceTree = "<group>"; };
-		149C265424464B4E00270F8C /* FirebaseInstallations.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseInstallations.xcframework; sourceTree = "<group>"; };
-		149C265524464B4E00270F8C /* FirebaseCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = FirebaseCore.xcframework; sourceTree = "<group>"; };
-		149C265624464B4E00270F8C /* GoogleDataTransportCCTSupport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleDataTransportCCTSupport.xcframework; sourceTree = "<group>"; };
-		149C265724464B4E00270F8C /* GoogleDataTransport.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleDataTransport.xcframework; sourceTree = "<group>"; };
-		149C265824464B4E00270F8C /* FIRAnalyticsConnector.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FIRAnalyticsConnector.framework; sourceTree = "<group>"; };
-		149C265924464B4E00270F8C /* GoogleUtilities.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleUtilities.xcframework; sourceTree = "<group>"; };
-		149C267024464C0C00270F8C /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
-		149C267124464C2400270F8C /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
-		149C268224464EAC00270F8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
-		149C268324464EB400270F8C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS13.4.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 		149C268624464F7200270F8C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		14A826D7244D410900A7BB1C /* Gravity Putt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Gravity Putt.entitlements"; sourceTree = "<group>"; };
 		14AC4AF32440D937000F6D3C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -303,21 +274,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F13000000000000000000005 /* FirebaseCore in Frameworks */,
+				F13000000000000000000006 /* FirebaseAnalytics in Frameworks */,
+				F13000000000000000000007 /* FirebaseCrashlytics in Frameworks */,
 				149C26492445382D00270F8C /* StoreKit.framework in Frameworks */,
-				149C267B24464DCB00270F8C /* FirebaseCoreDiagnostics.xcframework in Frameworks */,
-				149C268524464ED700270F8C /* libsqlite3.tbd in Frameworks */,
-				149C267524464D9D00270F8C /* FirebaseCore.xcframework in Frameworks */,
-				149C267824464DB800270F8C /* GoogleAppMeasurement.framework in Frameworks */,
-				149C268424464ECD00270F8C /* libz.tbd in Frameworks */,
-				149C266E24464B4E00270F8C /* GoogleUtilities.xcframework in Frameworks */,
-				149C267624464DA400270F8C /* FIRAnalyticsConnector.framework in Frameworks */,
-				149C267F24464DFA00270F8C /* GoogleDataTransport.xcframework in Frameworks */,
-				149C267C24464DCE00270F8C /* FirebaseInstallations.xcframework in Frameworks */,
-				149C267724464DAF00270F8C /* FirebaseAnalytics.framework in Frameworks */,
-				146DC32C24467C45002DF97C /* FirebaseCrashlytics.xcframework in Frameworks */,
-				149C267924464DBB00270F8C /* nanopb.xcframework in Frameworks */,
-				149C267E24464DF600270F8C /* GoogleDataTransportCCTSupport.xcframework in Frameworks */,
-				149C267A24464DC500270F8C /* PromisesObjC.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,16 +392,6 @@
 			path = "Gravity Putt Tests";
 			sourceTree = "<group>";
 		};
-		146DC32824467C45002DF97C /* FirebaseCrashlytics */ = {
-			isa = PBXGroup;
-			children = (
-				146DC32924467C45002DF97C /* FirebaseCrashlytics.xcframework */,
-				146DC32A24467C45002DF97C /* run */,
-				146DC32B24467C45002DF97C /* upload-symbols */,
-			);
-			path = FirebaseCrashlytics;
-			sourceTree = "<group>";
-		};
 		146DC33024467E29002DF97C /* AppCenter-SDK-Apple */ = {
 			isa = PBXGroup;
 			children = (
@@ -475,20 +425,6 @@
 			isa = PBXGroup;
 			children = (
 				149C268624464F7200270F8C /* GoogleService-Info.plist */,
-				149C267024464C0C00270F8C /* Firebase.h */,
-				149C267124464C2400270F8C /* module.modulemap */,
-				146DC32824467C45002DF97C /* FirebaseCrashlytics */,
-				149C264F24464B4E00270F8C /* nanopb.xcframework */,
-				149C265024464B4E00270F8C /* GoogleAppMeasurement.framework */,
-				149C265124464B4E00270F8C /* PromisesObjC.xcframework */,
-				149C265224464B4E00270F8C /* FirebaseAnalytics.framework */,
-				149C265324464B4E00270F8C /* FirebaseCoreDiagnostics.xcframework */,
-				149C265424464B4E00270F8C /* FirebaseInstallations.xcframework */,
-				149C265524464B4E00270F8C /* FirebaseCore.xcframework */,
-				149C265624464B4E00270F8C /* GoogleDataTransportCCTSupport.xcframework */,
-				149C265724464B4E00270F8C /* GoogleDataTransport.xcframework */,
-				149C265824464B4E00270F8C /* FIRAnalyticsConnector.framework */,
-				149C265924464B4E00270F8C /* GoogleUtilities.xcframework */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -505,8 +441,6 @@
 		14AC4AF22440D937000F6D3C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				149C268324464EB400270F8C /* libsqlite3.tbd */,
-				149C268224464EAC00270F8C /* libz.tbd */,
 				149C264C2445383A00270F8C /* StoreKit.framework */,
 				149C264A2445383500270F8C /* StoreKit.framework */,
 				149C26482445382D00270F8C /* StoreKit.framework */,
@@ -633,6 +567,11 @@
 			dependencies = (
 			);
 			name = "Gravity Putt iOS";
+			packageProductDependencies = (
+				F13000000000000000000002 /* FirebaseCore */,
+				F13000000000000000000003 /* FirebaseAnalytics */,
+				F13000000000000000000004 /* FirebaseCrashlytics */,
+			);
 			productName = "Untitled Space Game iOS";
 			productReference = 1400F97B241BF47D003BFED8 /* Gravity Putt.app */;
 			productType = "com.apple.product-type.application";
@@ -745,6 +684,9 @@
 				Base,
 			);
 			mainGroup = 1400F96D241BF47C003BFED8;
+			packageReferences = (
+				F13000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 1400F97C241BF47D003BFED8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -820,7 +762,11 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+				"$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)",
+				"$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)/Contents/Resources/DWARF/$(PRODUCT_NAME)",
+				"$(DWARF_DSYM_FOLDER_PATH)/$(DWARF_DSYM_FILE_NAME)/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
 			);
 			outputFileListPaths = (
 			);
@@ -828,7 +774,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./$(SRC_ROOT)/Gravity\\ Putt\\ Shared/Analytics/Firebase/FirebaseCrashlytics/run\n";
+			shellScript = "if [ \"${CONFIGURATION}\" != \"Release\" ] || [ \"${PLATFORM_NAME}\" != \"iphoneos\" ]; then\n    echo \"Skipping Crashlytics upload for Debug or simulator build\"\n    exit 0\nfi\nif [ \"${CRASHLYTICS_SKIP_UPLOAD}\" = \"YES\" ]; then\n    \"${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/upload-symbols\" --build-phase --validate\nelse\n    \"${BUILD_DIR%Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1165,22 +1111,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Gravity Putt iOS/Gravity Putt.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2020.04.19;
+				CURRENT_PROJECT_VERSION = 2026.11.02;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 72S993BNAV;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/Firebase",
-				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/Firebase";
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Putt iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.04.01;
+				MARKETING_VERSION = 2026.11.01;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Putt";
@@ -1194,22 +1136,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Gravity Putt iOS/Gravity Putt.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2020.04.19;
+				CURRENT_PROJECT_VERSION = 2026.11.02;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				EXCLUDED_SOURCE_FILE_NAMES = fastlane_scene_data;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/Firebase",
-				);
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/Gravity\\ Putt\\ Shared/Analytics/Firebase";
 				INFOPLIST_FILE = "$(SRCROOT)/Gravity Putt iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2020.04.01;
+				MARKETING_VERSION = 2026.11.01;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.andrewfinke.space.golf;
 				PRODUCT_NAME = "Gravity Putt";
@@ -1389,7 +1327,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "GravityPuttScreenshots-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1410,7 +1348,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 72S993BNAV;
 				INFOPLIST_FILE = "GravityPuttScreenshots-iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1484,6 +1422,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+/* Begin XCRemoteSwiftPackageReference section */
+		F13000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.1.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F13000000000000000000002 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F13000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		F13000000000000000000003 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F13000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		F13000000000000000000004 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F13000000000000000000001 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+/* End XCSwiftPackageProductDependency section */
+
 	};
 	rootObject = 1400F96E241BF47C003BFED8 /* Project object */;
 }

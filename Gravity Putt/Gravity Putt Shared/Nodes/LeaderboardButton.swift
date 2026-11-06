@@ -10,6 +10,12 @@ import SpriteKit
 
 class LeaderboardButton: SKNode {
 
+    var isEnabled = false {
+        didSet {
+            children.forEach { $0.alpha = isEnabled ? 1 : 0.45 }
+        }
+    }
+
     // MARK: - Initalization -
 
     override init() {
@@ -48,6 +54,7 @@ class LeaderboardButton: SKNode {
             ctx.cgContext.fillPath()
         }
         let body = SKSpriteNode(texture: SKTexture(image: image))
+        body.alpha = 0.45
         addChild(body)
     }
 

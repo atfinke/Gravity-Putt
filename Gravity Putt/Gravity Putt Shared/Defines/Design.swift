@@ -10,6 +10,9 @@ import CoreGraphics
 import Foundation
 
 struct Design {
+    // Course generation is independent of the current iPhone window or posture.
+    static let iOSCourseSize = CGSize(width: 1000, height: 800)
+
     static let colors: Bool = true
 
     static let leaderboardButtonSize: CGFloat = 28
@@ -37,4 +40,26 @@ struct Design {
             }
         }
     }()
+}
+
+// World coordinates retain their aspect ratio while the viewport fills the view.
+// Extra space is visible world, not a change to the course or its physics.
+struct GameViewport {
+    let sceneSize: CGSize
+    let unitsPerPoint: CGFloat
+
+    init?(viewSize: CGSize, courseSize: CGSize) {
+        guard viewSize.width.isFinite, viewSize.height.isFinite,
+              viewSize.width > 0, viewSize.height > 0,
+              courseSize.width > 0, courseSize.height > 0 else { return nil }
+        unitsPerPoint = max(courseSize.width / viewSize.width,
+                            courseSize.height / viewSize.height)
+        sceneSize = CGSize(width: viewSize.width * unitsPerPoint,
+                           height: viewSize.height * unitsPerPoint)
+    }
+
+    func hudOrigin(safeArea: CGRect) -> CGPoint {
+        return CGPoint(x: -sceneSize.width / 2 + (safeArea.minX + 30) * unitsPerPoint,
+                       y: sceneSize.height / 2 - (safeArea.maxY - 30) * unitsPerPoint)
+    }
 }

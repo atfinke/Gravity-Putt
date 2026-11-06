@@ -26,6 +26,8 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
 
     private let localPlayer = GKLocalPlayer.local
 
+    var isAuthenticated: Bool { localPlayer.isAuthenticated }
+
     // MARK: - Helpers -
 
     func submit(stats: GameStats) {
@@ -84,8 +86,9 @@ class LeaderboardUtility: NSObject, GKGameCenterControllerDelegate {
                     completion(false)
                     AnalyticsUtility.shared.queue(event: "authFailed", parameters: nil)
                 } else {
-                    completion(true)
-                    AnalyticsUtility.shared.queue(event: "authSuccess", parameters: nil)
+                    let isAuthenticated = GKLocalPlayer.local.isAuthenticated
+                    completion(isAuthenticated)
+                    AnalyticsUtility.shared.queue(event: isAuthenticated ? "authSuccess" : "authFailed", parameters: nil)
                 }
             }
         }

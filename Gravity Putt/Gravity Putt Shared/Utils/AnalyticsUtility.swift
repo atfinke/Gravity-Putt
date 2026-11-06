@@ -8,10 +8,9 @@
 
 import Foundation
 
-#if os(iOS)
-import Firebase
+#if os(iOS) && !targetEnvironment(simulator)
 import FirebaseAnalytics
-#else
+#elseif !os(iOS)
 import AppCenterAnalytics
 #endif
 
@@ -29,6 +28,7 @@ class AnalyticsUtility {
     
     func flushQueue() {
         self.queue.async {
+            #if !os(iOS) || !targetEnvironment(simulator)
             for item in self.queued {
                 #if os(iOS)
                 Analytics.logEvent(item.event, parameters: item.parameters)
@@ -36,6 +36,7 @@ class AnalyticsUtility {
                 MSAnalytics.trackEvent(item.event, withProperties: item.parameters)
                 #endif
             }
+            #endif
             self.queued = []
         }
     }

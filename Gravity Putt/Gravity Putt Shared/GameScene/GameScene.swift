@@ -62,7 +62,15 @@ class GameScene: SKScene, Codable {
     let playerPathTexture = CircleRenderer.create(radius: Design.playerPathNodeRadius)
     
     // Levels
+    #if os(iOS)
+    var levelSize = Design.iOSCourseSize
+    private var viewportViewSize: CGSize = .zero
+    private var viewportSafeArea: CGRect = .zero
+    private var hudScale: CGFloat = 1
+    #else
     var levelSize: CGSize = .zero
+    #endif
+    private var hasSetupScene = false
     var levels = [LevelNode]()
     var lastLevel: LevelNode?
     var activeLevelGoalNode: Goal?
@@ -72,6 +80,7 @@ class GameScene: SKScene, Codable {
     
     // Other
     var leaderboardRect = CGRect()
+    var isTargetingInput = false
     var holeDurationTimer: Timer?
     
     var gameStats = GameStats()
@@ -80,9 +89,11 @@ class GameScene: SKScene, Codable {
     
     var presentingController: SKController? {
         didSet {
+            #if !os(iOS)
             guard let presentingSize = presentingController?.view.frame.size else { fatalError() }
             let usableHeight = size.width / presentingSize.width * presentingSize.height
             levelSize = CGSize(width: size.width, height: usableHeight)
+            #endif
         }
     }
     let store = Store()
@@ -98,7 +109,11 @@ class GameScene: SKScene, Codable {
     }
     
     override init() {
+        #if os(iOS)
+        super.init(size: Design.iOSCourseSize)
+        #else
         super.init()
+        #endif
         scaleMode = .aspectFill
         store.unlockStateUpdated = { success in
             DispatchQueue.main.async {
@@ -145,6 +160,8 @@ class GameScene: SKScene, Codable {
     // MARK: - Setup -
     
     func setupScene() {
+        guard !hasSetupScene else { return }
+        hasSetupScene = true
         setupCamera()
         
         backgroundColorNode.color = .randomBackgroundColor
@@ -186,7 +203,11 @@ class GameScene: SKScene, Codable {
         
         createDepthNodes()
         physicsWorld.contactDelegate = self
-        
+
+        #if os(iOS)
+        updateViewport(viewSize: viewportViewSize, safeArea: viewportSafeArea)
+        #endif
+
         #if DEBUG
         if UserDefaults.standard.bool(forKey: "FASTLANE_SNAPSHOT") {
             gameStats.hitShot(power: 1)
@@ -244,6 +265,34 @@ class GameScene: SKScene, Codable {
         }
     }
     
+    #if os(iOS)
+    func updateViewport(viewSize: CGSize, safeArea: CGRect) {
+        guard let viewport = GameViewport(viewSize: viewSize, courseSize: levelSize) else { return }
+        viewportViewSize = viewSize
+        viewportSafeArea = safeArea
+        size = viewport.sceneSize
+        hudScale = viewport.unitsPerPoint
+
+        // Keep enough background for the existing camera's maximum 1.6x zoom-out.
+        backgroundColorNode.xScale = size.width / 10 * 2
+        backgroundColorNode.yScale = size.height / 10 * 2
+        guard hasSetupScene else { return }
+
+        leaderboardButton.setScale(hudScale)
+        strokesLabel.setScale(hudScale)
+        holeLabel.setScale(hudScale)
+        leaderboardButton.position = viewport.hudOrigin(safeArea: safeArea)
+        strokesLabel.position = CGPoint(x: leaderboardButton.position.x + Design.leaderboardButtonSize * hudScale,
+                                        y: leaderboardButton.position.y)
+        updateScoreLabel()
+
+        if introLabel.parent != nil {
+            introLabel.setScale(hudScale)
+            introLabel.position = CGPoint(x: 0, y: 0)
+        }
+    }
+    #endif
+
     // MARK: - Level Management -
     
     func updateScoreLabel() {
@@ -253,14 +302,21 @@ class GameScene: SKScene, Codable {
         holeLabel.attributedText = NSAttributedString.stylized(string: "+\(gameStats.holeStrokes)",
             size: 15, weight: .semibold)
         
-        let xOffset = strokesLabel.position.x + strokesLabel.frame.size.width + 5
+        #if os(iOS)
+        let spacingScale = hudScale
+        let touchPadding = 20 * hudScale
+        #else
+        let spacingScale: CGFloat = 1
+        let touchPadding: CGFloat = 40
+        #endif
+        let xOffset = strokesLabel.position.x + strokesLabel.frame.size.width + 5 * spacingScale
         holeLabel.position = CGPoint(x: xOffset,
                                      y: leaderboardButton.position.y)
         
-        leaderboardRect = CGRect(x: leaderboardButton.frame.minX,
-                                 y: leaderboardButton.frame.minY,
-                                 width: holeLabel.frame.maxX - leaderboardButton.frame.minX,
-                                 height: leaderboardButton.frame.height).insetBy(dx: -40, dy: -40)
+        leaderboardRect = leaderboardButton.calculateAccumulatedFrame()
+            .union(strokesLabel.frame)
+            .union(holeLabel.frame)
+            .insetBy(dx: -touchPadding, dy: -touchPadding)
     }
     
     func addLevel() {
@@ -763,13 +819,17 @@ class GameScene: SKScene, Codable {
         guard let presentingController = presentingController else { fatalError() }
         leaderboardUtility.authenticate(authController: { controller in
             presentingController.present(controller, animated: true, completion: nil)
-        }, completion: { _ in
-            
+        }, completion: { [weak self] isAuthenticated in
+            self?.leaderboardButton.isEnabled = isAuthenticated
         })
         #endif
     }
     
     func showLeaderboard() {
+        guard leaderboardUtility.isAuthenticated else {
+            authenticate()
+            return
+        }
         let controller = leaderboardUtility.leaderboardController()
         presentingController?.present(controller, animated: true, completion: nil)
     }
